@@ -87,8 +87,8 @@ export function NhisDashboard() {
     setIsExporting(true);
     try {
       await downloadNhisClaimsPdf(pendingClaimsSummary, {
-        facilityName: 'NDC Medical Centre',
-        facilityAddress: 'Nigerian Defence College, Abuja',
+        facilityName: 'XenoCare',
+        facilityAddress: 'XenoCare',
         facilityNhisId: 'NHIS-NDC-001',
       });
       showToast({

@@ -333,6 +333,7 @@ export async function getPrescriptions(filters: PrescriptionFilters = {}) {
   let query = supabase
     .from('prescriptions')
     .select(PRESCRIPTION_SELECT, { count: 'exact' })
+    .eq('is_external', false)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -982,7 +983,8 @@ export async function getPharmacyStats(): Promise<PharmacyStats> {
   // This is more reliable than trying to filter by enum values via PostgREST
   const { data: allPrescriptions, error: prescError } = await supabase
     .from('prescriptions')
-    .select('prescription_id, status, updated_at');
+    .select('prescription_id, status, updated_at, is_external')
+    .eq('is_external', false);
 
   if (prescError) {
     log.error(
@@ -1080,6 +1082,7 @@ export async function getPendingPrescriptions(patientId?: string) {
   let query = supabase
     .from('prescriptions')
     .select(PRESCRIPTION_SELECT)
+    .eq('is_external', false)
     .or('status.eq.Pending,status.eq.Partial,status.eq.Verified,status.eq.Paid')
     .order('created_at', { ascending: true });
 

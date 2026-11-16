@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Patient Search Input Component
+// XENOCARE EMR - Patient Search Input Component
 // Reusable patient search component for use across all modules
 // Searches by: EMR Number, Name, Phone
 // =============================================================================

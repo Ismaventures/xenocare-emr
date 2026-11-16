@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Physiotherapy Report Modal
+ * XenoCare EMR — Physiotherapy Report Modal
  */
 
 import React, { useState } from 'react';
@@ -240,7 +240,7 @@ export function PhysioReportModal({
         format,
         buildSheets(),
         buildPDFOpts(),
-        `NDC_Physiotherapy_Report_${new Date().toISOString().split('T')[0]}`,
+        `XenoCare_Physiotherapy_Report_${new Date().toISOString().split('T')[0]}`,
       );
     } catch (error) {
       showToast({

@@ -11,7 +11,8 @@ import log from 'electron-log';
 // =============================================================================
 
 function getConfig() {
-  const provider = (process.env.AI_PROVIDER || 'groq') as
+  const provider = (process.env.AI_PROVIDER || 'ollama') as
+    | 'ollama'
     | 'openai'
     | 'gemini'
     | 'groq';
@@ -145,10 +146,16 @@ async function generateOllamaEmbedding(
 ): Promise<{ embedding: number[]; tokensUsed: number }> {
   const config = getConfig();
   const url = `${config.ollama.baseUrl}/api/embed`;
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (config.provider === 'ollama' && process.env.OLLAMA_API_KEY) {
+    headers.Authorization = `Bearer ${process.env.OLLAMA_API_KEY}`;
+  }
 
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       model: config.ollama.model,
       input: text,
@@ -172,11 +179,17 @@ async function generateOllamaEmbeddingBatch(
 ): Promise<{ embeddings: number[][]; tokensUsed: number }> {
   const config = getConfig();
   const url = `${config.ollama.baseUrl}/api/embed`;
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (config.provider === 'ollama' && process.env.OLLAMA_API_KEY) {
+    headers.Authorization = `Bearer ${process.env.OLLAMA_API_KEY}`;
+  }
 
   // Ollama /api/embed supports array input natively
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       model: config.ollama.model,
       input: texts,
@@ -279,6 +292,13 @@ export async function generateEmbedding(
       );
       return result;
     } catch (ollamaErr) {
+      if (config.provider === 'ollama') {
+        log.warn(
+          '[AI Embedding] Ollama failed in local-only mode. Pull the configured local embedding model and retry:',
+          String(ollamaErr),
+        );
+        throw ollamaErr;
+      }
       log.warn(
         '[AI Embedding] Ollama failed, falling back to cloud:',
         String(ollamaErr),
@@ -331,6 +351,13 @@ export async function generateEmbeddingBatch(
       );
       return result;
     } catch (ollamaErr) {
+      if (config.provider === 'ollama') {
+        log.warn(
+          '[AI Embedding] Ollama batch failed in local-only mode. Pull the configured local embedding model and retry:',
+          String(ollamaErr),
+        );
+        throw ollamaErr;
+      }
       log.warn(
         '[AI Embedding] Ollama batch failed, falling back to cloud:',
         String(ollamaErr),
@@ -380,6 +407,9 @@ export async function checkEmbeddingHealth(): Promise<{
       await generateOllamaEmbedding('health check');
       return { ok: true, provider: 'ollama' };
     } catch (ollamaErr) {
+      if (getConfig().provider === 'ollama') {
+        return { ok: false, provider: 'ollama', error: String(ollamaErr) };
+      }
       log.warn('[AI Embedding] Ollama health check failed:', String(ollamaErr));
     }
 

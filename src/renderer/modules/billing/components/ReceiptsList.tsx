@@ -55,8 +55,10 @@ import {
   generateReceiptPDF,
 } from '../utils/receiptPrint';
 
-// NDC Logo import
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+import { getFacilityName } from '../../../lib/facility';
+
+// XenoCare logo import
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // Category colors and icons
 const CATEGORY_CONFIG: Record<
@@ -877,7 +879,7 @@ export function ReceiptsList({ onViewReceipt }: ReceiptsListProps) {
               {/* Watermark */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
                 <span className="text-green-100 text-7xl font-bold transform -rotate-45 whitespace-nowrap tracking-widest opacity-40">
-                  NDC VERIFIED
+                  XENOCARE VERIFIED
                 </span>
               </div>
 
@@ -890,13 +892,13 @@ export function ReceiptsList({ onViewReceipt }: ReceiptsListProps) {
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg p-1">
                     <img
                       src={ndcLogoSrc}
-                      alt="NDC Medical Centre Logo"
+                      alt="XenoCare Logo"
                       className="w-full h-full object-contain rounded-full"
                     />
                   </div>
                   <div className="text-center">
                     <h1 className="text-2xl font-bold tracking-wide">
-                      NDC MEDICAL CENTRE
+                      {getFacilityName().toUpperCase()}
                     </h1>
                     <p className="text-green-200 text-sm tracking-widest uppercase">
                       Excellence in Healthcare
@@ -1158,7 +1160,7 @@ export function ReceiptsList({ onViewReceipt }: ReceiptsListProps) {
                         Thank you for your payment!
                       </p>
                       <p className="text-xs text-gray-400 mt-1">
-                        NDC Medical Centre EMR System
+                        XenoCare EMR System
                       </p>
                       <div className="mt-2 inline-flex items-center gap-1 bg-green-50 px-2 py-1 rounded text-xs font-mono text-green-700">
                         <Shield className="h-3 w-3" />
@@ -1179,7 +1181,7 @@ export function ReceiptsList({ onViewReceipt }: ReceiptsListProps) {
                         </div>
                       </div>
                       <span className="text-[8px] text-green-700 mt-1 uppercase tracking-wider">
-                        NDC Official
+                        XenoCare Official
                       </span>
                     </div>
                   </div>

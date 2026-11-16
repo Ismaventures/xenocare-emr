@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - useBeds Hook
+// XENOCARE EMR - useBeds Hook
 // React Query hook for bed management
 // =============================================================================
 

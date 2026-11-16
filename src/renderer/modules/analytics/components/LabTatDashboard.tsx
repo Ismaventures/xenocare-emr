@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Laboratory TAT Dashboard
+// XENOCARE EMR - Laboratory TAT Dashboard
 // Comprehensive Lab Turnaround Time tracking and analysis
 // =============================================================================
 

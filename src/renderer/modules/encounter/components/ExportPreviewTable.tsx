@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - EXPORT PREVIEW TABLE
+ * XENOCARE EMR - EXPORT PREVIEW TABLE
  * Description: Scrollable data preview with checkbox selection for exports
  * =============================================================================
  */

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC Receipt & Invoice Print Utility
+// XenoCare Receipt & Invoice Print Utility
 // Professional branded documents with QR verification for audit compliance
 // =============================================================================
 
@@ -7,8 +7,9 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import QRCode from 'qrcode';
 import { InvoiceDTO, PaymentDTO } from '../dtos/billing.dto';
-import { NDC_BRAND } from './billingExport';
+import { getBrand } from './billingExport';
 import { createScopedLogger } from '../../../utils/logger';
+import { APP_POWERED_BY } from '../../../shared/constants/branding';
 
 const log = createScopedLogger('ReceiptPrint');
 
@@ -97,7 +98,7 @@ export async function generateQRCodeDataURL(data: string): Promise<string> {
       width: 150,
       margin: 1,
       color: {
-        dark: '#166534', // NDC green
+        dark: '#166534', // XenoCare green
         light: '#ffffff',
       },
     });
@@ -116,7 +117,7 @@ export function createVerificationURL(
   verificationCode: string,
 ): string {
   // In production, this would point to your verification endpoint
-  const baseURL = 'https://emr.ndc.gov.ng/verify';
+  const baseURL = 'https://xenolink.tech/verify';
   return `${baseURL}?type=${documentType}&num=${encodeURIComponent(documentNumber)}&code=${encodeURIComponent(verificationCode)}`;
 }
 
@@ -233,23 +234,23 @@ export interface InvoicePrintData {
 // =============================================================================
 
 /**
- * Load NDC logo as base64 for PDF
+ * Load XenoCare logo as base64 for PDF
  */
 async function loadLogoAsBase64(): Promise<string> {
   try {
     // Try to load the logo image
-    const logoModule = require('../../../../../assets/ndclogo.png');
+    const logoModule = require('../../../../../assets/xenocare-logo.png');
     return logoModule.default || logoModule;
   } catch (error) {
-    log.warn('Could not load NDC logo:', error);
+    log.warn('Could not load XenoCare logo:', error);
     return '';
   }
 }
 
 /**
- * Add NDC header to PDF document
+ * Add XenoCare receipt header to PDF document
  */
-async function addNDCHeader(doc: jsPDF, yOffset: number = 10): Promise<number> {
+async function addReceiptHeader(doc: jsPDF, yOffset: number = 10): Promise<number> {
   const pageWidth = doc.internal.pageSize.getWidth();
   const centerX = pageWidth / 2;
 
@@ -267,33 +268,33 @@ async function addNDCHeader(doc: jsPDF, yOffset: number = 10): Promise<number> {
   // Hospital name
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(22, 101, 52); // NDC Green
-  doc.text(NDC_BRAND.name.toUpperCase(), centerX, yOffset, { align: 'center' });
+  doc.setTextColor(22, 101, 52); // XenoCare green
+  doc.text(getBrand().name.toUpperCase(), centerX, yOffset, { align: 'center' });
   yOffset += 5;
 
   // Full name
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(100, 100, 100);
-  doc.text(NDC_BRAND.fullName, centerX, yOffset, { align: 'center' });
+  doc.text(getBrand().fullName, centerX, yOffset, { align: 'center' });
   yOffset += 4;
 
   // Tagline
   doc.setFontSize(7);
   doc.setFont('helvetica', 'italic');
-  doc.text(NDC_BRAND.tagline, centerX, yOffset, { align: 'center' });
+  doc.text(getBrand().tagline, centerX, yOffset, { align: 'center' });
   yOffset += 4;
 
   // Contact info
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(80, 80, 80);
-  const contactLine = `Tel: ${NDC_BRAND.phone} | Email: ${NDC_BRAND.email}`;
+  const contactLine = `Tel: ${getBrand().phone} | Email: ${getBrand().email}`;
   doc.text(contactLine, centerX, yOffset, { align: 'center' });
   yOffset += 3;
 
   // Address
   doc.setFontSize(6);
-  const addressLines = doc.splitTextToSize(NDC_BRAND.address, 150);
+  const addressLines = doc.splitTextToSize(getBrand().address, 150);
   addressLines.forEach((line: string) => {
     doc.text(line, centerX, yOffset, { align: 'center' });
     yOffset += 2.5;
@@ -350,7 +351,7 @@ function addFooter(
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(100, 100, 100);
   doc.text(
-    'Scan QR code or visit emr.ndc.gov.ng/verify',
+    'Scan QR code or visit xenolink.tech/verify',
     centerX,
     footerY + 14,
     { align: 'center' },
@@ -373,6 +374,12 @@ function addFooter(
     footerY + 26,
     { align: 'center' },
   );
+  doc.setFontSize(6);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(107, 114, 128);
+  doc.text(APP_POWERED_BY, centerX, footerY + 29, { align: 'center' });
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(100, 100, 100);
 
   // Page number on right
   doc.setFontSize(8);
@@ -455,7 +462,7 @@ export async function generateReceiptPDF(data: ReceiptData): Promise<jsPDF> {
   doc.setFontSize(7);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(22, 101, 52);
-  doc.text('NDC MEDICAL CENTRE', centerX, yOffset, { align: 'center' });
+  doc.text(getBrand().name.toUpperCase(), centerX, yOffset, { align: 'center' });
   yOffset += 2.5;
 
   // Tagline
@@ -467,7 +474,7 @@ export async function generateReceiptPDF(data: ReceiptData): Promise<jsPDF> {
 
   // Contact
   doc.setFontSize(5);
-  doc.text(`Tel: ${NDC_BRAND.phone}`, centerX, yOffset, { align: 'center' });
+  doc.text(`Tel: ${getBrand().phone}`, centerX, yOffset, { align: 'center' });
   yOffset += 2.5;
 
   // Dashed divider
@@ -825,11 +832,15 @@ export async function generateReceiptPDF(data: ReceiptData): Promise<jsPDF> {
   doc.setFontSize(5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(100, 100, 100);
-  doc.text('Thank you for choosing NDC Medical Centre', centerX, yOffset, {
+  doc.text(`Thank you for choosing ${getBrand().name}`, centerX, yOffset, {
     align: 'center',
   });
   yOffset += 3;
   doc.text('This is a computer generated receipt', centerX, yOffset, {
+    align: 'center',
+  });
+  yOffset += 3;
+  doc.text('Powered by Xenolink', centerX, yOffset, {
     align: 'center',
   });
   yOffset += 3;
@@ -861,7 +872,7 @@ export async function generateReceiptPDFA4(data: ReceiptData): Promise<jsPDF> {
   const pageWidth = doc.internal.pageSize.getWidth();
 
   // Add header
-  let yOffset = await addNDCHeader(doc);
+  let yOffset = await addReceiptHeader(doc);
 
   // Receipt title
   doc.setFontSize(14);
@@ -1230,7 +1241,7 @@ export async function generateInvoicePDF(
   const pageWidth = doc.internal.pageSize.getWidth();
 
   // Add header
-  let yOffset = await addNDCHeader(doc);
+  let yOffset = await addReceiptHeader(doc);
 
   // Invoice title with status
   doc.setFontSize(14);

@@ -10,6 +10,13 @@
 
 import React, { useState, useRef } from 'react';
 import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../../../../lib/facility';
+import { printUniversalLabReportFromDetail } from '../../../../../lab/utils/labReportPrint';
+import { sanitizeClinicalHtml } from '../../../../../lab/utils/clinicalDataHtml';
+import { MUHEDA_LOGO_DATA_URI } from '../../../../../../shared/constants/muhedaLogo';
+import {
   FlaskConical,
   ChevronRight,
   ChevronLeft,
@@ -61,6 +68,17 @@ function renderStructuredResult(
   if (!structured) return null;
   const t = templateType || structured.templateType;
   const data = structured as Record<string, any>;
+
+  if (t === 'clinical_data' || typeof data.html === 'string') {
+    return (
+      <div
+        className="rounded-xl border border-gray-200 bg-white p-5 text-sm leading-7 text-gray-800 [&_h1]:mb-2 [&_h1]:mt-4 [&_h1]:text-xl [&_h1]:font-bold [&_h2]:mb-2 [&_h2]:mt-4 [&_h2]:text-lg [&_h2]:font-bold [&_h3]:mb-2 [&_h3]:mt-3 [&_h3]:font-bold [&_li]:ml-5 [&_ol]:list-decimal [&_p]:mb-2 [&_table]:my-3 [&_table]:w-full [&_table]:border-collapse [&_td]:border [&_td]:border-gray-300 [&_td]:p-2 [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:p-2 [&_ul]:list-disc"
+        dangerouslySetInnerHTML={{
+          __html: sanitizeClinicalHtml(String(data.html || '')),
+        }}
+      />
+    );
+  }
 
   // Reusable Section Header for uniformity
   function ResultSectionHeader({
@@ -2134,20 +2152,20 @@ export function LabsPanel({ encounter, onBack }: LabsPanelProps) {
 }
 
 // =============================================================================
-// NDC Logo Component
+// XenoCare Logo Component
 // =============================================================================
-function NDCLogo() {
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
-      className="h-12 w-auto"
+      src={MUHEDA_LOGO_DATA_URI}
+      alt="MUHEDA Clinic"
+      className="h-12 w-12 object-contain"
     />
   );
 }
 
 // =============================================================================
-// Lab Result Modal - NDC Medical Centre-Grade Design (Matching LabDetailModal)
+// Lab Result Modal - XenoCare-Grade Design (Matching LabDetailModal)
 // =============================================================================
 function LabResultModal({
   lab,
@@ -2174,7 +2192,9 @@ function LabResultModal({
   hasNext?: boolean;
   hasPrev?: boolean;
 }) {
-  const [activeTab, setActiveTab] = useState<'details' | 'report'>('details');
+  const [activeTab, setActiveTab] = useState<'details' | 'report'>(
+    lab?.structured_result ? 'report' : 'details',
+  );
 
   const formatDate = (dateString?: string | null) => {
     if (!dateString) return 'N/A';
@@ -2187,658 +2207,13 @@ function LabResultModal({
     });
   };
 
-  // Print Lab Report Function - Hospital Grade
-  const handlePrintLabReport = () => {
-    let ndcLogoBase64 = '';
-    try {
-      // Load NDC logo as base64
-      const logoModule = require('../../../../../../../../assets/ndclogo.png');
-      ndcLogoBase64 = logoModule.default || logoModule;
-    } catch (error) {
-      console.warn('Could not load NDC logo:', error);
-    }
-
-    // Build components table HTML
-    let componentsHtml = '';
-    const structured: any = lab.structured_result || {};
-    const template = lab.result_template_type;
-
-    if (template === 'culture_sensitivity') {
-      if (structured.specimenInfo) {
-        componentsHtml += `
-            <div class="result-section">
-                <div class="section-header">Microbiology Specimen</div>
-                <div class="grid-3">
-                     <div><div class="label">Specimen</div><div class="value">${structured.specimenInfo.specimenType || '-'}</div></div>
-                     <div><div class="label">Collection Date</div><div class="value">${structured.specimenInfo.collectionDate ? new Date(structured.specimenInfo.collectionDate).toLocaleDateString() : '-'}</div></div>
-                     <div><div class="label">Quality</div><div class="value">${structured.specimenInfo.specimenQuality || '-'}</div></div>
-                </div>
-            </div>`;
-      }
-      if (structured.microscopy) {
-        componentsHtml += `
-             <div class="result-section">
-               <div class="section-header">Microscopy</div>
-               <table class="report-table"><tbody>`;
-        Object.entries(structured.microscopy).forEach(([k, v]) => {
-          if (v && k !== 'otherFindings')
-            componentsHtml += `<tr><td width="40%">${k.replace(/([A-Z])/g, ' $1').trim()}</td><td class="res-val">${v}</td></tr>`;
-        });
-        componentsHtml += `</tbody></table></div>`;
-      }
-      if (structured.cultures && structured.cultures.length) {
-        componentsHtml += `<div class="result-section"><div class="section-header">Culture Results</div>`;
-        structured.cultures.forEach((cult: any, i: number) => {
-          componentsHtml += `
-                    <div class="culture-box">
-                         <div class="culture-name">Isolate ${i + 1}: ${cult.organismIsolated}</div>
-                         <div class="culture-meta">Growth: <span class="${cult.growth === 'No Growth' ? '' : 'abnormal-text'}">${cult.growth}</span> | Count: ${cult.colonyCount || '-'}</div>
-                    </div>
-                `;
-        });
-        componentsHtml += `</div>`;
-      }
-      if (structured.sensitivities && structured.sensitivities.length) {
-        componentsHtml += `<div class="result-section"><div class="section-header">Antibiotic Susceptibility</div>`;
-        structured.sensitivities.forEach((sens: any) => {
-          if (sens.antibiotics && sens.antibiotics.length) {
-            componentsHtml += `
-                    <div style="margin-bottom:15px; font-weight:bold; font-size:9pt;">Organism: ${sens.organism || '-'}</div>
-                    <table class="report-table compact">
-                      <thead><tr><th>Antibiotic</th><th>Result</th></tr></thead>
-                      <tbody>`;
-            sens.antibiotics.forEach((ab: any) => {
-              const res = ab.result || ab.sensitivity;
-              const isResistant =
-                String(res).startsWith('R') || String(res) === 'Resistant';
-              componentsHtml += `<tr><td>${ab.antibiotic}</td><td><span class="${isResistant ? 'res-flag' : ''}">${res}</span></td></tr>`;
-            });
-            componentsHtml += `</tbody></table>`;
-          }
-        });
-        componentsHtml += `</div>`;
-      }
-    } else if (template === 'parasite_report') {
-      if (structured.specimenType) {
-        componentsHtml += `
-             <div class="result-section" style="margin-bottom:15px;">
-                 <div class="grid-2">
-                   <div><div class="label">Specimen</div><div class="value">${structured.specimenType}</div></div>
-                   ${structured.collectionTime ? `<div><div class="label">Collection</div><div class="value">${structured.collectionTime}</div></div>` : ''}
-                 </div>
-             </div>`;
-      }
-      if (
-        structured.parasitesFound !== undefined ||
-        structured.detected !== undefined
-      ) {
-        const found = structured.parasitesFound ?? structured.detected;
-        componentsHtml += `
-             <div class="summary-box ${found ? 'abnormal-bg' : 'normal-bg'}">
-                ${found ? 'PARASITES DETECTED' : 'NO PARASITES DETECTED'}
-             </div>`;
-      }
-      if (
-        (structured.parasitesFound &&
-          Array.isArray(structured.parasitesFound) &&
-          structured.parasitesFound.length) ||
-        (structured.detections && structured.detections.length)
-      ) {
-        const pList =
-          Array.isArray(structured.parasitesFound) &&
-          structured.parasitesFound.length
-            ? structured.parasitesFound
-            : structured.detections;
-        componentsHtml += `<table class="report-table"><thead><tr><th>Parasite</th><th>Stage</th><th>Density</th><th>Count</th></tr></thead><tbody>`;
-        pList.forEach((det: any) => {
-          componentsHtml += `<tr><td>${det.species || det.parasite || det.name}</td><td>${det.stage || '-'}</td><td>${det.density || det.form || '-'}</td><td>${det.count || '-'}${det.countPer ? ` / ${det.countPer}` : ''}</td></tr>`;
-        });
-        componentsHtml += `</tbody></table>`;
-      }
-    } else if (template === 'numeric_timing') {
-      // ─── Numeric Timing (readings / time-point values) ───
-      const readings = structured.readings || structured.results || [];
-      if (Array.isArray(readings) && readings.length > 0) {
-        componentsHtml += `
-            <div class="result-section">
-              <div class="section-header">Timed Readings</div>
-              <table class="report-table">
-                <thead><tr><th>Parameter / Time Point</th><th>Value</th><th>Unit</th><th>Ref. Range</th><th style="text-align:center;">Flag</th></tr></thead>
-                <tbody>
-                  ${readings
-                    .map((r: any, idx: number) => {
-                      const isAbn =
-                        r.isCritical ||
-                        r.isAbnormal ||
-                        r.flag === 'H' ||
-                        r.flag === 'L';
-                      return `
-                      <tr class="${isAbn ? 'row-abnormal' : ''}">
-                        <td>${r.timePoint || r.time || r.parameter || `Reading ${idx + 1}`}</td>
-                        <td class="res-val">${r.value ?? r.resultValue ?? '-'}</td>
-                        <td class="unit">${r.unit || structured.unit || ''}</td>
-                        <td>${r.reference || r.referenceRange || ''}</td>
-                        <td style="text-align:center;font-weight:bold;color:${r.isCritical ? 'red' : isAbn ? '#d97706' : 'inherit'};">${r.isCritical ? 'CRIT' : r.isAbnormal ? 'ABN' : r.flag || ''}</td>
-                      </tr>`;
-                    })
-                    .join('')}
-                </tbody>
-              </table>
-            </div>`;
-      }
-      if (structured.interpretation) {
-        componentsHtml += `<div class="note-box"><div class="note-title">Interpretation</div><div class="note-content">${structured.interpretation}</div></div>`;
-      }
-    } else if (
-      template === 'panel_numeric' &&
-      structured.panels &&
-      structured.panels.length > 0
-    ) {
-      // ─── Panel Numeric with panels[].analytes[] ───
-      const rows = structured.panels.flatMap(
-        (g: any) =>
-          g.analytes?.map((a: any) => ({ group: g.groupName, ...a })) || [],
-      );
-      if (rows.length > 0) {
-        componentsHtml += `
-            <table class="report-table">
-              <thead><tr><th>Panel / Analyte</th><th>Result</th><th>Unit</th><th>Ref. Range</th><th style="text-align:center;">Flag</th></tr></thead>
-              <tbody>
-                ${rows
-                  .map((a: any) => {
-                    const isAbnormal =
-                      a.flag === 'H' ||
-                      a.flag === 'L' ||
-                      a.flag === 'High' ||
-                      a.flag === 'Low' ||
-                      a.isAbnormal;
-                    const isCritical =
-                      a.flag === 'C' || a.flag === 'CC' || a.isCritical;
-                    return `
-                    <tr class="${isCritical ? 'row-abnormal' : isAbnormal ? 'row-abnormal' : ''}">
-                        <td>${a.group && a.group !== 'Additional Parameters' ? `${a.group}: ` : ''}${a.analyte || a.parameter || a.name}</td>
-                        <td class="res-val" style="color:${isCritical ? '#dc2626' : isAbnormal ? '#d97706' : 'inherit'};">${a.resultValue ?? a.value ?? a.result ?? 'N/A'}</td>
-                        <td class="unit">${a.unit || '-'}</td>
-                        <td>${a.referenceRange || a.reference || '-'}</td>
-                        <td style="text-align:center;font-weight:bold;color:${isCritical ? 'red' : isAbnormal ? '#d97706' : 'inherit'};">${a.flag || (isCritical ? 'C' : isAbnormal ? '!' : '')}</td>
-                    </tr>`;
-                  })
-                  .join('')}
-              </tbody>
-            </table>`;
-      }
-    } else if (template === 'qualitative_quantitative') {
-      // ─── Qualitative / Quantitative ───
-      const qualResult =
-        structured.qualitative || structured.qualitativeResult || '';
-      const quantObj =
-        typeof structured.quantitative === 'object' &&
-        structured.quantitative !== null
-          ? structured.quantitative
-          : null;
-      const quantValue = quantObj
-        ? (quantObj.concentration ?? quantObj.titer ?? quantObj.value)
-        : (structured.quantitative ?? structured.quantitativeValue ?? '');
-      const unitVal =
-        quantObj?.unit || structured.unit || structured.resultUnit || '';
-      const refRange =
-        quantObj?.referenceRange ||
-        structured.reference ||
-        structured.referenceRange ||
-        '';
-      const qqInterpretation =
-        structured.interpretation || structured.notes || '';
-
-      componentsHtml += `<div class="result-section"><div class="grid-2">`;
-      if (qualResult) {
-        const isQPositive =
-          qualResult === 'Positive' ||
-          qualResult === 'Reactive' ||
-          qualResult === 'Detected';
-        componentsHtml += `
-            <div class="summary-box ${isQPositive ? 'abnormal-bg' : 'normal-bg'}" style="text-align:center;">
-              <div style="font-size:8pt;font-weight:800;text-transform:uppercase;opacity:0.7;margin-bottom:4px;">Qualitative Result</div>
-              <div style="font-size:18pt;font-weight:900;">${qualResult}</div>
-            </div>`;
-      }
-      if (
-        quantValue !== '' &&
-        quantValue !== undefined &&
-        quantValue !== null
-      ) {
-        componentsHtml += `
-            <div style="border:2px solid #006838;padding:16px;border-radius:10px;text-align:center;background:linear-gradient(135deg,#f0fdf4,#fff);">
-              <div style="font-size:8pt;font-weight:800;text-transform:uppercase;color:#666;margin-bottom:4px;">Quantitative Value</div>
-              <div style="font-size:20pt;font-weight:900;color:#006838;">${quantValue} <span style="font-size:11pt;font-weight:600;color:#666;">${unitVal}</span></div>
-              ${refRange ? `<div style="font-size:8pt;color:#666;margin-top:6px;background:#f0f0f0;display:inline-block;padding:2px 8px;border-radius:4px;">Ref: ${refRange}</div>` : ''}
-            </div>`;
-      }
-      componentsHtml += `</div>`;
-      if (
-        structured.confirmation &&
-        (structured.confirmation.test || structured.confirmation.result)
-      ) {
-        componentsHtml += `<div style="margin-top:12px;padding:12px;background:#faf5ff;border:1px solid #d8b4fe;border-radius:6px;">
-              <div style="font-size:7pt;font-weight:800;text-transform:uppercase;color:#7c3aed;margin-bottom:6px;">Confirmation Testing</div>
-              <div class="grid-3">
-                ${structured.confirmation.test ? `<div><div class="label">Test</div><div class="value">${structured.confirmation.test}</div></div>` : ''}
-                ${structured.confirmation.result ? `<div><div class="label">Result</div><div class="value">${structured.confirmation.result}</div></div>` : ''}
-                ${structured.confirmation.date ? `<div><div class="label">Date</div><div class="value">${structured.confirmation.date}</div></div>` : ''}
-              </div>
-            </div>`;
-      }
-      if (qqInterpretation) {
-        componentsHtml += `<div class="note-box" style="margin-top:12px;"><div class="note-title">Interpretation</div><div class="note-content">${qqInterpretation}</div></div>`;
-      }
-      componentsHtml += `</div>`;
-    } else if (template === 'urinalysis_checklist') {
-      // ─── Urinalysis Checklist ───
-      const uSections = ['physical', 'chemical', 'microscopy'];
-      uSections.forEach((sec) => {
-        const secData = structured[sec];
-        if (!secData || typeof secData !== 'object') return;
-        componentsHtml += `
-            <div class="result-section">
-              <div class="section-header">${sec.charAt(0).toUpperCase() + sec.slice(1)} Examination</div>
-              <table class="report-table">
-                <thead><tr><th width="45%">Parameter</th><th>Result</th></tr></thead>
-                <tbody>
-                  ${Object.entries(secData)
-                    .map(([k, v]: [string, any]) => {
-                      const displayVal = Array.isArray(v)
-                        ? v.length > 0
-                          ? v.join(', ')
-                          : '-'
-                        : v === null || v === undefined || v === ''
-                          ? '-'
-                          : String(v);
-                      return `<tr><td style="text-transform:capitalize;">${k
-                        .replace(/([A-Z])/g, ' $1')
-                        .replace(/_/g, ' ')
-                        .trim()}</td><td class="res-val">${displayVal}</td></tr>`;
-                    })
-                    .join('')}
-                </tbody>
-              </table>
-            </div>`;
-      });
-      if (structured.comments) {
-        componentsHtml += `<div class="note-box"><div class="note-title">Comments</div><div class="note-content">${structured.comments}</div></div>`;
-      }
-    } else if (template === 'binary_metadata') {
-      // ─── Binary Metadata ───
-      const binResult =
-        structured.result ||
-        (structured.detected === true
-          ? 'Detected'
-          : structured.detected === false
-            ? 'Not Detected'
-            : '');
-      const isBPositive =
-        binResult === 'Positive' ||
-        binResult === 'Reactive' ||
-        binResult === 'Detected';
-      const kitLotDisplay =
-        structured.kitLot || structured.kitInfo?.lotNumber || '';
-      componentsHtml += `<div class="result-section">`;
-      if (binResult) {
-        componentsHtml += `<div class="summary-box ${isBPositive ? 'abnormal-bg' : 'normal-bg'}" style="text-align:center;"><div style="font-size:8pt;font-weight:800;text-transform:uppercase;opacity:0.7;margin-bottom:4px;">Test Result</div><div style="font-size:20pt;font-weight:900;">${binResult}</div></div>`;
-      }
-      if (structured.target) {
-        componentsHtml += `<div style="margin-top:12px;padding:10px;background:#fafbfc;border:1px solid #e5e7eb;border-radius:6px;"><div style="font-size:7pt;font-weight:800;text-transform:uppercase;color:#666;">Target</div><div style="font-size:10pt;font-weight:600;">${structured.target}</div></div>`;
-      }
-      componentsHtml += `<div class="grid-2" style="margin-top:12px;">`;
-      if (structured.method)
-        componentsHtml += `<div style="padding:10px;background:#fafbfc;border:1px solid #e5e7eb;border-radius:6px;"><div style="font-size:7pt;font-weight:800;text-transform:uppercase;color:#666;">Method</div><div style="font-size:10pt;font-weight:600;">${structured.method}</div></div>`;
-      if (kitLotDisplay)
-        componentsHtml += `<div style="padding:10px;background:#fafbfc;border:1px solid #e5e7eb;border-radius:6px;"><div style="font-size:7pt;font-weight:800;text-transform:uppercase;color:#666;">Kit / Lot #</div><div style="font-size:10pt;font-weight:600;">${kitLotDisplay}</div></div>`;
-      componentsHtml += `</div>`;
-      if (structured.interpretation || structured.notes) {
-        componentsHtml += `<div class="note-box" style="margin-top:12px;"><div class="note-title">Interpretation</div><div class="note-content">${structured.interpretation || structured.notes}</div></div>`;
-      }
-      componentsHtml += `</div>`;
-    } else if (template === 'narrative_diagnostic') {
-      // ─── Narrative Diagnostic ───
-      const grossDesc =
-        typeof structured.macroscopy === 'object'
-          ? structured.macroscopy?.grossDescription
-          : structured.macroscopy;
-      const microDesc =
-        typeof structured.microscopy === 'object'
-          ? structured.microscopy?.microscopicFindings
-          : structured.microscopy;
-      const finalDx =
-        structured.finalDiagnosis ||
-        (typeof structured.diagnosis === 'object'
-          ? structured.diagnosis?.finalDiagnosis
-          : structured.diagnosis);
-      const ndFindings = structured.findings || grossDesc;
-      const ndImpression = structured.impression || finalDx;
-      const ndRecommendation = structured.recommendation || structured.comments;
-      componentsHtml += `<div class="result-section">`;
-      if (structured.specimenType || structured.specimenSite) {
-        componentsHtml += `<div class="grid-3" style="margin-bottom:16px;">${structured.specimenType ? `<div><div class="label">Specimen</div><div class="value">${structured.specimenType}</div></div>` : ''}${structured.specimenSite ? `<div><div class="label">Site</div><div class="value">${structured.specimenSite}</div></div>` : ''}${structured.fixationType ? `<div><div class="label">Fixation</div><div class="value">${structured.fixationType}</div></div>` : ''}</div>`;
-      }
-      if (structured.clinicalHistory) {
-        componentsHtml += `<div style="margin-bottom:16px;"><div class="section-header">Clinical History</div><div style="padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:9.5pt;white-space:pre-wrap;">${structured.clinicalHistory}</div></div>`;
-      }
-      if (ndFindings) {
-        componentsHtml += `<div style="margin-bottom:16px;"><div class="section-header">Macroscopic Findings</div><div style="padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:9.5pt;white-space:pre-wrap;">${ndFindings}</div></div>`;
-      }
-      if (microDesc) {
-        componentsHtml += `<div style="margin-bottom:16px;"><div class="section-header">Microscopic Findings</div><div style="padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:9.5pt;white-space:pre-wrap;">${microDesc}</div></div>`;
-      }
-      if (ndImpression) {
-        componentsHtml += `<div style="margin-bottom:16px;"><div class="section-header" style="color:#1e40af;border-color:#1e40af;">Diagnosis</div><div style="padding:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:9.5pt;font-weight:500;white-space:pre-wrap;">${ndImpression}</div></div>`;
-      }
-      if (ndRecommendation) {
-        componentsHtml += `<div><div class="section-header" style="color:#92400e;border-color:#92400e;">Comments / Recommendations</div><div style="padding:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:9.5pt;font-weight:500;white-space:pre-wrap;">${ndRecommendation}</div></div>`;
-      }
-      if (structured.addendum) {
-        componentsHtml += `<div style="margin-top:16px;"><div class="section-header" style="color:#854d0e;border-color:#854d0e;">Addendum</div><div style="padding:14px;background:#fefce8;border:1px solid #fde047;border-radius:8px;font-size:9.5pt;white-space:pre-wrap;">${structured.addendum}</div></div>`;
-      }
-      componentsHtml += `</div>`;
-    } else if (
-      template === 'checklist' ||
-      template === 'panel' ||
-      (structured.parameters && structured.parameters.length) ||
-      (structured.results && structured.results.length)
-    ) {
-      const params = structured.parameters || structured.results || [];
-      if (params.length > 0) {
-        componentsHtml += `
-            <table class="report-table">
-              <thead><tr><th>Test / Analyte</th><th>Result</th><th>Unit</th><th>Ref. Range</th><th style="text-align:center;">Flag</th></tr></thead>
-              <tbody>
-                ${params
-                  .map((p: any) => {
-                    const isAbnormal =
-                      p.flag === 'H' ||
-                      p.flag === 'L' ||
-                      p.flag === 'High' ||
-                      p.flag === 'Low' ||
-                      p.isAbnormal ||
-                      p.status === 'Abnormal';
-                    const isCritical =
-                      p.flag === 'C' ||
-                      p.flag === 'CC' ||
-                      p.flag === 'Critical Low' ||
-                      p.flag === 'Critical High' ||
-                      p.isCritical;
-                    return `
-                    <tr class="${isCritical ? 'row-critical' : isAbnormal ? 'row-abnormal' : ''}">
-                        <td>${p.name || p.parameter}</td>
-                        <td class="res-val">${p.resultValue ?? p.value ?? p.result ?? '-'}</td>
-                        <td class="unit">${p.unit || ''}</td>
-                        <td>${p.reference || p.referenceRange || ''}</td>
-                        <td style="text-align:center; font-weight:bold; color:${isCritical ? 'red' : isAbnormal ? '#d97706' : 'inherit'};">${p.flag || (isCritical ? 'Critical' : isAbnormal ? '!' : '') || ''}</td>
-                    </tr>`;
-                  })
-                  .join('')}
-              </tbody>
-            </table>`;
-      }
-    } else if (lab.lab_results_items && lab.lab_results_items.length > 0) {
-      // Standard Table for Panel
-      componentsHtml = `
-        <table class="report-table">
-          <thead>
-            <tr>
-              <th>Test Parameter</th>
-              <th>Result</th>
-              <th>Unit</th>
-              <th>Ref. Range</th>
-              <th style="text-align:center;">Flag</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${lab.lab_results_items
-              .map((comp: any) => {
-                const isAbnormal =
-                  comp.is_abnormal || comp.result_status === 'Abnormal';
-                return `
-              <tr class="${isAbnormal ? 'row-abnormal' : ''}">
-                <td>${comp.component_name || 'N/A'}</td>
-                <td class="res-val">${comp.result_value || 'N/A'}</td>
-                <td class="unit">${comp.unit || ''}</td>
-                <td>${comp.reference_range || ''}</td>
-                <td style="text-align:center; font-weight:bold; color:${isAbnormal ? 'red' : 'inherit'};">
-                  ${isAbnormal ? '!' : ''}
-                </td>
-              </tr>
-            `;
-              })
-              .join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    const reportContent = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Lab Report - ${lab.test_name || 'Laboratory Test'}</title>
-        <style>
-          @page { size: A4; margin: 12mm; }
-          * { box-sizing: border-box; }
-          body { 
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; 
-            width: 210mm; min-height: 297mm; padding: 0; margin: 0 auto;
-            color: #000; font-size: 10pt; line-height: 1.4; background: white;
-          }
-          .page { padding: 10mm; background: white; position: relative; }
-          
-          /* Header */
-          .header { display:flex; justify-content:space-between; align-items:flex-start; border-bottom: 2px solid #000; padding-bottom:15px; margin-bottom: 20px; }
-          .header-left { display:flex; gap:15px; align-items:center; }
-          .logo { width:60px; height:60px; }
-          .logo img { width:100%; height:100%; object-fit:contain; }
-          .hospital-text h1 { margin:0; font-size:16pt; font-weight:900; color:#000; text-transform:uppercase; line-height:1.1; }
-          .hospital-text p { margin:0; font-size:9pt; text-transform:uppercase; letter-spacing:1px; color:#444; }
-          
-          .header-right { text-align:right; }
-          .report-type { font-size:14pt; font-weight:800; text-transform:uppercase; margin-bottom:5px; border:2px solid #000; padding:2px 10px; display:inline-block; }
-          .report-meta { font-size:9pt; color:#333; }
-
-          /* Info Grid */
-          .info-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:15px; padding-bottom:15px; border-bottom:1px solid #ccc; margin-bottom:25px; }
-          .info-item { display:flex; flex-direction:column; }
-          .label { font-size:7pt; color:#666; text-transform:uppercase; font-weight:700; margin-bottom:2px; }
-          .value { font-size:9.5pt; font-weight:600; color:#000; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
-          
-          /* Test Header */
-          .test-header { text-align:center; margin-bottom:20px; text-transform:uppercase; }
-          .test-name { font-size:14pt; font-weight:900; border-bottom:2px solid #000; display:inline-block; padding-bottom:2px; margin-bottom:5px; }
-          .test-category { font-size:9pt; font-weight:600; color:#444; }
-
-          /* Results */
-          .section-header { font-size:10pt; font-weight:800; text-transform:uppercase; border-bottom:1px solid #000; margin-bottom:10px; padding-bottom:2px; display:inline-block; min-width:150px; }
-          .result-section { margin-bottom:20px; }
-          
-          /* Tables */
-          .report-table { width:100%; border-collapse:collapse; font-size:9.5pt; }
-          .report-table th { text-align:left; border-bottom:1px solid #000; padding:6px 4px; text-transform:uppercase; font-size:8pt; }
-          .report-table td { padding:6px 4px; border-bottom:1px solid #eee; vertical-align:top; }
-          .report-table tr:last-child td { border-bottom:none; }
-          .report-table.compact td { padding: 4px; }
-          
-          .res-val { font-weight:700; }
-          .unit { color:#555; font-size:9pt; }
-          .row-abnormal td { color:#000; } 
-          
-          /* Single Analyte Card */
-          .single-analyte-card { border:1px solid #000; padding:20px; display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-radius:4px; }
-          .sa-main { display:flex; align-items:baseline; gap:10px; }
-          .sa-value { font-size:14pt; font-weight:700; }
-          .sa-unit { font-size:12pt; font-weight:600; color:#555; }
-          .sa-meta { text-align:right; font-size:9pt; }
-          .sa-flag { display:inline-block; background:#000; color:#fff; padding:2px 8px; font-weight:bold; font-size:9pt; border-radius:2px; margin-left:10px; }
-
-          /* Microbiology */
-          .grid-3 { display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
-          .culture-box { background:#f9f9f9; padding:10px; border-left:3px solid #000; margin-bottom:10px; }
-          .culture-name { font-weight:800; }
-          .culture-meta { font-size:9pt; margin-top:3px; }
-          .abnormal-text { color:#cc0000; font-weight:bold; }
-          .res-flag { font-weight:bold; color:#cc0000; }
-          .summary-box { padding:15px; text-align:center; font-weight:900; font-size:12pt; border:1px solid #ccc; margin-bottom:15px; }
-          .abnormal-bg { background:#ffeeee; color:#cc0000; border-color:#cc0000; }
-          .normal-bg { background:#eeffee; color:#006600; border-color:#006600; }
-
-          /* Interpretation/Remarks */
-          .note-box { background:#f5f5f5; padding:10px; border:1px solid #ddd; margin-bottom:15px; page-break-inside:avoid; }
-          .note-title { font-size:8pt; font-weight:800; text-transform:uppercase; margin-bottom:5px; color:#444; }
-          .note-content { font-size:9.5pt; }
-
-          /* Signatures */
-          .signatures { display:grid; grid-template-columns: 1fr 1fr; gap:50px; margin-top:40px; page-break-inside:avoid; }
-          .sig-line { border-top:1px solid #000; padding-top:5px; display:flex; flex-direction:column; align-items:center; }
-          .sig-name { font-weight:700; font-size:11pt; }
-          .sig-title { font-size:9pt; text-transform:uppercase; color:#555; }
-          .sig-date { font-size:8pt; color:#777; margin-top:2px; }
-
-          /* Footer */
-          .footer { margin-top:30px; border-top:1px solid #000; padding-top:10px; display:flex; justify-content:space-between; font-size:8pt; color:#555; }
-          
-          /* Action Bar */
-          .action-bar { position:fixed; top:0; left:0; width:100%; background:#222; padding:10px; display:flex; justify-content:center; gap:10px; z-index:9999; }
-          .btn { background:#fff; border:none; padding:8px 20px; font-weight:bold; cursor:pointer; }
-          @media print { .action-bar { display:none; } body { padding:0; } .page { padding:0; } }
-        </style>
-      </head>
-      <body>
-        <div class="action-bar">
-          <button onclick="window.print()" class="btn">PRINT REPORT</button>
-          <button onclick="window.close()" class="btn">CLOSE</button>
-        </div>
-
-        <div class="page">
-          <!-- Header -->
-          <div class="header">
-            <div class="header-left">
-              <div class="logo">
-                ${ndcLogoBase64 ? `<img src="${ndcLogoBase64}" alt="NDC" />` : '<div style="width:100%;height:100%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;">NDC</div>'}
-              </div>
-              <div class="hospital-text">
-                <h1>NDC Medical Centre</h1>
-                <p>National Diagnostic Center • Lab Medicine</p>
-              </div>
-            </div>
-            <div class="header-right">
-              <div class="report-type">Laboratory Report</div>
-              <div class="report-meta">
-                <div>REF: ${(lab.request_id || lab.id || '').slice(0, 8).toUpperCase()}</div>
-                <div>Date: ${new Date().toLocaleDateString('en-GB')}</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Patient & Request Grid -->
-          <div class="info-grid">
-            <div class="info-item">
-              <div class="label">Patient Name</div>
-              <div class="value" style="font-size:11pt;">${patientName}</div>
-            </div>
-            <div class="info-item">
-              <div class="label">EMR / ID</div>
-              <div class="value">${emrNumber}</div>
-            </div>
-            <div class="info-item">
-              <div class="label">Ordering Physician</div>
-              <div class="value">${lab.doctor_name || lab.clinician_name || 'Medical Officer'}</div>
-            </div>
-            <div class="info-item">
-              <div class="label">Clinical Indication</div>
-              <div class="value" title="${lab.clinical_notes || '-'}">${lab.clinical_notes || '-'}</div>
-            </div>
-          </div>
-
-          <!-- Test Title -->
-          <div class="test-header">
-            <div class="test-name">${lab.test_name || 'Laboratory Test'}</div>
-            <div class="test-category">${lab.category || 'General'} • Sample: ${lab.sample_type || 'Standard'}</div>
-          </div>
-
-          <!-- Main Results -->
-          <div class="result-section">
-            ${
-              componentsHtml ||
-              `
-                <!-- Single Result Card Fallback -->
-                <div class="single-analyte-card">
-                  <div class="sa-main">
-                    <div class="sa-value">${lab.result || lab.result_value || 'Pending'}</div>
-                    <div class="sa-unit">${lab.result_unit || ''}</div>
-                     ${lab.is_abnormal || lab.is_critical ? `<div class="sa-flag">${lab.is_critical ? 'CRITICAL' : 'ABNORMAL'}</div>` : ''}
-                  </div>
-                  <div class="sa-meta">
-                     ${lab.reference_range || lab.normal_range ? `<div><strong>Ref Range:</strong> ${lab.reference_range || lab.normal_range}</div>` : ''}
-                  </div>
-                </div>
-            `
-            }
-          </div>
-
-          <!-- Interpretation & Notes -->
-          ${
-            lab.interpretation
-              ? `
-            <div class="note-box">
-              <div class="note-title">Interpretation</div>
-              <div class="note-content">${lab.interpretation}</div>
-            </div>
-          `
-              : ''
-          }
-
-          ${
-            lab.result_notes || lab.remarks
-              ? `
-            <div class="note-box">
-              <div class="note-title">Remarks</div>
-              <div class="note-content">${lab.result_notes || lab.remarks}</div>
-            </div>
-          `
-              : ''
-          }
-
-          <!-- Signatures -->
-          <div class="signatures">
-            <div class="sig-line">
-              <div class="sig-name">${lab.technician?.name || lab.result_entered_by_name || '______________________'}</div>
-              <div class="sig-title">Laboratory Scientist</div>
-              <div class="sig-date">${lab.result_date ? formatDate(lab.result_date) : ''}</div>
-            </div>
-            <div class="sig-line">
-               <div class="sig-name">${lab.verifier?.name || lab.verified_by_name || '______________________'}</div>
-               <div class="sig-title">Verified By / Pathologist</div>
-               <div class="sig-date">${lab.verified_at ? formatDate(lab.verified_at) : ''}</div>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div class="footer">
-            <div>Printed: ${new Date().toLocaleString()} | User: System</div>
-            <div>NDC Medical Centre LIS • Page 1 of 1</div>
-          </div>
-        </div>
-      </body>
-      </html>
-    `;
-
-    // Open in system default browser
-    if ((window as any).electron?.html?.saveAndOpen) {
-      const filename = `Lab_Report_${(lab.request_id || lab.id).slice(0, 8)}_${Date.now()}.html`;
-      (window as any).electron.html.saveAndOpen(filename, reportContent);
-    } else {
-      const printWindow = window.open('', '_blank', 'width=900,height=700');
-      if (printWindow) {
-        printWindow.document.write(reportContent);
-        printWindow.document.close();
-        printWindow.focus();
-      }
-    }
+  // Print Lab Report Function - Universal hospital report
+  const handlePrintLabReport = async () => {
+    await printUniversalLabReportFromDetail(lab, {
+      patientName,
+      emrNumber,
+      gender: patientGender,
+    });
   };
 
   const hasResult =
@@ -2868,14 +2243,14 @@ function LabResultModal({
             <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-primary-700 to-primary-600">
               <div className="flex items-center gap-4">
                 <div className="bg-white rounded-lg p-1.5 shadow-md">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div className="border-l border-white/30 pl-4">
                   <h1 className="text-white font-bold text-lg tracking-wide">
-                    NATIONAL DEFENCE COLLEGE
+                    {getFacilityName().toUpperCase()}
                   </h1>
                   <p className="text-green-100 text-xs font-medium">
-                    Medical Centre - Laboratory Result
+                    {getFacilityAddress() || 'Laboratory Result'}
                   </p>
                 </div>
               </div>
@@ -3065,11 +2440,11 @@ function LabResultModal({
                       <div className="flex justify-between items-start">
                         <div className="flex gap-4 items-center">
                           <div className="h-16 w-16 bg-green-50 rounded-full flex items-center justify-center text-green-700 font-bold text-2xl border-2 border-green-700">
-                            NDC
+                            {getFacilityName().slice(0, 3).toUpperCase()}
                           </div>
                           <div>
                             <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                              NDC MEDICAL CENTRE
+                              {getFacilityName().toUpperCase()}
                             </h2>
                             <p className="text-sm font-semibold text-green-700 uppercase tracking-wide">
                               Department of Laboratory Medicine
@@ -3344,7 +2719,7 @@ function LabResultModal({
                           </div>
                           <div className="mt-6 text-center">
                             <p className="text-xs text-gray-400 uppercase tracking-widest">
-                              Electronic Report Generated by NDC EMR System
+                              Electronic Report Generated by XenoCare System
                             </p>
                           </div>
                         </div>

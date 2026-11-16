@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT PROFILE HEADER
+ * XENOCARE EMR - PATIENT PROFILE HEADER
  * Document-style clinical profile card with all patient overview details
  * Replaces sidebar - serves as the single source of patient context
  * =============================================================================

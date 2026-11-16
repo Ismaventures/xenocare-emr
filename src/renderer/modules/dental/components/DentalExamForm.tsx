@@ -26,6 +26,7 @@ import type {
 } from '../types/dental.types';
 import DentalChart from './DentalChart';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import {
   INPUT_CLS,
   LABEL_CLS,
@@ -249,12 +250,35 @@ export default function DentalExamForm({
           <div className="md:col-span-2">
             <div className="flex items-center justify-between mb-1.5">
               <label className={LABEL_CLS}>Chief Complaint</label>
-              <SavedNotesPopover
-                category="dental_notes"
-                subcategory="chief_complaint"
-                currentValue={formData.chief_complaint || ''}
-                onInsert={(content) => updateField('chief_complaint', content)}
-              />
+              <div className="flex items-center gap-1">
+                <TemplateSearchPopover
+                  templateType="dental"
+                  category="dental_notes"
+                  currentValues={{
+                    chief_complaint: formData.chief_complaint || '',
+                    dental_history: formData.dental_history || '',
+                    medical_history: formData.medical_history || '',
+                    extraoral_findings: formData.extraoral_findings || '',
+                    intraoral_findings: formData.intraoral_findings || '',
+                    treatment_plan: formData.treatment_plan || '',
+                  }}
+                  onTemplateSelect={(data) => {
+                    if (data.chief_complaint) updateField('chief_complaint', data.chief_complaint);
+                    if (data.dental_history) updateField('dental_history', data.dental_history);
+                    if (data.medical_history) updateField('medical_history', data.medical_history);
+                    if (data.extraoral_findings) updateField('extraoral_findings', data.extraoral_findings);
+                    if (data.intraoral_findings) updateField('intraoral_findings', data.intraoral_findings);
+                    if (data.treatment_plan) updateField('treatment_plan', data.treatment_plan);
+                  }}
+                  buttonText="Fill All Fields"
+                />
+                <SavedNotesPopover
+                  category="dental_notes"
+                  subcategory="chief_complaint"
+                  currentValue={formData.chief_complaint || ''}
+                  onInsert={(content) => updateField('chief_complaint', content)}
+                />
+              </div>
             </div>
             <textarea
               value={formData.chief_complaint || ''}

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - EYE EXAMINATION WIZARD
+ * XENOCARE EMR - EYE EXAMINATION WIZARD
  * Modern step-based eye examination workflow with progress indicator
  * Following SOAP methodology tailored for ophthalmology practice
  * =============================================================================
@@ -52,10 +52,21 @@ import type {
   PrescriptionOrderDTO,
 } from '../../clinical-consultation/dtos/consultation.dto';
 import type { SpecialtyOrdersPayload } from '../../specialty-common/utils/specialty-order-submission';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import {
   SelectWithOther,
   type SelectOption,
 } from '../../shared/components/SelectWithOther';
+
+const OPHTHALMOLOGY_TEMPLATE_CATEGORY = 'ophthalmology_exam';
+const OPHTHALMOLOGY_TEMPLATE_FIELDS = [
+  'chief_complaint',
+  'provisional_diagnosis',
+  'final_diagnosis',
+  'treatment_plan',
+] as const;
+
+type OphthalmologyTemplateField = (typeof OPHTHALMOLOGY_TEMPLATE_FIELDS)[number];
 
 // =============================================================================
 // Types
@@ -2765,10 +2776,36 @@ export default function EyeExamWizard({
     procedureOrders.length > 0 ||
     Object.values(specialtyReferrals).some((ref) => ref.selected);
 
+  const ophthalmologyTemplateValues: Record<OphthalmologyTemplateField, string> = {
+    chief_complaint: formData.chief_complaint || '',
+    provisional_diagnosis: formData.provisional_diagnosis || '',
+    final_diagnosis: formData.final_diagnosis || '',
+    treatment_plan: formData.treatment_plan || '',
+  };
+
   const handleFieldChange = useCallback(
     (field: keyof EyeExamDTO, value: any) => {
       if (readOnly) return;
       setFormData((prev) => ({ ...prev, [field]: value }));
+    },
+    [readOnly],
+  );
+
+  const applyOphthalmologyTemplate = useCallback(
+    (templateData: Record<string, string>) => {
+      if (readOnly) return;
+
+      setFormData((prev) => {
+        const next = { ...prev };
+
+        for (const field of OPHTHALMOLOGY_TEMPLATE_FIELDS) {
+          if (field in templateData) {
+            next[field] = templateData[field] ?? '';
+          }
+        }
+
+        return next;
+      });
     },
     [readOnly],
   );
@@ -3052,8 +3089,18 @@ export default function EyeExamWizard({
         ) : (
           /* Normal wizard navigation */
           <>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              Step {currentStep + 1} of {STEPS.length}
+            <div className="flex items-center gap-3">
+              {!readOnly && (
+                <TemplateSearchPopover
+                  templateType="ophthalmology"
+                  category={OPHTHALMOLOGY_TEMPLATE_CATEGORY}
+                  currentValues={ophthalmologyTemplateValues}
+                  onTemplateSelect={applyOphthalmologyTemplate}
+                />
+              )}
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                Step {currentStep + 1} of {STEPS.length}
+              </div>
             </div>
             <div className="flex items-center gap-3">
               {currentStep > 0 && (

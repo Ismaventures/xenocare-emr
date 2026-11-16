@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Excel Exporter
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Multi-sheet Excel export with formatting for clinical data analysis
  *

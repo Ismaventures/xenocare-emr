@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure History List Component
+// XENOCARE EMR - Procedure History List Component
 // Comprehensive list of all procedures with patient information
 // =============================================================================
 

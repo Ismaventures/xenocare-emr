@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTERS SERVICE
+ * XENOCARE EMR - ENCOUNTERS SERVICE
  * Patient encounters listing and pagination
  * =============================================================================
  */

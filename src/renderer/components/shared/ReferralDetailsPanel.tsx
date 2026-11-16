@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - REFERRAL DETAILS PANEL
+ * XENOCARE EMR - REFERRAL DETAILS PANEL
  * Component for displaying referral information before specialty exam
  * Shows referral reason, urgency, referring doctor, and patient medical records
  * =============================================================================

@@ -93,6 +93,7 @@ import { ApprovedRequestsHistory } from './components/ApprovedRequestsHistory';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTimeTheme } from '../../hooks/useTimeTheme';
 import { InlineGuidance } from '../../components/guidance/InlineGuidance';
+import { getFacilityName } from '../../lib/facility';
 
 // Helper to get the stats period label based on filter
 const getStatsPeriodLabel = (
@@ -1792,7 +1793,7 @@ export default function Billing() {
               {/* Watermark */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
                 <span className="text-green-100 text-6xl font-bold transform -rotate-45 whitespace-nowrap tracking-widest opacity-40">
-                  NDC VERIFIED
+                  XENOCARE VERIFIED
                 </span>
               </div>
 
@@ -1800,7 +1801,7 @@ export default function Billing() {
               <div className="relative z-10 bg-gradient-to-r from-green-700 to-green-600 text-white p-5">
                 <div className="text-center">
                   <h1 className="text-xl font-bold tracking-wide">
-                    NDC MEDICAL CENTRE
+                    {getFacilityName().toUpperCase()}
                   </h1>
                   <p className="text-green-200 text-xs tracking-widest uppercase">
                     Excellence in Healthcare

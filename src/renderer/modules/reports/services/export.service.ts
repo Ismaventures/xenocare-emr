@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR
+ * XenoCare EMR
  * Reusable Export Service — CSV, Excel (xlsx), PDF (jsPDF)
  *
  * All module exports funnel through this service for consistency.
@@ -163,10 +163,10 @@ export function exportToPDF(opts: PDFReportOptions, filename: string): void {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.text('NDC MEDICAL CENTRE', ML, 9);
+  doc.text('XENOCARE', ML, 9);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text(opts.facility || 'NDC Medical Centre EMR', ML, 15);
+  doc.text(opts.facility || 'XenoCare EMR', ML, 15);
 
   // Confidentiality notice right-aligned
   doc.setFontSize(7);
@@ -301,7 +301,7 @@ export function exportToPDF(opts: PDFReportOptions, filename: string): void {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(7);
     doc.text(
-      'NDC Medical Centre EMR — Confidential Medical Record',
+      'XenoCare EMR — Confidential Medical Record',
       ML,
       pageH - 4,
     );

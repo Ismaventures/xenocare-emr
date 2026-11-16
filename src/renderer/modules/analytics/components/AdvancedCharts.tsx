@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Advanced 3D Charts Library
+// XENOCARE EMR - Advanced 3D Charts Library
 // Professional chart components with 3D effects and chart-friendly colors
 // =============================================================================
 

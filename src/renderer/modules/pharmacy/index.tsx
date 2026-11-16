@@ -31,10 +31,6 @@ import InventoryDashboard from './components/InventoryDashboard';
 import BatchDispenseModal from './components/BatchDispenseModal';
 import DrugCatalogueList from './components/DrugCatalogueList';
 import DrugFormModal, { DrugFormData } from './components/DrugFormModal';
-import EncounterGroupList from './components/EncounterGroupList';
-import EncounterApprovalModal, {
-  EncounterGroup,
-} from './components/EncounterApprovalModal';
 import ReadyToDispenseList, {
   DispenseEncounterGroup,
 } from './components/ReadyToDispenseList';
@@ -60,8 +56,6 @@ import {
   useCreateDrug,
   useUpdateDrugCatalogue,
   usePharmacySubscription,
-  useAcceptPrescription,
-  useRejectPrescription,
 } from './hooks/usePharmacy';
 import { getDispensableBatches } from './api/pharmacy.api';
 import {
@@ -88,8 +82,8 @@ import { createScopedLogger } from '../../utils/logger';
 
 const log = createScopedLogger('PharmacyModule');
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Component
@@ -105,8 +99,8 @@ export default function Pharmacy() {
   // State
   const [activeTab, setActiveTab] = useState('prescriptions');
   const [prescriptionSubTab, setPrescriptionSubTab] = useState<
-    'approval' | 'all' | 'dispense_history'
-  >('approval');
+    'all' | 'dispense_history'
+  >('all');
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<PrescriptionStatus | ''>('');
   const [selectedPrescription, setSelectedPrescription] =
@@ -124,17 +118,6 @@ export default function Pharmacy() {
   const [cancelConfirm, setCancelConfirm] = useState<PrescriptionDTO | null>(
     null,
   );
-  const [acceptConfirm, setAcceptConfirm] = useState<PrescriptionDTO | null>(
-    null,
-  );
-  const [rejectModal, setRejectModal] = useState<{
-    isOpen: boolean;
-    prescription: PrescriptionDTO | null;
-    reason: string;
-  }>({ isOpen: false, prescription: null, reason: '' });
-  const [selectedEncounterGroup, setSelectedEncounterGroup] =
-    useState<EncounterGroup | null>(null);
-  const [isEncounterModalOpen, setIsEncounterModalOpen] = useState(false);
   const [isAIDashboardOpen, setIsAIDashboardOpen] = useState(false);
   const [aiSelectedPatientId, setAiSelectedPatientId] = useState<string>('');
 
@@ -279,8 +262,6 @@ export default function Pharmacy() {
   const transitionEncounter = useTransitionEncounter();
   const createDrug = useCreateDrug();
   const updateDrugCatalogue = useUpdateDrugCatalogue();
-  const acceptPrescription = useAcceptPrescription();
-  const rejectPrescription = useRejectPrescription();
 
   // Delete confirmation state
   const [deleteConfirm, setDeleteConfirm] = useState<{
@@ -299,88 +280,10 @@ export default function Pharmacy() {
     setIsPrescriptionDetailOpen(true);
   };
 
-  // Accept/Reject handlers for approval workflow
-  const handleAcceptPrescription = (prescription: PrescriptionDTO) => {
-    setAcceptConfirm(prescription);
-  };
-
-  const handleRejectPrescription = (prescription: PrescriptionDTO) => {
-    setRejectModal({ isOpen: true, prescription, reason: '' });
-  };
-
-  // Encounter group handlers
-  const handleSelectEncounter = (group: EncounterGroup) => {
-    setSelectedEncounterGroup(group);
-    setIsEncounterModalOpen(true);
-  };
-
   // Dispense encounter group handler (for Ready to Process tab)
   const handleSelectDispenseEncounter = (group: DispenseEncounterGroup) => {
     setSelectedDispenseGroup(group);
     setIsDispenseModalOpen(true);
-  };
-
-  const confirmAcceptPrescription = () => {
-    if (acceptConfirm) {
-      const prescriptionId = acceptConfirm.prescription_id;
-      setAcceptConfirm(null);
-
-      acceptPrescription.mutate(
-        { prescription_id: prescriptionId },
-        {
-          onSuccess: () => {
-            showToast({
-              type: 'success',
-              title: 'Prescription Accepted',
-              message: 'Prescription has been accepted and sent to billing.',
-            });
-          },
-          onError: (error) => {
-            showToast({
-              type: 'error',
-              title: 'Accept Failed',
-              message:
-                error instanceof Error
-                  ? error.message
-                  : 'Failed to accept prescription',
-            });
-            log.error('Failed to accept prescription:', error);
-          },
-        },
-      );
-    }
-  };
-
-  const confirmRejectPrescription = () => {
-    if (rejectModal.prescription && rejectModal.reason.trim()) {
-      const prescriptionId = rejectModal.prescription.prescription_id;
-      const { reason } = rejectModal;
-      setRejectModal({ isOpen: false, prescription: null, reason: '' });
-
-      rejectPrescription.mutate(
-        { prescription_id: prescriptionId, rejection_reason: reason },
-        {
-          onSuccess: () => {
-            showToast({
-              type: 'success',
-              title: 'Prescription Rejected',
-              message: 'Prescription has been rejected.',
-            });
-          },
-          onError: (error) => {
-            showToast({
-              type: 'error',
-              title: 'Reject Failed',
-              message:
-                error instanceof Error
-                  ? error.message
-                  : 'Failed to reject prescription',
-            });
-            log.error('Failed to reject prescription:', error);
-          },
-        },
-      );
-    }
   };
 
   const ensurePaymentBeforeAction = async (
@@ -1144,7 +1047,7 @@ export default function Pharmacy() {
         <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-sm font-semibold sm:px-5 [&::-webkit-details-marker]:hidden text-slate-800 dark:text-slate-100">
           <span className="flex items-center gap-2">
             <Bot className="h-4 w-4 opacity-80" />
-            NDC Medical AI assistants
+            XenoCare AI Assistant
           </span>
           <ChevronDown className="h-4 w-4 shrink-0 text-slate-500 transition-transform group-open:rotate-180 dark:text-slate-400" />
         </summary>
@@ -1199,7 +1102,7 @@ export default function Pharmacy() {
         <InlineGuidance
           module="pharmacy"
           title="Prescription Management"
-          message="Handle medication orders here. Use 'Approval Queue' to vet new prescriptions, and 'Ready to Process' to dispense medications for orders that have been paid or approved."
+          message="Prescriptions flow directly to central billing. Dispense here once payment or billing authorization is confirmed."
         />
       )}
 
@@ -1234,17 +1137,6 @@ export default function Pharmacy() {
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
               <button
-                onClick={() => setPrescriptionSubTab('approval')}
-                className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
-                  prescriptionSubTab === 'approval'
-                    ? 'border-green-500 text-green-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                <ClipboardList size={18} />
-                Approval Queue
-              </button>
-              <button
                 onClick={() => setPrescriptionSubTab('all')}
                 className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
                   prescriptionSubTab === 'all'
@@ -1273,26 +1165,6 @@ export default function Pharmacy() {
               </button>
             </nav>
           </div>
-
-          {/* Approval Queue Sub-Tab */}
-          {prescriptionSubTab === 'approval' && (
-            <Card>
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Pending Approvals
-                </h2>
-                <p className="text-sm text-gray-500">
-                  Review and approve/reject prescriptions grouped by patient
-                  encounter
-                </p>
-              </div>
-              <EncounterGroupList
-                prescriptions={prescriptionsData?.data || []}
-                isLoading={isLoading}
-                onSelectEncounter={handleSelectEncounter}
-              />
-            </Card>
-          )}
 
           {/* Ready to Process Sub-Tab */}
           {prescriptionSubTab === 'all' && (
@@ -1432,12 +1304,12 @@ export default function Pharmacy() {
                 <div className="bg-white rounded-lg p-1.5 shadow">
                   <img
                     src={ndcLogoSrc}
-                    alt="NDC"
+                    alt="XenoCare"
                     className="h-6 w-6 object-contain"
                   />
                 </div>
                 <span className="text-sm font-semibold">
-                  NDC Medical AI Assistants
+                  XenoCare AI Assistant
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -1602,73 +1474,6 @@ export default function Pharmacy() {
         isLoading={createDrug.isPending || updateDrugCatalogue.isPending}
       />
 
-      {/* Confirm Accept Prescription */}
-      <ConfirmDialog
-        isOpen={!!acceptConfirm}
-        onClose={() => setAcceptConfirm(null)}
-        onConfirm={confirmAcceptPrescription}
-        title="Accept Prescription"
-        message={`Are you sure you want to accept the prescription for "${acceptConfirm?.drug?.drug_name}"? This will create a billing order.`}
-        confirmText="Accept & Bill"
-        isLoading={acceptPrescription.isPending}
-      />
-
-      {/* Reject Prescription Modal */}
-      {rejectModal.isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Reject Prescription
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Are you sure you want to reject the prescription for &quot;
-              {rejectModal.prescription?.drug?.drug_name}&quot;?
-            </p>
-            <label
-              htmlFor="rejectReason"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Rejection Reason <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="rejectReason"
-              className="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
-              rows={3}
-              placeholder="Enter reason for rejection..."
-              value={rejectModal.reason}
-              onChange={(e) =>
-                setRejectModal((prev) => ({ ...prev, reason: e.target.value }))
-              }
-            />
-            <div className="flex justify-end gap-3 mt-4">
-              <Button
-                variant="secondary"
-                onClick={() =>
-                  setRejectModal({
-                    isOpen: false,
-                    prescription: null,
-                    reason: '',
-                  })
-                }
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="danger"
-                onClick={confirmRejectPrescription}
-                disabled={
-                  !rejectModal.reason.trim() || rejectPrescription.isPending
-                }
-              >
-                {rejectPrescription.isPending
-                  ? 'Rejecting...'
-                  : 'Reject Prescription'}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* NHIS Blocking Modal */}
       {nhisBlockingModal.isOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
@@ -1724,16 +1529,6 @@ export default function Pharmacy() {
           </div>
         </div>
       )}
-
-      {/* Encounter Approval Modal */}
-      <EncounterApprovalModal
-        isOpen={isEncounterModalOpen}
-        onClose={() => {
-          setIsEncounterModalOpen(false);
-          setSelectedEncounterGroup(null);
-        }}
-        encounterGroup={selectedEncounterGroup}
-      />
 
       {/* Encounter Dispense Modal (for Ready to Process) */}
       <EncounterDispenseModal

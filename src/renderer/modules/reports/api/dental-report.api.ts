@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Dental Report API
+ * XenoCare EMR — Dental Report API
  */
 
 import { supabase } from '../../../api/supabaseClient';

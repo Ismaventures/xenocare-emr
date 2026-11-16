@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Radiology / Imaging Export Panel
+ * XenoCare EMR — Radiology / Imaging Export Panel
  * Inline export toolbar for the Radiology module page.
  */
 
@@ -65,7 +65,7 @@ export function ImagingExportPanel({ data }: ImagingExportPanelProps) {
   const rows = data.map((r) => toRow(r));
 
   async function handleExport(format: ExportFormat) {
-    const filename = `NDC_Radiology_Export_${new Date().toISOString().split('T')[0]}`;
+    const filename = `XenoCare_Radiology_Export_${new Date().toISOString().split('T')[0]}`;
     const pdfOpts = {
       title: 'Radiology / Imaging Export',
       generatedBy: staff ? `${staff.first_name} ${staff.last_name}` : '',

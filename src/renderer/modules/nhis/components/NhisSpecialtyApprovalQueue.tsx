@@ -1,5 +1,5 @@
 // =============================================================================
-// NHIS Specialty Approval Queue Component — NDC Branded
+// NHIS Specialty Approval Queue Component — XenoCare Branded
 // =============================================================================
 // Displays internal specialty referrals (Dental, Ophthalmology, Physiotherapy, etc.)
 // that require NHIS authorization before the patient can be seen at the specialty clinic.
@@ -1146,7 +1146,7 @@ export function NhisSpecialtyApprovalQueue({
         </>
       )}
 
-      {/* Approve Modal — NDC Branded */}
+      {/* Approve Modal — XenoCare Branded */}
       {approveModalOpen && selectedItem && (
         <div
           className={`fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200 ${isExpanded ? 'p-0' : ''}`}
@@ -1160,8 +1160,8 @@ export function NhisSpecialtyApprovalQueue({
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center p-1.5 backdrop-blur-sm border border-white/10">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC Logo"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare Logo"
                     className="w-full h-full object-contain drop-shadow-sm"
                   />
                 </div>
@@ -2209,7 +2209,7 @@ export function NhisSpecialtyApprovalQueue({
         </div>
       )}
 
-      {/* Reject Modal — NDC Branded */}
+      {/* Reject Modal — XenoCare Branded */}
       {rejectModalOpen && selectedItem && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4"

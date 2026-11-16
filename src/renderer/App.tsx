@@ -26,6 +26,7 @@ import { GlobalMutationSyncIndicator } from './components/ui/GlobalMutationSyncI
 import { runIndexedDbMaintenance } from './lib/offline/storage/maintenance';
 import { setupRealtimeInvalidation } from './lib/realtimeInvalidation';
 import { createScopedLogger } from './utils/logger';
+import { isNhisFeatureEnabled } from './config/features';
 import './App.css';
 
 const log = createScopedLogger('App');
@@ -120,6 +121,18 @@ function ModuleLoadingFallback() {
 
 export default function App() {
   useEffect(() => {
+    document.title = 'XenoCare EMR';
+    const faviconSvg =
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 112'%3E%3Crect x='5' y='5' width='102' height='102' rx='27' fill='%230E2A47'/%3E%3Cpath d='M29 29L83 83M83 29L29 83' fill='none' stroke='%23FFFFFF' stroke-width='9' stroke-linecap='round'/%3E%3Cpath d='M51 40H61V51H72V61H61V72H51V61H40V51H51V40Z' fill='%23F97316' stroke='%23FFFFFF' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E";
+    let iconLink = document.querySelector<HTMLLinkElement>("link[rel~='icon']");
+    if (!iconLink) {
+      iconLink = document.createElement('link');
+      iconLink.rel = 'icon';
+      document.head.appendChild(iconLink);
+    }
+    iconLink.type = 'image/svg+xml';
+    iconLink.href = faviconSvg;
+
     setupPersistentQueryCache();
     const cleanupRealtime = setupRealtimeInvalidation();
 
@@ -388,9 +401,13 @@ export default function App() {
                             <Route
                               path="nhis"
                               element={
-                                <ModuleRoute module="nhis">
-                                  <NhisModule />
-                                </ModuleRoute>
+                                isNhisFeatureEnabled() ? (
+                                  <ModuleRoute module="nhis">
+                                    <NhisModule />
+                                  </ModuleRoute>
+                                ) : (
+                                  <Navigate to="/" replace />
+                                )
                               }
                             />
                             <Route

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT MEDICAL RECORDS PANEL
+ * XENOCARE EMR - PATIENT MEDICAL RECORDS PANEL
  * Reusable component for viewing comprehensive patient medical records
  * Following global EMR best practices for encounter-centric documentation
  * =============================================================================

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { SelectWithOther } from '../../shared/components/SelectWithOther';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import {
   ancDoctorReviewSchema,
   type AncDoctorReviewFormDTO,
@@ -96,6 +97,25 @@ export default function AncDoctorReviewForm({
         icon={<ClipboardList className="h-4 w-4 text-blue-500" />}
       >
         <div className="space-y-4">
+          <div className="flex justify-end">
+            <TemplateSearchPopover
+              templateType="anc"
+              category="anc_notes"
+              currentValues={{
+                subjective: watch('subjective') || '',
+                objective: watch('objective') || '',
+                assessment: watch('assessment') || '',
+                plan: watch('plan') || '',
+              }}
+              onTemplateSelect={(data) => {
+                if (data.subjective) setValue('subjective', data.subjective);
+                if (data.objective) setValue('objective', data.objective);
+                if (data.assessment) setValue('assessment', data.assessment);
+                if (data.plan) setValue('plan', data.plan);
+              }}
+              buttonText="Fill All Fields"
+            />
+          </div>
           <Field
             label="Subjective (Patient's complaint / history) *"
             error={errors.subjective?.message}

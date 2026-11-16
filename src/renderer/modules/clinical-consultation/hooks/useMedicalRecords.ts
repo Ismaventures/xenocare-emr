@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS HOOKS
+ * XENOCARE EMR - MEDICAL RECORDS HOOKS
  * React Query hooks for patient medical records
  * =============================================================================
  */

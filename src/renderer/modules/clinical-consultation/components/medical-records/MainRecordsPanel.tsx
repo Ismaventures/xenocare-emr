@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER TIMELINE PANEL
+ * XENOCARE EMR - ENCOUNTER TIMELINE PANEL
  * Clean encounter list without sidebar - patient profile is in sticky header
  * Each encounter shows: Date, Visit Type/Category, Chief Complaint, Status
  * =============================================================================

@@ -13,7 +13,8 @@ import {
 } from 'lucide-react';
 import { Select } from '../../../components/ui';
 import { useToast } from '../../../components/ui/Toast';
-import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
+
 import {
   RadiologyRequestDTO,
   validateRadiologyReportForm,
@@ -2299,11 +2300,15 @@ export default function RadiologyReportForm({
                     <label className="text-xs font-bold text-rose-700 uppercase tracking-wider">
                       Findings <span className="text-red-500">*</span>
                     </label>
-                    <SavedNotesPopover
-                      category="radiology_findings"
-                      subcategory={request.imaging_type}
-                      currentValue={findings}
-                      onInsert={(content) => { setFindings(content); if (errors.findings) setErrors({ ...errors, findings: undefined }); }}
+                    <TemplateSearchPopover
+                      templateType="radiology"
+                      currentValues={{ findings, impression, notes }}
+                      onTemplateSelect={(data) => {
+                        if (data.findings) setFindings(data.findings);
+                        if (data.impression) setImpression(data.impression);
+                        if (data.notes) setNotes(data.notes);
+                        if (errors.findings) setErrors({ ...errors, findings: undefined });
+                      }}
                     />
                   </div>
                   <textarea
@@ -2327,11 +2332,15 @@ export default function RadiologyReportForm({
                     <label className="text-xs font-bold text-purple-700 uppercase tracking-wider">
                       Impression <span className="text-red-500">*</span>
                     </label>
-                    <SavedNotesPopover
-                      category="radiology_impression"
-                      subcategory={request.imaging_type}
-                      currentValue={impression}
-                      onInsert={(content) => { setImpression(content); if (errors.report) setErrors({ ...errors, report: undefined }); }}
+                    <TemplateSearchPopover
+                      templateType="radiology"
+                      currentValues={{ findings, impression, notes }}
+                      onTemplateSelect={(data) => {
+                        if (data.findings) setFindings(data.findings);
+                        if (data.impression) setImpression(data.impression);
+                        if (data.notes) setNotes(data.notes);
+                        if (errors.report) setErrors({ ...errors, report: undefined });
+                      }}
                     />
                   </div>
                   <textarea
@@ -2355,11 +2364,14 @@ export default function RadiologyReportForm({
                     <label className="text-xs font-bold text-teal-700 uppercase tracking-wider">
                       Additional Notes <span className="font-normal normal-case text-gray-400">(Optional)</span>
                     </label>
-                    <SavedNotesPopover
-                      category="radiology_notes"
-                      subcategory={request.imaging_type}
-                      currentValue={notes}
-                      onInsert={setNotes}
+                    <TemplateSearchPopover
+                      templateType="radiology"
+                      currentValues={{ findings, impression, notes }}
+                      onTemplateSelect={(data) => {
+                        if (data.findings) setFindings(data.findings);
+                        if (data.impression) setImpression(data.impression);
+                        if (data.notes) setNotes(data.notes);
+                      }}
                     />
                   </div>
                   <textarea
@@ -2643,3 +2655,6 @@ export default function RadiologyReportForm({
     </div>
   );
 }
+
+
+

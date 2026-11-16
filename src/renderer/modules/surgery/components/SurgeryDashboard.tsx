@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Calendar,
@@ -191,13 +192,15 @@ const SurgeryDashboard: React.FC<SurgeryDashboardProps> = ({ facilityId }) => {
             color="purple"
             highlight={stats.pending_preop > 0}
           />
-          <StatCard
-            title="Awaiting NHIS"
-            value={stats.awaiting_nhis}
-            icon={<Clock className="h-5 w-5 text-orange-500" />}
-            color="orange"
-            highlight={stats.awaiting_nhis > 0}
-          />
+          {isNhisFeatureEnabled() && (
+            <StatCard
+              title="Awaiting NHIS"
+              value={stats.awaiting_nhis}
+              icon={<Clock className="h-5 w-5 text-orange-500" />}
+              color="orange"
+              highlight={stats.awaiting_nhis > 0}
+            />
+          )}
           <StatCard
             title="Emergency"
             value={stats.emergency_pending}
@@ -396,7 +399,7 @@ const SurgeryListItem: React.FC<SurgeryListItemProps> = ({
           <span className="text-xs text-gray-500">
             {surgery.surgery_number}
           </span>
-          {surgery.requires_nhis_approval && (
+          {isNhisFeatureEnabled() && surgery.requires_nhis_approval && (
             <span
               className={`text-xs px-1.5 py-0.5 rounded ${
                 surgery.nhis_authorization_code

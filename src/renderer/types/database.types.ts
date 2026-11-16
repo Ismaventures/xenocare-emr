@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Database Types
+// XENOCARE EMR - Database Types
 // Auto-generated types matching Supabase schema
 // =============================================================================
 
@@ -355,6 +355,8 @@ export interface Patient {
   clinical_summary: string | null;
   blood_group: string | null;
   known_allergies: string[] | null;
+  no_known_allergies: boolean | null;
+  allergies_reviewed_at: string | null;
   registered_by: string | null;
   registration_date: string;
   status: PatientStatus;
@@ -524,6 +526,9 @@ export interface LabRequest {
   status: RequestStatus; // Pending, Sample Collected, In Progress, Completed, Cancelled
   request_date?: string; // When request was made
   sample_collected_at: string | null;
+  lab_request_group_id?: string | null;
+  specimen_type?: string | null;
+  specimen_identifier?: string | null;
   created_at: string;
   updated_at: string;
   // NHIS fields
@@ -769,6 +774,7 @@ export interface Prescription {
   dispense_date: string | null;
   status: DispenseStatus;
   is_nhis_claim: boolean;
+  is_external?: boolean;
   created_at: string;
   updated_at: string;
   // Relations

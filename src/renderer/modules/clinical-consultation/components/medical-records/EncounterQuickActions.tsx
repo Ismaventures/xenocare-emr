@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER QUICK ACTIONS
+ * XENOCARE EMR - ENCOUNTER QUICK ACTIONS
  *
  * Context-aware action bar that appears when viewing encounter records.
  * Provides quick access to common clinical actions like adding orders and notes.

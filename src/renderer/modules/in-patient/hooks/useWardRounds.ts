@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - useWardRounds Hook
+// XENOCARE EMR - useWardRounds Hook
 // React Query hook for ward round documentation
 // =============================================================================
 

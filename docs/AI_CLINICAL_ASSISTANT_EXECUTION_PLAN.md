@@ -953,7 +953,7 @@ This means `chunkBuilder.ts` only generates embeddings for narrative tables, whi
 | **HuggingFace** | `all-MiniLM-L6-v2` | 384 | Free | Yes (local) |
 | **Ollama** | `nomic-embed-text` | 768 | Free | Yes (local) |
 
-**Recommendation:** Start with **OpenAI `text-embedding-3-small`** (best quality/cost) for cloud. For offline/on-premise, use **Ollama `nomic-embed-text`**.
+**Recommendation:** For a fully local/offline deployment, pair **Ollama `phi3:latest`** for chat with **Ollama `nomic-embed-text`** for embeddings. Use **OpenAI `text-embedding-3-small`** only when you explicitly want a cloud setup.
 
 ### 4.3 When to Generate Embeddings
 
@@ -1167,15 +1167,12 @@ src/
 
 ```env
 # AI Clinical Assistant
-AI_PROVIDER=openai                    # openai | ollama
-OPENAI_API_KEY=sk-your-key-here
-OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-OPENAI_CHAT_MODEL=gpt-4o-mini
+AI_PROVIDER=ollama                    # openai | ollama
 
 # For offline/on-premise (Ollama)
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_EMBEDDING_MODEL=nomic-embed-text
-OLLAMA_CHAT_MODEL=llama3.1:8b
+OLLAMA_CHAT_MODEL=phi3:latest
 
 # Search tuning
 AI_FULLTEXT_WEIGHT=0.4

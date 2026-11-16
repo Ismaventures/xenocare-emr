@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Procedure Report API
+ * XenoCare EMR — Procedure Report API
  */
 
 import { supabase } from '../../../api/supabaseClient';

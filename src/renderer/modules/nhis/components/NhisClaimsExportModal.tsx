@@ -1,6 +1,6 @@
 /**
  * NHIS Claims Category Export Modal
- * NDC MEDICAL CENTRE EMR - NHIS Module
+ * XENOCARE EMR - NHIS Module
  *
  * Modal dialog allowing admin to:
  *  1. Select which financial categories to include in the report
@@ -308,8 +308,8 @@ export function NhisClaimsExportModal({
         selectedCategories: Array.from(selectedCategories),
         selectedColumns: Array.from(selectedColumns),
         format: selectedFormat,
-        facilityName: 'NDC Medical Centre',
-        facilityAddress: 'National Defence College, Abuja',
+        facilityName: 'XenoCare',
+        facilityAddress: 'XenoCare',
         facilityNhisId: 'NHIS-NDC-001',
         generatedBy: 'System',
         reportPeriod,

@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - ICD-10 Service
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * ICD-10 code validation, lookup, and statistics
  * Reference: WHO ICD-10 Classification

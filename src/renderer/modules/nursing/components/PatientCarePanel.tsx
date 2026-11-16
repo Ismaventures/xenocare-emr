@@ -523,7 +523,10 @@ function OverviewTabContent({
               <p className="text-sm font-bold text-red-900">
                 {patient.known_allergies?.length
                   ? patient.known_allergies.join(', ')
-                  : 'No Known Allergies'}
+                  : (patient as { no_known_allergies?: boolean })
+                        .no_known_allergies
+                    ? 'No Known Allergies'
+                    : 'Allergy status not recorded'}
               </p>
             </div>
             <div className="p-3 bg-gray-50 rounded-lg">

@@ -22,6 +22,10 @@ import {
   useOutstandingNHISClaims,
   useDepartmentWaitTimes,
 } from '../hooks/useAnalytics';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 
 // =============================================================================
 // Types
@@ -47,12 +51,18 @@ export default function BillingAnalytics({ date }: BillingAnalyticsProps) {
     return `₦${amount.toLocaleString()}`;
   };
 
+  const visibleRevenueByMethod = isNhisFeatureEnabled()
+    ? revenueByMethod
+    : (revenueByMethod || []).filter(
+        (item) => !isNhisCategory(item.payment_method),
+      );
+
   // Calculate totals
-  const totalRevenue = (revenueByMethod || []).reduce(
+  const totalRevenue = (visibleRevenueByMethod || []).reduce(
     (sum, item) => sum + item.total_amount,
     0,
   );
-  const totalTransactions = (revenueByMethod || []).reduce(
+  const totalTransactions = (visibleRevenueByMethod || []).reduce(
     (sum, item) => sum + item.count,
     0,
   );
@@ -67,7 +77,7 @@ export default function BillingAnalytics({ date }: BillingAnalyticsProps) {
   };
 
   const revenueChartData =
-    revenueByMethod?.map((item) => ({
+    visibleRevenueByMethod?.map((item) => ({
       label: getPaymentMethodLabel(item.payment_method),
       value: item.total_amount,
       color: paymentMethodColors[item.payment_method] || '#6B7280',
@@ -105,17 +115,21 @@ export default function BillingAnalytics({ date }: BillingAnalyticsProps) {
           icon={CreditCard}
           variant="info"
         />
-        <StatsCard
-          title="NHIS Claims"
-          value={nhisClaimsData?.total_claims || 0}
-          icon={Shield}
-          variant="warning"
-        />
-        <StatsCard
-          title="NHIS Total"
-          value={formatCurrency(nhisClaimsData?.total_amount || 0)}
-          icon={Building2}
-        />
+        {isNhisFeatureEnabled() && (
+          <>
+            <StatsCard
+              title="NHIS Claims"
+              value={nhisClaimsData?.total_claims || 0}
+              icon={Shield}
+              variant="warning"
+            />
+            <StatsCard
+              title="NHIS Total"
+              value={formatCurrency(nhisClaimsData?.total_amount || 0)}
+              icon={Building2}
+            />
+          </>
+        )}
       </div>
 
       {/* Revenue Breakdown */}
@@ -166,6 +180,7 @@ export default function BillingAnalytics({ date }: BillingAnalyticsProps) {
         </Card>
 
         {/* NHIS Claims Summary */}
+        {isNhisFeatureEnabled() && (
         <Card>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Outstanding NHIS Claims
@@ -222,6 +237,7 @@ export default function BillingAnalytics({ date }: BillingAnalyticsProps) {
             </div>
           )}
         </Card>
+        )}
       </div>
 
       {/* Wait Times by Department */}

@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Ophthalmology Report Modal
+ * XenoCare EMR — Ophthalmology Report Modal
  */
 
 import React, { useState } from 'react';
@@ -256,7 +256,7 @@ export function OphthalmologyReportModal({
         format,
         buildSheets(),
         buildPDFOpts(),
-        `NDC_Ophthalmology_Report_${new Date().toISOString().split('T')[0]}`,
+        `XenoCare_Ophthalmology_Report_${new Date().toISOString().split('T')[0]}`,
       );
     } catch (error) {
       showToast({

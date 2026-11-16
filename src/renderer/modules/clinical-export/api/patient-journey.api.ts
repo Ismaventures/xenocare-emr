@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Patient Journey API
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Data aggregation service for fetching complete patient clinical records
  * across all modules for export
@@ -1937,8 +1937,8 @@ export async function fetchPatientJourney(
     exportTime: new Date().toTimeString().split(' ')[0],
     exportedBy,
     facility: {
-      id: 'NDC',
-      name: 'National Defence College Medical Centre',
+      id: 'XENOCARE',
+      name: 'XenoCare',
     },
     dateRange: {
       from: filters.dateRange?.from || '',
@@ -2012,8 +2012,8 @@ export async function fetchMultiPatientJourneys(
     exportTime: new Date().toTimeString().split(' ')[0],
     exportedBy,
     facility: {
-      id: 'NDC',
-      name: 'National Defence College Medical Centre',
+      id: 'XENOCARE',
+      name: 'XenoCare',
     },
     dateRange: {
       from: filters.dateRange?.from || '',

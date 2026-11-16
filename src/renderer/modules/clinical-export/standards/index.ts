@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Standards Index
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Central export point for healthcare coding standards services
  *

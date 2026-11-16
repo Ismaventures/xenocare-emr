@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - OPTIMISTIC LOCKING UTILITIES
+ * XENOCARE EMR - OPTIMISTIC LOCKING UTILITIES
  * Prevent concurrent update conflicts using version-based locking
  * =============================================================================
  *

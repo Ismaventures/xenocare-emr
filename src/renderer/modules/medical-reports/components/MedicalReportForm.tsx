@@ -122,7 +122,7 @@ const DEFAULT_REPORT_TEMPLATES: Record<
     content: [
       'To Whom It May Concern,',
       '',
-      'This is to certify that {patient_name} was seen and evaluated at NDC Medical Centre on {date}.',
+      'This is to certify that {patient_name} was seen and evaluated at XenoCare on {date}.',
       'Clinical findings are consistent with [brief diagnosis/condition].',
       'The patient is advised to be exempted from regular duties from [start_date] to [end_date].',
       'Review is recommended on [review_date].',

@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Lab Export Panel
+ * XenoCare EMR — Lab Export Panel
  * Inline export toolbar for the Lab module page.
  */
 
@@ -65,7 +65,7 @@ export function LabExportPanel({ data }: LabExportPanelProps) {
   const rows = data.map((r) => toRow(r));
 
   async function handleExport(format: ExportFormat) {
-    const filename = `NDC_Lab_Export_${new Date().toISOString().split('T')[0]}`;
+    const filename = `XenoCare_Lab_Export_${new Date().toISOString().split('T')[0]}`;
     const pdfOpts = {
       title: 'Lab Requests Export',
       generatedBy: staff ? `${staff.first_name} ${staff.last_name}` : '',

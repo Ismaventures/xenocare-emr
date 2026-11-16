@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS TYPES
+ * XENOCARE EMR - MEDICAL RECORDS TYPES
  * Centralized type definitions for medical records module
  * =============================================================================
  */
@@ -125,6 +125,7 @@ export interface PrescriptionRow {
   instructions?: string;
   route?: string;
   status?: string;
+  is_external?: boolean;
   doctor_id?: string;
   created_at?: string;
   drug?: { id: string; name: string };
@@ -546,6 +547,7 @@ export interface PrescriptionDetail {
   prescribed_by_name?: string;
   created_at?: string;
   dispensed: boolean;
+  is_external?: boolean;
   is_changed?: boolean;
 }
 
@@ -558,6 +560,7 @@ export interface MedicationDetail {
   quantity: number;
   instructions?: string;
   status: string;
+  is_external?: boolean;
 }
 
 export interface LabRequestDetail {

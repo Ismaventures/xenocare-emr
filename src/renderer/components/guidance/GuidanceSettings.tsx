@@ -11,7 +11,6 @@ export const GuidanceSettings: React.FC = () => {
   } = useGuidance();
 
   const modules = [
-    { id: 'nhis', label: 'NHIS Module' },
     { id: 'surgery', label: 'Surgery Module' },
     { id: 'consultation', label: 'Clinical Consultation' },
     { id: 'registration', label: 'Patient Registration' },

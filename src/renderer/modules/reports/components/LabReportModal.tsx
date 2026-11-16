@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Lab Report Modal
+ * XenoCare EMR — Lab Report Modal
  *
  * Month-end Lab report: summary metrics + detailed table + critical alerts.
  * Supports CSV, Excel, and PDF export of the generated report.
@@ -298,7 +298,7 @@ export function LabReportModal({ isOpen, onClose }: LabReportModalProps) {
 
   async function handleExport(format: ExportFormat) {
     if (!report) return;
-    const fname = `NDC_Lab_Report_${new Date().toISOString().split('T')[0]}`;
+    const fname = `XenoCare_Lab_Report_${new Date().toISOString().split('T')[0]}`;
     try {
       dispatchExport(format, buildSheets(), buildPDFOpts(), fname);
     } catch (error) {

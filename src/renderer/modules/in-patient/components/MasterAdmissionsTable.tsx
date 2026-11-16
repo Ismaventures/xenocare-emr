@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Master Admissions Table
+// XENOCARE EMR - Master Admissions Table
 // Unified table for all admissions with filtering and category-specific actions
 // =============================================================================
 

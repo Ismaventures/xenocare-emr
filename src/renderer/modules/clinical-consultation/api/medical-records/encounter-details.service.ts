@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER DETAILS SERVICE
+ * XENOCARE EMR - ENCOUNTER DETAILS SERVICE
  * Full encounter detail loading with parallel queries
  * =============================================================================
  */

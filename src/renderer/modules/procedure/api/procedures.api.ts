@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedures API
+// XENOCARE EMR - Procedures API
 // Supabase API functions for procedure management
 // =============================================================================
 

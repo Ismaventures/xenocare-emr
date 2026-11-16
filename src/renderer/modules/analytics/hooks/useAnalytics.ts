@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getVisibilityAwareRefetchInterval } from '../../../lib/query/polling';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   getDashboardStats,
   getPatientTrends,
@@ -221,6 +222,7 @@ export function useOutstandingNHISClaims() {
   return useQuery({
     queryKey: analyticsKeys.outstandingNHIS(),
     queryFn: getOutstandingNHISClaims,
+    enabled: isNhisFeatureEnabled(),
     staleTime: 300000, // 5 minutes
   });
 }
@@ -342,7 +344,8 @@ export function useNHISReconciliation(filters: DateFilters) {
   return useQuery({
     queryKey: ['analytics', 'nhis-reconciliation', filters],
     queryFn: () => getNHISReconciliation(filters),
-    enabled: !!filters.startDate && !!filters.endDate,
+    enabled:
+      isNhisFeatureEnabled() && !!filters.startDate && !!filters.endDate,
     staleTime: 300000,
   });
 }

@@ -38,8 +38,8 @@ import { useToast } from '../../../components/ui/Toast';
 import { supabase } from '../../../api/supabaseClient';
 import { useAuth } from '../../../contexts/AuthContext';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types - All tied to encounter_id
@@ -890,7 +890,7 @@ function ShiftHandoverForm({
               <div className="flex items-center gap-4">
                 <img
                   src={ndcLogoSrc}
-                  alt="NDC Logo"
+                  alt="XenoCare Logo"
                   className="h-12 w-12 rounded-lg bg-white p-1"
                 />
                 <div>
@@ -898,7 +898,7 @@ function ShiftHandoverForm({
                     New Shift Handover
                   </h2>
                   <p className="text-blue-100 text-sm">
-                    NDC Medical Centre - Nursing Shift Handover
+                    XenoCare - Nursing Shift Handover
                   </p>
                 </div>
               </div>

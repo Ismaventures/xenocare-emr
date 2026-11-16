@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedures Page Component
+// XENOCARE EMR - Procedures Page Component
 // Main page for managing medical procedures - Single Master Table View
 // =============================================================================
 

@@ -1,6 +1,6 @@
 /**
  * Records History Module - React Query Hooks
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  */
 
 import { useQuery } from '@tanstack/react-query';

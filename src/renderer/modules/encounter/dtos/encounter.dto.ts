@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER MODULE DTOs
+ * XENOCARE EMR - ENCOUNTER MODULE DTOs
  * Description: Type definitions, interfaces, and helper functions
  * =============================================================================
  */

@@ -31,13 +31,17 @@ import {
 } from '../dtos/radiology.dto';
 import { supabase } from '../../../api/supabaseClient';
 import { extractPrintableFields } from '../../../utils/printFieldUtils';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-12 w-auto"
     />
   );
@@ -210,13 +214,15 @@ export default function RadiologyDetailModal({
 
   // Print Radiology Report Function
   const handlePrintRadiologyReport = () => {
-    // Load NDC logo as base64
+    const facilityName = getFacilityName();
+    const facilityAddress = getFacilityAddress();
+    // Load XenoCare logo as base64
     let ndcLogoBase64 = '';
     try {
-      const logoModule = require('../../../../../assets/ndclogo.png');
+      const logoModule = require('../../../../../assets/xenocare-logo.png');
       ndcLogoBase64 = logoModule.default || logoModule;
     } catch (error) {
-      console.warn('Could not load NDC logo:', error);
+      console.warn('Could not load XenoCare logo:', error);
     }
 
     const patientName = request.patient
@@ -691,11 +697,11 @@ export default function RadiologyDetailModal({
           <div class="header">
             <div class="logo-section">
               <div class="logo">
-                ${ndcLogoBase64 ? `<img src="${ndcLogoBase64}" alt="NDC Logo" />` : '<span style="font-size:18px;font-weight:bold;color:#059669;">NDC</span>'}
+                ${ndcLogoBase64 ? `<img src="${ndcLogoBase64}" alt="XenoCare Logo" />` : '<span style="font-size:18px;font-weight:bold;color:#059669;">XenoCare</span>'}
               </div>
               <div class="hospital-info">
-                <div class="hospital-name">NDC MEDICAL CENTRE</div>
-                <div class="hospital-subtitle">National Diagnostic Center</div>
+                <div class="hospital-name">${facilityName.toUpperCase()}</div>
+                <div class="hospital-subtitle">${facilityAddress || 'Radiology & Diagnostic Imaging'}</div>
                 <div class="department">Department of Radiology & Diagnostic Imaging</div>
               </div>
             </div>
@@ -890,11 +896,11 @@ export default function RadiologyDetailModal({
               This report is part of the patient's<br/>permanent medical record.
             </div>
             <div class="footer-center">
-              <div class="footer-logo">NDC MEDICAL CENTRE</div>
+              <div class="footer-logo">${facilityName.toUpperCase()}</div>
               <div class="footer-tagline">Excellence in Healthcare Delivery</div>
             </div>
             <div class="footer-right">
-              Form: NDC-RAD-001<br/>
+              Form: XC-RAD-001<br/>
               Printed: ${new Date().toLocaleString()}
             </div>
           </div>
@@ -1081,14 +1087,14 @@ export default function RadiologyDetailModal({
             <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-primary-700 to-primary-600">
               <div className="flex items-center gap-4">
                 <div className="bg-white rounded-lg p-1.5 shadow-md">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div className="border-l border-white/30 pl-4">
                   <h1 className="text-white font-bold text-lg tracking-wide">
-                    NATIONAL DEFENCE COLLEGE
+                    {getFacilityName().toUpperCase()}
                   </h1>
                   <p className="text-green-100 text-xs font-medium">
-                    Medical Centre - Radiology Request Details
+                    {getFacilityAddress() || 'Radiology Request Details'}
                   </p>
                 </div>
               </div>

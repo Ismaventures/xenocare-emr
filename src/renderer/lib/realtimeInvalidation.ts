@@ -3,7 +3,7 @@ import { supabase } from '../api/supabaseClient';
 
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - REALTIME CACHE INVALIDATION
+ * XENOCARE EMR - REALTIME CACHE INVALIDATION
  * =============================================================================
  *
  * This module bridges Supabase Realtime functionality with React Query's

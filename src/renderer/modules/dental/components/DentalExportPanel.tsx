@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Dental Export Panel
+ * XenoCare EMR — Dental Export Panel
  * Inline export toolbar for the Dental module page.
  */
 
@@ -57,7 +57,7 @@ export function DentalExportPanel({ data }: DentalExportPanelProps) {
   const rows = data.map(toRow);
 
   async function handleExport(format: ExportFormat) {
-    const filename = `NDC_Dental_Export_${new Date().toISOString().split('T')[0]}`;
+    const filename = `XenoCare_Dental_Export_${new Date().toISOString().split('T')[0]}`;
     const pdfOpts = {
       title: 'Dental Procedures Export',
       generatedBy: staff ? `${staff.first_name} ${staff.last_name}` : '',

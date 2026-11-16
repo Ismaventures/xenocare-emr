@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Components
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Central export point for UI components
  *

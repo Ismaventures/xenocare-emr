@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Export Filters & Configuration Types
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Type definitions for export filters, configuration, and settings
  *

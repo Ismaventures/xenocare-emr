@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER TABLE COMPONENT
+ * XENOCARE EMR - ENCOUNTER TABLE COMPONENT
  * Description: Modern, professional data table for displaying encounters
  * =============================================================================
  */

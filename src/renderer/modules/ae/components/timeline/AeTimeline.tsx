@@ -27,6 +27,7 @@ import {
 import { useAeTimeline } from '../../hooks/useAe';
 import { supabase } from '../../../../api/supabaseClient';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 
 interface AeTimelineProps {
   encounterId: string;
@@ -188,12 +189,24 @@ export default function AeTimeline({
             <label className="block text-sm font-medium text-gray-700">
               Addendum Note
             </label>
-            <SavedNotesPopover
-              category="ae_notes"
-              subcategory="addendum"
-              currentValue={noteText}
-              onInsert={(content) => setNoteText(content)}
-            />
+            <div className="flex items-center gap-1">
+              <TemplateSearchPopover
+                templateType="ae"
+                category="ae_notes"
+                currentValues={{ clinical_notes: noteText }}
+                onTemplateSelect={(data) => {
+                  if (data.clinical_notes) setNoteText(data.clinical_notes);
+                  if (data.notes) setNoteText(data.notes);
+                }}
+                buttonText="Fill"
+              />
+              <SavedNotesPopover
+                category="ae_notes"
+                subcategory="addendum"
+                currentValue={noteText}
+                onInsert={(content) => setNoteText(content)}
+              />
+            </div>
           </div>
           <textarea
             value={noteText}

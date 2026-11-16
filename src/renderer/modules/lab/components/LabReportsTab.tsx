@@ -425,7 +425,20 @@ export default function LabReportsTab({
                   .map((request) => (
                     <div
                       key={request.request_id}
-                      className="border border-gray-200 rounded-lg p-3 hover:border-info-300 hover:shadow-sm transition-all bg-white"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        setSelectedPatientGroup(null);
+                        onViewReport(request);
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          setSelectedPatientGroup(null);
+                          onViewReport(request);
+                        }
+                      }}
+                      className="cursor-pointer border border-gray-200 rounded-lg p-3 hover:border-info-300 hover:shadow-sm transition-all bg-white"
                     >
                       {/* Patient & Encounter Header */}
                       <div className="bg-gray-50 -mx-3 -mt-3 px-3 py-2 mb-3 rounded-t-lg border-b border-gray-200">
@@ -594,14 +607,16 @@ export default function LabReportsTab({
                         {/* View Detail Button */}
                         <Button
                           size="sm"
-                          variant="ghost"
-                          onClick={() => {
+                          variant="outline"
+                          onClick={(event) => {
+                            event.stopPropagation();
                             setSelectedPatientGroup(null);
                             onViewReport(request);
                           }}
-                          className="text-info-600 hover:text-info-700 hover:bg-info-50 h-8 w-8 p-0 rounded-full"
+                          className="inline-flex h-8 items-center gap-1 border-info-200 px-3 text-xs text-info-700 hover:bg-info-50"
                         >
-                          <ChevronRight className="h-5 w-5" />
+                          View Report
+                          <ChevronRight className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>

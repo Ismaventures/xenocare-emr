@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COURSES API
+ * XENOCARE EMR - COURSES API
  * Description: API functions for managing participant courses
  * =============================================================================
  */

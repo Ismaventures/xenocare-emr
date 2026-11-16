@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Search, Settings, Server, Activity } from 'lucide-react';
+import { Search, Settings, Server, Activity, FileText } from 'lucide-react';
 import { SkeletonTable } from '../../components/ui/SkeletonLoader';
 import {
   DataTable,
@@ -11,6 +11,7 @@ import { Modal } from '../../components/ui/Modal';
 import ConfigurationEditForm from './components/ConfigurationEditForm';
 import ServerSettings from './components/ServerSettings';
 import ComprehensiveAuditViewer from './components/ComprehensiveAuditViewer';
+import ClinicalTemplatesManager from './components/ClinicalTemplatesManager';
 import {
   useConfigCategories,
   useSystemConfigurations,
@@ -22,7 +23,7 @@ import { useToast } from '../../components/ui/Toast';
 const EMPTY_CATEGORIES: any[] = [];
 const EMPTY_CONFIGS: any[] = [];
 
-type ActiveTab = 'settings' | 'server' | 'audit';
+type ActiveTab = 'settings' | 'server' | 'audit' | 'templates';
 
 export default function Configurations() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('settings');
@@ -181,6 +182,19 @@ export default function Configurations() {
               Audit Trail
             </div>
           </button>
+          <button
+            onClick={() => setActiveTab('templates')}
+            className={`py-2 px-1 border-b-2 font-medium text-sm ${
+              activeTab === 'templates'
+                ? 'border-green-600 text-green-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Clinical Templates
+            </div>
+          </button>
         </nav>
       </div>
 
@@ -189,6 +203,8 @@ export default function Configurations() {
         <ServerSettings />
       ) : activeTab === 'audit' ? (
         <ComprehensiveAuditViewer />
+      ) : activeTab === 'templates' ? (
+        <ClinicalTemplatesManager />
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

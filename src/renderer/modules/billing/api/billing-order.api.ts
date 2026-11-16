@@ -4,6 +4,7 @@
 
 import { supabase } from '../../../api/supabaseClient';
 import { createScopedLogger } from '../../../utils/logger';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 const log = createScopedLogger('BillingOrders');
 import {
@@ -962,6 +963,23 @@ export async function createBillingOrder(
   } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
 
+  // Idempotency: one billing item per source service/request/prescription.
+  // This prevents doctors retrying a submission or legacy approval actions from
+  // creating a duplicate invoice line.
+  if (dto.service_reference_id) {
+    const { data: existingItem } = await supabase
+      .from('billing_items')
+      .select('billing_order_id')
+      .or(
+        `service_reference_id.eq.${dto.service_reference_id},item_id.eq.${dto.service_reference_id}`,
+      )
+      .maybeSingle();
+
+    if (existingItem?.billing_order_id) {
+      return getBillingOrderById(existingItem.billing_order_id);
+    }
+  }
+
   const patientId = await resolvePatientIdForOrder(
     dto.patient_id,
     dto.visit_id,
@@ -1029,6 +1047,14 @@ export async function createBillingOrder(
     nhisPercentage = dto.nhis_percentage ?? nhisCalc.nhisPercentage;
     nhisPayable = dto.nhis_payable ?? nhisCalc.nhisPayable;
     patientPayable = dto.patient_payable ?? nhisCalc.patientPayable;
+  }
+
+  // NHIS is disabled for this facility: every new billing order is self-pay.
+  if (!isNhisFeatureEnabled()) {
+    nhisCovered = false;
+    nhisPercentage = 0;
+    nhisPayable = 0;
+    patientPayable = netAmount;
   }
 
   // =========================================================================
@@ -3433,6 +3459,8 @@ export async function getPatientUnverifiedBills(patientId: string): Promise<{
 export async function autoVerifyNhisBillingOrder(
   billingOrderId: string,
 ): Promise<boolean> {
+  if (!isNhisFeatureEnabled()) return false;
+
   try {
     // Fetch the billing order WITH patient info + items for service name & correct receipt IDs
     const { data: order, error: fetchError } = await supabase

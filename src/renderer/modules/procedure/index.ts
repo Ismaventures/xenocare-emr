@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Module
+// XENOCARE EMR - Procedure Module
 // Central export file for the procedure management module
 // =============================================================================
 

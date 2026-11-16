@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT MEDICAL RECORDS API
+ * XENOCARE EMR - PATIENT MEDICAL RECORDS API
  * Problem-oriented medical records view for clinical consultations
  *
  * This file is a facade that re-exports from the refactored module structure.

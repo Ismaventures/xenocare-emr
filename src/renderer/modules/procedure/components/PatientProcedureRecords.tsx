@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Patient Procedure Records Component
+// XENOCARE EMR - Patient Procedure Records Component
 // Complete view of all procedures for a patient with notes, findings, timeline
 // Standard EMR practice: comprehensive patient procedure history
 // =============================================================================
@@ -286,7 +286,7 @@ const PatientProcedureRecords: React.FC<PatientProcedureRecordsProps> = ({
           </head>
           <body>
             <div class="header">
-              <h1>NDC Medical Centre - Procedure Records</h1>
+              <h1>XenoCare - Procedure Records</h1>
               <p>Patient: ${patientName} | EMR: ${emrNumber}</p>
               <p>Generated: ${new Date().toLocaleString()}</p>
             </div>

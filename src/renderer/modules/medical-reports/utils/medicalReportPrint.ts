@@ -2,10 +2,14 @@ import {
   MedicalReportDTO,
   getReportTypeLabel,
 } from '../dtos/medical-reports.dto';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 
 let ndcLogoSrc = '';
 try {
-  const logoModule = require('../../../../../assets/ndclogo.png');
+  const logoModule = require('../../../../../assets/xenocare-logo.png');
   ndcLogoSrc = logoModule?.default || logoModule || '';
 } catch {
   ndcLogoSrc = '';
@@ -337,12 +341,12 @@ export function printMedicalReport(
       <div class="brand">
         ${
           ndcLogoSrc
-            ? `<img src="${ndcLogoSrc}" alt="NDC Logo" />`
-            : '<div class="logo-fallback">NDC</div>'
+            ? `<img src="${ndcLogoSrc}" alt="XenoCare Logo" />`
+            : '<div class="logo-fallback">XenoCare</div>'
         }
         <div>
-          <h1>National Defence College</h1>
-          <p>Medical Centre, Abuja</p>
+          <h1>${escapeHtml(getFacilityName())}</h1>
+          <p>${escapeHtml(getFacilityAddress())}</p>
           <p>Official Clinical Documentation</p>
         </div>
       </div>
@@ -402,7 +406,7 @@ export function printMedicalReport(
     </section>
 
     <footer class="footer">
-      <div>This document is generated from NDC EMR and is intended for official clinical use.</div>
+      <div>This document is generated from ${escapeHtml(getFacilityName())} and is intended for official clinical use.</div>
       <div>Generated on ${escapeHtml(new Date().toLocaleString())}</div>
     </footer>
   </article>

@@ -286,8 +286,6 @@ export function BillingFilterPanel({
             >
               <option value="all">All Categories</option>
               <option value="Cash">Cash Payment</option>
-              <option value="NHIS">NHIS</option>
-              <option value="DHML">DHML</option>
               <option value="Retainership">Retainership</option>
               <option value="Private">Private/Insurance</option>
             </select>
@@ -471,8 +469,6 @@ export function BillingFilterPanel({
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-gray-400"
             >
               <option value="all">All Providers</option>
-              <option value="NHIS">NHIS</option>
-              <option value="DHML">DHML</option>
               <option value="HMO1">Hygeia HMO</option>
               <option value="HMO2">AXA Mansard</option>
               <option value="HMO3">Leadway Health</option>

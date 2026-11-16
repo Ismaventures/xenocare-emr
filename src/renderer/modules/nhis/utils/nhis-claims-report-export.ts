@@ -1,6 +1,6 @@
 /**
  * NHIS Claims Comprehensive Report Export Utility
- * NDC MEDICAL CENTRE EMR - NHIS Module
+ * XENOCARE EMR - NHIS Module
  *
  * Generates detailed, structured reports in PDF, Excel, and CSV formats
  * with full financial breakdowns by billing category:
@@ -993,7 +993,7 @@ export function buildCategoryReports(
 // ==================== PDF CONSTANTS ====================
 
 const PDF_COLORS = {
-  primary: [22, 101, 52] as [number, number, number], // NDC Green (unified)
+  primary: [22, 101, 52] as [number, number, number], // Xenolink navy (unified)
   secondary: [51, 65, 85] as [number, number, number], // Slate-700
   accent: [37, 99, 235] as [number, number, number], // Blue-600
   success: [22, 163, 74] as [number, number, number],
@@ -1101,8 +1101,8 @@ export async function generateCategoryReportPdf(
   options: ReportExportOptions,
 ): Promise<Blob> {
   const {
-    facilityName = 'NDC Medical Centre',
-    facilityAddress = 'National Defence College, Abuja',
+    facilityName = 'XenoCare',
+    facilityAddress = 'XenoCare',
     facilityNhisId = 'NHIS-NDC-001',
     generatedBy = 'System',
     reportPeriod,
@@ -1283,7 +1283,7 @@ export async function generateCategoryReportPdf(
     addHeader();
     yPos = 24;
 
-    // Category title bar — NDC Green
+    // Category title bar — Xenolink navy
     doc.setFillColor(...PDF_COLORS.primary);
     doc.roundedRect(
       PDF_MARGINS.left,
@@ -1812,7 +1812,7 @@ export async function generateCategoryReportPdf(
   addHeader();
   yPos = 24;
 
-  // Grand total banner — clean NDC Green bar
+  // Grand total banner — clean Xenolink navy bar
   doc.setFillColor(...PDF_COLORS.primary);
   doc.roundedRect(
     PDF_MARGINS.left,
@@ -1935,7 +1935,7 @@ export function generateCategoryReportExcel(
 ): Blob {
   const wb = XLSX.utils.book_new();
   const {
-    facilityName = 'NDC Medical Centre',
+    facilityName = 'XenoCare',
     reportPeriod,
     generatedBy = 'System',
   } = options;
@@ -1946,7 +1946,7 @@ export function generateCategoryReportExcel(
 
   // ---- Sheet 1: Executive Summary ----
   const summaryRows: (string | number | null)[][] = [
-    ['NDC MEDICAL CENTRE — NHIS CLAIMS CATEGORY REPORT', '', '', ''],
+    ['XENOCARE — NHIS CLAIMS CATEGORY REPORT', '', '', ''],
     ['Facility', facilityName, '', ''],
     ['Report Date', formatDate(new Date().toISOString()), '', ''],
     [
@@ -2202,7 +2202,7 @@ export function generateCategoryReportCsv(
   );
 
   // Header info
-  lines.push(`${esc('NDC MEDICAL CENTRE — NHIS CLAIMS CATEGORY REPORT')}`);
+  lines.push(`${esc('XENOCARE — NHIS CLAIMS CATEGORY REPORT')}`);
   lines.push(
     `${esc('Report Date')},${esc(formatDate(new Date().toISOString()))}`,
   );

@@ -314,6 +314,8 @@ export interface ConsultationWithDetails extends ConsultationWithRelations {
     quantity_prescribed: number;
     quantity_dispensed: number;
     instructions?: string | null;
+    is_external?: boolean;
+    drug_name?: string;
     drug?: {
       drug_id: string;
       drug_name: string;
@@ -417,6 +419,8 @@ export interface LabOrderDTO {
   test_name?: string;
   test_code?: string;
   diagnosis?: string[]; // ICD-10 codes/diagnoses for clinical context
+  specimen_type?: string;
+  specimen_identifier?: string;
 }
 
 export interface RadiologyOrderDTO {
@@ -460,6 +464,7 @@ export interface PrescriptionOrderDTO {
   quantity_prescribed: number;
   instructions?: string;
   price?: number;
+  is_external?: boolean; // External medicine — never dispensed by facility pharmacy
   diagnosis?: string[]; // ICD-10 codes/diagnoses - why this was prescribed
   clinical_notes?: string; // Indication/reason for prescription
 }

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS CONSTANTS
+ * XENOCARE EMR - MEDICAL RECORDS CONSTANTS
  * Toggleable logging and shared constants
  * =============================================================================
  */
@@ -177,6 +177,7 @@ export const PRESCRIPTION_SELECT_FIELDS = `
   instructions,
   route,
   status,
+  is_external,
   doctor_id,
   created_at,
   doctor:staff!fk_prescriptions_doctor(first_name, last_name)

@@ -43,6 +43,7 @@ import {
   DischargeSummaryData,
 } from '../../in-patient/components/DischargeSummary';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface AdmissionInfo {
   id: string;
@@ -693,6 +694,22 @@ export const DischargeExecutionModal: React.FC<
 
                 {/* Hospital Course */}
                 <div>
+                  <div className="flex justify-end mb-2">
+                    <TemplateSearchPopover
+                      templateType="inpatient"
+                      category="discharge_notes"
+                      currentValues={{ hospital_course: hospitalCourse, follow_up_instructions: followUpInstructions, activity_restrictions: activityRestrictions, dietary_instructions: dietaryInstructions, warning_signs: warningSignsText, notes }}
+                      onTemplateSelect={(data) => {
+                        if (data.hospital_course) setHospitalCourse(data.hospital_course);
+                        if (data.follow_up_instructions) setFollowUpInstructions(data.follow_up_instructions);
+                        if (data.activity_restrictions) setActivityRestrictions(data.activity_restrictions);
+                        if (data.dietary_instructions) setDietaryInstructions(data.dietary_instructions);
+                        if (data.warning_signs) setWarningSignsText(data.warning_signs);
+                        if (data.notes) setNotes(data.notes);
+                      }}
+                      buttonText="Fill All Fields"
+                    />
+                  </div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="block text-sm font-medium text-gray-700">
                       Hospital Course Summary

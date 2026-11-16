@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Check,
 } from 'lucide-react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   Input,
   Select,
@@ -423,7 +424,7 @@ export default function PrescriptionList({
           );
         },
       },
-    ],
+    ].filter((column) => isNhisFeatureEnabled() || column.key !== 'nhis'),
     [
       onView,
       onAccept,

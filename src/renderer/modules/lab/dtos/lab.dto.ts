@@ -105,6 +105,8 @@ export interface LabRequestDTO extends Omit<LabRequest, 'status'> {
     encounter_number: string | null;
     encounter_date: string | null;
     status: string;
+    clinic_name?: string | null;
+    clinic_id?: string | null;
   };
 }
 
@@ -135,6 +137,8 @@ export interface LabResultDTO extends LabResult {
   result?: string; // Maps from result_value
   result_unit?: string; // Maps from unit
   remarks?: string; // Maps from comments
+  is_abnormal?: boolean;
+  is_critical?: boolean;
 }
 
 // Lab Result Component DTO
@@ -191,6 +195,8 @@ export interface UpdateLabRequestDTO {
   result_notes?: string; // Notes about the result
   sample_collected_at?: string;
   result_date?: string;
+  specimen_type?: string;
+  specimen_identifier?: string;
 }
 
 export interface LabRequestFilters {

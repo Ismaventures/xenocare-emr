@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -477,7 +478,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({
             label="Insurance Type"
             value={surgery.patient_insurance_type}
           />
-          {surgery.requires_nhis_approval && (
+          {isNhisFeatureEnabled() && surgery.requires_nhis_approval && (
             <InfoItem
               label="NHIS Authorization"
               value={surgery.nhis_authorization_code || 'Pending'}

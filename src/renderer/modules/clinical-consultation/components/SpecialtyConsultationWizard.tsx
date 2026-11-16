@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - SPECIALTY CONSULTATION WIZARD
+ * XENOCARE EMR - SPECIALTY CONSULTATION WIZARD
  *
  * A specialized consultation wizard for SOPD (Specialty OPD) clinics.
  * Mimics the standard ConsultationWizard structure but uses template-driven
@@ -15,6 +15,8 @@
  */
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
+import PatientAllergySummary from '../../../components/shared/PatientAllergySummary';
 import {
   X,
   Save,
@@ -54,7 +56,6 @@ import {
   ArrowRightCircle,
   Sparkles,
   Share2,
-  Settings,
   Trash2,
   Building,
   ExternalLink,
@@ -66,12 +67,13 @@ import {
 import {
   Button,
   Input,
-  SearchableMultiSelect,
   CategorizedSearchableMultiSelect,
   SearchableOption,
   SearchableSelect,
 } from '../../../components/ui';
-import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import PrescriptionEditor from './prescriptions/PrescriptionEditor';
+import LabSpecimenFields from './lab/LabSpecimenFields';
+import ConsultationTemplatePopover from './ConsultationTemplatePopover';
 import { INPUT_CLS } from '../../../components/ui/ConsultationFormUI';
 import {
   CreateConsultationDTO,
@@ -96,15 +98,6 @@ import {
   useProcedureCatalogue,
   useWardsCatalogue,
 } from '../hooks/useConsultation';
-import {
-  DOSAGE_OPTIONS,
-  FREQUENCY_OPTIONS,
-  DURATION_OPTIONS,
-  ROUTE_OPTIONS,
-  getDrugCategoryColor,
-  DRUG_CATEGORIES,
-  DrugCategory,
-} from '../../pharmacy/dtos/pharmacy.dto';
 import { usePatientSearch } from '../../patient-registration/hooks/usePatient';
 import {
   PatientDTO,
@@ -902,6 +895,12 @@ export function SpecialtyConsultationWizard({
     urgency: 'Routine',
   });
 
+  useEffect(() => {
+    if (!isNhisFeatureEnabled() && externalNhisReferral.enabled) {
+      setExternalNhisReferral((prev) => ({ ...prev, enabled: false }));
+    }
+  }, [externalNhisReferral.enabled]);
+
   // ==========================================================================
   // Orders UI State
   // ==========================================================================
@@ -917,53 +916,8 @@ export function SpecialtyConsultationWizard({
     priority: 'Normal',
   });
 
-  // Pending drugs - selected but not yet configured
-  const [pendingDrugIds, setPendingDrugIds] = useState<string[]>([]);
-
-  // Multi-drug prescription modal state
-  const [multiPrescriptionModal, setMultiPrescriptionModal] = useState<{
-    isOpen: boolean;
-    drugConfigs: Array<{
-      drugId: string;
-      dosage: string;
-      customDosage: string;
-      useCustomDosage: boolean;
-      frequency: string;
-      duration: string;
-      route: string;
-      quantity: number;
-      instructions: string;
-    }>;
-  }>({
-    isOpen: false,
-    drugConfigs: [],
-  });
-
-  const [prescriptionPopup, setPrescriptionPopup] = useState<{
-    isOpen: boolean;
-    drugId: string | null;
-    dosage: string;
-    customDosage: string;
-    useCustomDosage: boolean;
-    frequency: string;
-    duration: string;
-    route: string;
-    quantity: number;
-    instructions: string;
-  }>({
-    isOpen: false,
-    drugId: null,
-    dosage: '',
-    customDosage: '',
-    useCustomDosage: false,
-    frequency: '',
-    duration: '',
-    route: 'Oral',
-    quantity: 1,
-    instructions: '',
-  });
-
   // ==========================================================================
+  // Catalogue Hooks  // ==========================================================================
   // Catalogue Hooks
   // ==========================================================================
   const { data: labTests = [], isLoading: isLoadingLabTests } =
@@ -1248,6 +1202,39 @@ export function SpecialtyConsultationWizard({
     [],
   );
 
+  const applyConsultationTemplate = (payload: {
+    fields: Partial<CreateConsultationDTO>;
+    selectedComplaints?: SelectedComplaint[];
+    selectedDiagnoses?: ICDMultiSelectDiagnosis[];
+    specialtyFormData?: Record<string, unknown>;
+  }) => {
+    if (payload.selectedComplaints) {
+      setSelectedComplaints(payload.selectedComplaints);
+    }
+    if (payload.selectedDiagnoses) {
+      setSelectedDiagnoses(payload.selectedDiagnoses);
+      const diagnosisText = payload.selectedDiagnoses
+        .map(
+          (diagnosis) =>
+            `${diagnosis.code.startsWith('CUSTOM') ? '' : `${diagnosis.code} - `}${diagnosis.title}`,
+        )
+        .join('; ');
+      setFormData((prev) => ({
+        ...prev,
+        ...payload.fields,
+        diagnosis: diagnosisText,
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, ...payload.fields }));
+    }
+    if (payload.specialtyFormData) {
+      setSpecialtyFormData((prev) => ({
+        ...prev,
+        ...payload.specialtyFormData,
+      }));
+    }
+  };
+
   const handleComplaintsChange = useCallback(
     (complaints: SelectedComplaint[]) => {
       setSelectedComplaints(complaints);
@@ -1356,7 +1343,7 @@ export function SpecialtyConsultationWizard({
       }
 
       // Validate external NHIS referral if enabled
-      if (externalNhisReferral.enabled) {
+      if (isNhisFeatureEnabled() && externalNhisReferral.enabled) {
         if (
           !externalNhisReferral.facilityName?.trim() ||
           !externalNhisReferral.doctorName?.trim() ||
@@ -1461,7 +1448,7 @@ export function SpecialtyConsultationWizard({
 
       // Build external NHIS referral if enabled
       const externalReferralSubmission: ExternalNhisReferralDTO | null =
-        externalNhisReferral.enabled
+        isNhisFeatureEnabled() && externalNhisReferral.enabled
           ? {
               facilityName: externalNhisReferral.facilityName,
               facilityAddress: externalNhisReferral.facilityAddress,
@@ -1605,6 +1592,14 @@ export function SpecialtyConsultationWizard({
                 <Bot size={16} />
                 AI Assistant
               </button>
+              <ConsultationTemplatePopover
+                formData={formData}
+                selectedComplaints={selectedComplaints}
+                selectedDiagnoses={selectedDiagnoses}
+                specialtyFormData={specialtyFormData}
+                specialtyName={specialtyName}
+                onApply={applyConsultationTemplate}
+              />
               <Button
                 variant="ghost"
                 size="sm"
@@ -1723,21 +1718,16 @@ export function SpecialtyConsultationWizard({
 
                   {/* Scrollable Content */}
                   <div className="flex-1 overflow-y-auto p-3 space-y-3">
-                    {/* Allergies - Always Show First if Present */}
-                    {selectedPatient.known_allergies &&
-                      selectedPatient.known_allergies.length > 0 && (
-                        <div className="bg-red-50 rounded-lg p-2 border border-red-200">
-                          <div className="flex items-center gap-1 mb-1">
-                            <AlertTriangle size={10} className="text-red-500" />
-                            <span className="text-[9px] font-bold uppercase text-red-600">
-                              Allergies
-                            </span>
-                          </div>
-                          <p className="text-xs text-red-700 font-medium">
-                            {selectedPatient.known_allergies.join(', ')}
-                          </p>
-                        </div>
-                      )}
+                    {/* Allergies - always show review status */}
+                    <PatientAllergySummary
+                      patientId={selectedPatient.id}
+                      knownAllergies={selectedPatient.known_allergies}
+                      noKnownAllergies={
+                        (selectedPatient as { no_known_allergies?: boolean })
+                          .no_known_allergies
+                      }
+                      compact
+                    />
 
                     {/* Vitals Widget */}
                     <div>
@@ -1810,6 +1800,7 @@ export function SpecialtyConsultationWizard({
                     <ClinicalHistoryStep
                       formData={formData}
                       onChange={handleFormChange}
+                      specialtyName={specialtyName}
                     />
                   )}
 
@@ -1879,12 +1870,6 @@ export function SpecialtyConsultationWizard({
                       setExternalNhisReferral={setExternalNhisReferral}
                       activeOrderTab={activeOrderTab}
                       setActiveOrderTab={setActiveOrderTab}
-                      pendingDrugIds={pendingDrugIds}
-                      setPendingDrugIds={setPendingDrugIds}
-                      multiPrescriptionModal={multiPrescriptionModal}
-                      setMultiPrescriptionModal={setMultiPrescriptionModal}
-                      prescriptionPopup={prescriptionPopup}
-                      setPrescriptionPopup={setPrescriptionPopup}
                       specialtyCode={specialtyCode}
                     />
                   )}
@@ -2027,14 +2012,14 @@ export function SpecialtyConsultationWizard({
               <div className="flex items-center gap-3 min-w-0">
                 <div className="bg-white rounded-lg p-1.5 shadow flex-shrink-0">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare"
                     className="h-6 w-6 object-contain"
                   />
                 </div>
                 <div className="min-w-0">
                   <span className="block text-sm font-semibold truncate">
-                    NDC Medical AI Assistants
+                    XenoCare AI Assistants
                   </span>
                   {selectedPatient && (
                     <span className="block text-[11px] text-white/85 truncate">
@@ -2788,9 +2773,11 @@ function ChiefComplaintsStep({
 function ClinicalHistoryStep({
   formData,
   onChange,
+  specialtyName,
 }: {
   formData: CreateConsultationDTO;
   onChange: (field: string, value: string) => void;
+  specialtyName: string;
 }) {
   return (
     <div className="space-y-6">
@@ -2800,12 +2787,7 @@ function ClinicalHistoryStep({
             <label className="block text-xs font-medium text-gray-500">
               History of Present Illness
             </label>
-            <SavedNotesPopover
-              category="specialty_notes"
-              subcategory="history_of_present_illness"
-              currentValue={formData.history_of_present_illness || ''}
-              onInsert={(content) => onChange('history_of_present_illness', content)}
-            />
+
           </div>
           <textarea
             value={formData.history_of_present_illness || ''}
@@ -2823,12 +2805,7 @@ function ClinicalHistoryStep({
               <label className="block text-xs font-medium text-gray-500">
                 Past Medical History
               </label>
-              <SavedNotesPopover
-                category="specialty_notes"
-                subcategory="past_medical_history"
-                currentValue={formData.past_medical_history || ''}
-                onInsert={(content) => onChange('past_medical_history', content)}
-              />
+
             </div>
             <textarea
               value={formData.past_medical_history || ''}
@@ -2843,12 +2820,7 @@ function ClinicalHistoryStep({
               <label className="block text-xs font-medium text-gray-500">
                 Family History
               </label>
-              <SavedNotesPopover
-                category="specialty_notes"
-                subcategory="family_history"
-                currentValue={formData.family_history || ''}
-                onInsert={(content) => onChange('family_history', content)}
-              />
+
             </div>
             <textarea
               value={formData.family_history || ''}
@@ -2865,12 +2837,7 @@ function ClinicalHistoryStep({
               <label className="block text-xs font-medium text-gray-500">
                 Social History
               </label>
-              <SavedNotesPopover
-                category="specialty_notes"
-                subcategory="social_history"
-                currentValue={formData.social_history || ''}
-                onInsert={(content) => onChange('social_history', content)}
-              />
+
             </div>
             <textarea
               value={formData.social_history || ''}
@@ -2885,12 +2852,7 @@ function ClinicalHistoryStep({
               <label className="block text-xs font-medium text-gray-500">
                 Review of Systems
               </label>
-              <SavedNotesPopover
-                category="specialty_notes"
-                subcategory="review_of_systems"
-                currentValue={formData.review_of_systems || ''}
-                onInsert={(content) => onChange('review_of_systems', content)}
-              />
+
             </div>
             <textarea
               value={formData.review_of_systems || ''}
@@ -3055,12 +3017,7 @@ function DiagnosisStep({
             <label className="block text-xs font-medium text-gray-500">
               Treatment Plan
             </label>
-            <SavedNotesPopover
-              category="specialty_notes"
-              subcategory="treatment_plan"
-              currentValue={formData.treatment_plan || ''}
-              onInsert={(content) => onChange('treatment_plan', content)}
-            />
+
           </div>
           <textarea
             value={formData.treatment_plan || ''}
@@ -3075,12 +3032,7 @@ function DiagnosisStep({
             <label className="block text-xs font-medium text-gray-500">
               Follow-up Instructions
             </label>
-            <SavedNotesPopover
-              category="specialty_notes"
-              subcategory="follow_up_notes"
-              currentValue={formData.follow_up_notes || ''}
-              onInsert={(content) => onChange('follow_up_notes', content)}
-            />
+
           </div>
           <textarea
             value={formData.follow_up_notes || ''}
@@ -3359,12 +3311,6 @@ function OrdersStep({
   setExternalNhisReferral,
   activeOrderTab,
   setActiveOrderTab,
-  pendingDrugIds,
-  setPendingDrugIds,
-  multiPrescriptionModal,
-  setMultiPrescriptionModal,
-  prescriptionPopup,
-  setPrescriptionPopup,
   specialtyCode,
 }: {
   labOrders: LabOrderDTO[];
@@ -3469,68 +3415,10 @@ function OrdersStep({
       | 'referrals'
     >
   >;
-  pendingDrugIds: string[];
-  setPendingDrugIds: React.Dispatch<React.SetStateAction<string[]>>;
-  multiPrescriptionModal: {
-    isOpen: boolean;
-    drugConfigs: Array<{
-      drugId: string;
-      dosage: string;
-      customDosage: string;
-      useCustomDosage: boolean;
-      frequency: string;
-      duration: string;
-      route: string;
-      quantity: number;
-      instructions: string;
-    }>;
-  };
-  setMultiPrescriptionModal: React.Dispatch<
-    React.SetStateAction<{
-      isOpen: boolean;
-      drugConfigs: Array<{
-        drugId: string;
-        dosage: string;
-        customDosage: string;
-        useCustomDosage: boolean;
-        frequency: string;
-        duration: string;
-        route: string;
-        quantity: number;
-        instructions: string;
-      }>;
-    }>
-  >;
-  prescriptionPopup: {
-    isOpen: boolean;
-    drugId: string | null;
-    dosage: string;
-    customDosage: string;
-    useCustomDosage: boolean;
-    frequency: string;
-    duration: string;
-    route: string;
-    quantity: number;
-    instructions: string;
-  };
-  setPrescriptionPopup: React.Dispatch<
-    React.SetStateAction<{
-      isOpen: boolean;
-      drugId: string | null;
-      dosage: string;
-      customDosage: string;
-      useCustomDosage: boolean;
-      frequency: string;
-      duration: string;
-      route: string;
-      quantity: number;
-      instructions: string;
-    }>
-  >;
 }) {
   const specialtyReferralCount =
     Object.values(specialtyReferrals).filter((r) => r?.selected).length +
-    (externalNhisReferral.enabled ? 1 : 0);
+    (isNhisFeatureEnabled() && externalNhisReferral.enabled ? 1 : 0);
 
   const orderTabs = [
     {
@@ -3586,151 +3474,7 @@ function OrdersStep({
 
   const selectedLabIds = labOrders.map((o) => o.test_id);
   const selectedImagingIds = radiologyOrders.map((o) => o.imaging_id);
-  const selectedDrugIds = prescriptions
-    .map((p) => p.drug_id)
-    .filter((id): id is string => !!id);
   const selectedProcedureIds = procedureOrders.map((o) => o.procedure_id);
-  const allSelectedDrugIds = [...selectedDrugIds, ...pendingDrugIds];
-
-  const toggleDrug = (drugId: string) => {
-    if (selectedDrugIds.includes(drugId)) {
-      onPrescriptionsChange(prescriptions.filter((p) => p.drug_id !== drugId));
-    } else if (pendingDrugIds.includes(drugId)) {
-      setPendingDrugIds(pendingDrugIds.filter((id) => id !== drugId));
-    } else {
-      setPendingDrugIds([...pendingDrugIds, drugId]);
-    }
-  };
-
-  const openMultiDrugModal = () => {
-    setMultiPrescriptionModal({
-      isOpen: true,
-      drugConfigs: pendingDrugIds.map((drugId) => ({
-        drugId,
-        dosage: '',
-        customDosage: '',
-        useCustomDosage: false,
-        frequency: '',
-        duration: '',
-        route: 'Oral',
-        quantity: 1,
-        instructions: '',
-      })),
-    });
-  };
-
-  const updateDrugConfig = (
-    index: number,
-    field: string,
-    value: string | number | boolean,
-  ) => {
-    setMultiPrescriptionModal((prev) => ({
-      ...prev,
-      drugConfigs: prev.drugConfigs.map((config, i) =>
-        i === index ? { ...config, [field]: value } : config,
-      ),
-    }));
-  };
-
-  const removeDrugFromModal = (drugId: string) => {
-    setMultiPrescriptionModal((prev) => ({
-      ...prev,
-      drugConfigs: prev.drugConfigs.filter((c) => c.drugId !== drugId),
-    }));
-    setPendingDrugIds(pendingDrugIds.filter((id) => id !== drugId));
-  };
-
-  const confirmMultiplePrescriptions = () => {
-    const prefillClinicalNotes =
-      formData.examination_findings ||
-      formData.physical_examination ||
-      formData.clinical_notes ||
-      '';
-    const prefillDiagnosis =
-      selectedDiagnoses.length > 0 ? selectedDiagnoses.map((d) => d.title) : [];
-
-    const newPrescriptions = multiPrescriptionModal.drugConfigs
-      .filter((config) => {
-        const hasValidDosage = config.useCustomDosage
-          ? config.customDosage
-          : config.dosage;
-        return hasValidDosage && config.frequency && config.duration;
-      })
-      .map((config) => {
-        const drug = drugOptions.find((d) => d.id === config.drugId);
-        const finalDosage = config.useCustomDosage
-          ? config.customDosage
-          : config.dosage;
-        return {
-          drug_id: config.drugId,
-          drug_name: drug?.name || 'Unknown Drug',
-          dosage: finalDosage,
-          frequency: config.frequency,
-          duration: config.duration,
-          route: config.route,
-          quantity_prescribed: config.quantity,
-          instructions: config.instructions,
-          price: drug?.price ?? undefined,
-          clinical_notes: prefillClinicalNotes,
-          diagnosis: prefillDiagnosis,
-        };
-      });
-
-    if (newPrescriptions.length > 0) {
-      onPrescriptionsChange([...prescriptions, ...newPrescriptions]);
-    }
-    setPendingDrugIds([]);
-    setMultiPrescriptionModal({ isOpen: false, drugConfigs: [] });
-  };
-
-  const confirmPrescription = () => {
-    if (!prescriptionPopup.drugId) return;
-    const drug = drugOptions.find((d) => d.id === prescriptionPopup.drugId);
-    const finalDosage = prescriptionPopup.useCustomDosage
-      ? prescriptionPopup.customDosage
-      : prescriptionPopup.dosage;
-    const prefillClinicalNotes =
-      formData.examination_findings ||
-      formData.physical_examination ||
-      formData.clinical_notes ||
-      '';
-    const prefillDiagnosis =
-      selectedDiagnoses.length > 0 ? selectedDiagnoses.map((d) => d.title) : [];
-
-    onPrescriptionsChange([
-      ...prescriptions,
-      {
-        drug_id: prescriptionPopup.drugId,
-        drug_name: drug?.name || 'Unknown Drug',
-        dosage: finalDosage,
-        frequency: prescriptionPopup.frequency,
-        duration: prescriptionPopup.duration,
-        route: prescriptionPopup.route,
-        quantity_prescribed: prescriptionPopup.quantity,
-        instructions: prescriptionPopup.instructions,
-        price: drug?.price ?? undefined,
-        clinical_notes: prefillClinicalNotes,
-        diagnosis: prefillDiagnosis,
-      },
-    ]);
-    setPrescriptionPopup({
-      isOpen: false,
-      drugId: null,
-      dosage: '',
-      customDosage: '',
-      useCustomDosage: false,
-      frequency: '',
-      duration: '',
-      route: 'Oral',
-      quantity: 1,
-      instructions: '',
-    });
-  };
-
-  const popupDrug = prescriptionPopup.drugId
-    ? drugOptions.find((d) => d.id === prescriptionPopup.drugId)
-    : null;
-
   return (
     <div className="space-y-6">
       {/* Investigation Panel Quick-Select (Order Sets) */}
@@ -3791,104 +3535,18 @@ function OrdersStep({
 
       {/* Prescriptions Tab */}
       {activeOrderTab === 'rx' && (
-        <div className="space-y-4">
-          <SearchableMultiSelect
-            options={drugOptions}
-            selectedIds={allSelectedDrugIds}
-            onToggleSelect={toggleDrug}
-            placeholder="Search medications by name or code..."
-            categoryColorFn={(cat) =>
-              DRUG_CATEGORIES.includes(cat as DrugCategory)
-                ? getDrugCategoryColor(cat as DrugCategory)
-                : 'bg-gray-100 text-gray-700'
-            }
-          />
-
-          {pendingDrugIds.length > 0 && (
-            <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-2xl">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 bg-orange-100 rounded-lg">
-                    <Pill className="h-4 w-4 text-orange-600" />
-                  </div>
-                  <p className="font-medium text-orange-800">
-                    {pendingDrugIds.length} medication
-                    {pendingDrugIds.length > 1 ? 's' : ''} pending configuration
-                  </p>
-                </div>
-                <Button
-                  type="button"
-                  onClick={openMultiDrugModal}
-                  className="bg-orange-500 hover:bg-orange-600 text-white"
-                >
-                  <Settings size={16} className="mr-1.5" />
-                  Configure Dosage
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {pendingDrugIds.map((drugId) => {
-                  const drug = drugOptions.find((d) => d.id === drugId);
-                  return (
-                    <span
-                      key={drugId}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-orange-200 rounded-lg text-sm text-orange-800"
-                    >
-                      {drug?.name || drugId}
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPendingDrugIds(
-                            pendingDrugIds.filter((id) => id !== drugId),
-                          )
-                        }
-                        className="p-0.5 hover:bg-orange-100 rounded"
-                      >
-                        <X size={12} />
-                      </button>
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {prescriptions.length > 0 && (
-            <div className="mt-4 space-y-2">
-              <p className="text-xs font-medium text-gray-500">
-                Selected Medications:
-              </p>
-              {prescriptions.map((rx) => {
-                const drug = drugOptions.find((d) => d.id === rx.drug_id);
-                return (
-                  <div
-                    key={rx.drug_id}
-                    className="flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 shadow-sm"
-                  >
-                    <div>
-                      <span className="font-medium text-gray-900">
-                        {drug?.name || rx.drug_id}
-                      </span>
-                      <span className="text-sm text-gray-500 ml-2">
-                        {rx.dosage} • {rx.frequency} • {rx.duration}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        onPrescriptionsChange(
-                          prescriptions.filter((p) => p.drug_id !== rx.drug_id),
-                        )
-                      }
-                      className="p-1 text-red-500 hover:bg-red-50 rounded"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        <PrescriptionEditor
+          prescriptions={prescriptions}
+          onChange={onPrescriptionsChange}
+          drugOptions={drugOptions}
+          clinicalNotes={
+            formData.examination_findings ||
+            formData.physical_examination ||
+            formData.clinical_notes ||
+            ''
+          }
+          diagnosis={selectedDiagnoses.map((diagnosis) => diagnosis.title)}
+        />
       )}
 
       {/* Lab Tests Tab */}
@@ -3920,6 +3578,7 @@ function OrdersStep({
                     priority: 'Normal',
                     test_name: test?.name,
                     test_code: test?.code,
+                    specimen_type: test?.subCategory,
                     clinical_notes: prefillClinicalNotes,
                     diagnosis: prefillDiagnosis,
                   },
@@ -3960,6 +3619,19 @@ function OrdersStep({
                         <X size={16} />
                       </button>
                     </div>
+                    <LabSpecimenFields
+                      specimenType={order.specimen_type || test?.subCategory}
+                      specimenIdentifier={order.specimen_identifier}
+                      onChange={(patch) =>
+                        onLabOrdersChange(
+                          labOrders.map((o) =>
+                            o.test_id === order.test_id
+                              ? { ...o, ...patch }
+                              : o,
+                          ),
+                        )
+                      }
+                    />
                     <textarea
                       value={order.clinical_notes || ''}
                       onChange={(e) =>
@@ -4306,17 +3978,7 @@ function OrdersStep({
                   <label className="block text-xs font-medium text-gray-500">
                     Reason for Admission *
                   </label>
-                  <SavedNotesPopover
-                    category="admission_notes"
-                    subcategory="reason"
-                    currentValue={admissionOrder.reason}
-                    onInsert={(content) =>
-                      onAdmissionOrderChange({
-                        ...admissionOrder,
-                        reason: content,
-                      })
-                    }
-                  />
+
                 </div>
                 <textarea
                   value={admissionOrder.reason}
@@ -4337,17 +3999,7 @@ function OrdersStep({
                   <label className="block text-xs font-medium text-gray-500">
                     Special Requirements / Notes
                   </label>
-                  <SavedNotesPopover
-                    category="admission_notes"
-                    subcategory="special_requirements"
-                    currentValue={admissionOrder.special_requirements || ''}
-                    onInsert={(content) =>
-                      onAdmissionOrderChange({
-                        ...admissionOrder,
-                        special_requirements: content || undefined,
-                      })
-                    }
-                  />
+
                 </div>
                 <textarea
                   value={admissionOrder.special_requirements || ''}
@@ -4644,6 +4296,7 @@ function OrdersStep({
                       </div>
                     </div>
                   </button>
+                  {isNhisFeatureEnabled() && (
                   <button
                     type="button"
                     onClick={() =>
@@ -4686,6 +4339,7 @@ function OrdersStep({
                       </div>
                     </div>
                   </button>
+                  )}
                 </div>
               </div>
 
@@ -4918,7 +4572,7 @@ function OrdersStep({
 
           {/* Active Referral Forms */}
           <div className="space-y-4">
-            {externalNhisReferral.enabled && (
+            {isNhisFeatureEnabled() && externalNhisReferral.enabled && (
               <div className="p-6 rounded-2xl border border-amber-200 bg-white shadow-sm ring-1 ring-amber-100">
                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-amber-100">
                   <div className="bg-amber-50 p-2 rounded-lg">
@@ -4988,17 +4642,7 @@ function OrdersStep({
                       <label className="block text-xs font-medium text-gray-500">
                         Clinical Findings <span className="text-red-500">*</span>
                       </label>
-                      <SavedNotesPopover
-                        category="referral_notes"
-                        subcategory="clinical_findings"
-                        currentValue={externalNhisReferral.clinicalFindings}
-                        onInsert={(content) =>
-                          setExternalNhisReferral((prev) => ({
-                            ...prev,
-                            clinicalFindings: content,
-                          }))
-                        }
-                      />
+
                     </div>
                     <textarea
                       value={externalNhisReferral.clinicalFindings}
@@ -5019,17 +4663,7 @@ function OrdersStep({
                         Reason for Referral{' '}
                         <span className="text-red-500">*</span>
                       </label>
-                      <SavedNotesPopover
-                        category="referral_notes"
-                        subcategory="reason"
-                        currentValue={externalNhisReferral.reason}
-                        onInsert={(content) =>
-                          setExternalNhisReferral((prev) => ({
-                            ...prev,
-                            reason: content,
-                          }))
-                        }
-                      />
+
                     </div>
                     <textarea
                       value={externalNhisReferral.reason}
@@ -5233,20 +4867,7 @@ function OrdersStep({
                         <label className="block text-xs font-medium text-gray-500">
                           Clinical Findings
                         </label>
-                        <SavedNotesPopover
-                          category="referral_notes"
-                          subcategory="clinical_findings"
-                          currentValue={referral.clinicalFindings}
-                          onInsert={(content) =>
-                            onSpecialtyReferralsChange((prev) => ({
-                              ...prev,
-                              [key]: {
-                                ...prev[key],
-                                clinicalFindings: content,
-                              },
-                            }))
-                          }
-                        />
+
                       </div>
                       <textarea
                         value={referral.clinicalFindings}
@@ -5293,20 +4914,7 @@ function OrdersStep({
                         <label className="block text-xs font-medium text-gray-500">
                           Provisional Diagnosis
                         </label>
-                        <SavedNotesPopover
-                          category="referral_notes"
-                          subcategory="provisional_diagnosis"
-                          currentValue={referral.provisionalDiagnosis}
-                          onInsert={(content) =>
-                            onSpecialtyReferralsChange((prev) => ({
-                              ...prev,
-                              [key]: {
-                                ...prev[key],
-                                provisionalDiagnosis: content,
-                              },
-                            }))
-                          }
-                        />
+
                       </div>
                       <textarea
                         value={referral.provisionalDiagnosis}
@@ -5387,375 +4995,6 @@ function OrdersStep({
         </div>
       )}
 
-      {/* Multi-Drug Configuration Modal */}
-      {multiPrescriptionModal.isOpen &&
-        multiPrescriptionModal.drugConfigs.length > 0 && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center">
-            <div
-              className="absolute inset-0 bg-black/50"
-              onClick={() =>
-                setMultiPrescriptionModal((prev) => ({
-                  ...prev,
-                  isOpen: false,
-                }))
-              }
-            />
-            <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] m-4 flex flex-col">
-              <div className="flex items-center justify-between p-5 border-b border-gray-200 shrink-0">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-orange-100 rounded-lg">
-                    <Pill className="h-5 w-5 text-orange-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-900">
-                      Configure Prescriptions
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      Set dosage for {multiPrescriptionModal.drugConfigs.length}{' '}
-                      medication
-                      {multiPrescriptionModal.drugConfigs.length > 1 ? 's' : ''}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setMultiPrescriptionModal((prev) => ({
-                      ...prev,
-                      isOpen: false,
-                    }))
-                  }
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <X size={20} className="text-gray-500" />
-                </button>
-              </div>
-
-              <div className="flex-1 overflow-y-auto p-5 space-y-4">
-                {multiPrescriptionModal.drugConfigs.map((config, index) => {
-                  const drug = drugOptions.find((d) => d.id === config.drugId);
-                  const hasValidDosage = config.useCustomDosage
-                    ? config.customDosage
-                    : config.dosage;
-                  const isComplete =
-                    hasValidDosage && config.frequency && config.duration;
-
-                  return (
-                    <div
-                      key={config.drugId}
-                      className={`p-4 rounded-2xl border transition-colors ${isComplete ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold ${isComplete ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-700'}`}
-                          >
-                            {isComplete ? <Check size={14} /> : index + 1}
-                          </span>
-                          <span className="font-semibold text-gray-900">
-                            {drug?.name || 'Unknown Drug'}
-                          </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeDrugFromModal(config.drugId)}
-                          className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-
-                      <div className="grid grid-cols-5 gap-3">
-                        <div>
-                          <div className="flex items-center justify-between mb-1">
-                            <label className="text-xs font-medium text-gray-500">
-                              Dosage *
-                            </label>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                updateDrugConfig(
-                                  index,
-                                  'useCustomDosage',
-                                  !config.useCustomDosage,
-                                )
-                              }
-                              className="text-xs text-orange-600 hover:text-orange-700"
-                            >
-                              {config.useCustomDosage ? '← preset' : 'custom →'}
-                            </button>
-                          </div>
-                          {config.useCustomDosage ? (
-                            <input
-                              type="text"
-                              value={config.customDosage}
-                              onChange={(e) =>
-                                updateDrugConfig(
-                                  index,
-                                  'customDosage',
-                                  e.target.value,
-                                )
-                              }
-                              placeholder="e.g., 2.5ml"
-                              className="w-full px-2.5 py-2 border border-orange-200 rounded-lg text-sm bg-orange-50 focus:border-orange-500 focus:ring-0"
-                            />
-                          ) : (
-                            <SearchableSelect
-                              value={config.dosage}
-                              onChange={(value) =>
-                                updateDrugConfig(index, 'dosage', value)
-                              }
-                              options={DOSAGE_OPTIONS}
-                              placeholder="Dosage"
-                            />
-                          )}
-                        </div>
-                        <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">
-                            Frequency *
-                          </label>
-                          <SearchableSelect
-                            value={config.frequency}
-                            onChange={(value) =>
-                              updateDrugConfig(index, 'frequency', value)
-                            }
-                            options={FREQUENCY_OPTIONS}
-                            placeholder="Frequency"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">
-                            Duration *
-                          </label>
-                          <SearchableSelect
-                            value={config.duration}
-                            onChange={(value) =>
-                              updateDrugConfig(index, 'duration', value)
-                            }
-                            options={DURATION_OPTIONS}
-                            placeholder="Duration"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">
-                            Route
-                          </label>
-                          <SearchableSelect
-                            value={config.route}
-                            onChange={(value) =>
-                              updateDrugConfig(index, 'route', value)
-                            }
-                            options={ROUTE_OPTIONS}
-                            placeholder="Route"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-xs font-medium text-gray-500 mb-1 block">
-                            Qty
-                          </label>
-                          <input
-                            type="number"
-                            min={1}
-                            value={config.quantity}
-                            onChange={(e) =>
-                              updateDrugConfig(
-                                index,
-                                'quantity',
-                                parseInt(e.target.value) || 1,
-                              )
-                            }
-                            className="w-full px-2.5 py-2 border border-gray-200 rounded-lg text-sm focus:border-orange-500 focus:ring-0"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex items-center justify-between p-5 border-t border-gray-200 bg-gray-50 rounded-b-xl shrink-0">
-                <div className="text-sm text-gray-600">
-                  <span className="font-medium text-green-600">
-                    {
-                      multiPrescriptionModal.drugConfigs.filter((c) => {
-                        const hasValidDosage = c.useCustomDosage
-                          ? c.customDosage
-                          : c.dosage;
-                        return hasValidDosage && c.frequency && c.duration;
-                      }).length
-                    }
-                  </span>{' '}
-                  of {multiPrescriptionModal.drugConfigs.length} medications
-                  configured
-                </div>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    onClick={() =>
-                      setMultiPrescriptionModal((prev) => ({
-                        ...prev,
-                        isOpen: false,
-                      }))
-                    }
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    variant="primary"
-                    onClick={confirmMultiplePrescriptions}
-                    disabled={
-                      !multiPrescriptionModal.drugConfigs.some((c) => {
-                        const hasValidDosage = c.useCustomDosage
-                          ? c.customDosage
-                          : c.dosage;
-                        return hasValidDosage && c.frequency && c.duration;
-                      })
-                    }
-                    className="bg-orange-500 hover:bg-orange-600"
-                  >
-                    <Plus size={16} className="mr-1" />
-                    Add Prescriptions
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-      {/* Single Prescription Popup Modal */}
-      {prescriptionPopup.isOpen && popupDrug && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() =>
-              setPrescriptionPopup((p) => ({ ...p, isOpen: false }))
-            }
-          />
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 m-4">
-            <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-200">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <Pill className="h-5 w-5 text-orange-600" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-gray-900">
-                    Prescribe Medication
-                  </h3>
-                  <p className="text-sm text-gray-500">{popupDrug.name}</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() =>
-                  setPrescriptionPopup((p) => ({ ...p, isOpen: false }))
-                }
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <X size={20} className="text-gray-500" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                  Dosage *
-                </label>
-                <SearchableSelect
-                  value={prescriptionPopup.dosage}
-                  onChange={(value) =>
-                    setPrescriptionPopup((p) => ({ ...p, dosage: value }))
-                  }
-                  options={DOSAGE_OPTIONS}
-                  placeholder="Select dosage"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                  Frequency *
-                </label>
-                <SearchableSelect
-                  value={prescriptionPopup.frequency}
-                  onChange={(value) =>
-                    setPrescriptionPopup((p) => ({ ...p, frequency: value }))
-                  }
-                  options={FREQUENCY_OPTIONS}
-                  placeholder="Select frequency"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                  Duration *
-                </label>
-                <SearchableSelect
-                  value={prescriptionPopup.duration}
-                  onChange={(value) =>
-                    setPrescriptionPopup((p) => ({ ...p, duration: value }))
-                  }
-                  options={DURATION_OPTIONS}
-                  placeholder="Select duration"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                  Route
-                </label>
-                <SearchableSelect
-                  value={prescriptionPopup.route}
-                  onChange={(value) =>
-                    setPrescriptionPopup((p) => ({ ...p, route: value }))
-                  }
-                  options={ROUTE_OPTIONS}
-                  placeholder="Select route"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">
-                  Quantity
-                </label>
-                <input
-                  type="number"
-                  min={1}
-                  value={prescriptionPopup.quantity}
-                  onChange={(e) =>
-                    setPrescriptionPopup((p) => ({
-                      ...p,
-                      quantity: parseInt(e.target.value) || 1,
-                    }))
-                  }
-                  className={INPUT_CLS}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
-              <p className="text-xs text-gray-500">* Required fields</p>
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    setPrescriptionPopup((p) => ({ ...p, isOpen: false }))
-                  }
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={confirmPrescription}
-                  disabled={
-                    !prescriptionPopup.dosage ||
-                    !prescriptionPopup.frequency ||
-                    !prescriptionPopup.duration
-                  }
-                  className="bg-orange-500 hover:bg-orange-600"
-                >
-                  <Plus size={16} className="mr-1" />
-                  Add Prescription
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -5830,7 +5069,7 @@ function ReviewSubmitStep({
 }) {
   const specialtyReferralCount =
     Object.values(specialtyReferrals).filter((r) => r?.selected).length +
-    (externalNhisReferral.enabled ? 1 : 0);
+    (isNhisFeatureEnabled() && externalNhisReferral.enabled ? 1 : 0);
 
   // Get filled specialty fields count
   const filledFieldsCount = Object.values(specialtyFormData).filter((v) => {
@@ -6493,11 +5732,18 @@ function ReviewSubmitStep({
                     className="p-3 bg-white rounded-lg text-sm border border-gray-200 shadow-sm hover:border-orange-200 transition-colors"
                   >
                     <div className="flex items-start justify-between mb-1">
-                      <div
-                        className="font-semibold text-gray-900 line-clamp-1"
-                        title={drug?.name || rx.drug_name}
-                      >
-                        {drug?.name || rx.drug_name}
+                      <div className="min-w-0">
+                        <div
+                          className="font-semibold text-gray-900 line-clamp-1"
+                          title={drug?.name || rx.drug_name}
+                        >
+                          {drug?.name || rx.drug_name}
+                        </div>
+                        {rx.is_external && (
+                          <span className="mt-1 inline-flex rounded border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+                            External ? not dispensed
+                          </span>
+                        )}
                       </div>
                       <span className="text-xs font-mono bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 border border-gray-200 whitespace-nowrap ml-2">
                         x{rx.quantity_prescribed}

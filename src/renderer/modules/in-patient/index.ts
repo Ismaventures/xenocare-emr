@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - In-Patient Module
+// XENOCARE EMR - In-Patient Module
 // Central export file for the in-patient management module
 // =============================================================================
 

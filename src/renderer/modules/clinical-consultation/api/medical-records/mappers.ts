@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - DATA MAPPERS
+ * XENOCARE EMR - DATA MAPPERS
  * Transform raw database rows to DTOs
  * =============================================================================
  */
@@ -173,6 +173,7 @@ export function mapPrescriptionToDetail(
     prescribed_by: prescription.doctor_id,
     prescribed_by_name: doctorName,
     created_at: prescription.created_at,
+    is_external: prescription.is_external ?? false,
     dispensed:
       prescription.status === 'Dispensed' ||
       prescription.status === 'Completed',
@@ -191,6 +192,7 @@ export function mapPrescriptionToMedicationDetail(
     quantity: prescription.quantity_prescribed || 0,
     instructions: prescription.instructions,
     status: prescription.status || '',
+    is_external: prescription.is_external ?? false,
   };
 }
 

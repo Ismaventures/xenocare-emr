@@ -6,13 +6,16 @@ import {
   formatDetailedAge,
   formatPatientName,
 } from '../dtos/patient.dto';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 
 interface PatientRegistrationPdfOptions {
   filters?: PatientSearchParams;
   generatedBy?: string;
 }
 
-const FACILITY_NAME = 'National Defence College Medical Centre';
 const REPORT_TITLE = 'Patient Registration Report';
 
 function formatDateTime(value?: string | null): string {
@@ -105,19 +108,27 @@ export async function exportPatientRegistrationPdf(
   const pageHeight = doc.internal.pageSize.getHeight();
   const filename = buildFilename();
 
-  // NDC Green branded header banner
+  // Facility-branded header banner
+  const facilityName = getFacilityName();
+  const facilityAddress = getFacilityAddress();
   doc.setFillColor(22, 101, 52);
-  doc.rect(0, 0, pageWidth, 14, 'F');
+  doc.rect(0, 0, pageWidth, 18, 'F');
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text(FACILITY_NAME.toUpperCase(), pageWidth / 2, 6, { align: 'center' });
+  doc.text(facilityName.toUpperCase(), pageWidth / 2, 6, {
+    align: 'center',
+  });
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.text(REPORT_TITLE, pageWidth / 2, 11, { align: 'center' });
+  if (facilityAddress) {
+    doc.setFontSize(7);
+    doc.text(facilityAddress, pageWidth / 2, 15, { align: 'center' });
+  }
 
   // Metadata
-  let yPos = 20;
+  let yPos = 24;
   doc.setTextColor(100, 116, 139);
   doc.setFontSize(8);
   doc.text(buildFilterSummary(options.filters), 14, yPos);
@@ -141,13 +152,10 @@ export async function exportPatientRegistrationPdf(
         'S/N',
         'EMR Number',
         'Patient Name',
-        'Gender',
+        'Sex',
         'Age',
-        'Patient Category',
-        'Patient Type',
-        'Insurance',
-        'NHIS Source',
         'Phone',
+        'Occupation',
         'Registered',
       ],
     ],
@@ -155,13 +163,10 @@ export async function exportPatientRegistrationPdf(
       String(index + 1),
       patient.emr_number || 'Pending',
       formatPatientName(patient),
-      patient.gender || '—',
+      patient.gender || '�?"',
       formatDetailedAge(patient.date_of_birth),
-      patient.patient_category || patient.staff_category || '—',
-      patient.patient_type || '—',
-      patient.insurance_type || '—',
-      patient.nhis_patient_source || '—',
-      patient.contact_phone || '—',
+      patient.contact_phone || '�?"',
+      patient.occupation || '�?"',
       formatDateTime(patient.registration_date),
     ]),
     styles: {
@@ -184,20 +189,26 @@ export async function exportPatientRegistrationPdf(
       // Re-draw header on subsequent pages
       if (hookData.pageNumber > 1) {
         doc.setFillColor(22, 101, 52);
-        doc.rect(0, 0, pageWidth, 14, 'F');
+        doc.rect(0, 0, pageWidth, 18, 'F');
         doc.setTextColor(255, 255, 255);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(11);
-        doc.text(FACILITY_NAME.toUpperCase(), pageWidth / 2, 6, { align: 'center' });
+        doc.text(facilityName.toUpperCase(), pageWidth / 2, 6, {
+          align: 'center',
+        });
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.text(REPORT_TITLE, pageWidth / 2, 11, { align: 'center' });
+        if (facilityAddress) {
+          doc.setFontSize(7);
+          doc.text(facilityAddress, pageWidth / 2, 15, { align: 'center' });
+        }
       }
       // Footer
       doc.setFontSize(7);
       doc.setTextColor(100, 116, 139);
       doc.text(
-        `NDC Medical Centre  •  Page ${hookData.pageNumber}`,
+        `${facilityName}  •  Page ${hookData.pageNumber}`,
         pageWidth / 2,
         pageHeight - 8,
         { align: 'center' },

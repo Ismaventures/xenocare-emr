@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS COMPONENTS BARREL EXPORT
+ * XENOCARE EMR - MEDICAL RECORDS COMPONENTS BARREL EXPORT
  * =============================================================================
  */
 

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PROFESSIONAL ENCOUNTER TIMELINE
+ * XENOCARE EMR - PROFESSIONAL ENCOUNTER TIMELINE
  * Clinical-grade encounter history with visual timeline and comprehensive details
  * Designed for rapid clinical review and encounter navigation
  * =============================================================================

@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - LOINC Service
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * LOINC (Logical Observation Identifiers Names and Codes) mapping
  * for laboratory tests, vitals, and observations

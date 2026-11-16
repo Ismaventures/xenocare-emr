@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Combined Hospital Month-End Report API
+ * XenoCare EMR — Combined Hospital Month-End Report API
  * Aggregates all 6 modules into a single executive-level report.
  */
 

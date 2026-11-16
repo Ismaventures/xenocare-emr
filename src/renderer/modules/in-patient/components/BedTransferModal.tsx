@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Bed Transfer Modal
+// XENOCARE EMR - Bed Transfer Modal
 // Transfer a patient to a different bed/ward
 // =============================================================================
 

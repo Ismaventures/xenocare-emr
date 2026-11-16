@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Analytics Types
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Type definitions for clinical, operational, and financial analytics
  * Aligned with analytics-engine.ts output structures

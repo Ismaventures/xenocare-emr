@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Bed Management Component
+// XENOCARE EMR - Bed Management Component
 // Visual bed layout and status management for wards
 // =============================================================================
 

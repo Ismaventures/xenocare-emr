@@ -34,6 +34,7 @@ import {
 
 // Import NHIS Logo
 import nhisLogo from '../../../assets/nhis_logo.png';
+import { isNhisFeatureEnabled } from './features';
 
 export interface MenuItem {
   to: string;
@@ -46,7 +47,7 @@ export interface MenuItem {
   imageSrc?: string;
 }
 
-export const menuItems: MenuItem[] = [
+const baseMenuItems: MenuItem[] = [
   {
     to: '/',
     icon: BarChart3,
@@ -306,3 +307,7 @@ export const menuItems: MenuItem[] = [
     color: 'bg-rose-500',
   },
 ];
+
+export const menuItems: MenuItem[] = isNhisFeatureEnabled()
+  ? baseMenuItems
+  : baseMenuItems.filter((item) => item.module !== 'nhis');

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER COMPONENTS INDEX
+ * XENOCARE EMR - ENCOUNTER COMPONENTS INDEX
  * Description: Export all encounter components
  * =============================================================================
  */

@@ -510,6 +510,7 @@ export interface PrescriptionDTO extends Prescription {
   // Clinical context fields - diagnosis and notes from doctor
   diagnosis?: string[]; // ICD-10 codes/diagnoses - WHY this was prescribed
   clinical_notes?: string; // Indication/reason for prescription
+  is_external?: boolean; // External medicine — not dispensed by facility pharmacy
   // Encounter relation for tracking
   encounter?: {
     id: string;

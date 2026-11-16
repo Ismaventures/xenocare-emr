@@ -1,5 +1,5 @@
 // =============================================================================
-// NHIS OUTGOING REFERRAL PROCESSING COMPONENT — NDC Branded
+// NHIS OUTGOING REFERRAL PROCESSING COMPONENT — XenoCare Branded
 //
 // This component allows NHIS desk officers to:
 // 1. View pending outgoing referral requests from doctors
@@ -1394,8 +1394,8 @@ export const NhisOutgoingReferralQueue: React.FC<
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src={require('../../../../../assets/ndclogo.png')}
-                alt="NDC"
+                src={require('../../../../../assets/xenocare-logo.png')}
+                alt="XenoCare"
                 className="h-10 w-10 rounded-full bg-white/20 p-0.5 object-contain"
               />
               <div>

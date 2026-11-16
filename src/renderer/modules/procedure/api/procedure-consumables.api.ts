@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Consumables API
+// XENOCARE EMR - Procedure Consumables API
 // Supabase API functions for tracking items used during procedures
 // =============================================================================
 

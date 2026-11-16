@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Edit Care Team Modal
+// XENOCARE EMR - Edit Care Team Modal
 // Allows assigning/updating the care team for an admission
 // (Attending Physician, Primary Nurse, Acuity, etc.)
 // =============================================================================

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PROBLEMS EXTRACTOR
+ * XENOCARE EMR - PROBLEMS EXTRACTOR
  * Extract and deduplicate problems from consultation diagnoses
  * =============================================================================
  */

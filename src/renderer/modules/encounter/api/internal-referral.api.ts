@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - INTERNAL REFERRAL API
+ * XENOCARE EMR - INTERNAL REFERRAL API
  *
  * API functions for managing internal referrals in the Encounter Office.
  * This module handles the workflow where doctors refer patients to specialty

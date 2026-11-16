@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PageHeader Component
+ * XENOCARE EMR - PageHeader Component
  *
  * Unified page header for all modules. Eliminates per-module header chaos
  * by providing a single, consistent pattern.

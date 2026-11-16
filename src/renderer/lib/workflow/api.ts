@@ -4,6 +4,7 @@
 
 import { supabase } from '../../api/supabaseClient';
 import { createScopedLogger } from '../../utils/logger';
+import { isNhisFeatureEnabled } from '../../config/features';
 import {
   EncounterDTO,
   CreateEncounterDTO,
@@ -871,7 +872,12 @@ async function createConsultationBillingOrder(
     .toLowerCase()
     .replace(/_/g, ' ')
     .trim();
+  const isRetainership = [
+    'retainership',
+    'corporate',
+  ].includes(normalizedInsuranceType);
   const isNhis =
+    isNhisFeatureEnabled() &&
     normalizedInsuranceType !== '' &&
     [
       'dhml',
@@ -879,9 +885,8 @@ async function createConsultationBillingOrder(
       'civilian nhis',
       'security services nhis',
       'gifship',
-      'retainership',
-      'corporate',
     ].includes(normalizedInsuranceType);
+  const isCoveredConsultation = isNhis || isRetainership;
 
   // Get consultation fee using single source of truth: clinic's base fee columns
   // Same fee for ALL patient types - NHIS coverage is calculated separately
@@ -897,10 +902,10 @@ async function createConsultationBillingOrder(
   const orderNumber = generateBillingOrderNumber();
 
   // Ensure boolean values for database
-  const nhisCovered: boolean = isNhis === true;
-  const nhisPercentage: number = isNhis ? 100 : 0; // 100% for ALL NHIS patients
+  const nhisCovered: boolean = isCoveredConsultation === true;
+  const nhisPercentage: number = isCoveredConsultation ? 100 : 0; // 100% for covered consultations
   const grossAmount: number = fee;
-  const nhisPayable: number = isNhis ? grossAmount : 0;
+  const nhisPayable: number = isCoveredConsultation ? grossAmount : 0;
   const patientPayable: number = grossAmount - nhisPayable;
 
   // ALL billing orders start as 'Pending' - billing admin must verify
@@ -1082,13 +1087,15 @@ export async function createEncounter(
     .toLowerCase()
     .replace(/_/g, ' ')
     .trim();
-  const isNhisReferral = !!(
-    dto.is_referral_encounter &&
-    dto.source_referral_id &&
-    (normalizedIns.includes('nhis') ||
-      normalizedIns === 'dhml' ||
-      normalizedIns === 'gifship')
-  );
+  const isNhisReferral =
+    isNhisFeatureEnabled() &&
+    !!(
+      dto.is_referral_encounter &&
+      dto.source_referral_id &&
+      (normalizedIns.includes('nhis') ||
+        normalizedIns === 'dhml' ||
+        normalizedIns === 'gifship')
+    );
 
   // Detect if this is an A&E encounter for setting encounter_category
   const isAeVisitType =

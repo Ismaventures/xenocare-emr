@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORD VIEW SERVICE
+ * XENOCARE EMR - MEDICAL RECORD VIEW SERVICE
  * Complete patient medical records view
  * =============================================================================
  */

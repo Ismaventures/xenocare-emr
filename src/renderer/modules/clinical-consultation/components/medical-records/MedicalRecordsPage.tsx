@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT MEDICAL RECORDS PAGE
+ * XENOCARE EMR - PATIENT MEDICAL RECORDS PAGE
  * Main page integrating all medical records components
  * Responsive layout: Desktop (3-col), Tablet (2-col), Mobile (accordion)
  * =============================================================================

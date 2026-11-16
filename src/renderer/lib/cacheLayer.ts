@@ -1,5 +1,5 @@
 /**
- * Cache Layer for NDC MEDICAL CENTRE EMR
+ * Cache Layer for XENOCARE EMR
  *
  * Session-scoped cache invalidation utilities.
  *

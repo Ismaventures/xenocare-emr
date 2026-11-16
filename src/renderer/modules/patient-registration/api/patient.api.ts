@@ -109,16 +109,18 @@ function getPatientSearchClause(rawQuery?: string): string | null {
 
   const cleanQuery = rawQuery.trim();
   const searchQuery = `%${cleanQuery}%`;
-  let emrSearchPattern = searchQuery;
+  const emrPatterns = [`emr_number.ilike.${searchQuery}`];
 
   if (/^\d+$/.test(cleanQuery)) {
-    const paddedNumber = cleanQuery.padStart(4, '0');
-    emrSearchPattern = `%-${paddedNumber}`;
+    // Support legacy NDC-0001 and MHC-000001 formats.
+    const padded4 = cleanQuery.padStart(4, '0');
+    const padded6 = cleanQuery.padStart(6, '0');
+    emrPatterns.push(`emr_number.ilike.%-${padded4}`);
+    emrPatterns.push(`emr_number.ilike.%-${padded6}`);
   }
 
   return [
-    `emr_number.ilike.${searchQuery}`,
-    `emr_number.ilike.${emrSearchPattern}`,
+    ...emrPatterns,
     `first_name.ilike.${searchQuery}`,
     `surname.ilike.${searchQuery}`,
     `contact_phone.ilike.${searchQuery}`,
@@ -488,16 +490,14 @@ export const searchPatients = async (
   // Build search patterns
   const searchQuery = `%${cleanQuery}%`;
 
-  // For numeric queries, create exact EMR search pattern
-  // e.g., "1" should find "NDC-0001" (ends with -0001)
-  // e.g., "10" should find "NDC-0010" (ends with -0010)
-  // e.g., "0001" should find "NDC-0001" (ends with -0001)
-  let emrSearchPattern = searchQuery;
+  // For numeric queries, support both legacy 4-digit and current 6-digit EMR formats.
+  const emrConditions = [`emr_number.ilike.${searchQuery}`];
 
   if (/^\d+$/.test(cleanQuery)) {
-    // Pad with zeros to match EMR format: NDC-XXXX
-    const paddedNumber = cleanQuery.padStart(4, '0');
-    emrSearchPattern = `%-${paddedNumber}`;
+    const padded4 = cleanQuery.padStart(4, '0');
+    const padded6 = cleanQuery.padStart(6, '0');
+    emrConditions.push(`emr_number.ilike.%-${padded4}`);
+    emrConditions.push(`emr_number.ilike.%-${padded6}`);
   }
 
   const { data, error } = await supabase
@@ -507,7 +507,14 @@ export const searchPatients = async (
     )
     .eq('status', 'Active')
     .or(
-      `first_name.ilike.${searchQuery},surname.ilike.${searchQuery},middle_name.ilike.${searchQuery},service_number.ilike.${searchQuery},contact_phone.ilike.${searchQuery},emr_number.ilike.${searchQuery},emr_number.ilike.${emrSearchPattern}`,
+      [
+        `first_name.ilike.${searchQuery}`,
+        `surname.ilike.${searchQuery}`,
+        `middle_name.ilike.${searchQuery}`,
+        `service_number.ilike.${searchQuery}`,
+        `contact_phone.ilike.${searchQuery}`,
+        ...emrConditions,
+      ].join(','),
     )
     .limit(limit);
 

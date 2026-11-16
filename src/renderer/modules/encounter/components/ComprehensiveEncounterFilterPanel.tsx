@@ -1,12 +1,16 @@
-﻿/**
+/**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COMPREHENSIVE ENCOUNTER FILTER PANEL
+ * XENOCARE EMR - COMPREHENSIVE ENCOUNTER FILTER PANEL
  * Description: Full-featured filter panel with all encounter fields
  * Features: Multi-section filters, presets, search within filters, export options
  * =============================================================================
  */
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 import {
   X,
   Calendar,
@@ -275,6 +279,10 @@ const INSURANCE_TYPES = [
   { value: 'Private', label: 'Private Insurance' },
   { value: 'None', label: 'No Insurance (Self-Pay)' },
 ];
+
+const VISIBLE_INSURANCE_TYPES = isNhisFeatureEnabled()
+  ? INSURANCE_TYPES
+  : INSURANCE_TYPES.filter((type) => !isNhisCategory(type.value));
 
 const ENCOUNTER_STAGES = [
   { value: 'created', label: 'Created' },
@@ -904,11 +912,15 @@ export function ComprehensiveEncounterFilterPanel({
                       label: 'SOPD This Month',
                       icon: Stethoscope,
                     },
-                    {
-                      key: 'nhisEncounters',
-                      label: 'NHIS',
-                      icon: Heart,
-                    },
+                    ...(isNhisFeatureEnabled()
+                      ? [
+                          {
+                            key: 'nhisEncounters',
+                            label: 'NHIS',
+                            icon: Heart,
+                          },
+                        ]
+                      : []),
                     {
                       key: 'emergencies',
                       label: 'Emergencies',
@@ -1023,7 +1035,7 @@ export function ComprehensiveEncounterFilterPanel({
                       </label>
                       <input
                         type="text"
-                        placeholder="NDC-..."
+                        placeholder="EMR number..."
                         value={filters.emrNumber}
                         onChange={(e) =>
                           updateFilter('emrNumber', e.target.value)
@@ -1363,7 +1375,7 @@ export function ComprehensiveEncounterFilterPanel({
                         placeholder="All Insurance"
                         options={[
                           { value: 'all', label: 'All Insurance Types' },
-                          ...INSURANCE_TYPES.map((ins) => ({
+                          ...VISIBLE_INSURANCE_TYPES.map((ins) => ({
                             value: ins.value,
                             label: ins.label,
                           })),
@@ -1786,32 +1798,36 @@ export function ComprehensiveEncounterFilterPanel({
                       ]}
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1.5 font-medium">NHIS Referral Status</label>
-                    <SearchableDropdown
-                      value={filters.nhisReferralStatus}
-                      onChange={(val) => updateFilter('nhisReferralStatus', val)}
-                      placeholder="Any Status"
-                      options={[
-                        { value: 'all', label: 'Any Status' },
-                        { value: 'pending', label: 'Pending Approval' },
-                        { value: 'approved', label: 'Approved' },
-                        { value: 'rejected', label: 'Rejected' },
-                      ]}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1.5 font-medium">NHIS Claim Status</label>
-                    <SearchableDropdown
-                      value={filters.nhisClaimStatus}
-                      onChange={(val) => updateFilter('nhisClaimStatus', val)}
-                      placeholder="Any Status"
-                      options={[
-                        { value: 'all', label: 'Any Status' },
-                        ...NHIS_CLAIM_STATUSES.map((s) => ({ value: s.value, label: s.label })),
-                      ]}
-                    />
-                  </div>
+                  {isNhisFeatureEnabled() && (
+                    <>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1.5 font-medium">NHIS Referral Status</label>
+                        <SearchableDropdown
+                          value={filters.nhisReferralStatus}
+                          onChange={(val) => updateFilter('nhisReferralStatus', val)}
+                          placeholder="Any Status"
+                          options={[
+                            { value: 'all', label: 'Any Status' },
+                            { value: 'pending', label: 'Pending Approval' },
+                            { value: 'approved', label: 'Approved' },
+                            { value: 'rejected', label: 'Rejected' },
+                          ]}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1.5 font-medium">NHIS Claim Status</label>
+                        <SearchableDropdown
+                          value={filters.nhisClaimStatus}
+                          onChange={(val) => updateFilter('nhisClaimStatus', val)}
+                          placeholder="Any Status"
+                          options={[
+                            { value: 'all', label: 'Any Status' },
+                            ...NHIS_CLAIM_STATUSES.map((s) => ({ value: s.value, label: s.label })),
+                          ]}
+                        />
+                      </div>
+                    </>
+                  )}
                   <div>
                     <label className="block text-xs text-gray-500 mb-1.5 font-medium">Specialty Clinic</label>
                     <SearchableDropdown

@@ -32,8 +32,8 @@ import { Button } from '../../components/ui/FormElements';
 import { EncounterForm } from '../encounter/components';
 import { InlineGuidance } from '../../components/guidance/InlineGuidance';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../assets/xenocare-logo.png');
 
 export default function PatientRegistration() {
   // Enable real-time updates
@@ -253,7 +253,7 @@ export default function PatientRegistration() {
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/95 p-2 shadow-[0_12px_28px_-8px_rgba(0,0,0,0.28)] ring-2 ring-white/40 sm:h-16 sm:w-16 sm:rounded-[1.15rem]">
                 <img
                   src={ndcLogoSrc}
-                  alt="NDC Medical Centre"
+                  alt="XenoCare"
                   className="h-full w-full object-contain"
                 />
               </div>
@@ -275,7 +275,7 @@ export default function PatientRegistration() {
                 >
                   <TimeIcon className="h-4 w-4 shrink-0 opacity-90" />
                   <span className="font-medium text-white/95">
-                    NDC Medical Centre
+                    XenoCare
                   </span>
                   <span className="hidden text-white/40 sm:inline">·</span>
                   <span>Demographics, coverage & master patient index</span>
@@ -297,7 +297,7 @@ export default function PatientRegistration() {
             <InlineGuidance
               module="registration"
               variant="onDark"
-              message="This module is the entry point for all patients. Capture accurate phone numbers and NHIS details (if applicable) to prevent billing issues later."
+              message="This module is the entry point for all patients. Capture accurate demographics, phone numbers and contact details to keep clinical and billing records consistent."
             />
           </div>
 

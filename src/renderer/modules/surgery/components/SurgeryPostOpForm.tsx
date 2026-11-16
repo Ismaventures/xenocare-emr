@@ -21,6 +21,7 @@ import {
 } from '../types/surgery.types';
 import { SkeletonForm } from '../../../components/ui/SkeletonLoader';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 const SurgeryPostOpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -309,6 +310,18 @@ const SurgeryPostOpForm: React.FC = () => {
               </h2>
             </div>
             <div className="p-6 space-y-6">
+              <div className="flex justify-end mb-1">
+                <TemplateSearchPopover
+                  templateType="surgery"
+                  category="surgery_postop"
+                  currentValues={{ post_op_complications: complications, discharge_instructions: instructions }}
+                  onTemplateSelect={(data) => {
+                    if (data.post_op_complications) setComplications(data.post_op_complications);
+                    if (data.discharge_instructions) setInstructions(data.discharge_instructions);
+                  }}
+                  buttonText="Fill All Fields"
+                />
+              </div>
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="text-sm font-medium text-gray-700">

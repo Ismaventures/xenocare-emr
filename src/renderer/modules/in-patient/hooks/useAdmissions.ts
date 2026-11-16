@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - useAdmissions Hook
+// XENOCARE EMR - useAdmissions Hook
 // React Query hook for admission management
 // =============================================================================
 

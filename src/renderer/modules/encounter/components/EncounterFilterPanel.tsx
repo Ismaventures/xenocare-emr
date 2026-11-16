@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER FILTER PANEL
+ * XENOCARE EMR - ENCOUNTER FILTER PANEL
  * Description: Comprehensive filter panel for encounters similar to billing module
  * Features: Date range, status, visit type, department, doctor, patient category filters
  * =============================================================================
@@ -33,6 +33,10 @@ import {
   VisitType,
   PriorityLevel,
 } from '../dtos/encounter.dto';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 
 // =============================================================================
 // Types
@@ -139,6 +143,14 @@ const PAYMENT_CATEGORIES = [
   { value: 'Retainership', label: 'Retainership' },
   { value: 'Military_Free', label: 'Military Free' },
 ];
+
+const VISIBLE_INSURANCE_TYPES = isNhisFeatureEnabled()
+  ? INSURANCE_TYPES
+  : INSURANCE_TYPES.filter((type) => !isNhisCategory(type.value));
+
+const VISIBLE_PAYMENT_CATEGORIES = isNhisFeatureEnabled()
+  ? PAYMENT_CATEGORIES
+  : PAYMENT_CATEGORIES.filter((category) => category.value !== 'NHIS');
 
 const DEPARTMENTS = [
   { value: 'GOPD', label: 'General Out-Patient (GOPD)' },
@@ -479,7 +491,7 @@ export function EncounterFilterPanel({
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-700 focus:border-primary-700"
             >
               <option value="all">All Insurance Types</option>
-              {INSURANCE_TYPES.map((ins) => (
+              {VISIBLE_INSURANCE_TYPES.map((ins) => (
                 <option key={ins.value} value={ins.value}>
                   {ins.label}
                 </option>
@@ -499,7 +511,7 @@ export function EncounterFilterPanel({
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-700 focus:border-primary-700"
             >
               <option value="all">All Payment Categories</option>
-              {PAYMENT_CATEGORIES.map((pay) => (
+              {VISIBLE_PAYMENT_CATEGORIES.map((pay) => (
                 <option key={pay.value} value={pay.value}>
                   {pay.label}
                 </option>

@@ -3,7 +3,11 @@ import {
   MedicalReportDTO,
   getReportTypeLabel,
 } from '../dtos/medical-reports.dto';
-import ndcLogo from '../../../../../assets/NDC_LOGO.png';
+import ndcLogo from '../../../../../assets/xenocare-logo.png';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 
 interface PdfOptions {
   generatedByName?: string;
@@ -49,7 +53,7 @@ async function getCachedLogoBase64(): Promise<string | null> {
         return value;
       })
       .catch((error) => {
-        console.error('Failed to load NDC logo', error);
+        console.error('Failed to load XenoCare logo', error);
         return null;
       })
       .finally(() => {
@@ -250,12 +254,17 @@ export async function buildMedicalReportPdf(
   doc.setTextColor(primaryGreen[0], primaryGreen[1], primaryGreen[2]);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(14);
-  doc.text('NATIONAL DEFENCE COLLEGE MEDICAL CENTRE', textMarginLeft, y + 6);
+  doc.text(getFacilityName().toUpperCase(), textMarginLeft, y + 6);
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
+  doc.setFontSize(8);
   doc.setTextColor(mutedText[0], mutedText[1], mutedText[2]);
-  doc.text('Official Clinical Report', textMarginLeft, y + 11);
+  const facilityAddress = getFacilityAddress();
+  if (facilityAddress) {
+    doc.text(facilityAddress, textMarginLeft, y + 11);
+  }
+  doc.setFontSize(10);
+  doc.text('Official Clinical Report', textMarginLeft, y + 16);
 
   // Document metadata right aligned
   doc.setFont('helvetica', 'bold');
@@ -494,7 +503,7 @@ export async function buildMedicalReportPdf(
     doc.setFontSize(8);
     doc.setTextColor(100, 116, 139);
     doc.text(
-      `Generated from NDC EMR on ${new Date().toLocaleString()}`,
+      `Generated from ${getFacilityName()} on ${new Date().toLocaleString()}`,
       margin,
       doc.internal.pageSize.getHeight() - 8,
     );

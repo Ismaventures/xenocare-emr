@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - NHIS Reconciliation Dashboard
+// XENOCARE EMR - NHIS Reconciliation Dashboard
 // Comprehensive NHIS claims tracking, reconciliation, and reporting
 // =============================================================================
 

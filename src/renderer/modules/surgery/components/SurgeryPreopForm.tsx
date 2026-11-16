@@ -20,6 +20,7 @@ import {
   getASADescription,
 } from '../types/surgery.types';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 const SurgeryPreopForm: React.FC = () => {
   const navigate = useNavigate();
@@ -256,6 +257,20 @@ const SurgeryPreopForm: React.FC = () => {
             <Heart className="h-5 w-5 text-gray-500" />
             Clinical Risk Assessment
           </h2>
+          <div className="flex justify-end mb-2">
+            <TemplateSearchPopover
+              templateType="surgery"
+              category="surgery_preop"
+              currentValues={{ cardiac_risk: cardiacRisk, pulmonary_risk: pulmonaryRisk, bleeding_risk: bleedingRisk, notes }}
+              onTemplateSelect={(data) => {
+                if (data.cardiac_risk) setCardiacRisk(data.cardiac_risk);
+                if (data.pulmonary_risk) setPulmonaryRisk(data.pulmonary_risk);
+                if (data.bleeding_risk) setBleedingRisk(data.bleeding_risk);
+                if (data.notes) setNotes(data.notes);
+              }}
+              buttonText="Fill All Fields"
+            />
+          </div>
           <div className="grid grid-cols-1 gap-4">
             <div>
               <div className="flex items-center justify-between mb-1">

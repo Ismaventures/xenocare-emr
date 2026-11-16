@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER ACCESS CONTROL HOOK
+ * XENOCARE EMR - ENCOUNTER ACCESS CONTROL HOOK
  * =============================================================================
  *
  * React hook for implementing encounter-based access control in UI components.

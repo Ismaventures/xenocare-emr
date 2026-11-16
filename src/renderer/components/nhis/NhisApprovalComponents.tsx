@@ -17,6 +17,7 @@ import {
 import { StatusBadge } from '../ui/DataDisplay';
 import { Button } from '../ui/FormElements';
 import type { NhisApprovalStatus } from '../../types/database.types';
+import { isNhisFeatureEnabled } from '../../config/features';
 
 // =============================================================================
 // Types
@@ -124,6 +125,7 @@ export function NhisApprovalBadge({
   size = 'md',
   className,
 }: NhisApprovalBadgeProps) {
+  if (!isNhisFeatureEnabled()) return null;
   if (!status || status === 'not_required') {
     return null;
   }
@@ -157,6 +159,7 @@ export function NhisApprovalIndicator({
   status: NhisApprovalStatus | null | undefined;
   className?: string;
 }) {
+  if (!isNhisFeatureEnabled()) return null;
   if (!status || status === 'not_required') {
     return null;
   }
@@ -190,6 +193,7 @@ export function NhisApprovalStatusCard({
   onViewDetails,
   isLoading,
 }: NhisApprovalStatusCardProps) {
+  if (!isNhisFeatureEnabled()) return null;
   if (!status) {
     return (
       <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
@@ -315,6 +319,7 @@ export function NhisApprovalBlocker({
   onRequestApproval,
   onContactNhis,
 }: NhisApprovalBlockerProps) {
+  if (!isNhisFeatureEnabled()) return null;
   if (status === 'approved' || status === 'not_required') {
     return null;
   }
@@ -377,6 +382,8 @@ export function NhisApprovalRequiredAlert({
   onSkip?: () => void;
   isLoading?: boolean;
 }) {
+  if (!isNhisFeatureEnabled()) return null;
+
   return (
     <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4">
       <div className="flex items-start gap-3">
@@ -435,7 +442,7 @@ export function NhisServiceStatusCell({
   approvalStatus: NhisApprovalStatus | null | undefined;
   className?: string;
 }) {
-  if (!isNhisPatient) {
+  if (!isNhisFeatureEnabled() || !isNhisPatient) {
     return (
       <span className={`text-xs text-gray-400 ${className || ''}`}>
         Non-NHIS

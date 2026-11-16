@@ -15,11 +15,15 @@ import {
   Printer,
   Edit,
   History,
-  Shield,
   Info,
   ClipboardList,
 } from 'lucide-react';
 import { Button } from '../../../components/ui';
+import PatientAllergySummary from '../../../components/shared/PatientAllergySummary';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 import { StatusBadge } from '../../../components/ui/DataDisplay';
 import {
   PrescriptionDTO,
@@ -35,12 +39,12 @@ import {
   formatDetailedAge,
 } from '../../patient-registration/dtos/patient.dto';
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-12 w-auto"
     />
   );
@@ -135,14 +139,14 @@ export default function PrescriptionDetailModal({
             <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-primary-700 to-primary-600">
               <div className="flex items-center gap-4">
                 <div className="bg-white rounded-lg p-1.5 shadow-md">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div className="border-l border-white/30 pl-4">
                   <h1 className="text-white font-bold text-lg tracking-wide">
-                    NATIONAL DEFENCE COLLEGE
+                    {getFacilityName().toUpperCase()}
                   </h1>
                   <p className="text-green-100 text-xs font-medium">
-                    Medical Centre - Prescription Details
+                    {getFacilityAddress() || 'Prescription Details'}
                   </p>
                 </div>
               </div>
@@ -319,22 +323,19 @@ export default function PrescriptionDetailModal({
                     </div>
                   </div>
 
-                  {/* Patient Allergies Warning */}
-                  {prescription.patient?.known_allergies && (
-                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-                      <Shield className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-xs font-semibold text-red-800 uppercase">
-                          Known Allergies
-                        </p>
-                        <p className="text-sm text-red-700">
-                          {Array.isArray(prescription.patient.known_allergies)
-                            ? prescription.patient.known_allergies.join(', ')
-                            : prescription.patient.known_allergies}
-                        </p>
-                      </div>
-                    </div>
-                  )}
+                  {/* Structured allergy status */}
+                  <PatientAllergySummary
+                    patientId={prescription.patient?.id}
+                    knownAllergies={prescription.patient?.known_allergies}
+                    noKnownAllergies={
+                      (
+                        prescription.patient as
+                          | { no_known_allergies?: boolean }
+                          | undefined
+                      )?.no_known_allergies
+                    }
+                    compact
+                  />
                 </div>
 
                 {/* Clinical Context Section - Diagnosis & Indication */}

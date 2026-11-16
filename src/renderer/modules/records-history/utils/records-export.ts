@@ -1,6 +1,6 @@
 /**
  * Records History Module - Export Utilities
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * PDF (via jsPDF + autoTable) and CSV export for filtered records.
  */
@@ -17,9 +17,9 @@ import { RECORD_CATEGORIES } from '../types/records-history.types';
 // Shared helpers
 // ---------------------------------------------------------------------------
 
-const NDC_HEADER = {
-  name: 'NDC Medical Centre',
-  fullName: 'National Defence College Medical Centre, Abuja',
+const BRAND_HEADER = {
+  name: 'XenoCare',
+  fullName: 'XenoCare, Abuja',
   tagline: 'Excellence in Healthcare & Service to Nation',
 };
 
@@ -108,7 +108,7 @@ export function exportRecordsCSV(
   ]);
 
   const csv = [
-    `"${NDC_HEADER.fullName}"`,
+    `"${BRAND_HEADER.fullName}"`,
     `"Records History Export — ${opts.title}"`,
     `"${filterSummary(opts)}"`,
     `"Generated: ${new Date().toLocaleString()} by ${opts.generatedBy}"`,
@@ -135,10 +135,10 @@ export async function exportRecordsPDF(
   // Header
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
-  doc.text(NDC_HEADER.name, pageW / 2, 14, { align: 'center' });
+  doc.text(BRAND_HEADER.name, pageW / 2, 14, { align: 'center' });
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
-  doc.text(NDC_HEADER.tagline, pageW / 2, 19, { align: 'center' });
+  doc.text(BRAND_HEADER.tagline, pageW / 2, 19, { align: 'center' });
 
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');

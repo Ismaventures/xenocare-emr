@@ -1,12 +1,16 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER REPORT TEMPLATE
+ * XENOCARE EMR - ENCOUNTER REPORT TEMPLATE
  * Description: NDC branded document template for encounter reports
  * For: Medical Record Officers - comprehensive encounter summary
  * =============================================================================
  */
 
 import React, { useRef } from 'react';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 import {
   X,
   Download,
@@ -31,8 +35,8 @@ import {
 } from '../utils/encounterExport';
 import { AdvancedEncounterFilters } from './EncounterFilterPanel';
 
-// NDC Logo for print
-const NDCLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo for print
+const XenoCareLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 interface EncounterReportTemplateProps {
   isOpen: boolean;
@@ -145,18 +149,20 @@ export function EncounterReportTemplate({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
               <img
-                src={NDCLogoSrc}
-                alt="NDC Logo"
+                src={XenoCareLogoSrc}
+                alt="XenoCare Logo"
                 className="h-20 w-auto print:h-16"
               />
               <div>
                 <h1 className="text-2xl font-bold print:text-xl">
-                  NATIONAL DEFENCE COLLEGE
+                  {getFacilityName().toUpperCase()}
                 </h1>
                 <h2 className="text-lg opacity-90 print:text-base">
-                  Medical Centre
+                  XenoCare EMR
                 </h2>
-                <p className="text-sm opacity-80 mt-1">Abuja, Nigeria</p>
+                <p className="text-sm opacity-80 mt-1">
+                  {getFacilityAddress()}
+                </p>
               </div>
             </div>
             <div className="text-right">
@@ -509,7 +515,7 @@ export function EncounterReportTemplate({
         <div className="bg-gray-50 px-8 py-4 print:px-6 border-t border-gray-200">
           <div className="flex items-center justify-between text-sm text-gray-500">
             <div>
-              <p>NDC Medical Centre - Electronic Medical Records System</p>
+              <p>XenoCare - Electronic Medical Records System</p>
               <p className="text-xs mt-1">
                 This is a system-generated report. For official records, please
                 verify with the Medical Records Department.

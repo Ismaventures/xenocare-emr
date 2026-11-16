@@ -21,6 +21,7 @@ import {
 } from '../dtos/anc.dto';
 import { useCreateObservation, useAncObservations } from '../hooks/useAnc';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import type { AncObservation } from '../api/anc.types';
 
 interface Props {
@@ -432,6 +433,22 @@ export default function AncNursingForm({
         title="Additional Notes"
         icon={<Activity className="h-4 w-4 text-gray-500" />}
       >
+        <div className="flex justify-end mb-3">
+          <TemplateSearchPopover
+            templateType="anc"
+            category="anc_notes"
+            currentValues={{
+              maternal_complaints: watch('maternal_complaints') || '',
+              interventions: watch('interventions') || '',
+            }}
+            onTemplateSelect={(data) => {
+              if (data.maternal_complaints) setValue('maternal_complaints', data.maternal_complaints);
+              if (data.nursing_notes) setValue('maternal_complaints', data.nursing_notes);
+              if (data.interventions) setValue('interventions', data.interventions);
+            }}
+            buttonText="Fill All Fields"
+          />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Maternal Complaints">
             <div className="flex justify-end mb-1">

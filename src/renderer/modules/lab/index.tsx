@@ -9,7 +9,6 @@ import {
   Moon,
   Sunrise,
   Sunset,
-  ClipboardList,
   History,
   FileText,
   Shield,
@@ -23,14 +22,10 @@ import {
   getFormattedRejectionReason,
 } from '../../components/ui/RejectionReasonSelect';
 import LabRequestList from './components/LabRequestList';
-import EnhancedLabResultForm, {
-  EnhancedCreateLabResultDTO,
-} from './components/EnhancedLabResultForm';
+import UniversalLabResultForm, {
+  UniversalLabResultBatch,
+} from './components/UniversalLabResultForm';
 import LabDetailModal from './components/LabDetailModal';
-import EncounterGroupList from './components/EncounterGroupList';
-import EncounterApprovalModal, {
-  EncounterGroup,
-} from './components/EncounterApprovalModal';
 import { ApprovedRequestsHistory } from '../billing/components/ApprovedRequestsHistory';
 import LabReportsTab from './components/LabReportsTab';
 import { LabExportPanel } from './components/LabExportPanel';
@@ -60,6 +55,7 @@ import { useToast } from '../../components/ui/Toast';
 import { useTimeTheme } from '../../hooks/useTimeTheme';
 import { NhisApprovalStatus } from '../../types/database.types';
 import { InlineGuidance } from '../../components/guidance/InlineGuidance';
+import { MUHEDA_LOGO_DATA_URI } from '../../shared/constants/muhedaLogo';
 
 // =============================================================================
 // Component
@@ -70,7 +66,7 @@ export default function Laboratory() {
   useLabSubscription();
 
   // State
-  const [activeTab, setActiveTab] = useState('approval');
+  const [activeTab, setActiveTab] = useState('requests');
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<LabRequestStatus | ''>('');
   const [categoryFilter, setCategoryFilter] = useState<LabCategory | ''>('');
@@ -79,9 +75,6 @@ export default function Laboratory() {
   );
   const [isResultFormOpen, setIsResultFormOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [selectedEncounterGroup, setSelectedEncounterGroup] =
-    useState<EncounterGroup | null>(null);
-  const [isEncounterModalOpen, setIsEncounterModalOpen] = useState(false);
   const [confirmAction, setConfirmAction] = useState<{
     type: 'collect' | 'process' | 'accept' | null;
     request: LabRequestDTO | null;
@@ -203,12 +196,6 @@ export default function Laboratory() {
     });
   };
 
-  // Encounter group handlers
-  const handleSelectEncounter = (group: EncounterGroup) => {
-    setSelectedEncounterGroup(group);
-    setIsEncounterModalOpen(true);
-  };
-
   const confirmAcceptRequest = async () => {
     if (confirmAction.request && confirmAction.type === 'accept') {
       const requestId = confirmAction.request.request_id;
@@ -241,12 +228,12 @@ export default function Laboratory() {
   };
 
   const confirmRejectRequest = async () => {
-    const validation = validateRejection(
+    const validationError = validateRejection(
       rejectModal.reasonCode,
       rejectModal.explanation,
     );
-    if (!validation.isValid) {
-      setRejectModal((prev) => ({ ...prev, error: validation.error }));
+    if (validationError) {
+      setRejectModal((prev) => ({ ...prev, error: validationError }));
       return;
     }
 
@@ -512,31 +499,27 @@ export default function Laboratory() {
     }
   };
 
-  const handleResultSubmit = async (data: EnhancedCreateLabResultDTO) => {
-    if (selectedRequest) {
+  const handleResultSubmit = async (data: UniversalLabResultBatch[]) => {
+    if (selectedRequest && data.length > 0) {
       const canProceed = await ensurePaymentBeforeAction(
         selectedRequest,
         'submit results',
       );
       if (!canProceed) return;
 
-      // Ensure lab_request_id is set
-      const resultData: EnhancedCreateLabResultDTO = {
-        ...data,
-        lab_request_id: selectedRequest.request_id,
-      };
-
-      // Close form IMMEDIATELY
       const requestToProcess = selectedRequest;
-      setIsResultFormOpen(false);
-      setSelectedRequest(null);
 
       try {
-        await enterResult.mutateAsync(resultData);
+        for (const resultData of data) {
+          await enterResult.mutateAsync(resultData);
+        }
         showToast({
           type: 'success',
           title: 'Results Saved',
-          message: 'Lab results recorded successfully',
+          message:
+            data.length === 1
+              ? 'Lab result recorded successfully'
+              : `${data.length} lab results recorded successfully`,
         });
 
         // Check if all lab requests for this visit are completed
@@ -559,12 +542,8 @@ export default function Laboratory() {
           }
         }
       } catch (error) {
-        showToast({
-          type: 'error',
-          title: 'Save Failed',
-          message: 'Failed to save lab results',
-        });
         console.error('Failed to enter result:', error);
+        throw error;
       }
     }
   };
@@ -623,10 +602,12 @@ export default function Laboratory() {
 
         <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div
-              className={`p-3 ${themeColors.header.decorativeCircle} rounded-xl backdrop-blur-sm`}
-            >
-              <FlaskConical className="h-8 w-8 text-white" />
+            <div className="rounded-xl bg-white p-2 shadow-sm">
+              <img
+                src={MUHEDA_LOGO_DATA_URI}
+                alt="MUHEDA Clinic"
+                className="h-12 w-12 object-contain"
+              />
             </div>
             <div>
               <h1 className="text-2xl font-bold flex items-center gap-2">
@@ -685,12 +666,6 @@ export default function Laboratory() {
           variant="underline"
           tabs={[
             {
-              id: 'approval',
-              label: 'Approval Queue',
-              icon: <ClipboardList className="h-4 w-4" />,
-              count: stats?.pending || 0,
-            },
-            {
               id: 'requests',
               label: 'Ready to Process',
               icon: <CheckCircle className="h-4 w-4" />,
@@ -710,32 +685,6 @@ export default function Laboratory() {
         />
       </div>
 
-      {/* Approval Queue Tab */}
-      {activeTab === 'approval' && (
-        <Card>
-          <InlineGuidance
-            module="lab"
-            title="Incoming Requests Queue"
-            message="All new lab requests appear here. You must review the billing/payment status before accepting the sample. Rejection is only allowed with a valid reason."
-            className="mb-4"
-          />
-          <div className="mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Pending Approvals
-            </h2>
-            <p className="text-sm text-gray-500">
-              Review and approve/reject lab requests grouped by patient
-              encounter
-            </p>
-          </div>
-          <EncounterGroupList
-            requests={requestsData?.data || []}
-            isLoading={isLoading}
-            onSelectEncounter={handleSelectEncounter}
-          />
-        </Card>
-      )}
-
       {/* Ready to Process Tab */}
       {activeTab === 'requests' && (
         <>
@@ -744,7 +693,7 @@ export default function Laboratory() {
             <InlineGuidance
               module="lab"
               title="Active Workflow"
-              message="Track requests from approval -> collection -> processing. Use the filters to find specific tests quickly."
+              message="Track requests from billing verification ? sample collection ? processing ? results. Use the filters to find specific tests quickly."
               className="mb-4"
             />
             <div className="flex items-center justify-between">
@@ -769,8 +718,6 @@ export default function Laboratory() {
               onCollectSample={handleCollectSample}
               onStartProcessing={handleStartProcessing}
               onEnterResult={handleEnterResult}
-              onAccept={handleAcceptRequest}
-              onReject={handleRejectRequest}
               page={page}
               totalPages={requestsData?.totalPages || 1}
               onPageChange={setPage}
@@ -879,7 +826,7 @@ export default function Laboratory() {
       />
 
       {/* Result Form Modal - Enhanced with Dynamic Templates */}
-      <EnhancedLabResultForm
+      <UniversalLabResultForm
         isOpen={isResultFormOpen}
         onClose={() => {
           setIsResultFormOpen(false);
@@ -1060,15 +1007,6 @@ export default function Laboratory() {
         </div>
       )}
 
-      {/* Encounter Approval Modal */}
-      <EncounterApprovalModal
-        isOpen={isEncounterModalOpen}
-        onClose={() => {
-          setIsEncounterModalOpen(false);
-          setSelectedEncounterGroup(null);
-        }}
-        encounterGroup={selectedEncounterGroup}
-      />
     </div>
   );
 }

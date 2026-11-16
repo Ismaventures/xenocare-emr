@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Patient Admission Card Component
+// XENOCARE EMR - Patient Admission Card Component
 // Compact card view of patient admission details
 // =============================================================================
 

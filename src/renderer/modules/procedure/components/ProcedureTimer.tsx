@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Timer Component
+// XENOCARE EMR - Procedure Timer Component
 // Countdown timer based on scheduled duration - enforces time-based completion
 // Status can only change to "Completed" after scheduled duration has elapsed
 // =============================================================================

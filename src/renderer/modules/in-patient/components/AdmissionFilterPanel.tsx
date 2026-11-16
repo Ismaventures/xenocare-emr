@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Admission Filter Panel
+// XENOCARE EMR - Admission Filter Panel
 // Slide-out filter panel for admissions (similar to billing module)
 // =============================================================================
 

@@ -18,7 +18,6 @@ import {
   Calendar,
   Mail,
   Home,
-  Globe,
   Droplets,
   Building2,
   UserPlus,
@@ -56,9 +55,14 @@ import {
   NHISPatientSource,
   ReferralStatus,
   formatDetailedAge,
+  calculateDetailedAge,
   capitalizePatientName,
 } from '../dtos/patient.dto';
 import { Gender, StaffCategory, MilitaryBranch } from '../../../types';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 import {
   usePayerSchemes,
   usePatients,
@@ -72,15 +76,23 @@ import {
 } from '../hooks/useCourses';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useToast } from '../../../components/ui/Toast';
-import { NIGERIAN_STATES, COUNTRIES } from '../constants/locations';
-import { WORLD_STATES, NIGERIAN_LGAS } from '../constants/world-locations';
+import {
+  ALLERGY_SEVERITIES,
+  type AllergySeverity,
+  type PatientAllergyInput,
+} from '../api/patient-allergies.api';
+import {
+  usePatientAllergyReview,
+  usePatientAllergies,
+  useSavePatientAllergies,
+} from '../hooks/usePatientAllergies';
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-full max-h-9 w-auto object-contain sm:max-h-10"
     />
   );
@@ -279,6 +291,24 @@ const BLOOD_GROUP_OPTIONS = [
   { value: 'O-', label: 'O-' },
 ];
 
+const OCCUPATION_OPTIONS = [
+  'Trader',
+  'Farmer',
+  'Student',
+  'Teacher',
+  'Civil Servant',
+  'Business Owner',
+  'Artisan',
+  'Healthcare Worker',
+  'Driver',
+  'Housewife',
+  'Clergy',
+  'Security Personnel',
+  'Retired',
+  'Unemployed',
+  'Other',
+];
+
 const NOK_RELATIONSHIPS = [
   { value: 'Spouse', label: 'Spouse' },
   { value: 'Father', label: 'Father' },
@@ -371,10 +401,11 @@ const getInitialFormData = (
     relationship: 'Self',
     expiration_date: '',
   },
-  // New category fields
-  patient_category: patient?.patient_category || undefined,
-  insurance_type: (patient?.insurance_type as InsuranceType) || undefined,
-  patient_type: patient?.patient_type || 'Principal',
+  // Deployment defaults for MUHEDA CLINIC: general civilian/self-pay patient.
+  // Existing records keep their stored classification when edited.
+  patient_category: patient?.patient_category || 'Civilian',
+  insurance_type: (patient?.insurance_type as InsuranceType) || 'Private',
+  patient_type: patient?.patient_type || 'Private',
   principal_id: patient?.principal_id || '',
   relationship_to_principal: patient?.relationship_to_principal || '',
   // Military-specific fields - display / instead of - (stored as -)
@@ -393,7 +424,8 @@ const getInitialFormData = (
   security_service_number: patient?.security_service_number || '',
   // NHIS & Referral fields
   nhis_number: patient?.nhis_number || '',
-  national_id: '', // Removed - no longer used
+  national_id: patient?.national_id || '', // Preserve existing value; no UI field
+
   nhis_patient_source: patient?.nhis_patient_source || 'Internal',
   referral_code: patient?.referral_code || '',
   referring_facility_name: patient?.referring_facility_name || '',
@@ -408,6 +440,49 @@ const getInitialFormData = (
   // Preset values apply only when creating a new patient
   ...(patient ? {} : preset || {}),
 });
+
+type AgeUnit = 'years' | 'months';
+interface EstimatedAgeInput {
+  value: string;
+  unit: AgeUnit;
+}
+
+function getEstimatedAgeFromDob(
+  dateOfBirth?: string | null,
+): EstimatedAgeInput {
+  const detailed = calculateDetailedAge(dateOfBirth);
+  if (!detailed) return { value: '', unit: 'years' };
+
+  if (detailed.years >= 2) {
+    return { value: String(detailed.years), unit: 'years' };
+  }
+
+  return {
+    value: String(detailed.years * 12 + detailed.months),
+    unit: 'months',
+  };
+}
+
+function calculateDobFromEstimatedAge(
+  value: string,
+  unit: AgeUnit,
+): string {
+  const amount = Number(value);
+  if (!value.trim() || !Number.isFinite(amount) || amount < 0) return '';
+
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  if (unit === 'months') {
+    date.setMonth(date.getMonth() - Math.floor(amount));
+  } else {
+    date.setFullYear(date.getFullYear() - Math.floor(amount));
+  }
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 // =============================================================================
 // Component
@@ -424,14 +499,33 @@ export default function PatientForm({
   isLoading = false,
 }: PatientFormProps) {
   const { staff } = useAuth();
-  const { data: payerSchemes = [] } = usePayerSchemes();
+  // MUHEDA registration no longer collects payer, course or classification
+  // data, so these legacy queries remain disabled.
+  const { data: payerSchemes = [] } = usePayerSchemes(false);
   const { data: activeCourses = [], isLoading: coursesLoading } =
-    useActiveCourses();
+    useActiveCourses(false);
   const createCourseMutation = useCreateCourse();
-  const { data: nextCourseNumber } = useNextCourseNumber();
+  const { data: nextCourseNumber } = useNextCourseNumber(false);
   const [formData, setFormData] = useState<CreatePatientDTO>(
     getInitialFormData(patient, preset),
   );
+  const [estimatedAge, setEstimatedAge] = useState<EstimatedAgeInput>(() =>
+    getEstimatedAgeFromDob(patient?.date_of_birth || preset?.date_of_birth),
+  );
+  const [noKnownAllergies, setNoKnownAllergies] = useState(false);
+  const [allergyEntries, setAllergyEntries] = useState<PatientAllergyInput[]>(
+    [],
+  );
+  const [allergyDraft, setAllergyDraft] = useState<PatientAllergyInput>({
+    allergen: '',
+    reaction: '',
+    severity: 'Moderate',
+    notes: '',
+  });
+  const [allergyError, setAllergyError] = useState<string | null>(null);
+  const { data: structuredAllergies } = usePatientAllergies(patient?.id);
+  const { data: allergyReview } = usePatientAllergyReview(patient?.id);
+  const savePatientAllergies = useSavePatientAllergies();
   // Manual Principal Entry State
   const [manualPrincipal, setManualPrincipal] = useState(false);
   const [errors, setErrors] = useState<PatientFormErrors>({});
@@ -535,7 +629,7 @@ export default function PatientForm({
     }
   };
 
-  // Form steps configuration - 2 pages
+  // MUHEDA CLINIC registration is intentionally limited to two sections.
   const steps = [
     {
       id: 'personal',
@@ -547,22 +641,19 @@ export default function PatientForm({
       id: 'contact',
       title: 'Contact',
       icon: Phone,
-      description: 'Address & NOK',
-    },
-    {
-      id: 'service',
-      title: 'Service',
-      icon: Shield,
-      description: 'Category & insurance',
+      description: 'Address & next of kin',
     },
   ];
 
-  // Search for principal patients (when registering a dependent)
-  const { data: principalSearchResults } = usePatients({
-    query: principalSearch,
-    limit: 5,
-    patient_type: 'Principal',
-  });
+  // Dependent/principal registration is not part of MUHEDA's workflow.
+  const { data: principalSearchResults } = usePatients(
+    {
+      query: principalSearch,
+      limit: 5,
+      patient_type: 'Principal',
+    },
+    false,
+  );
 
   const isEditing = !!patient;
   const isMilitary = formData.patient_category === 'Military';
@@ -593,7 +684,21 @@ export default function PatientForm({
   useEffect(() => {
     if (!isOpen) return;
     setFormData(getInitialFormData(patient, preset));
+    setEstimatedAge(
+      getEstimatedAgeFromDob(
+        patient?.date_of_birth || preset?.date_of_birth,
+      ),
+    );
     setAllergiesInput(patient?.known_allergies?.join(', ') || '');
+    setNoKnownAllergies(false);
+    setAllergyEntries([]);
+    setAllergyDraft({
+      allergen: '',
+      reaction: '',
+      severity: 'Moderate',
+      notes: '',
+    });
+    setAllergyError(null);
     setPrincipalSearch('');
     setErrors({});
     setCurrentStep(0);
@@ -608,6 +713,34 @@ export default function PatientForm({
       relationship_to_principal: '',
     });
   }, [patient, preset, isOpen]);
+
+  // Load structured allergy records once for an existing patient.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    setNoKnownAllergies(Boolean(allergyReview?.no_known_allergies));
+
+    const rows = structuredAllergies ?? [];
+    const entries: PatientAllergyInput[] =
+      rows.length > 0
+        ? rows.map((entry) => ({
+            allergen: entry.allergen,
+            reaction: entry.reaction || '',
+            severity: entry.severity,
+            notes: entry.notes || '',
+          }))
+        : (patient?.known_allergies || [])
+            .filter(Boolean)
+            .map((allergen) => ({
+              allergen,
+              reaction: '',
+              severity: 'Moderate' as AllergySeverity,
+              notes: 'Imported from existing allergy record',
+            }));
+
+    setAllergyEntries(entries);
+    setAllergyError(null);
+  }, [isOpen, patient?.id, structuredAllergies, allergyReview]);
 
   // Inherit category/insurance AND address/contact from principal when registering a dependent
   useEffect(() => {
@@ -765,18 +898,24 @@ export default function PatientForm({
       // Convert empty strings to undefined for optional fields
       date_of_birth: formData.date_of_birth || undefined,
       blood_group: formData.blood_group || undefined,
-      patient_category: formData.patient_category || undefined,
-      insurance_type: formData.insurance_type || undefined,
+      patient_category: formData.patient_category || 'Civilian',
+      insurance_type:
+        !isNhisFeatureEnabled() && isNhisCategory(formData.insurance_type)
+          ? 'Private'
+          : formData.insurance_type || 'Private',
       patient_type: (overrides?.patient_type ||
         formData.patient_type ||
         'Private') as any,
 
       // Map to legacy fields for backward compatibility
-      staff_category: (formData.patient_category as StaffCategory) || undefined,
+      staff_category:
+        (formData.patient_category as StaffCategory) || 'Civilian',
       military_branch: isMilitary ? formData.military_branch : undefined,
 
       // Map NHIS numbers based on category
-      nhis_number: formData.nhis_number || undefined,
+      nhis_number: isNhisFeatureEnabled()
+        ? formData.nhis_number || undefined
+        : undefined,
 
       // Clear military fields if not military
       service_number: isMilitary
@@ -785,9 +924,9 @@ export default function PatientForm({
       rank: isMilitary ? formData.rank : undefined,
       unit: isMilitary ? formData.unit : undefined,
 
-      // Clear civilian fields if not civilian
-      occupation: isCivilian ? formData.occupation : undefined,
-      employer: isCivilian ? formData.employer : undefined,
+      // Occupation is a core registration field for this deployment.
+      occupation: formData.occupation || undefined,
+      employer: formData.employer || undefined,
 
       // Clear dependent fields if not dependent
       principal_id: isDependent ? formData.principal_id : undefined,
@@ -796,42 +935,64 @@ export default function PatientForm({
         : undefined,
 
       // NHIS and referral fields
-      nhis_patient_source: formData.nhis_patient_source || 'Internal',
+      nhis_patient_source: isNhisFeatureEnabled()
+        ? formData.nhis_patient_source || 'Internal'
+        : 'Internal',
 
       // Clear referral fields if not a referral patient
       referral_code:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referral_code
           : undefined,
       referring_facility_name:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referring_facility_name
           : undefined,
       referring_facility_nhis_id:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referring_facility_nhis_id
           : undefined,
       referral_date:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referral_date
           : undefined,
       referral_reason:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referral_reason
           : undefined,
       referral_status:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referral_status
           : undefined,
       referral_expiry_date:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.referral_expiry_date
           : undefined,
       clinical_summary:
-        formData.nhis_patient_source === 'Referral'
+        isNhisFeatureEnabled() && formData.nhis_patient_source === 'Referral'
           ? formData.clinical_summary
           : undefined,
     };
+  };
+
+  const persistAllergies = async (savedPatient?: PatientDTO | null) => {
+    if (!savedPatient?.id) return;
+    try {
+      await savePatientAllergies.mutateAsync({
+        patientId: savedPatient.id,
+        noKnownAllergies,
+        entries: allergyEntries,
+        recordedBy: staff?.id || null,
+      });
+    } catch (error) {
+      console.error('Failed to save patient allergies:', error);
+      showToast({
+        type: 'error',
+        title: 'Allergies not saved',
+        message:
+          'The patient record was saved, but allergy details could not be stored. Please edit the patient and try again.',
+      });
+    }
   };
 
   // Handle form submission
@@ -851,42 +1012,18 @@ export default function PatientForm({
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
 
-      // Map error fields to their step
-      const step0Fields = ['first_name', 'surname', 'gender', 'date_of_birth'];
-      const step2Fields = [
-        'service_number', 'rank', 'military_branch',
-        'principal_id', 'relationship_to_principal',
-        'patient_category',
-      ];
-      // step1 fields: email, contact_phone (contact page)
-
+      // All remaining validated fields belong to the Personal section.
       const errorKeys = Object.keys(validationErrors);
-      const hasStep0Error = errorKeys.some((k) => step0Fields.includes(k));
-      const hasStep2Error = errorKeys.some((k) => step2Fields.includes(k));
-
-      // Navigate to the first step that has errors
-      if (hasStep0Error) {
-        setCurrentStep(0);
-      } else if (hasStep2Error) {
-        setCurrentStep(2);
-      } else {
-        setCurrentStep(1);
-      }
+      setCurrentStep(0);
 
       // Build a user-friendly message listing the missing fields
       const fieldLabels: Record<string, string> = {
         first_name: 'First Name',
         surname: 'Surname',
-        gender: 'Gender',
+        gender: 'Sex',
         date_of_birth: 'Date of Birth',
-        email: 'Email',
+        email: 'Email Address',
         contact_phone: 'Phone Number',
-        service_number: 'Service Number',
-        rank: 'Rank',
-        military_branch: 'Military Branch',
-        principal_id: 'Principal Patient',
-        relationship_to_principal: 'Relationship to Principal',
-        patient_category: 'Patient Category',
       };
 
       const missingLabels = errorKeys.map(
@@ -921,18 +1058,21 @@ export default function PatientForm({
 
       // Instant close for fast UX; write continues in background with rollback handling.
       onClose();
-      void onSubmit(payload).catch((error) => {
-        console.error('Failed to save patient:', error);
-      });
+      void onSubmit(payload)
+        .then((saved) => persistAllergies(saved))
+        .catch((error) => {
+          console.error('Failed to save patient:', error);
+        });
       return;
     }
 
     try {
       if (isEditing && patient) {
-        await onSubmit({
+        const updatedPatient = await onSubmit({
           ...submitData,
           patient_id: patient.patient_id,
         } as UpdatePatientDTO);
+        await persistAllergies(updatedPatient);
 
         // If editing a principal and there are pending dependents, create them
         if (
@@ -974,6 +1114,7 @@ export default function PatientForm({
       } else {
         // Create principal patient first
         const createdPrincipal = await onSubmit(submitData);
+        await persistAllergies(createdPrincipal);
 
         // If there are pending dependents and we can create them, do so in parallel
         if (
@@ -1050,6 +1191,7 @@ export default function PatientForm({
       });
 
       const createdPrincipal = await onSubmit(principalPayload);
+      await persistAllergies(createdPrincipal);
       if (onOpenDependentForPrincipal) {
         onOpenDependentForPrincipal(createdPrincipal);
       }
@@ -1088,6 +1230,23 @@ export default function PatientForm({
     setCurrentStep(index);
   };
 
+  const handleEstimatedAgeChange = (
+    value: string,
+    unit: AgeUnit = estimatedAge.unit,
+  ) => {
+    setEstimatedAge({ value, unit });
+    setFormData((prev) => ({
+      ...prev,
+      date_of_birth: calculateDobFromEstimatedAge(value, unit),
+    }));
+    if (errors.date_of_birth) {
+      setErrors((prev) => {
+        const { date_of_birth: _dateOfBirth, ...rest } = prev;
+        return rest;
+      });
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -1112,11 +1271,11 @@ export default function PatientForm({
             <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-3.5">
               <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/95 p-1.5 shadow-lg shadow-black/15 ring-2 ring-white/40 sm:h-12 sm:w-12">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div className="min-w-0 border-l border-white/25 pl-3 sm:pl-4">
                   <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">
-                    National Defence College
+                    XenoCare
                   </p>
                   <h1 className="truncate text-sm font-bold tracking-tight text-white sm:text-base">
                     Medical centre · Electronic medical records
@@ -1267,7 +1426,7 @@ export default function PatientForm({
                         staff?.role === 'receptionist') && (
                         <div className="mb-6 pb-5 border-b border-gray-100">
                           <label className="block text-xs font-semibold text-gray-600 uppercase tracking-wide mb-3">
-                            Profile Photo
+                            Profile Photo (optional)
                           </label>
                           <div className="flex items-center gap-4">
                             {/* Photo Preview */}
@@ -1428,51 +1587,58 @@ export default function PatientForm({
                         <div className="space-y-2 group">
                           <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
                             <Calendar className="h-4 w-4 text-gray-400 group-focus-within:text-primary-700" />
-                            Date of Birth
+                            Estimated Age
                             {formData.date_of_birth && (
                               <span className="ml-1 text-primary-700 font-bold text-xs">
                                 ({formatDetailedAge(formData.date_of_birth)})
                               </span>
                             )}
                           </label>
-                          <div className="relative">
+                          <div className="flex gap-2">
                             <input
-                              type="date"
-                              name="date_of_birth"
-                              value={formData.date_of_birth || ''}
-                              onChange={handleChange}
-                              max={new Date().toISOString().split('T')[0]}
-                              className="w-full pl-4 pr-10 py-3 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all duration-200 text-sm cursor-pointer bg-gray-50/50 focus:bg-white"
+                              type="number"
+                              min={0}
+                              max={estimatedAge.unit === 'months' ? 1800 : 150}
+                              step={1}
+                              inputMode="numeric"
+                              name="estimated_age"
+                              value={estimatedAge.value}
+                              onChange={(event) =>
+                                handleEstimatedAgeChange(event.target.value)
+                              }
+                              className="min-w-0 flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all duration-200 text-sm bg-gray-50/50 focus:bg-white"
+                              placeholder={estimatedAge.unit === 'months' ? 'e.g. 18' : 'e.g. 34'}
                             />
-                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                              <Calendar className="h-5 w-5" />
-                            </span>
+                            <div className="flex rounded-xl border-2 border-gray-200 bg-gray-50 p-1">
+                              {(['years', 'months'] as const).map((unit) => (
+                                <button
+                                  key={unit}
+                                  type="button"
+                                  onClick={() =>
+                                    handleEstimatedAgeChange(
+                                      estimatedAge.value,
+                                      unit,
+                                    )
+                                  }
+                                  className={`rounded-lg px-3 py-1.5 text-xs font-semibold capitalize transition-colors ${
+                                    estimatedAge.unit === unit
+                                      ? 'bg-primary-700 text-white shadow-sm'
+                                      : 'text-gray-500 hover:text-gray-800'
+                                  }`}
+                                >
+                                  {unit}
+                                </button>
+                              ))}
+                            </div>
                           </div>
+                          <p className="text-[11px] text-gray-500">
+                            Enter the estimated age; the system will derive an
+                            approximate date of birth for clinical records.
+                          </p>
                         </div>
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Contact & Next of Kin Section - STEP 1 continues */}
-                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_16px_-4px_rgba(15,80,72,0.08)] overflow-hidden">
-                    {/* Section Header */}
-                    <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
-                      <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center shadow-sm shadow-primary-700/25">
-                        <Phone className="h-4 w-4 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-                          Contact & Emergency
-                        </h3>
-                        <p className="text-xs text-gray-500">
-                          Phone, address and next of kin information
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Section Content */}
-                    <div className="p-5">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
                         {/* Phone Number */}
                         <div className="space-y-2 group">
                           <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
@@ -1486,7 +1652,6 @@ export default function PatientForm({
                               value={formData.contact_phone || ''}
                               onChange={handleChange}
                               maxLength={11}
-                              pattern="[0-9]{11}"
                               className="w-full pl-4 pr-10 py-3 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all duration-200 text-sm bg-gray-50/50 focus:bg-white"
                               placeholder="Enter phone number"
                             />
@@ -1496,6 +1661,290 @@ export default function PatientForm({
                           </div>
                         </div>
 
+                        {/* Email Address */}
+                        <div className="space-y-2 group">
+                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
+                            <Mail className="h-4 w-4 text-gray-400 group-focus-within:text-primary-700" />
+                            Email Address
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="email"
+                              name="email"
+                              value={formData.email || ''}
+                              onChange={handleChange}
+                              className="w-full pl-4 pr-10 py-3 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all duration-200 text-sm bg-gray-50/50 focus:bg-white"
+                              placeholder="Enter email address"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                              <Mail className="h-5 w-5" />
+                            </span>
+                          </div>
+                          {errors.email && (
+                            <p className="text-xs text-red-600 flex items-center gap-1">
+                              <AlertCircle className="h-3 w-3" /> {errors.email}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                        {/* Occupation - searchable predefined options + manual entry */}
+                        <div className="space-y-2 group">
+                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
+                            <Briefcase className="h-4 w-4 text-gray-400 group-focus-within:text-primary-700" />
+                            Occupation
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              name="occupation"
+                              list="occupation-options"
+                              value={formData.occupation || ''}
+                              onChange={handleChange}
+                              className="w-full pl-4 pr-10 py-3 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all duration-200 text-sm bg-gray-50/50 focus:bg-white"
+                              placeholder="Select or type occupation"
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                              <Briefcase className="h-5 w-5" />
+                            </span>
+                          </div>
+                          <datalist id="occupation-options">
+                            {OCCUPATION_OPTIONS.map((occupation) => (
+                              <option key={occupation} value={occupation} />
+                            ))}
+                          </datalist>
+                        </div>
+
+                        {/* Blood Group - retained for clinical safety */}
+                        <div className="space-y-2 group">
+                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
+                            <Droplets className="h-4 w-4 text-gray-400 group-focus-within:text-primary-700" />
+                            Blood Group
+                          </label>
+                          <SearchableSelect
+                            options={BLOOD_GROUP_OPTIONS}
+                            value={formData.blood_group || ''}
+                            onChange={(value) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                blood_group: value,
+                              }))
+                            }
+                            placeholder="Select Blood Group"
+                            className="w-full border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all text-sm bg-gray-50/50 focus:bg-white"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <div>
+                            <p className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+                              <AlertCircle className="h-4 w-4 text-amber-600" />
+                              Allergies
+                            </p>
+                            <p className="mt-0.5 text-xs text-slate-500">
+                              Record No Known Allergies or add specific allergies.
+                            </p>
+                          </div>
+                          <label className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2 text-xs font-semibold text-emerald-800">
+                            <input
+                              type="checkbox"
+                              checked={noKnownAllergies}
+                              onChange={(event) => {
+                                const checked = event.target.checked;
+                                setNoKnownAllergies(checked);
+                                if (checked) {
+                                  setAllergyEntries([]);
+                                  setAllergyError(null);
+                                }
+                              }}
+                              className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                            />
+                            No Known Allergies
+                          </label>
+                        </div>
+
+                        {!noKnownAllergies && (
+                          <div className="mt-4 space-y-3">
+                            {allergyEntries.length > 0 && (
+                              <div className="space-y-2">
+                                {allergyEntries.map((entry, index) => (
+                                  <div
+                                    key={`${entry.allergen}-${index}`}
+                                    className="flex flex-wrap items-center gap-2 rounded-lg border border-red-100 bg-white px-3 py-2"
+                                  >
+                                    <span className="text-sm font-semibold text-slate-900">
+                                      {entry.allergen}
+                                    </span>
+                                    <span
+                                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${
+                                        entry.severity === 'Life-threatening'
+                                          ? 'bg-red-700 text-white'
+                                          : entry.severity === 'Severe'
+                                            ? 'bg-red-100 text-red-800'
+                                            : entry.severity === 'Moderate'
+                                              ? 'bg-orange-100 text-orange-800'
+                                              : 'bg-yellow-100 text-yellow-800'
+                                      }`}
+                                    >
+                                      {entry.severity}
+                                    </span>
+                                    {entry.reaction && (
+                                      <span className="text-xs text-slate-500">
+                                        Reaction: {entry.reaction}
+                                      </span>
+                                    )}
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setAllergyEntries((prev) =>
+                                          prev.filter((_, i) => i !== index),
+                                        )
+                                      }
+                                      className="ml-auto rounded p-1 text-red-400 hover:bg-red-50 hover:text-red-600"
+                                      title="Remove allergy"
+                                    >
+                                      <Trash2 className="h-3.5 w-3.5" />
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            <div className="grid grid-cols-1 gap-3 md:grid-cols-12">
+                              <input
+                                type="text"
+                                value={allergyDraft.allergen}
+                                onChange={(e) =>
+                                  setAllergyDraft((prev) => ({
+                                    ...prev,
+                                    allergen: e.target.value,
+                                  }))
+                                }
+                                placeholder="Allergen (e.g. penicillin)"
+                                className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm md:col-span-4"
+                              />
+                              <input
+                                type="text"
+                                value={allergyDraft.reaction || ''}
+                                onChange={(e) =>
+                                  setAllergyDraft((prev) => ({
+                                    ...prev,
+                                    reaction: e.target.value,
+                                  }))
+                                }
+                                placeholder="Reaction"
+                                className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm md:col-span-3"
+                              />
+                              <select
+                                value={allergyDraft.severity}
+                                onChange={(e) =>
+                                  setAllergyDraft((prev) => ({
+                                    ...prev,
+                                    severity: e.target.value as AllergySeverity,
+                                  }))
+                                }
+                                className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm md:col-span-2"
+                              >
+                                {ALLERGY_SEVERITIES.map((severity) => (
+                                  <option key={severity} value={severity}>
+                                    {severity}
+                                  </option>
+                                ))}
+                              </select>
+                              <input
+                                type="text"
+                                value={allergyDraft.notes || ''}
+                                onChange={(e) =>
+                                  setAllergyDraft((prev) => ({
+                                    ...prev,
+                                    notes: e.target.value,
+                                  }))
+                                }
+                                placeholder="Notes (optional)"
+                                className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm md:col-span-2"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const allergen = allergyDraft.allergen.trim();
+                                  if (!allergen) {
+                                    setAllergyError('Enter an allergen first.');
+                                    return;
+                                  }
+                                  if (
+                                    allergyEntries.some(
+                                      (entry) =>
+                                        entry.allergen.toLowerCase() ===
+                                        allergen.toLowerCase(),
+                                    )
+                                  ) {
+                                    setAllergyError(
+                                      'This allergen is already recorded.',
+                                    );
+                                    return;
+                                  }
+                                  setAllergyEntries((prev) => [
+                                    ...prev,
+                                    {
+                                      ...allergyDraft,
+                                      allergen,
+                                      reaction:
+                                        allergyDraft.reaction?.trim() || '',
+                                      notes: allergyDraft.notes?.trim() || '',
+                                    },
+                                  ]);
+                                  setAllergyDraft({
+                                    allergen: '',
+                                    reaction: '',
+                                    severity: 'Moderate',
+                                    notes: '',
+                                  });
+                                  setAllergyError(null);
+                                }}
+                                className="flex items-center justify-center gap-1 rounded-lg bg-slate-800 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-900 md:col-span-1"
+                              >
+                                <Plus className="h-3.5 w-3.5" />
+                                Add
+                              </button>
+                            </div>
+                            {allergyError && (
+                              <p className="text-xs text-red-600">
+                                {allergyError}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {currentStep === 1 && (
+                <div className="space-y-5 animate-fadeIn">
+                  {/* Contact Information */}
+                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_16px_-4px_rgba(15,80,72,0.08)] overflow-hidden">
+                    {/* Section Header */}
+                    <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
+                      <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center shadow-sm shadow-primary-700/25">
+                        <Phone className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
+                          Contact Information
+                        </h3>
+                        <p className="text-xs text-gray-500">
+                          Residential address and next of kin details
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Section Content */}
+                    <div className="p-5">
+                      <div className="grid grid-cols-1 gap-5">
                         {/* Residential Address */}
                         <div className="space-y-2 group">
                           <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
@@ -1600,187 +2049,7 @@ export default function PatientForm({
                 </div>
               )}
 
-              {/* Step 2: Contact Details (moved from step 1) */}
-              {currentStep === 1 && (
-                <div className="space-y-5 animate-fadeIn">
-                  {/* Blood Group and Medical Section */}
-                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_16px_-4px_rgba(15,80,72,0.08)] overflow-hidden">
-                    {/* Section Header */}
-                    <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
-                      <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center shadow-sm shadow-primary-700/25">
-                        <Heart className="h-4 w-4 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-                          Medical Information
-                        </h3>
-                        <p className="text-xs text-gray-500">
-                          Blood group and allergy details
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Section Content */}
-                    <div className="p-5">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        {/* Blood Group */}
-                        <div className="space-y-2 group">
-                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 group-focus-within:text-primary-700 transition-colors">
-                            <Droplets className="h-4 w-4 text-gray-400 group-focus-within:text-primary-700" />
-                            Blood Group
-                          </label>
-                          <div className="relative">
-                            <SearchableSelect
-                              options={BLOOD_GROUP_OPTIONS}
-                              value={formData.blood_group || ''}
-                              onChange={(value) =>
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  blood_group: value,
-                                }))
-                              }
-                              placeholder="Select Blood Group"
-                              className="w-full border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all text-sm bg-gray-50/50 focus:bg-white"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Nationality Section */}
-                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_16px_-4px_rgba(15,80,72,0.08)] overflow-hidden">
-                    {/* Section Header */}
-                    <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
-                      <div className="w-9 h-9 bg-primary-700 rounded-xl flex items-center justify-center shadow-sm shadow-primary-700/25">
-                        <Globe className="h-4 w-4 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-                          Nationality
-                        </h3>
-                        <p className="text-xs text-gray-500">
-                          Country of origin
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Section Content */}
-                    <div className="p-5">
-                      {/* Row 4: Nationality, State, LGA */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        <div className="space-y-2 relative">
-                          <SearchableSelect
-                            label="Nationality"
-                            options={COUNTRIES}
-                            value={formData.nationality || 'Nigeria'}
-                            onChange={(value) => {
-                              // Clear state and LGA when nationality changes from Nigeria
-                              if (value !== 'Nigeria') {
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  nationality: value,
-                                  state_of_origin: '',
-                                  lga: '',
-                                }));
-                              } else {
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  nationality: value,
-                                }));
-                              }
-                            }}
-                            placeholder="Search & select country"
-                          />
-                        </div>
-
-                        {/* Nigeria: State & LGA Dropdowns */}
-                        {formData.nationality === 'Nigeria' && (
-                          <>
-                            <div className="space-y-2">
-                              <SearchableSelect
-                                label="State of Origin"
-                                options={Object.keys(NIGERIAN_LGAS)}
-                                value={formData.state_of_origin || ''}
-                                onChange={(value) => {
-                                  setFormData((prev) => ({
-                                    ...prev,
-                                    state_of_origin: value,
-                                    lga: '',
-                                  }));
-                                }}
-                                placeholder="Search & select state"
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <SearchableSelect
-                                label="LGA"
-                                options={
-                                  formData.state_of_origin
-                                    ? NIGERIAN_LGAS[formData.state_of_origin] ||
-                                      []
-                                    : []
-                                }
-                                value={formData.lga || ''}
-                                onChange={(value) => {
-                                  setFormData((prev) => ({
-                                    ...prev,
-                                    lga: value,
-                                  }));
-                                }}
-                                placeholder={
-                                  formData.state_of_origin
-                                    ? 'Search & select LGA'
-                                    : 'Select state first'
-                                }
-                                disabled={!formData.state_of_origin}
-                              />
-                            </div>
-                          </>
-                        )}
-
-                        {/* International (Non-Nigerian): State/Province Selection */}
-                        {formData.nationality &&
-                          formData.nationality !== 'Nigeria' && (
-                            <div className="space-y-2">
-                              {WORLD_STATES[formData.nationality] &&
-                              WORLD_STATES[formData.nationality].length > 0 ? (
-                                <SearchableSelect
-                                  label="State / Province"
-                                  options={WORLD_STATES[formData.nationality]}
-                                  value={formData.state_of_origin || ''}
-                                  onChange={(value) => {
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      state_of_origin: value,
-                                    }));
-                                  }}
-                                  placeholder={`Select state in ${formData.nationality}`}
-                                />
-                              ) : (
-                                <>
-                                  <label className="text-sm font-medium text-gray-700">
-                                    State / Province
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="state_of_origin"
-                                    value={formData.state_of_origin || ''}
-                                    onChange={handleChange}
-                                    className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl hover:border-gray-300 focus:ring-2 focus:ring-primary-700/20 focus:border-primary-700 transition-all text-sm bg-gray-50 focus:bg-white"
-                                    placeholder="Enter state or province"
-                                  />
-                                </>
-                              )}
-                            </div>
-                          )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: Service & Classification */}
+              {/* Step 3: Service & Classification (disabled for MUHEDA CLINIC) */}
               {currentStep === 2 && (
                 <div className="space-y-5 animate-fadeIn">
                   {/* Service & Classification Card */}
@@ -1872,7 +2141,10 @@ export default function PatientForm({
                             <div className="relative">
                               <SearchableSelect
                                 options={INSURANCE_TYPE_OPTIONS.filter(
-                                  (opt) => opt.value !== '',
+                                  (opt) =>
+                                    opt.value !== '' &&
+                                    (isNhisFeatureEnabled() ||
+                                      !isNhisCategory(opt.value)),
                                 )}
                                 value={formData.insurance_type || ''}
                                 onChange={(value) =>
@@ -3156,7 +3428,7 @@ export default function PatientForm({
                   ) : (
                     <Check className="h-4 w-4" />
                   )}
-                  {isEditing ? 'Update Patient' : 'Save Personnel'}
+                  {isEditing ? 'Update Patient' : 'Save Patient'}
                 </button>
               )}
             </div>

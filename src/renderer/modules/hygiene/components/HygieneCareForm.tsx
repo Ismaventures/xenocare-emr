@@ -35,6 +35,7 @@ import { supabase } from '../../../api/supabaseClient';
 import { sanitizeFilterValue } from '../../../lib/filterSanitizer';
 import { useAuth } from '../../../contexts/AuthContext';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface PatientSearchResult {
   id: string;
@@ -593,12 +594,27 @@ const HygieneCareForm: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   Findings / Observations
                 </label>
-                <SavedNotesPopover
-                  category="nursing_notes"
-                  subcategory="hygiene_findings"
-                  currentValue={formData.findings || ''}
-                  onInsert={(content) => updateField('findings', content)}
-                />
+                <div className="flex items-center gap-1">
+                  <TemplateSearchPopover
+                    templateType="nursing"
+                    category="hygiene_notes"
+                    currentValues={{
+                      findings: formData.findings || '',
+                      notes: formData.notes || '',
+                    }}
+                    onTemplateSelect={(data) => {
+                      if (data.findings) updateField('findings', data.findings);
+                      if (data.notes) updateField('notes', data.notes);
+                    }}
+                    buttonText="Fill All Fields"
+                  />
+                  <SavedNotesPopover
+                    category="nursing_notes"
+                    subcategory="hygiene_findings"
+                    currentValue={formData.findings || ''}
+                    onInsert={(content) => updateField('findings', content)}
+                  />
+                </div>
               </div>
               <textarea
                 value={formData.findings || ''}

@@ -1,6 +1,6 @@
 /**
  * Records History Module
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Unified admin view for browsing and exporting all clinical records.
  */

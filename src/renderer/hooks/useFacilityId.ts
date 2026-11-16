@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - useFacilityId Hook
+ * XENOCARE EMR - useFacilityId Hook
  * =============================================================================
  *
  * Resolves the current user's facility_id with a fallback to the default

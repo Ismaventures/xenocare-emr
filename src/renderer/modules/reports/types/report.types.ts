@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR
+ * XenoCare EMR
  * Comprehensive Export & Reporting System — Shared Types
  *
  * Covers: Labs, Imaging, Procedures, Dental, Physiotherapy, Ophthalmology

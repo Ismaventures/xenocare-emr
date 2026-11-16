@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Physiotherapy Report API
+ * XenoCare EMR — Physiotherapy Report API
  */
 
 import { supabase } from '../../../api/supabaseClient';

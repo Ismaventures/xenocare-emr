@@ -453,9 +453,9 @@ export const ExternalReferralsTab: React.FC<ExternalReferralsTabProps> = ({
     hmoCode: ref.hmo_code || '',
     date: ref.processed_at || ref.requested_at,
 
-    fromFacility: 'National Defence College Medical Centre',
+    fromFacility: 'XenoCare',
     fromFacilityNhisId: '', // TODO: Get from facility settings
-    fromFacilityAddress: 'National Defence College, Abuja, FCT Nigeria',
+    fromFacilityAddress: 'XenoCare',
     referredTo: ref.destination_facility_name || '',
     referredToNhisId: ref.destination_facility_nhis_id || undefined,
     referredToAddress: ref.destination_facility_address || undefined,
@@ -669,13 +669,13 @@ export const ExternalReferralsTab: React.FC<ExternalReferralsTabProps> = ({
       {selectedReferral && !showPrintPreview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            {/* Header — NDC Branded */}
+            {/* Header — XenoCare Branded */}
             <div className="sticky top-0 bg-gradient-to-r from-primary-700 to-[#008545] px-6 py-4 rounded-t-xl z-10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare"
                     className="h-10 w-10 rounded-full bg-white/20 p-0.5 object-contain"
                   />
                   <div>
@@ -880,10 +880,10 @@ export const ExternalReferralsTab: React.FC<ExternalReferralsTabProps> = ({
                       From (Health Facility)
                     </p>
                     <p className="text-sm font-bold text-gray-900 mt-1">
-                      National Defence College Medical Centre
+                      XenoCare
                     </p>
                     <p className="text-xs text-gray-600">
-                      National Defence College, Abuja, FCT Nigeria
+                      XenoCare
                     </p>
                   </div>
                   <div className="bg-indigo-50 rounded-lg p-3 border border-indigo-200">
@@ -1128,8 +1128,8 @@ export const ExternalReferralsTab: React.FC<ExternalReferralsTabProps> = ({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare"
                     className="h-10 w-10 rounded-full bg-white/20 p-0.5 object-contain"
                   />
                   <div>
@@ -1137,7 +1137,7 @@ export const ExternalReferralsTab: React.FC<ExternalReferralsTabProps> = ({
                       Print Preview
                     </h3>
                     <p className="text-sm text-emerald-100">
-                      NHIS Referral Form — National Defence College
+                      NHIS Referral Form — XenoCare
                     </p>
                   </div>
                 </div>

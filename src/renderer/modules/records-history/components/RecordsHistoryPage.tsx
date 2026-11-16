@@ -1,11 +1,12 @@
 /**
  * Records History Page
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Admin-facing unified records history with category tabs, filters, and export.
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   History,
   Download,
@@ -458,7 +459,7 @@ export default function RecordsHistoryPage() {
             {RECORD_CATEGORIES.find((c) => c.key === filters.category)?.label}
           </span>
         )}
-        {records.some((r) => r.nhisRelated) && (
+        {isNhisFeatureEnabled() && records.some((r) => r.nhisRelated) && (
           <div className="flex items-center gap-1 text-green-700">
             <Shield className="h-3.5 w-3.5" />
             <span className="text-xs">NHIS records included</span>

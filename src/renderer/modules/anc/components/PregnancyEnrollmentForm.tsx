@@ -17,6 +17,7 @@ import {
 } from '../dtos/anc.dto';
 import { calculateEDD, calculateGestationalAge } from '../api/anc.types';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface Props {
   onBack: () => void;
@@ -394,6 +395,21 @@ export default function PregnancyEnrollmentForm({
 
           {/* Medical History */}
           <Section title="Historical Notes (optional)">
+            <div className="flex justify-end mb-3">
+              <TemplateSearchPopover
+                templateType="anc"
+                category="anc_notes"
+                currentValues={{
+                  medical_history: watch('medical_history') || '',
+                  family_history: watch('family_history') || '',
+                }}
+                onTemplateSelect={(data) => {
+                  if (data.medical_history) setValue('medical_history', data.medical_history);
+                  if (data.family_history) setValue('family_history', data.family_history);
+                }}
+                buttonText="Fill All Fields"
+              />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <div className="flex items-center justify-between mb-1">

@@ -60,10 +60,14 @@ export const patientKeys = {
 // Get Patients (with search/filter/pagination)
 // =============================================================================
 
-export const usePatients = (params?: PatientSearchParams) => {
+export const usePatients = (
+  params?: PatientSearchParams,
+  enabled = true,
+) => {
   return useQuery({
     queryKey: patientKeys.list(params || {}),
     queryFn: () => api.getPatients(params),
+    enabled,
     staleTime: 1000 * 60 * 2, // 2 minutes
   });
 };
@@ -326,10 +330,11 @@ export const useDeletePatient = () => {
 // Get Payer Schemes
 // =============================================================================
 
-export const usePayerSchemes = () => {
+export const usePayerSchemes = (enabled = true) => {
   return useQuery({
     queryKey: ['payer_schemes'],
     queryFn: api.getPayerSchemes,
+    enabled,
     staleTime: 1000 * 60 * 60, // 1 hour
   });
 };

@@ -1,5 +1,5 @@
 /**
- * Request Deduplication for NDC MEDICAL CENTRE EMR
+ * Request Deduplication for XENOCARE EMR
  *
  * Prevents duplicate mutation requests from being sent to the server.
  * Useful for preventing double-submits, rapid clicks, and network retries.

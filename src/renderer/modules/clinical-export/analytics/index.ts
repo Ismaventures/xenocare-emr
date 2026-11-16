@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Analytics
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Central export point for analytics engine
  *

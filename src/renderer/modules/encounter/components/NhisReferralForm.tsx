@@ -1,7 +1,7 @@
 // =============================================================================
-// NHIS REFERRAL FORM - NDC BRANDED PRINTABLE COMPONENT
+// NHIS REFERRAL FORM - XENOCARE BRANDED PRINTABLE COMPONENT
 //
-// Professional printable NHIS Referral Form with National Defence College
+// Professional printable NHIS Referral Form with XenoCare
 // branding. Uses inline styles for reliable printing across all browsers.
 //
 // Patient Display Logic:
@@ -60,8 +60,8 @@ interface NhisReferralFormProps {
   showAcknowledgement?: boolean;
 }
 
-// NDC Logo path for embedding
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo path for embedding
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 export const NhisReferralForm = forwardRef<
   HTMLDivElement,
@@ -93,9 +93,9 @@ export const NhisReferralForm = forwardRef<
   };
 
   // Colours
-  const NDC_GREEN = '#006838';
-  const NDC_GREEN_LIGHT = '#008545';
-  const NDC_GOLD = '#C5A44E';
+  const BRAND_NAVY = '#006838';
+  const BRAND_NAVY_LIGHT = '#008545';
+  const BRAND_ACCENT = '#C5A44E';
   const BORDER_COLOR = '#d1d5db';
   const LABEL_COLOR = '#374151';
   const MUTED_COLOR = '#6b7280';
@@ -117,7 +117,7 @@ export const NhisReferralForm = forwardRef<
       {/* ===== MAIN FORM ===== */}
       <div
         style={{
-          border: `2px solid ${NDC_GREEN}`,
+          border: `2px solid ${BRAND_NAVY}`,
           borderRadius: '6px',
           overflow: 'hidden',
         }}
@@ -125,7 +125,7 @@ export const NhisReferralForm = forwardRef<
         {/* ── HEADER BAND ── */}
         <div
           style={{
-            background: `linear-gradient(135deg, ${NDC_GREEN} 0%, ${NDC_GREEN_LIGHT} 100%)`,
+            background: `linear-gradient(135deg, ${BRAND_NAVY} 0%, ${BRAND_NAVY_LIGHT} 100%)`,
             padding: '16px 24px',
             textAlign: 'center',
             color: '#fff',
@@ -143,7 +143,7 @@ export const NhisReferralForm = forwardRef<
           >
             <img
               src={ndcLogoSrc}
-              alt="NDC"
+              alt="XenoCare"
               style={{
                 width: '56px',
                 height: '56px',
@@ -165,7 +165,7 @@ export const NhisReferralForm = forwardRef<
           >
             <img
               src={ndcLogoSrc}
-              alt="NDC"
+              alt="XenoCare"
               style={{
                 width: '56px',
                 height: '56px',
@@ -185,7 +185,7 @@ export const NhisReferralForm = forwardRef<
               textTransform: 'uppercase' as const,
             }}
           >
-            National Defence College
+            XenoCare
           </div>
           <div
             style={{
@@ -211,7 +211,7 @@ export const NhisReferralForm = forwardRef<
                 fontWeight: 700,
                 letterSpacing: '4px',
                 textTransform: 'uppercase' as const,
-                color: NDC_GOLD,
+                color: BRAND_ACCENT,
               }}
             >
               NHIS Referral Form
@@ -232,7 +232,7 @@ export const NhisReferralForm = forwardRef<
           >
             <div
               style={{
-                background: NDC_GREEN,
+                background: BRAND_NAVY,
                 color: '#fff',
                 padding: '6px 12px',
                 fontSize: '10px',
@@ -327,12 +327,12 @@ export const NhisReferralForm = forwardRef<
                   <span
                     style={{
                       flex: 1,
-                      borderBottom: `1px solid ${NDC_GREEN}`,
+                      borderBottom: `1px solid ${BRAND_NAVY}`,
                       padding: '0 6px 2px',
                       fontSize: '12px',
                       fontWeight: 700,
                       fontFamily: "'Courier New', monospace",
-                      color: NDC_GREEN,
+                      color: BRAND_NAVY,
                     }}
                   >
                     {data.fileNo || '—'}
@@ -600,7 +600,7 @@ export const NhisReferralForm = forwardRef<
           >
             <div
               style={{
-                background: NDC_GREEN,
+                background: BRAND_NAVY,
                 color: '#fff',
                 padding: '6px 12px',
                 fontSize: '10px',
@@ -636,12 +636,12 @@ export const NhisReferralForm = forwardRef<
                   <span
                     style={{
                       flex: 1,
-                      borderBottom: `2px solid ${NDC_GREEN}`,
+                      borderBottom: `2px solid ${BRAND_NAVY}`,
                       padding: '0 6px 2px',
                       fontWeight: 700,
                       fontSize: '13px',
                       fontFamily: "'Courier New', monospace",
-                      color: NDC_GREEN,
+                      color: BRAND_NAVY,
                     }}
                   >
                     {data.nhisReferralCode || '—'}
@@ -747,7 +747,7 @@ export const NhisReferralForm = forwardRef<
                     style={{
                       fontWeight: 700,
                       fontSize: '11px',
-                      color: NDC_GREEN,
+                      color: BRAND_NAVY,
                       width: '160px',
                       flexShrink: 0,
                       textTransform: 'uppercase' as const,
@@ -758,7 +758,7 @@ export const NhisReferralForm = forwardRef<
                   <span
                     style={{
                       flex: 1,
-                      borderBottom: `1px solid ${NDC_GREEN}`,
+                      borderBottom: `1px solid ${BRAND_NAVY}`,
                       padding: '0 6px 2px',
                       fontWeight: 600,
                       fontSize: '12px',
@@ -823,7 +823,7 @@ export const NhisReferralForm = forwardRef<
             >
               <div
                 style={{
-                  background: NDC_GREEN,
+                  background: BRAND_NAVY,
                   color: '#fff',
                   padding: '5px 10px',
                   fontSize: '10px',
@@ -843,7 +843,7 @@ export const NhisReferralForm = forwardRef<
                   }}
                 >
                   {data.fromFacility ||
-                    'National Defence College Medical Centre'}
+                    'XenoCare'}
                 </div>
                 {data.fromFacilityNhisId && (
                   <div style={{ fontSize: '11px', color: MUTED_COLOR }}>
@@ -851,7 +851,7 @@ export const NhisReferralForm = forwardRef<
                   </div>
                 )}
                 <div style={{ fontSize: '11px', color: MUTED_COLOR }}>
-                  {data.fromFacilityAddress || 'NDC Abuja, FCT Nigeria'}
+                  {data.fromFacilityAddress || 'XenoCare'}
                 </div>
               </div>
             </div>
@@ -865,7 +865,7 @@ export const NhisReferralForm = forwardRef<
             >
               <div
                 style={{
-                  background: NDC_GREEN,
+                  background: BRAND_NAVY,
                   color: '#fff',
                   padding: '5px 10px',
                   fontSize: '10px',
@@ -940,7 +940,7 @@ export const NhisReferralForm = forwardRef<
           >
             <div
               style={{
-                background: NDC_GREEN,
+                background: BRAND_NAVY,
                 color: '#fff',
                 padding: '6px 12px',
                 fontSize: '10px',
@@ -961,7 +961,7 @@ export const NhisReferralForm = forwardRef<
                     color: '#fff',
                     textTransform: 'uppercase' as const,
                     letterSpacing: '1.5px',
-                    background: NDC_GREEN,
+                    background: BRAND_NAVY,
                     padding: '4px 10px',
                     borderRadius: '3px 3px 0 0',
                     display: 'inline-block',
@@ -972,7 +972,7 @@ export const NhisReferralForm = forwardRef<
                 <div
                   style={{
                     border: `1px solid ${BORDER_COLOR}`,
-                    borderTop: `2px solid ${NDC_GREEN}`,
+                    borderTop: `2px solid ${BRAND_NAVY}`,
                     borderRadius: '0 4px 4px 4px',
                     padding: '10px 12px',
                     minHeight: '60px',
@@ -994,7 +994,7 @@ export const NhisReferralForm = forwardRef<
                     color: '#fff',
                     textTransform: 'uppercase' as const,
                     letterSpacing: '1.5px',
-                    background: NDC_GREEN,
+                    background: BRAND_NAVY,
                     padding: '4px 10px',
                     borderRadius: '3px 3px 0 0',
                     display: 'inline-block',
@@ -1005,7 +1005,7 @@ export const NhisReferralForm = forwardRef<
                 <div
                   style={{
                     border: `1px solid ${BORDER_COLOR}`,
-                    borderTop: `2px solid ${NDC_GREEN}`,
+                    borderTop: `2px solid ${BRAND_NAVY}`,
                     borderRadius: '0 4px 4px 4px',
                     padding: '10px 12px',
                     minHeight: '50px',
@@ -1027,7 +1027,7 @@ export const NhisReferralForm = forwardRef<
                     color: '#fff',
                     textTransform: 'uppercase' as const,
                     letterSpacing: '1.5px',
-                    background: NDC_GREEN,
+                    background: BRAND_NAVY,
                     padding: '4px 10px',
                     borderRadius: '3px 3px 0 0',
                     display: 'inline-block',
@@ -1038,7 +1038,7 @@ export const NhisReferralForm = forwardRef<
                 <div
                   style={{
                     border: `1px solid ${BORDER_COLOR}`,
-                    borderTop: `2px solid ${NDC_GREEN}`,
+                    borderTop: `2px solid ${BRAND_NAVY}`,
                     borderRadius: '0 4px 4px 4px',
                     padding: '10px 12px',
                     minHeight: '40px',
@@ -1060,7 +1060,7 @@ export const NhisReferralForm = forwardRef<
                     color: '#fff',
                     textTransform: 'uppercase' as const,
                     letterSpacing: '1.5px',
-                    background: NDC_GREEN,
+                    background: BRAND_NAVY,
                     padding: '4px 10px',
                     borderRadius: '3px 3px 0 0',
                     display: 'inline-block',
@@ -1071,7 +1071,7 @@ export const NhisReferralForm = forwardRef<
                 <div
                   style={{
                     border: `1px solid ${BORDER_COLOR}`,
-                    borderTop: `2px solid ${NDC_GREEN}`,
+                    borderTop: `2px solid ${BRAND_NAVY}`,
                     borderRadius: '0 4px 4px 4px',
                     padding: '10px 12px',
                     minHeight: '50px',
@@ -1091,7 +1091,7 @@ export const NhisReferralForm = forwardRef<
           {/* SIGNATURE SECTION */}
           <div
             style={{
-              borderTop: `2px solid ${NDC_GREEN}`,
+              borderTop: `2px solid ${BRAND_NAVY}`,
               paddingTop: '16px',
               marginTop: '20px',
             }}
@@ -1181,7 +1181,7 @@ export const NhisReferralForm = forwardRef<
         {/* GREEN FOOTER BAND */}
         <div
           style={{
-            background: NDC_GREEN,
+            background: BRAND_NAVY,
             padding: '4px 24px',
             display: 'flex',
             justifyContent: 'space-between',
@@ -1190,7 +1190,7 @@ export const NhisReferralForm = forwardRef<
             letterSpacing: '0.5px',
           }}
         >
-          <span>NDC Medical Centre — NHIS Referral Form</span>
+          <span>XenoCare — NHIS Referral Form</span>
           <span>
             Printed:{' '}
             {new Date().toLocaleDateString('en-GB', {
@@ -1234,7 +1234,7 @@ export const NhisReferralForm = forwardRef<
 
           <div
             style={{
-              border: `2px solid ${NDC_GREEN}`,
+              border: `2px solid ${BRAND_NAVY}`,
               borderRadius: '6px',
               overflow: 'hidden',
             }}
@@ -1242,7 +1242,7 @@ export const NhisReferralForm = forwardRef<
             {/* Ack Header */}
             <div
               style={{
-                background: `linear-gradient(135deg, ${NDC_GREEN} 0%, ${NDC_GREEN_LIGHT} 100%)`,
+                background: `linear-gradient(135deg, ${BRAND_NAVY} 0%, ${BRAND_NAVY_LIGHT} 100%)`,
                 padding: '8px 16px',
                 textAlign: 'center' as const,
               }}
@@ -1288,7 +1288,7 @@ export const NhisReferralForm = forwardRef<
                       padding: '0 4px',
                       fontFamily: "'Courier New', monospace",
                       fontWeight: 600,
-                      color: NDC_GREEN,
+                      color: BRAND_NAVY,
                     }}
                   >
                     {data.nhisReferralCode}

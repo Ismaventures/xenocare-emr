@@ -30,6 +30,7 @@ import { supabase } from '../../../api/supabaseClient';
 import { sanitizeFilterValue } from '../../../lib/filterSanitizer';
 import { useAuth } from '../../../contexts/AuthContext';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface PatientSearchResult {
   id: string;
@@ -498,14 +499,29 @@ const InfectionReportForm: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700">
                     Symptoms & Signs
                   </label>
-                  <SavedNotesPopover
-                    category="nursing_notes"
-                    subcategory="infection_symptoms"
-                    currentValue={formData.symptoms || ''}
-                    onInsert={(content) =>
-                      setFormData({ ...formData, symptoms: content })
-                    }
-                  />
+                  <div className="flex items-center gap-1">
+                    <TemplateSearchPopover
+                      templateType="nursing"
+                      category="infection_notes"
+                      currentValues={{
+                        symptoms: formData.symptoms || '',
+                        treatment_notes: formData.treatment_notes || '',
+                      }}
+                      onTemplateSelect={(data) => {
+                        if (data.symptoms) setFormData({ ...formData, symptoms: data.symptoms });
+                        if (data.treatment_notes) setFormData({ ...formData, treatment_notes: data.treatment_notes });
+                      }}
+                      buttonText="Fill All Fields"
+                    />
+                    <SavedNotesPopover
+                      category="nursing_notes"
+                      subcategory="infection_symptoms"
+                      currentValue={formData.symptoms || ''}
+                      onInsert={(content) =>
+                        setFormData({ ...formData, symptoms: content })
+                      }
+                    />
+                  </div>
                 </div>
                 <textarea
                   rows={3}

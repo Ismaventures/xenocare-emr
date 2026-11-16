@@ -17,6 +17,7 @@ import {
 import { Modal } from '../../../components/ui/Modal';
 import { Button, Textarea } from '../../../components/ui/FormElements';
 import { useBatchVerifyPayments } from '../hooks/useBillingOrders';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   BillingOrderDTO,
   formatCurrency,
@@ -358,7 +359,10 @@ export function VerifyPaymentModal({
                 Payment Method <span className="text-red-500">*</span>
               </label>
               <div className="grid grid-cols-2 gap-2">
-                {PAYMENT_METHODS.map((method) => (
+                {PAYMENT_METHODS.filter(
+                  (method) =>
+                    isNhisFeatureEnabled() || method.value !== 'NHIS',
+                ).map((method) => (
                   <button
                     key={method.value}
                     onClick={() => setSelectedMethod(method.value)}

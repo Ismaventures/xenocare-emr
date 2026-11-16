@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - NURSING MODULE ENCOUNTER INTEGRATION
+ * XENOCARE EMR - NURSING MODULE ENCOUNTER INTEGRATION
  * =============================================================================
  *
  * Clinical Informatics & EMR Access Control Architecture

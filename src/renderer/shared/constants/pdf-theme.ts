@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC Medical Centre — Unified PDF Theme Constants
+ * XenoCare — Unified PDF Theme Constants
  *
  * Design system principles applied (GOV.UK, IBM Carbon, Ant Design):
  * - Single brand color across all exports for facility identity
@@ -11,9 +11,12 @@
  * =============================================================================
  */
 
+import { getFacilityAddress, getFacilityName } from '../../lib/facility';
+import { APP_NAME } from './branding';
+
 // ── Brand Colors (RGB tuples for jsPDF) ──────────────────────────────────────
 export const PDF_COLORS = {
-  // Primary brand — NDC Green (used for all table headers, title bars)
+  // Clinical green retained from the established report palette
   primary: [22, 101, 52] as [number, number, number],
   primaryLight: [240, 253, 244] as [number, number, number], // green-50 tint
 
@@ -72,11 +75,11 @@ export const PDF_SPACING = {
   sectionGap: 8,
 } as const;
 
-// ── Facility Info ────────────────────────────────────────────────────────────
+// ── Facility Info (fallbacks; live values come from Facility Settings) ───────
 export const FACILITY = {
-  name: 'National Defence College Medical Centre',
-  shortName: 'NDC Medical Centre',
-  address: 'National Defence College, Abuja',
+  name: APP_NAME,
+  shortName: APP_NAME,
+  address: '',
 } as const;
 
 // ── Shared Helpers ───────────────────────────────────────────────────────────
@@ -182,7 +185,7 @@ export async function savePdf(
 }
 
 /**
- * Render a standard NDC report header on the current page.
+ * Render a standard XenoCare report header on the current page.
  * Returns the Y position after the header for content placement.
  */
 export function renderReportHeader(
@@ -201,7 +204,7 @@ export function renderReportHeader(
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(PDF_FONTS.title.size);
   doc.setTextColor(...PDF_COLORS.text);
-  doc.text(FACILITY.name, pageWidth / 2, y, { align: 'center' });
+  doc.text(getFacilityName(), pageWidth / 2, y, { align: 'center' });
   y += 6;
 
   // Report title
@@ -249,8 +252,11 @@ export function renderPageFooter(doc: import('jspdf').jsPDF, pageNumber: number)
   const pageHeight = doc.internal.pageSize.getHeight();
   doc.setFontSize(PDF_FONTS.footer.size);
   doc.setTextColor(...PDF_COLORS.muted);
+  const facility = getFacilityName();
+  const address = getFacilityAddress();
+  const identity = address ? `${facility}  •  ${address}` : facility;
   doc.text(
-    `${FACILITY.shortName}  •  Page ${pageNumber}`,
+    `${identity} | Page ${pageNumber} | Powered by Xenolink`,
     pageWidth / 2,
     pageHeight - 8,
     { align: 'center' },

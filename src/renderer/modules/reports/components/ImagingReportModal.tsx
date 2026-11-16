@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Imaging Report Modal
+ * XenoCare EMR — Imaging Report Modal
  */
 
 import React, { useState } from 'react';
@@ -220,7 +220,7 @@ export function ImagingReportModal({
         format,
         buildSheets(),
         buildPDFOpts(),
-        `NDC_Imaging_Report_${new Date().toISOString().split('T')[0]}`,
+        `XenoCare_Imaging_Report_${new Date().toISOString().split('T')[0]}`,
       );
     } catch (error) {
       showToast({

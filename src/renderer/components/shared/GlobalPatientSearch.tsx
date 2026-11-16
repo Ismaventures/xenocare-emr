@@ -231,7 +231,7 @@ export function GlobalPatientSearch({
               select
             </span>
           </div>
-          <span>NDC Search</span>
+          <span>XenoCare Search</span>
         </div>
       </div>
     </div>

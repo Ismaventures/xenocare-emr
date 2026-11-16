@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - CLINICAL NOTES MODAL
+ * XENOCARE EMR - CLINICAL NOTES MODAL
  *
  * Modal for adding clinical notes to an encounter after reviewing results.
  * Follows standard EMR practices for:
@@ -58,6 +58,7 @@ import { useNoteTemplateResolver } from '../../hooks/useNoteTemplateResolver';
 import { createClinicalNote } from '../../api/clinical-notes-template.api';
 import { SpecialtyNoteFields } from './SpecialtyNoteFields';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 import type {
   ClinicalNoteTemplate,
   NoteTemplateSchema,
@@ -1053,6 +1054,22 @@ export function ClinicalNotesModal({
           {/* SOAP Fields */}
           {currentNoteType.fields.includes('subjective') && (
             <div>
+              <div className="flex justify-end mb-3">
+                <TemplateSearchPopover
+                  templateType="consultation"
+                  category="progress_note"
+                  currentValues={{ subjective, objective, assessment, plan, notes }}
+                  onTemplateSelect={(data) => {
+                    if (data.subjective) setSubjective(data.subjective);
+                    if (data.objective) setObjective(data.objective);
+                    if (data.assessment) setAssessment(data.assessment);
+                    if (data.plan) setPlan(data.plan);
+                    if (data.notes) setNotes(data.notes);
+                    if (data.follow_up_notes) setFollowUpNotes(data.follow_up_notes);
+                  }}
+                  buttonText="Fill All Fields"
+                />
+              </div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-semibold text-blue-700 flex items-center gap-2">
                   <MessageSquare size={16} />

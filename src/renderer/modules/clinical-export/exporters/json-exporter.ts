@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - JSON Exporter
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * HL7 FHIR-compatible JSON export for system integration and interoperability
  *

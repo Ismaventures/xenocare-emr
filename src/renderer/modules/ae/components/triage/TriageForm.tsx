@@ -17,6 +17,7 @@ import {
 } from '../../api/ae.types';
 import type { TriageLevel } from '../../api/ae.types';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 import { useToast } from '../../../../components/ui/Toast';
 
 interface TriageFormProps {
@@ -392,12 +393,24 @@ export default function TriageForm({
             <label className="block text-sm font-medium text-gray-700">
               Triage Notes
             </label>
-            <SavedNotesPopover
-              category="ae_notes"
-              subcategory="triage_notes"
-              currentValue={watch('triage_notes') || ''}
-              onInsert={(content) => setValue('triage_notes', content)}
-            />
+            <div className="flex items-center gap-1">
+              <TemplateSearchPopover
+                templateType="ae"
+                category="ae_triage"
+                currentValues={{ triage_notes: watch('triage_notes') || '' }}
+                onTemplateSelect={(data) => {
+                  if (data.triage_notes) setValue('triage_notes', data.triage_notes);
+                  if (data.notes) setValue('triage_notes', data.notes);
+                }}
+                buttonText="Fill"
+              />
+              <SavedNotesPopover
+                category="ae_notes"
+                subcategory="triage_notes"
+                currentValue={watch('triage_notes') || ''}
+                onInsert={(content) => setValue('triage_notes', content)}
+              />
+            </div>
           </div>
           <textarea
             {...register('triage_notes')}

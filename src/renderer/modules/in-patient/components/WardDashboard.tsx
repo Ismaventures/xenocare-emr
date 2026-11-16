@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Ward Dashboard Component
+// XENOCARE EMR - Ward Dashboard Component
 // Visual overview of all wards with occupancy and patient status
 // =============================================================================
 

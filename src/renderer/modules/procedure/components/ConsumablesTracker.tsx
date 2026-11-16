@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Consumables Tracker Component
+// XENOCARE EMR - Consumables Tracker Component
 // Track materials and consumables used during procedures
 // =============================================================================
 

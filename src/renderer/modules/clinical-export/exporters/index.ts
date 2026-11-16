@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Exporters
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Central export point for all export engines
  *

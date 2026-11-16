@@ -164,7 +164,7 @@ export default function EncounterDetailLayout({
   specialtyName,
   theme,
   encounterDate,
-  facilityName = 'NDC Medical Centre',
+  facilityName = 'XenoCare',
   visitId,
   status,
   statusBadgeClass,

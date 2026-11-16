@@ -27,6 +27,7 @@ interface AIQueryInputProps {
     imageAttachments?: AIImageAttachment[],
   ) => void;
   isLoading?: boolean;
+  disabled?: boolean;
   placeholder?: string;
   showQuickActions?: boolean;
   showSearchType?: boolean;
@@ -82,6 +83,7 @@ function fileToAttachment(file: File): Promise<AIImageAttachment> {
 export function AIQueryInput({
   onSubmit,
   isLoading = false,
+  disabled = false,
   placeholder = 'Ask about this patient…',
   showQuickActions = true,
   showSearchType = true,
@@ -96,10 +98,13 @@ export function AIQueryInput({
   );
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const isInteractionDisabled = isLoading || disabled;
 
   const handleSubmit = useCallback(() => {
     const trimmed = query.trim();
-    if ((!trimmed && imageAttachments.length === 0) || isLoading) return;
+    if ((!trimmed && imageAttachments.length === 0) || isInteractionDisabled) {
+      return;
+    }
     onSubmit(
       trimmed || 'Analyze the attached image(s).',
       searchType,
@@ -124,10 +129,10 @@ export function AIQueryInput({
 
   const handleQuickQuery = useCallback(
     (q: string) => {
-      if (isLoading) return;
+      if (isInteractionDisabled) return;
       onSubmit(q, searchType);
     },
-    [isLoading, searchType, onSubmit],
+    [isInteractionDisabled, searchType, onSubmit],
   );
 
   const handleImageSelect = useCallback(
@@ -173,7 +178,7 @@ export function AIQueryInput({
             <button
               key={q.label}
               onClick={() => handleQuickQuery(q.query)}
-              disabled={isLoading}
+              disabled={isInteractionDisabled}
               className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full
                          bg-blue-50 text-blue-700 hover:bg-blue-100
                          dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50
@@ -204,7 +209,7 @@ export function AIQueryInput({
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            disabled={isLoading}
+            disabled={isInteractionDisabled}
             rows={1}
             className="w-full pl-9 pr-4 py-2.5 text-sm rounded-lg border border-gray-300
                        bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white
@@ -218,7 +223,8 @@ export function AIQueryInput({
           type="button"
           onClick={() => imageInputRef.current?.click()}
           disabled={
-            isLoading || imageAttachments.length >= MAX_IMAGE_ATTACHMENTS
+            isInteractionDisabled ||
+            imageAttachments.length >= MAX_IMAGE_ATTACHMENTS
           }
           className="p-2.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors shrink-0"
           title="Attach image for AI analysis"
@@ -229,7 +235,8 @@ export function AIQueryInput({
         <button
           onClick={handleSubmit}
           disabled={
-            (!query.trim() && imageAttachments.length === 0) || isLoading
+            (!query.trim() && imageAttachments.length === 0) ||
+            isInteractionDisabled
           }
           className="p-2.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700
                      disabled:bg-gray-300 disabled:cursor-not-allowed
@@ -272,6 +279,7 @@ export function AIQueryInput({
             <button
               key={type}
               onClick={() => setSearchType(type)}
+              disabled={isInteractionDisabled}
               className={`px-2 py-0.5 rounded-full capitalize transition-colors ${
                 searchType === type
                   ? 'bg-blue-600 text-white'

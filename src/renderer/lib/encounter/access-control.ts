@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER ACCESS CONTROL SYSTEM
+ * XENOCARE EMR - ENCOUNTER ACCESS CONTROL SYSTEM
  * =============================================================================
  *
  * Implements enterprise-grade encounter ownership and access control following:

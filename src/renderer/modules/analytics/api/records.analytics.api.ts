@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Medical Records (HIM) Analytics API
+// XENOCARE EMR - Medical Records (HIM) Analytics API
 // Real database queries for documentation completeness, coding coverage, etc.
 // =============================================================================
 

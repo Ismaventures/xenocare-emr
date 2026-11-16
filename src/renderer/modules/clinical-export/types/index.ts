@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Types Index
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Central export point for all clinical export types
  *

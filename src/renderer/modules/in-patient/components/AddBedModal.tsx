@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Add Bed Modal
+// XENOCARE EMR - Add Bed Modal
 // Modal form for creating new beds in a ward
 // =============================================================================
 

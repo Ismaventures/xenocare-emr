@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Admission Form Component
+// XENOCARE EMR - Admission Form Component
 // Form for creating new patient admissions
 // =============================================================================
 

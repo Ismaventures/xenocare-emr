@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Physiotherapy Export Panel
+ * XenoCare EMR — Physiotherapy Export Panel
  * Inline export toolbar for the Physiotherapy module page.
  */
 
@@ -55,7 +55,7 @@ export function PhysioExportPanel({ data }: PhysioExportPanelProps) {
   const rows = data.map(toRow);
 
   async function handleExport(format: ExportFormat) {
-    const filename = `NDC_Physio_Export_${new Date().toISOString().split('T')[0]}`;
+    const filename = `XenoCare_Physio_Export_${new Date().toISOString().split('T')[0]}`;
     const pdfOpts = {
       title: 'Physiotherapy Sessions Export',
       generatedBy: staff ? `${staff.first_name} ${staff.last_name}` : '',

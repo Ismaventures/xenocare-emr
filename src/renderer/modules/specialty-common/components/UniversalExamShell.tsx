@@ -40,6 +40,7 @@ import type {
 } from '../dtos/specialty-clinic.dto';
 import { getKeyFindings, KeyFinding } from '../constants/key-findings';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -357,12 +358,25 @@ const UniversalExamShell: React.FC<UniversalExamShellProps> = ({
             <FileText size={15} className="text-blue-500" />
             Examination Summary
           </div>
-          <SavedNotesPopover
-            category="specialty_notes"
-            subcategory="exam_summary"
-            currentValue={summaryValue}
-            onInsert={(content) => onFieldChange('_exam_summary', content)}
-          />
+          <div className="flex items-center gap-2">
+            <TemplateSearchPopover
+              templateType="consultation"
+              category="specialty_exam"
+              contextKeywords={[specialtyName, specialtyCode.replace(/_/g, ' ')]}
+              currentValues={{ examination_findings: summaryValue }}
+              onTemplateSelect={(data) => {
+                if (data.examination_findings) onFieldChange('_exam_summary', data.examination_findings);
+                if (data.plan) onFieldChange('_clinical_plan', data.plan);
+              }}
+              buttonText="Fill All Fields"
+            />
+            <SavedNotesPopover
+              category="specialty_notes"
+              subcategory="exam_summary"
+              currentValue={summaryValue}
+              onInsert={(content) => onFieldChange('_exam_summary', content)}
+            />
+          </div>
         </div>
         <p className="text-xs text-gray-500 mb-2">
           Brief narrative of abnormal findings. Leave blank if all normal.

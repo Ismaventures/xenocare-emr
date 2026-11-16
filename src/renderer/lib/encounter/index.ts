@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER MODULE
+ * XENOCARE EMR - ENCOUNTER MODULE
  * =============================================================================
  *
  * Central export for all encounter-related functionality including:

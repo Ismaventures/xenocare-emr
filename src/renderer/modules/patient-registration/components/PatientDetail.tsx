@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {
   Phone,
   User,
@@ -23,6 +23,11 @@ import {
   formatPatientName,
 } from '../dtos/patient.dto';
 import { StatusBadge, Button } from '../../../components/ui';
+import PatientAllergySummary from '../../../components/shared/PatientAllergySummary';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 
 import { Modal } from '../../../components/ui/Modal';
 import { RoleGate } from '../../../components/auth/ProtectedRoute';
@@ -35,8 +40,8 @@ import {
 } from '../../medical-reports/utils/medicalReportPdf';
 import { useToast } from '../../../components/ui/Toast';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types
@@ -271,13 +276,17 @@ export default function PatientDetail({
                 {patient.emr_number || 'Pending'}
               </span>
             </div>
-            <div className="w-px h-3 bg-primary-200" />
-            <div className="flex items-center gap-1.5">
-              <span className="text-primary-600 font-semibold">NHIS</span>
-              <span className="font-mono font-semibold text-gray-800">
-                {patient.nhis_number || 'N/A'}
-              </span>
-            </div>
+            {isNhisFeatureEnabled() && (
+              <>
+                <div className="w-px h-3 bg-primary-200" />
+                <div className="flex items-center gap-1.5">
+                  <span className="text-primary-600 font-semibold">NHIS</span>
+                  <span className="font-mono font-semibold text-gray-800">
+                    {patient.nhis_number || 'N/A'}
+                  </span>
+                </div>
+              </>
+            )}
             {patient.patient_category === 'Military' && !isDependent && (
               <>
                 <div className="w-px h-3 bg-primary-200" />
@@ -292,23 +301,15 @@ export default function PatientDetail({
           </div>
         </div>
 
-        {/* Allergy Alert Banner */}
-        {patient.known_allergies && patient.known_allergies.length > 0 && (
-          <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg">
-            <AlertTriangle className="h-3.5 w-3.5 text-red-500 flex-shrink-0" />
-            <span className="text-xs font-medium text-red-700">Allergies:</span>
-            <div className="flex flex-wrap gap-1.5">
-              {patient.known_allergies.map((allergy) => (
-                <span
-                  key={allergy}
-                  className="px-1.5 py-0.5 bg-red-100 text-red-800 rounded text-xs font-medium border border-red-200"
-                >
-                  {allergy}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Allergy status */}
+        <PatientAllergySummary
+          patientId={patient.id}
+          knownAllergies={patient.known_allergies}
+          noKnownAllergies={
+            (patient as { no_known_allergies?: boolean }).no_known_allergies
+          }
+          compact
+        />
 
         {/* Two-Column: Personal Details + Contact & NOK */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -447,12 +448,19 @@ export default function PatientDetail({
               </div>
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-gray-600 text-xs font-medium">Insurance</span>
-                <span className="font-semibold text-gray-900">{patient.insurance_type || 'N/A'}</span>
+                <span className="font-semibold text-gray-900">
+                  {!isNhisFeatureEnabled() &&
+                  isNhisCategory(patient.insurance_type)
+                    ? 'Private'
+                    : patient.insurance_type || 'N/A'}
+                </span>
               </div>
-              <div className="flex items-center justify-between px-3 py-2">
-                <span className="text-gray-600 text-xs font-medium">NHIS Source</span>
-                <span className="font-semibold text-gray-900">{patient.nhis_patient_source || 'Internal'}</span>
-              </div>
+              {isNhisFeatureEnabled() && (
+                <div className="flex items-center justify-between px-3 py-2">
+                  <span className="text-gray-600 text-xs font-medium">NHIS Source</span>
+                  <span className="font-semibold text-gray-900">{patient.nhis_patient_source || 'Internal'}</span>
+                </div>
+              )}
               {patient.payer_info && patient.payer_info.scheme && (
                 <>
                   <div className="flex items-center justify-between px-3 py-2">
@@ -694,8 +702,8 @@ export default function PatientDetail({
             Registered: {new Date(patient.registration_date).toLocaleDateString()}
           </span>
           <div className="flex items-center gap-1.5">
-            <img src={ndcLogoSrc} alt="NDC" className="w-4 h-4 opacity-25" />
-            <span>NDC Medical Centre</span>
+            <img src={ndcLogoSrc} alt="XenoCare" className="w-4 h-4 opacity-25" />
+            <span>XenoCare</span>
           </div>
         </div>
       </div>

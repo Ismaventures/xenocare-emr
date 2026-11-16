@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Admission Care Modal
+// XENOCARE EMR - Admission Care Modal
 // Replicates the PatientCarePanel UI design for In-Patient Admissions
 // =============================================================================
 
@@ -961,7 +961,10 @@ function OverviewTabContent({
               <p className="text-sm font-bold text-red-900">
                 {patient.known_allergies?.length
                   ? patient.known_allergies.join(', ')
-                  : 'No Known Allergies'}
+                  : (patient as { no_known_allergies?: boolean })
+                        .no_known_allergies
+                    ? 'No Known Allergies'
+                    : 'Allergy status not recorded'}
               </p>
             </div>
             <div className="p-3 bg-gray-50 rounded-lg">
@@ -3578,7 +3581,7 @@ export const AdmissionCareModal: React.FC<AdmissionCareModalProps> = ({
               </div>
               <span>Enc: {encounterIdForHooks || 'NEW'}</span>
             </div>
-            <div>NDC Medical Centre EMR • In-Patient Module</div>
+            <div>XenoCare EMR • In-Patient Module</div>
           </footer>
         </div>
       </div>

@@ -33,6 +33,7 @@ import {
 import { useDoctors, useClinicalStaff } from '../../staff/hooks/useStaff';
 import { formatDetailedAge } from '../../patient-registration/dtos/patient.dto';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface ParticipatingStaff {
   staff_id: string;
@@ -585,6 +586,18 @@ export const ProcedureSchedulingModal: React.FC<
 
               {/* Custom Instructions */}
               <div>
+                <div className="flex justify-end mb-2">
+                  <TemplateSearchPopover
+                    templateType="inpatient"
+                    category="procedure_notes"
+                    currentValues={{ pre_op_instructions: customPreOpInstructions, procedure_notes: notes }}
+                    onTemplateSelect={(data) => {
+                      if (data.pre_op_instructions) setCustomPreOpInstructions(data.pre_op_instructions);
+                      if (data.procedure_notes) setNotes(data.procedure_notes);
+                    }}
+                    buttonText="Fill All Fields"
+                  />
+                </div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="block text-sm text-gray-600">
                     Additional Pre-Op Instructions

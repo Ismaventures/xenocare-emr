@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Ward Rounds API
+// XENOCARE EMR - Ward Rounds API
 // Supabase API functions for ward round documentation
 // =============================================================================
 

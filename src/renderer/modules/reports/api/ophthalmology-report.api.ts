@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Ophthalmology Report API
+ * XenoCare EMR — Ophthalmology Report API
  */
 
 import { supabase } from '../../../api/supabaseClient';

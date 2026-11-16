@@ -28,6 +28,8 @@ import { logAudit } from '../../../lib/audit/audit';
 import { updateWithLock } from '../../../lib/optimisticLocking';
 import { createScopedLogger } from '../../../utils/logger';
 import { resolvePatientVarcharId } from '../../../lib/patient-id-resolver';
+import { acceptLabRequest } from '../../lab/api/lab.api';
+import { acceptPrescription } from '../../pharmacy/api/pharmacy.api';
 
 // Re-export so existing consumers keep working
 export { resolvePatientVarcharId } from '../../../lib/patient-id-resolver';
@@ -1857,7 +1859,7 @@ export const getPatientMedicalHistory = async (
         .filter(Boolean);
 
       // Fetch lab_results for richer data (result_value, unit, reference_range, is_abnormal)
-      let labResultsMap = new Map<string, any>();
+      const labResultsMap = new Map<string, any>();
       if (requestIds.length > 0) {
         const { data: labResults } = await supabase
           .from('lab_results')
@@ -1951,7 +1953,7 @@ export const getPatientMedicalHistory = async (
           (radRequests || []).map((r: any) => r.imaging_id).filter(Boolean),
         ),
       ];
-      let imagingMap = new Map<string, { name: string; modality: string }>();
+      const imagingMap = new Map<string, { name: string; modality: string }>();
       if (imagingIds.length > 0) {
         const { data: imagingCatalogue } = await supabase
           .from('imaging_catalogue')
@@ -2160,8 +2162,9 @@ interface BatchOrderResult {
   }>;
   prescriptionRecords: Array<{
     prescription_id: string;
-    drug_id: string;
+    drug_id: string | null;
     drug_name?: string;
+    is_external?: boolean;
     price?: number;
     quantity?: number;
   }>;
@@ -2378,13 +2381,15 @@ export const createBatchOrders = async (
           }[],
         ),
 
-    prescriptions.length > 0
+    prescriptions.some((p) => !p.is_external && p.drug_id)
       ? supabase
           .from('drug_catalogue')
           .select('id, name, price')
           .in(
             'id',
-            prescriptions.map((p) => p.drug_id).filter((id) => !!id),
+            prescriptions
+              .filter((p) => !p.is_external && p.drug_id)
+              .map((p) => p.drug_id) as string[],
           )
           .then((r) => r.data || [])
       : Promise.resolve([] as { id: string; name: string; price: number }[]),
@@ -2395,6 +2400,10 @@ export const createBatchOrders = async (
   const imagingMap = new Map(imagingItems.map((i) => [i.id, i]));
   const procedureMap = new Map(procedures.map((p) => [p.id, p]));
   const drugMap = new Map(drugs.map((d) => [d.id, d]));
+  const labRequestGroupId =
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : `lab-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
   // =========================================================================
   // 2. Batch insert all orders in parallel
@@ -2416,6 +2425,9 @@ export const createBatchOrders = async (
                 encounter_id: encounterId, // UUID - THE standard encounter identifier
                 test_id: order.test_id,
                 ordered_by: orderedBy,
+                lab_request_group_id: labRequestGroupId,
+                specimen_type: order.specimen_type || null,
+                specimen_identifier: order.specimen_identifier || null,
                 clinical_notes: order.clinical_notes,
                 priority: order.priority || 'Normal',
                 status: 'Pending',
@@ -2481,6 +2493,7 @@ export const createBatchOrders = async (
                 encounter_id: encounterId, // UUID - THE standard encounter identifier
                 drug_id: rx.drug_id || null, // Allow null if not provided
                 drug_name: rx.drug_name, // Store the name directly
+                is_external: rx.is_external === true,
                 doctor_id: orderedBy,
                 dosage: rx.dosage,
                 frequency: rx.frequency,
@@ -2498,7 +2511,7 @@ export const createBatchOrders = async (
                 clinical_notes: rx.clinical_notes, // Why was this drug prescribed
               })),
             )
-            .select('prescription_id, drug_id, drug_name')
+            .select('prescription_id, drug_id, drug_name, is_external')
         : Promise.resolve({ data: [], error: null }),
     ]);
 
@@ -2600,6 +2613,34 @@ export const createBatchOrders = async (
   );
 
   // =========================================================================
+  // 2.4 DIRECT BILLING: lab requests and prescriptions go straight to billing.
+  // The legacy lab/pharmacy acceptance queue is no longer required at MUHEDA.
+  // =========================================================================
+  const autoBillingTasks = [
+    ...result.labRequests.map((request) =>
+      acceptLabRequest({ request_id: request.request_id }),
+    ),
+    ...result.prescriptionRecords
+      .filter((rx) => !rx.is_external && rx.drug_id)
+      .map((rx) =>
+        acceptPrescription({ prescription_id: rx.prescription_id }),
+      ),
+  ];
+
+  if (autoBillingTasks.length > 0) {
+    const autoBillingResults = await Promise.allSettled(autoBillingTasks);
+    const failedBilling = autoBillingResults.filter(
+      (item) => item.status === 'rejected',
+    );
+    if (failedBilling.length > 0) {
+      log.warn('[BatchOrders] Some services were saved but billing failed', {
+        failed: failedBilling.length,
+        total: autoBillingTasks.length,
+      });
+    }
+  }
+
+  // =========================================================================
   // 2.5 CREATE NHIS APPROVAL ENTRIES FOR SERVICES REQUIRING PRE-AUTH
   // =========================================================================
   // Check which services are pending NHIS approval (set by database trigger)
@@ -2662,12 +2703,19 @@ export const createBatchOrders = async (
       }
     }
 
-    // Fetch which drugs require NHIS authorization
-    const drugsWithAuth = await supabase
-      .from('drug_catalogue')
-      .select('id, name, price, requires_nhis_authorization')
-      .in('id', prescriptions.map((p) => p.drug_id).filter(Boolean) as string[])
-      .eq('requires_nhis_authorization', true);
+    // Fetch which clinic drugs require NHIS authorization.
+    // External medications are never routed through NHIS or pharmacy.
+    const clinicDrugIds = prescriptions
+      .filter((p) => !p.is_external && p.drug_id)
+      .map((p) => p.drug_id) as string[];
+    const drugsWithAuth =
+      clinicDrugIds.length > 0
+        ? await supabase
+            .from('drug_catalogue')
+            .select('id, name, price, requires_nhis_authorization')
+            .in('id', clinicDrugIds)
+            .eq('requires_nhis_authorization', true)
+        : { data: [], error: null };
 
     // Create sets of IDs that require auth
     const labAuthSet = new Set((labTestsWithAuth.data || []).map((t) => t.id));

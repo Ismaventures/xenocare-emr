@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER DETAIL MODAL
+ * XENOCARE EMR - ENCOUNTER DETAIL MODAL
  * Professional centered modal showing complete encounter details at a glance
  * Includes: Clinical Notes, Vitals, Nursing Reports, Labs, Imaging, Prescriptions
  * =============================================================================
@@ -47,8 +47,8 @@ import { EncounterDetail } from '../../api/medical-records.api';
 import { useEncounterDetails } from '../../hooks/useMedicalRecords';
 import { supabase } from '../../../../api/supabaseClient';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types
@@ -974,11 +974,11 @@ export function EncounterDetailModal({
               <div className="flex items-start justify-between">
                 {/* Left: Logo + Patient Info */}
                 <div className="flex items-start gap-4">
-                  {/* NDC Logo */}
+                  {/* XenoCare Logo */}
                   <div className="flex-shrink-0 bg-white rounded-xl p-2 shadow-lg">
                     <img
                       src={ndcLogoSrc}
-                      alt="NDC Logo"
+                      alt="XenoCare Logo"
                       className="h-12 w-auto"
                     />
                   </div>
@@ -1115,7 +1115,7 @@ export function EncounterDetailModal({
             <div className="flex-shrink-0 bg-white border-t border-gray-200 px-6 py-3">
               <div className="flex items-center justify-between text-xs text-gray-500">
                 <div>
-                  Generated from NDC Medical Centre EMR System •{' '}
+                  Generated from XenoCare EMR System •{' '}
                   {new Date().toLocaleString()}
                 </div>
                 <button

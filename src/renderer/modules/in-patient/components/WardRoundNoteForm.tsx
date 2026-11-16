@@ -1,9 +1,10 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Ward Round Note Form Component
+// XENOCARE EMR - Ward Round Note Form Component
 // Form for documenting ward round notes and observations
 // =============================================================================
 
 import React, { useState, useMemo, useCallback } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   FileText,
   Stethoscope,
@@ -55,6 +56,7 @@ import type {
 } from '../../../types/database.types';
 import { useDraftRestore } from '../../../hooks/useDraftRestore';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import { useEncounterAccess } from '../../../lib/encounter/useEncounterAccess';
 import {
   DOSAGE_OPTIONS,
@@ -559,11 +561,13 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
 
     // Prepare referral data
     const referralData =
-      internalReferrals.length > 0 || externalReferral.enabled
+      internalReferrals.length > 0 ||
+      (isNhisFeatureEnabled() && externalReferral.enabled)
         ? {
             internal:
               internalReferrals.length > 0 ? internalReferrals : undefined,
-            external: externalReferral.enabled
+            external:
+              isNhisFeatureEnabled() && externalReferral.enabled
               ? {
                   facilityName: externalReferral.facilityName,
                   facilityAddress: externalReferral.facilityAddress,
@@ -1167,10 +1171,14 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
                       <SendHorizonal className="h-5 w-5 text-amber-600" />
                       Referrals
                       {(internalReferrals.length > 0 ||
-                        externalReferral.enabled) && (
+                        (isNhisFeatureEnabled() &&
+                          externalReferral.enabled)) && (
                         <span className="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-bold">
                           {internalReferrals.length +
-                            (externalReferral.enabled ? 1 : 0)}
+                            (isNhisFeatureEnabled() &&
+                            externalReferral.enabled
+                              ? 1
+                              : 0)}
                         </span>
                       )}
                     </div>
@@ -1320,6 +1328,7 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
                     </div>
 
                     {/* ── External NHIS Referral ── */}
+                    {isNhisFeatureEnabled() && (
                     <div className="pt-4 border-t border-amber-200">
                       <div className="flex items-center justify-between mb-3">
                         <h4 className="text-sm font-bold text-gray-900 flex items-center gap-2">
@@ -1494,13 +1503,15 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
                         </div>
                       )}
                     </div>
+                    )}
                   </div>
                 )}
 
                 {/* Referrals Summary (when collapsed) */}
                 {!showReferrals &&
                   (internalReferrals.length > 0 ||
-                    externalReferral.enabled) && (
+                    (isNhisFeatureEnabled() &&
+                      externalReferral.enabled)) && (
                     <div className="space-y-2">
                       {internalReferrals.map((ref) => (
                         <div
@@ -1534,7 +1545,7 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
                           </button>
                         </div>
                       ))}
-                      {externalReferral.enabled && (
+                      {isNhisFeatureEnabled() && externalReferral.enabled && (
                         <div className="flex items-center justify-between p-3 bg-amber-50 border border-amber-200 rounded-lg">
                           <div className="flex items-center gap-3">
                             <ExternalLink className="h-4 w-4 text-amber-600" />
@@ -1579,7 +1590,7 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
                         No referrals added
                       </p>
                       <p className="text-xs text-gray-400">
-                        Internal specialty or external NHIS referrals
+                        Internal specialty referrals
                       </p>
                     </div>
                   )}
@@ -1696,13 +1707,27 @@ const WardRoundNoteForm: React.FC<WardRoundNoteFormProps> = ({
 
               {/* SOAP Notes */}
               <div className="space-y-6">
-                <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
-                  <h3 className="font-bold text-gray-900 text-lg">
-                    Detailed Notes
-                  </h3>
-                  <span className="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs font-bold rounded">
-                    SOAP Format
-                  </span>
+                <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-gray-900 text-lg">
+                      Detailed Notes
+                    </h3>
+                    <span className="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs font-bold rounded">
+                      SOAP Format
+                    </span>
+                  </div>
+                  <TemplateSearchPopover
+                    templateType="inpatient"
+                    category="ward_round"
+                    currentValues={{ subjective, objective, assessment, plan }}
+                    onTemplateSelect={(data) => {
+                      if (data.subjective) setSubjective(data.subjective);
+                      if (data.objective) setObjective(data.objective);
+                      if (data.assessment) setAssessment(data.assessment);
+                      if (data.plan) setPlan(data.plan);
+                    }}
+                    buttonText="Fill All Fields"
+                  />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">

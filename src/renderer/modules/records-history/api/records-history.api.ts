@@ -1,6 +1,6 @@
 /**
  * Records History Module - Data API
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Queries each clinical module's tables and normalises results into
  * the UnifiedRecord shape for the Records History page.
@@ -14,6 +14,7 @@ import type {
   UnifiedRecord,
 } from '../types/records-history.types';
 import { RECORD_CATEGORIES } from '../types/records-history.types';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -103,7 +104,9 @@ async function fetchEncounters(
         safeStr(doc?.first_name),
         safeStr(doc?.last_name),
       ),
-      nhisRelated: safeStr(r.payment_category).toLowerCase().includes('nhis'),
+      nhisRelated:
+        isNhisFeatureEnabled() &&
+        safeStr(r.payment_category).toLowerCase().includes('nhis'),
     };
   });
 }
@@ -545,7 +548,9 @@ async function fetchBillingRecords(
       department: '',
       staffName: formatName(safeStr(staff?.first_name), safeStr(staff?.last_name)),
       amount: amt,
-      nhisRelated: safeStr(r.payment_category).toLowerCase().includes('nhis'),
+      nhisRelated:
+        isNhisFeatureEnabled() &&
+        safeStr(r.payment_category).toLowerCase().includes('nhis'),
     };
   });
 }
@@ -620,7 +625,9 @@ const CATEGORY_FETCHERS: Record<
   anc: fetchEncounters, // anc visits are stored as encounters with department filter
   admission: fetchAdmissionRecords,
   billing: fetchBillingRecords,
-  nhis_claim: fetchNhisClaimRecords,
+  nhis_claim: isNhisFeatureEnabled()
+    ? fetchNhisClaimRecords
+    : async () => [],
   specialty: fetchConsultations,
 };
 
@@ -657,7 +664,7 @@ export async function fetchRecordsHistory(
     'procedure',
     'admission',
     'billing',
-    'nhis_claim',
+    ...(isNhisFeatureEnabled() ? (['nhis_claim'] as const) : []),
   ];
 
   const results = await Promise.allSettled(

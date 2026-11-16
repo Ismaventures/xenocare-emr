@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER EXPORT UTILITIES
+ * XENOCARE EMR - ENCOUNTER EXPORT UTILITIES
  * Description: Functions for exporting encounter data to CSV/Excel
  * =============================================================================
  */

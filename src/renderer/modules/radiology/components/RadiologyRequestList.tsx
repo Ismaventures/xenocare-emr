@@ -12,6 +12,7 @@ import {
   X,
   SkipForward,
 } from 'lucide-react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   Input,
   Select,
@@ -409,7 +410,7 @@ export default function RadiologyRequestList({
       },
     ];
 
-    return showNhisColumn
+    return showNhisColumn && isNhisFeatureEnabled()
       ? tableColumns
       : tableColumns.filter((column) => column.key !== 'nhis');
   }, [

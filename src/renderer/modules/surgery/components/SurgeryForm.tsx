@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -25,6 +26,7 @@ import {
 import { supabase } from '../../../api/supabaseClient';
 import { sanitizeFilterValue } from '../../../lib/filterSanitizer';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface PatientSearchResult {
   id: string;
@@ -220,7 +222,8 @@ const SurgeryForm: React.FC = () => {
     setShowPatientDropdown(false);
     setFormData((prev) => ({
       ...prev,
-      requires_nhis_approval: patient.insurance_type === 'nhis',
+      requires_nhis_approval:
+        isNhisFeatureEnabled() && patient.insurance_type === 'nhis',
     }));
 
     // Reset previous selection
@@ -513,7 +516,9 @@ const SurgeryForm: React.FC = () => {
             </div>
           )}
 
-          {selectedPatient && formData.requires_nhis_approval && (
+          {isNhisFeatureEnabled() &&
+            selectedPatient &&
+            formData.requires_nhis_approval && (
             <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
               <p className="text-sm text-yellow-700">
                 ⚠️ This patient has NHIS insurance. Surgery will require NHIS
@@ -546,6 +551,18 @@ const SurgeryForm: React.FC = () => {
             </div>
 
             <div className="md:col-span-2">
+              <div className="flex justify-end mb-2">
+                <TemplateSearchPopover
+                  templateType="surgery"
+                  category="surgery_notes"
+                  currentValues={{ indication: formData.indication ?? '' }}
+                  onTemplateSelect={(data) => {
+                    if (data.indication) updateField('indication', data.indication);
+                    if (data.preop_history) updateField('indication', data.preop_history);
+                  }}
+                  buttonText="Fill All Fields"
+                />
+              </div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block text-sm font-medium text-gray-700">
                   Indication / Reason for Surgery *

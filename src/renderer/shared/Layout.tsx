@@ -16,6 +16,8 @@ import { NotificationBell } from '../components/ui/NotificationBell';
 import { useTimeTheme } from '../hooks/useTimeTheme';
 import { useUnreadCount } from '../modules/messaging/hooks/useMessaging';
 import { GlobalPatientSearch } from '../components/shared/GlobalPatientSearch';
+import XenoCareLogo from '../components/shared/XenoCareLogo';
+import { APP_POWERED_BY } from '../shared/constants/branding';
 
 interface SidebarItemProps {
   to: string;
@@ -106,7 +108,7 @@ function SidebarItem({
     );
   }
 
-  // Deep sidebar Ã¢â‚¬â€ teal / navy / night gradient (matches main clinical banners)
+  // Deep sidebar ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â teal / navy / night gradient (matches main clinical banners)
   if (surfaceDeep) {
     return (
       <Link
@@ -310,7 +312,7 @@ export default function Layout() {
     <div
       className={`flex h-screen min-h-0 w-full min-w-0 overflow-x-hidden ${isNightMode ? 'bg-slate-900' : 'bg-gray-100'}`}
     >
-      {/* Sidebar Ã¢â‚¬â€ compact width, soft geometry, floating shadow stack */}
+      {/* Sidebar ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â compact width, soft geometry, floating shadow stack */}
       <aside
         className={`${
           sidebarCollapsed
@@ -335,10 +337,10 @@ export default function Layout() {
                   : 'bg-white ring-white/40'
               } ${sidebarCollapsed ? 'h-9 w-9 p-1' : 'h-10 w-10 sm:h-11 sm:w-11 p-1.5'}`}
             >
-              <img
-                src={require('../../../assets/ndclogo.png')}
-                alt="NDC Medical Centre"
-                className="h-full w-full object-contain"
+              <XenoCareLogo
+                variant="brand"
+                compact
+                className="h-full w-full"
               />
             </div>
 
@@ -349,7 +351,7 @@ export default function Layout() {
                     isCrystalMode ? 'text-emerald-800' : 'text-white/95'
                   }`}
                 >
-                  NDC Medical Centre
+                  XenoCare
                 </p>
                 <p
                   className={`mt-0.5 text-[17px] font-bold leading-tight tracking-tight ${
@@ -409,6 +411,15 @@ export default function Layout() {
         </nav>
 
         <div className="mt-auto flex flex-col pb-5 pt-1 px-1.5">
+          {!sidebarCollapsed && (
+            <p
+              className={`mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.14em] ${
+                isCrystalMode ? 'text-emerald-700' : 'text-green-200/80'
+              }`}
+            >
+              {APP_POWERED_BY}
+            </p>
+          )}
           <button
             type="button"
             onClick={handleSignOut}
@@ -430,7 +441,7 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* Main Content Ã¢â‚¬â€ tight gutter next to sidebar; tinted shell matches teal clinical UI */}
+      {/* Main Content ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â tight gutter next to sidebar; tinted shell matches teal clinical UI */}
       <div
         className={`flex-1 flex flex-col overflow-hidden min-w-0 ${
           isCrystalMode

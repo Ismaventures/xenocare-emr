@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - ATC Classification Service
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * ATC (Anatomical Therapeutic Chemical) classification for medications
  * Reference: WHO Collaborating Centre for Drug Statistics Methodology

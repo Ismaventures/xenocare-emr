@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - useProcedureCatalogue Hook
+// XENOCARE EMR - useProcedureCatalogue Hook
 // React Query hook for procedure catalogue management
 // =============================================================================
 

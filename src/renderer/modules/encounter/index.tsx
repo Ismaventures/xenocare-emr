@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER MODULE INDEX
+ * XENOCARE EMR - ENCOUNTER MODULE INDEX
  * Description: Main page for the Encounter module with NDC branding
  * =============================================================================
  */
@@ -35,6 +35,8 @@ import {
 } from 'lucide-react';
 import { usePatient } from '../patient-registration/hooks/usePatient';
 import { useDebounce } from '../../hooks/useDebounce';
+import { isNhisFeatureEnabled } from '../../config/features';
+import { DEPLOYMENT } from '../../config/deployment';
 import {
   Encounter,
   EncounterFilters,
@@ -86,12 +88,12 @@ import {
   type ExternalReferral,
 } from '../../lib/referrals/tracking';
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-12 w-auto"
     />
   );
@@ -845,7 +847,9 @@ const EncounterModule: React.FC = () => {
       label: 'Settings',
       icon: Settings2,
     },
-  ];
+  ].filter(
+    (tab) => isNhisFeatureEnabled() || tab.id !== 'external-referrals',
+  );
 
   return (
     <div
@@ -855,7 +859,7 @@ const EncounterModule: React.FC = () => {
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${isNightMode ? 'bg-slate-800' : 'bg-white'} border border-gray-100 shadow-sm`}>
-            <NDCLogo />
+            <XenoCareLogo />
           </div>
           <div>
             <h1 className={`text-lg font-semibold ${isNightMode ? 'text-white' : 'text-gray-900'}`}>
@@ -1031,7 +1035,7 @@ const EncounterModule: React.FC = () => {
               </span>
               {/^\d+$/.test(debouncedSearchQuery) && (
                 <span className="text-[11px] text-gray-400">
-                  → NDC-{debouncedSearchQuery.padStart(4, '0')}
+                  → {DEPLOYMENT.emrPrefix}-{debouncedSearchQuery.padStart(DEPLOYMENT.emrPadding, '0')}
                 </span>
               )}
               <button
@@ -1244,7 +1248,7 @@ const EncounterModule: React.FC = () => {
         <InternalReferralQueue />
       )}
 
-      {activeTab === 'external-referrals' && (
+      {isNhisFeatureEnabled() && activeTab === 'external-referrals' && (
         <div className="space-y-3">
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             <div
@@ -1635,6 +1639,8 @@ const EncounterModule: React.FC = () => {
                   </div>
                 </div>
 
+                {isNhisFeatureEnabled() && (
+                  <>
                 {/* Military NHIS Pricing */}
                 <div className="pt-4 border-t border-gray-200">
                   <h4 className="text-sm font-semibold text-green-700 mb-3 flex items-center gap-2">
@@ -1839,6 +1845,8 @@ const EncounterModule: React.FC = () => {
                     </div>
                   </div>
                 </div>
+                  </>
+                )}
 
                 {/* Retainership Pricing */}
                 <div className="pt-4 border-t border-gray-200">
@@ -2032,13 +2040,13 @@ const EncounterModule: React.FC = () => {
               <div className="flex items-center gap-3">
                 <div className="bg-white rounded-lg p-1.5 shadow">
                   <img
-                    src={require('../../../../assets/ndclogo.png')}
-                    alt="NDC"
+                    src={require('../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare"
                     className="h-6 w-6 object-contain"
                   />
                 </div>
                 <span className="text-sm font-semibold">
-                  NDC Medical AI Assistants
+                  XenoCare AI Assistants
                 </span>
               </div>
 

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Unified Procedure Checklist Component
+// XENOCARE EMR - Unified Procedure Checklist Component
 // Dynamic checklist enforcement based on procedure classification
 // All procedures use the same documentation standard with intelligent N/A marking
 // =============================================================================

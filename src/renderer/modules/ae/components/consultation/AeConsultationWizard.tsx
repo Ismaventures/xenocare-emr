@@ -63,6 +63,7 @@ import {
 } from '../../../pharmacy/dtos/pharmacy.dto';
 import { SelectWithOther } from '../../../shared/components/SelectWithOther';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 import { resolvePatientVarcharId } from '../../../../lib/patient-id-resolver';
 
 // =============================================================================
@@ -930,6 +931,25 @@ export default function AeConsultationWizard({
                     color="blue"
                     subtitle="Patient history and presenting complaint"
                   />
+                  {/* Fill all SOAP fields from template */}
+                  <div className="flex justify-end">
+                    <TemplateSearchPopover
+                      templateType="ae"
+                      category="clinical_notes"
+                      currentValues={{
+                        history_of_presenting_complaint: hpi,
+                        assessment: clinicalImpression,
+                        plan: planText,
+                      }}
+                      onTemplateSelect={(data) => {
+                        if (data.history_of_presenting_complaint) setHpi(data.history_of_presenting_complaint);
+                        if (data.clinical_notes) setHpi(data.clinical_notes);
+                        if (data.assessment) setClinicalImpression(data.assessment);
+                        if (data.plan) setPlanText(data.plan);
+                      }}
+                      buttonText="Fill All Fields"
+                    />
+                  </div>
 
                   <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 space-y-5">
                     <div>

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Staff Profile Page
+// XENOCARE EMR - Staff Profile Page
 // Allows staff members to view and manage their own profile
 // =============================================================================
 

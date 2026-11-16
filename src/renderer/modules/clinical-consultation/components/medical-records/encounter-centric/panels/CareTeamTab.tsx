@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - CARE TEAM TAB (Encounter-Centric View)
+ * XENOCARE EMR - CARE TEAM TAB (Encounter-Centric View)
  * =============================================================================
  *
  * Improved, user-friendly care team management panel for the encounter-centric

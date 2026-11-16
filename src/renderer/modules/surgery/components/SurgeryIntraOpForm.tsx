@@ -19,6 +19,7 @@ import {
   getWoundClassificationDescription,
 } from '../types/surgery.types';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 const SurgeryIntraOpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -215,6 +216,19 @@ const SurgeryIntraOpForm: React.FC = () => {
             Surgical Findings & Technique
           </h2>
           <div className="space-y-4">
+            <div className="flex justify-end">
+              <TemplateSearchPopover
+                templateType="surgery"
+                category="surgery_intraop"
+                currentValues={{ intraop_findings: findings, procedure_details: procedureDetails, intraop_complications: complications }}
+                onTemplateSelect={(data) => {
+                  if (data.intraop_findings) setFindings(data.intraop_findings);
+                  if (data.procedure_details) setProcedureDetails(data.procedure_details);
+                  if (data.intraop_complications) setComplications(data.intraop_complications);
+                }}
+                buttonText="Fill All Fields"
+              />
+            </div>
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-700">

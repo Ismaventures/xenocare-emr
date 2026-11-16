@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -251,11 +252,13 @@ const SurgeryHistoryList: React.FC = () => {
             value={electiveCount}
             color="text-blue-600"
           />
-          <StatBadge
-            label="NHIS Cases"
-            value={nhisCount}
-            color="text-purple-600"
-          />
+          {isNhisFeatureEnabled() && (
+            <StatBadge
+              label="NHIS Cases"
+              value={nhisCount}
+              color="text-purple-600"
+            />
+          )}
         </div>
       </div>
 

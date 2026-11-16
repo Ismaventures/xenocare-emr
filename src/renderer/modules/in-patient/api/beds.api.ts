@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Beds API
+// XENOCARE EMR - Beds API
 // Supabase API functions for bed management
 // =============================================================================
 

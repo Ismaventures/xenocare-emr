@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Lab Report API
+ * XenoCare EMR — Lab Report API
  *
  * Provides structured, filtered, DB-level queries for Lab month-end reports.
  * Returns typed data consumed by LabReportModal and the export service.

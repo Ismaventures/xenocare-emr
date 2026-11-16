@@ -34,6 +34,7 @@ import {
 import { WardBedSelector } from './WardBedSelector';
 import { useAuth } from '../../../contexts/AuthContext';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface Ward {
   id: string;
@@ -387,6 +388,19 @@ export const AdmissionExecutionModal: React.FC<
 
               {/* Admitting Diagnosis */}
               <div>
+                <div className="flex justify-end mb-2">
+                  <TemplateSearchPopover
+                    templateType="inpatient"
+                    category="admission_notes"
+                    currentValues={{ admitting_diagnosis: admittingDiagnosis, reason_for_admission: reasonForAdmission, notes }}
+                    onTemplateSelect={(data) => {
+                      if (data.admitting_diagnosis) setAdmittingDiagnosis(data.admitting_diagnosis);
+                      if (data.reason_for_admission) setReasonForAdmission(data.reason_for_admission);
+                      if (data.notes) setNotes(data.notes);
+                    }}
+                    buttonText="Fill All Fields"
+                  />
+                </div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="block text-sm text-gray-600">
                     Admitting Diagnosis <span className="text-red-500">*</span>

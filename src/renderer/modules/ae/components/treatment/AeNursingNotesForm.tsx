@@ -9,6 +9,7 @@ import { useAddVitalObservation, useAeVitals } from '../../hooks/useAe';
 import { supabase } from '../../../../api/supabaseClient';
 import { useToast } from '../../../../components/ui/Toast';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 
 interface AeNursingNotesFormProps {
   encounterId: string;
@@ -237,12 +238,24 @@ export default function AeNursingNotesForm({
             <h4 className="text-sm font-semibold text-green-700 flex items-center gap-1.5">
               <FileText className="h-4 w-4" /> Nursing Note
             </h4>
-            <SavedNotesPopover
-              category="nursing_notes"
-              subcategory="ae_nursing"
-              currentValue={nursingNote}
-              onInsert={(content) => setNursingNote(content)}
-            />
+            <div className="flex items-center gap-1">
+              <TemplateSearchPopover
+                templateType="ae"
+                category="nursing_notes"
+                currentValues={{ nursing_notes: nursingNote }}
+                onTemplateSelect={(data) => {
+                  if (data.nursing_notes) setNursingNote(data.nursing_notes);
+                  if (data.notes) setNursingNote(data.notes);
+                }}
+                buttonText="Fill"
+              />
+              <SavedNotesPopover
+                category="nursing_notes"
+                subcategory="ae_nursing"
+                currentValue={nursingNote}
+                onInsert={(content) => setNursingNote(content)}
+              />
+            </div>
           </div>
           <textarea
             value={nursingNote}

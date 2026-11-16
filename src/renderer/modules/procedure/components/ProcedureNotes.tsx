@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Notes Component
+// XENOCARE EMR - Procedure Notes Component
 // Documentation of procedure findings, complications, and outcomes
 // Saves to procedures table: procedure_notes, findings, complications fields
 // =============================================================================

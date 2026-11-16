@@ -1,6 +1,6 @@
 /**
  * Clinical Export System
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Comprehensive clinical records export module following international
  * healthcare data standards (HL7 FHIR, ICD-10, LOINC, ATC, CPT)

@@ -1738,7 +1738,7 @@ export default function PhysiotherapyPage() {
                   <Bot className="h-5 w-5" />
                 </div>
                 <div>
-                  <span className="block text-sm font-semibold">NDC Medical AI Assistants</span>
+                  <span className="block text-sm font-semibold">XenoCare AI Assistants</span>
                   <span className="block text-[11px] text-white/80">Physiotherapy</span>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER HELPERS
+ * XENOCARE EMR - ENCOUNTER HELPERS
  * =============================================================================
  *
  * Utility functions for handling encounter identifiers and data transformations.

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COMPREHENSIVE CROSS-MODULE PDF EXPORT
+ * XENOCARE EMR - COMPREHENSIVE CROSS-MODULE PDF EXPORT
  * Description: Professional PDF generation for encounter reports with full module integration
  * Features:
  *   - Clinical data (Consultations, Diagnoses, Chief Complaints)
@@ -17,6 +17,7 @@
 
 import { Encounter } from '../dtos/encounter.dto';
 import { ComprehensiveEncounterFilters } from '../components/ComprehensiveEncounterFilterPanel';
+import { getFacilityAddress, getFacilityName } from '../../../lib/facility';
 
 // Electron shell for opening files
 const electron = window.require ? window.require('electron') : null;
@@ -24,8 +25,8 @@ const fs = electron ? window.require('fs') : null;
 const path = electron ? window.require('path') : null;
 const os = electron ? window.require('os') : null;
 
-// NDC Logo as base64 (fallback if image load fails)
-const NDC_LOGO_PATH = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo as base64 (fallback if image load fails)
+const NDC_LOGO_PATH = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types
@@ -1742,8 +1743,7 @@ export function generateEncounterPDFContent(data: EncounterPDFData): string {
   };
 
   const reportTitle = options.title || 'Encounter Summary Report';
-  const reportSubtitle =
-    options.subtitle || 'National Defence College Medical Centre';
+  const reportSubtitle = options.subtitle || getFacilityName();
   const generatedDate = reportDate.toLocaleString();
   const generatedBy = options.generatedBy || 'System Administrator';
 
@@ -1792,11 +1792,11 @@ export function generateEncounterPDFContent(data: EncounterPDFData): string {
   <div style="background: linear-gradient(135deg, #006838 0%, #008545 100%); color: white; padding: 24px; margin: -15mm -15mm 24px -15mm; display: flex; justify-content: space-between; align-items: center;">
     <div style="display: flex; align-items: center; gap: 20px;">
       <div style="background: white; padding: 8px; border-radius: 8px;">
-        <img src="${NDC_LOGO_PATH}" alt="NDC Logo" style="height: 60px; width: auto;" onerror="this.style.display='none'"/>
+        <img src="${NDC_LOGO_PATH}" alt="XenoCare" style="height: 60px; width: auto;" onerror="this.style.display='none'"/>
       </div>
       <div>
-        <h1 style="margin: 0; font-size: 20px; font-weight: bold;">NATIONAL DEFENCE COLLEGE</h1>
-        <h2 style="margin: 4px 0 0 0; font-size: 14px; font-weight: normal; opacity: 0.9;">Medical Centre - ${facilityAddress || 'Abuja, Nigeria'}</h2>
+        <h1 style="margin: 0; font-size: 20px; font-weight: bold;">${(facilityName || getFacilityName()).toUpperCase()}</h1>
+        <h2 style="margin: 4px 0 0 0; font-size: 14px; font-weight: normal; opacity: 0.9;">${facilityAddress || getFacilityAddress()}</h2>
       </div>
     </div>
     <div style="text-align: right;">
@@ -1941,7 +1941,7 @@ export function generateEncounterPDFContent(data: EncounterPDFData): string {
   <!-- Footer -->
   <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e7eb; text-align: center; font-size: 10px; color: #6b7280;">
     <p style="margin: 0;">This report is confidential and intended for authorized personnel only.</p>
-    <p style="margin: 4px 0 0 0;">National Defence College Medical Centre - EMR System</p>
+    <p style="margin: 4px 0 0 0;">${facilityName || getFacilityName()} - EMR System</p>
     <p style="margin: 4px 0 0 0;">Page generated on ${generatedDate}</p>
   </div>
 </body>
@@ -1979,7 +1979,7 @@ export async function saveAndOpenPDFReport(
 }> {
   const defaultOptions: PDFExportOptions = {
     title: 'Encounter Summary Report',
-    subtitle: 'National Defence College Medical Centre',
+    subtitle: getFacilityName(),
     includePatientDetails: true,
     includeClinicalInfo: true,
     includeBillingInfo: false,
@@ -1998,8 +1998,8 @@ export async function saveAndOpenPDFReport(
     encounters,
     filters,
     options: mergedOptions,
-    facilityName: 'National Defence College Medical Centre',
-    facilityAddress: 'Abuja, Nigeria',
+    facilityName: getFacilityName(),
+    facilityAddress: getFacilityAddress(),
     reportDate: new Date(),
   };
 
@@ -2008,7 +2008,7 @@ export async function saveAndOpenPDFReport(
   // Generate filename with timestamp
   const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
   const time = new Date().toTimeString().slice(0, 5).replace(':', '');
-  const filename = `NDC_Encounter_Report_${timestamp}_${time}.html`;
+  const filename = `XenoCare_Encounter_Report_${timestamp}_${time}.html`;
 
   try {
     // Check if we're in Electron environment
@@ -2067,7 +2067,7 @@ export function exportEncountersToPDF(
 ): void {
   const defaultOptions: PDFExportOptions = {
     title: 'Encounter Summary Report',
-    subtitle: 'National Defence College Medical Centre',
+    subtitle: getFacilityName(),
     includePatientDetails: true,
     includeClinicalInfo: true,
     includeBillingInfo: false,
@@ -2086,8 +2086,8 @@ export function exportEncountersToPDF(
     encounters,
     filters,
     options: mergedOptions,
-    facilityName: 'National Defence College Medical Centre',
-    facilityAddress: 'Abuja, Nigeria',
+    facilityName: getFacilityName(),
+    facilityAddress: getFacilityAddress(),
     reportDate: new Date(),
   };
 
@@ -2121,8 +2121,8 @@ export async function generatePDFBlob(
       orientation: 'landscape',
       ...options,
     } as PDFExportOptions,
-    facilityName: 'National Defence College Medical Centre',
-    facilityAddress: 'Abuja, Nigeria',
+    facilityName: getFacilityName(),
+    facilityAddress: getFacilityAddress(),
     reportDate: new Date(),
   });
 

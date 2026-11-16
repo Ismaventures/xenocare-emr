@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - QUERY BUILDERS
+ * XENOCARE EMR - QUERY BUILDERS
  * Supabase query builder functions for medical records
  * =============================================================================
  */

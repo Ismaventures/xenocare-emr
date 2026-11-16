@@ -10,6 +10,7 @@ import {
   X,
   Shield,
 } from 'lucide-react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   Input,
   Select,
@@ -342,7 +343,7 @@ export default function LabRequestList({
           </div>
         ),
       },
-    ],
+    ].filter((column) => isNhisFeatureEnabled() || column.key !== 'nhis'),
     [
       onView,
       onCollectSample,

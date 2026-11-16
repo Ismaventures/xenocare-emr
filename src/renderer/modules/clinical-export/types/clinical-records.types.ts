@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Record Types
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Comprehensive type definitions for clinical records following
  * international healthcare data standards (HL7 FHIR, ICD-10, LOINC, SNOMED-CT, CPT, ATC)

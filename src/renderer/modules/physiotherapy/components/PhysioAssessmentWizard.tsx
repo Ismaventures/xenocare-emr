@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PHYSIOTHERAPY ASSESSMENT WIZARD
+ * XENOCARE EMR - PHYSIOTHERAPY ASSESSMENT WIZARD
  * Modern step-based assessment workflow with progress indicator
  * Following SOAP methodology tailored for physiotherapy practice
  * =============================================================================
@@ -37,6 +37,7 @@ import {
   createDefaultSpecialtyReferrals,
   type SpecialtyReferralsState,
 } from '../../specialty-common';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import {
   useLabTestCatalogue,
   useImagingCatalogue,
@@ -64,6 +65,23 @@ import type {
   OutcomeMeasureEntry,
 } from '../types/physiotherapy.types';
 import { OUTCOME_MEASURE_INFO } from '../types/physiotherapy.types';
+
+const PHYSIO_TEMPLATE_CATEGORY = 'physio_assessment';
+const PHYSIO_TEMPLATE_FIELDS = [
+  'chief_complaint',
+  'rom_notes',
+  'muscle_strength_notes',
+  'sensation_notes',
+  'reflex_notes',
+  'palpation_findings',
+  'physio_diagnosis',
+  'short_term_goals',
+  'long_term_goals',
+  'patient_goals',
+  'prognosis_notes',
+] as const;
+
+type PhysioTemplateField = (typeof PHYSIO_TEMPLATE_FIELDS)[number];
 
 // =============================================================================
 // Types
@@ -2324,10 +2342,43 @@ export default function PhysioAssessmentWizard({
 
   const isLastStep = currentStep === STEPS.length - 1;
 
+  const physioTemplateValues: Record<PhysioTemplateField, string> = {
+    chief_complaint: formData.chief_complaint || '',
+    rom_notes: formData.rom_notes || '',
+    muscle_strength_notes: formData.muscle_strength_notes || '',
+    sensation_notes: formData.sensation_notes || '',
+    reflex_notes: formData.reflex_notes || '',
+    palpation_findings: formData.palpation_findings || '',
+    physio_diagnosis: formData.physio_diagnosis || '',
+    short_term_goals: formData.short_term_goals || '',
+    long_term_goals: formData.long_term_goals || '',
+    patient_goals: formData.patient_goals || '',
+    prognosis_notes: formData.prognosis_notes || '',
+  };
+
   const handleFieldChange = useCallback(
     (field: keyof PhysioAssessmentDTO, value: any) => {
       if (readOnly) return;
       setFormData((prev) => ({ ...prev, [field]: value }));
+    },
+    [readOnly],
+  );
+
+  const applyPhysioTemplate = useCallback(
+    (templateData: Record<string, string>) => {
+      if (readOnly) return;
+
+      setFormData((prev) => {
+        const next = { ...prev };
+
+        for (const field of PHYSIO_TEMPLATE_FIELDS) {
+          if (field in templateData) {
+            next[field] = templateData[field] ?? '';
+          }
+        }
+
+        return next;
+      });
     },
     [readOnly],
   );
@@ -2546,8 +2597,18 @@ export default function PhysioAssessmentWizard({
 
       {/* Footer Navigation */}
       <div className="border-t border-gray-200 bg-white px-6 py-4 flex items-center justify-between flex-shrink-0">
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          Step {currentStep + 1} of {STEPS.length}
+        <div className="flex items-center gap-3">
+          {!readOnly && (
+            <TemplateSearchPopover
+              templateType="physiotherapy"
+              category={PHYSIO_TEMPLATE_CATEGORY}
+              currentValues={physioTemplateValues}
+              onTemplateSelect={applyPhysioTemplate}
+            />
+          )}
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            Step {currentStep + 1} of {STEPS.length}
+          </div>
         </div>
 
         {/* Navigation Buttons - Grouped together */}

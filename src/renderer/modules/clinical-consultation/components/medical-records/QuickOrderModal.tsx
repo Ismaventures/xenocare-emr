@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - QUICK ORDER MODAL
+ * XENOCARE EMR - QUICK ORDER MODAL
  *
  * A streamlined modal for creating orders directly from encounter context.
  * Follows standard EMR practice of "Order from Chart" functionality.
@@ -45,6 +45,8 @@ import {
 import type { CategorizedOption } from '../../../../components/ui/CategorizedSearchableMultiSelect';
 import type { SearchableOption } from '../../../../components/ui/SearchableMultiSelect';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import PrescriptionEditor from '../prescriptions/PrescriptionEditor';
+import LabSpecimenFields from '../lab/LabSpecimenFields';
 import { useToast } from '../../../../components/ui/Toast';
 import {
   useLabTestCatalogue,
@@ -78,6 +80,7 @@ import {
 import { createTreatmentPlan } from '../../../treatment-plan/api/treatment-plan.api';
 import { createClinicalRequest } from '../../../clinical-requests/api/clinical-requests.api';
 import { createOutgoingReferral } from '../../../nhis/api/nhis.api';
+import { isNhisFeatureEnabled } from '../../../../config/features';
 import {
   DOSAGE_OPTIONS,
   FREQUENCY_OPTIONS,
@@ -262,6 +265,12 @@ export function QuickOrderModal({
     urgency: 'Routine' as 'Routine' | 'Urgent' | 'Emergency',
   });
 
+  React.useEffect(() => {
+    if (!isNhisFeatureEnabled() && externalNhisReferral.enabled) {
+      setExternalNhisReferral((prev) => ({ ...prev, enabled: false }));
+    }
+  }, [externalNhisReferral.enabled]);
+
   // Catalogues
   const { data: labTests } = useLabTestCatalogue();
   const { data: imagingOptions } = useImagingCatalogue();
@@ -293,7 +302,8 @@ export function QuickOrderModal({
 
   // Count total orders
   const referralCount =
-    (selectedSpecialty ? 1 : 0) + (externalNhisReferral.enabled ? 1 : 0);
+    (selectedSpecialty ? 1 : 0) +
+    (isNhisFeatureEnabled() && externalNhisReferral.enabled ? 1 : 0);
   const totalOrders =
     labOrders.length +
     radiologyOrders.length +
@@ -397,7 +407,11 @@ export function QuickOrderModal({
       }
 
       // 5. Submit external NHIS referral
-      if (externalNhisReferral.enabled && externalNhisReferral.facilityName) {
+      if (
+        isNhisFeatureEnabled() &&
+        externalNhisReferral.enabled &&
+        externalNhisReferral.facilityName
+      ) {
         await createOutgoingReferral({
           patient_id: patientId,
           source_encounter_id: encounterId,
@@ -920,6 +934,7 @@ function LabOrdersPanel({
         name: test.test_name,
         code: test.test_code,
         category: test.category || 'General',
+        subCategory: test.sample_type || undefined,
         price: test.price ?? null,
       })),
     [labTests],
@@ -943,6 +958,7 @@ function LabOrdersPanel({
                 test_id: testId,
                 priority: 'Normal',
                 test_name: test?.name,
+                specimen_type: test?.subCategory,
                 clinical_notes: '',
               },
             ]);
@@ -981,6 +997,17 @@ function LabOrdersPanel({
                     <X size={16} />
                   </button>
                 </div>
+                <LabSpecimenFields
+                  specimenType={order.specimen_type || test?.subCategory}
+                  specimenIdentifier={order.specimen_identifier}
+                  onChange={(patch) =>
+                    onOrdersChange(
+                      orders.map((o) =>
+                        o.test_id === order.test_id ? { ...o, ...patch } : o,
+                      ),
+                    )
+                  }
+                />
                 <textarea
                   value={order.clinical_notes || ''}
                   onChange={(e) =>
@@ -1150,278 +1177,12 @@ function PrescriptionsPanel({
     [drugOptions],
   );
 
-  const selectedDrugIds = useMemo(
-    () => prescriptions.map((p) => p.drug_id!),
-    [prescriptions],
-  );
-
-  // Track which drugs need configuration (pending)
-  const [pendingDrugIds, setPendingDrugIds] = useState<string[]>([]);
-
-  // Whether we're in configuration mode for a specific drug
-  const [configuringDrug, setConfiguringDrug] = useState<string | null>(null);
-  const [draftConfig, setDraftConfig] = useState({
-    dosage: '',
-    frequency: '',
-    duration: '',
-    route: 'Oral',
-    quantity_prescribed: 1,
-    instructions: '',
-  });
-
-  const allSelectedDrugIds = useMemo(
-    () => [...selectedDrugIds, ...pendingDrugIds],
-    [selectedDrugIds, pendingDrugIds],
-  );
-
-  const toggleDrug = (drugId: string) => {
-    if (allSelectedDrugIds.includes(drugId)) {
-      // Remove from pending or configured
-      setPendingDrugIds((prev) => prev.filter((id) => id !== drugId));
-      onPrescriptionsChange(prescriptions.filter((p) => p.drug_id !== drugId));
-    } else {
-      // Add to pending
-      setPendingDrugIds((prev) => [...prev, drugId]);
-    }
-  };
-
-  const startConfiguring = (drugId: string) => {
-    setConfiguringDrug(drugId);
-    setDraftConfig({
-      dosage: '',
-      frequency: '',
-      duration: '',
-      route: 'Oral',
-      quantity_prescribed: 1,
-      instructions: '',
-    });
-  };
-
-  const confirmDrugConfig = () => {
-    if (!configuringDrug) return;
-    const drug = drugSearchOptions.find((d) => d.id === configuringDrug);
-    onPrescriptionsChange([
-      ...prescriptions,
-      {
-        drug_id: configuringDrug,
-        drug_name: drug?.name || '',
-        ...draftConfig,
-      },
-    ]);
-    setPendingDrugIds((prev) => prev.filter((id) => id !== configuringDrug));
-    setConfiguringDrug(null);
-  };
-
   return (
-    <div className="space-y-4">
-      <SearchableMultiSelect
-        options={drugSearchOptions}
-        selectedIds={allSelectedDrugIds}
-        onToggleSelect={toggleDrug}
-        placeholder="Search medications by name or code..."
-      />
-
-      {/* Pending Drugs - Need Configuration */}
-      {pendingDrugIds.length > 0 && (
-        <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-xl">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-orange-100 rounded-lg">
-                <Pill className="h-4 w-4 text-orange-600" />
-              </div>
-              <p className="font-medium text-orange-800">
-                {pendingDrugIds.length} medication
-                {pendingDrugIds.length > 1 ? 's' : ''} pending configuration
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {pendingDrugIds.map((drugId) => {
-              const drug = drugSearchOptions.find((d) => d.id === drugId);
-              return (
-                <span
-                  key={drugId}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-orange-200 rounded-lg text-sm text-orange-800 cursor-pointer hover:bg-orange-100"
-                  onClick={() => startConfiguring(drugId)}
-                >
-                  {drug?.name || drugId}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setPendingDrugIds((prev) =>
-                        prev.filter((id) => id !== drugId),
-                      );
-                    }}
-                    className="p-0.5 hover:bg-orange-100 rounded"
-                  >
-                    <X size={12} />
-                  </button>
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Drug Configuration Modal */}
-      {configuringDrug && (
-        <div className="p-5 bg-white rounded-xl border border-gray-200 shadow-sm animate-in fade-in slide-in-from-bottom-2 space-y-4">
-          <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-            <h4 className="font-semibold text-gray-900">
-              Configure:{' '}
-              {drugSearchOptions.find((d) => d.id === configuringDrug)?.name ||
-                configuringDrug}
-            </h4>
-            <button
-              type="button"
-              onClick={() => setConfiguringDrug(null)}
-              className="p-1 text-gray-400 hover:text-gray-600"
-            >
-              <X size={16} />
-            </button>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
-                Dosage
-              </label>
-              <SearchableSelect
-                value={draftConfig.dosage}
-                onChange={(v) => setDraftConfig((p) => ({ ...p, dosage: v }))}
-                options={['Select...', ...DOSAGE_OPTIONS]}
-                placeholder="Select dosage..."
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
-                Frequency
-              </label>
-              <SearchableSelect
-                value={draftConfig.frequency}
-                onChange={(v) =>
-                  setDraftConfig((p) => ({ ...p, frequency: v }))
-                }
-                options={['Select...', ...FREQUENCY_OPTIONS]}
-                placeholder="Select frequency..."
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
-                Duration
-              </label>
-              <SearchableSelect
-                value={draftConfig.duration}
-                onChange={(v) => setDraftConfig((p) => ({ ...p, duration: v }))}
-                options={['Select...', ...DURATION_OPTIONS]}
-                placeholder="Select duration..."
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
-                Route
-              </label>
-              <SearchableSelect
-                value={draftConfig.route}
-                onChange={(v) => setDraftConfig((p) => ({ ...p, route: v }))}
-                options={ROUTE_OPTIONS}
-                placeholder="Select route..."
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">
-                Quantity
-              </label>
-              <input
-                type="number"
-                min={1}
-                value={draftConfig.quantity_prescribed}
-                onChange={(e) =>
-                  setDraftConfig((p) => ({
-                    ...p,
-                    quantity_prescribed: parseInt(e.target.value) || 1,
-                  }))
-                }
-                className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">
-              Instructions
-            </label>
-            <input
-              type="text"
-              value={draftConfig.instructions}
-              onChange={(e) =>
-                setDraftConfig((p) => ({
-                  ...p,
-                  instructions: e.target.value,
-                }))
-              }
-              placeholder="Special instructions..."
-              className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            />
-          </div>
-          <div className="flex justify-end gap-2 pt-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setConfiguringDrug(null)}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={confirmDrugConfig}
-              disabled={!draftConfig.dosage || !draftConfig.frequency}
-            >
-              <Plus size={14} className="mr-1" />
-              Add Prescription
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Selected Prescriptions */}
-      {prescriptions.length > 0 && (
-        <div className="mt-4 space-y-2">
-          <p className="text-sm font-medium text-gray-700">
-            Selected Medications:
-          </p>
-          {prescriptions.map((rx) => {
-            const drug = drugSearchOptions.find((d) => d.id === rx.drug_id);
-            return (
-              <div
-                key={rx.drug_id}
-                className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 shadow-sm transition-all hover:border-gray-300"
-              >
-                <div>
-                  <span className="font-medium text-gray-900">
-                    {drug?.name || rx.drug_name || rx.drug_id}
-                  </span>
-                  <span className="text-sm text-gray-500 ml-2">
-                    {rx.dosage} • {rx.frequency} • {rx.duration}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    onPrescriptionsChange(
-                      prescriptions.filter((p) => p.drug_id !== rx.drug_id),
-                    )
-                  }
-                  className="p-1 text-red-500 hover:bg-red-50 rounded"
-                >
-                  <X size={16} />
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
+    <PrescriptionEditor
+      prescriptions={prescriptions}
+      onChange={onPrescriptionsChange}
+      drugOptions={drugSearchOptions}
+    />
   );
 }
 
@@ -2259,37 +2020,39 @@ function ReferralsPanel({
                   </div>
                 </div>
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  onSelectedSpecialtyChange('');
-                  onExternalNhisReferralChange((prev) => ({
-                    ...prev,
-                    enabled: !prev.enabled,
-                  }));
-                }}
-                className={`p-4 rounded-xl border-2 text-left transition-all ${
-                  externalNhisReferral.enabled
-                    ? 'border-amber-500 bg-amber-50 ring-1 ring-amber-200'
-                    : 'border-gray-200 bg-white hover:border-amber-300 hover:bg-amber-50/50'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`p-2 rounded-lg ${externalNhisReferral.enabled ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-500'}`}
-                  >
-                    <ExternalLink size={20} />
+              {isNhisFeatureEnabled() && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onSelectedSpecialtyChange('');
+                    onExternalNhisReferralChange((prev) => ({
+                      ...prev,
+                      enabled: !prev.enabled,
+                    }));
+                  }}
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                    externalNhisReferral.enabled
+                      ? 'border-amber-500 bg-amber-50 ring-1 ring-amber-200'
+                      : 'border-gray-200 bg-white hover:border-amber-300 hover:bg-amber-50/50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`p-2 rounded-lg ${externalNhisReferral.enabled ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-500'}`}
+                    >
+                      <ExternalLink size={20} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        External NHIS Referral
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Refer to an outside hospital (requires NHIS approval)
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      External NHIS Referral
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Refer to an outside hospital (requires NHIS approval)
-                    </p>
-                  </div>
-                </div>
-              </button>
+                </button>
+              )}
             </div>
           </div>
 
@@ -2497,7 +2260,7 @@ function ReferralsPanel({
         )}
 
         {/* External NHIS Referral Form */}
-        {externalNhisReferral.enabled && (
+        {isNhisFeatureEnabled() && externalNhisReferral.enabled && (
           <div className="p-6 rounded-xl border border-amber-200 bg-white shadow-sm ring-1 ring-amber-100 animate-in fade-in slide-in-from-top-2">
             <div className="flex items-center gap-3 mb-4 pb-4 border-b border-amber-100">
               <div className="bg-amber-50 p-2 rounded-lg">

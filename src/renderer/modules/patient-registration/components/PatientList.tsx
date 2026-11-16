@@ -30,6 +30,10 @@ import {
 } from '../dtos/patient.dto';
 import { Gender, PatientStatus, StaffCategory } from '../../../types';
 import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
+import {
   DataTable,
   StatusBadge,
   EmptyState,
@@ -106,6 +110,12 @@ const INSURANCE_OPTIONS: Array<{ value: InsuranceType | ''; label: string }> = [
   { value: 'Security_Services_NHIS', label: 'Security Services NHIS' },
 ];
 
+const VISIBLE_INSURANCE_OPTIONS = isNhisFeatureEnabled()
+  ? INSURANCE_OPTIONS
+  : INSURANCE_OPTIONS.filter(
+      (option) => !option.value || !isNhisCategory(option.value),
+    );
+
 const NHIS_SOURCE_OPTIONS: Array<{
   value: NHISPatientSource | '';
   label: string;
@@ -165,6 +175,7 @@ export default function PatientList({
   const [currentPage, setCurrentPage] = useState(1);
   const [deletePatient, setDeletePatient] = useState<PatientDTO | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [showLegacyFilters, setShowLegacyFilters] = useState(false);
   const [isExportingPdf, setIsExportingPdf] = useState(false);
 
   const patientFilters = useMemo<PatientSearchParams>(
@@ -608,12 +619,33 @@ export default function PatientList({
                   <p
                     className={`mt-1 text-xs ${isNightMode ? 'text-slate-400' : 'text-slate-500'}`}
                   >
-                    Admin tools for registration segmentation and PDF export
-                    stay inside this drawer.
+                    Everyday filters stay visible. Legacy classification
+                    filters are optional.
                   </p>
                 )}
               </div>
               <div className="flex items-center gap-2">
+                {canUseAdminRegistrationFilters && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (showLegacyFilters) {
+                        setCategoryFilter('');
+                        setPatientCategoryFilter('');
+                        setPatientTypeFilter('');
+                        setInsuranceTypeFilter('');
+                        setNhisSourceFilter('');
+                        setCurrentPage(1);
+                      }
+                      setShowLegacyFilters((value) => !value);
+                    }}
+                    className={`text-xs font-semibold ${isNightMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-800'}`}
+                  >
+                    {showLegacyFilters
+                      ? 'Hide legacy classification filters'
+                      : 'Show legacy classification filters'}
+                  </button>
+                )}
                 {hasActiveFilters && (
                   <button
                     type="button"
@@ -643,23 +675,25 @@ export default function PatientList({
                   className="w-full"
                 />
               </div>
-              <div>
-                <label
-                  className={`mb-1.5 block text-xs font-medium ${isNightMode ? 'text-slate-400' : 'text-slate-600'}`}
-                >
-                  Staff category
-                </label>
-                <Select
-                  options={CATEGORY_OPTIONS}
-                  value={categoryFilter}
-                  onChange={(e) => {
-                    setCategoryFilter(e.target.value as StaffCategory | '');
-                    setCurrentPage(1);
-                  }}
-                  className="w-full"
-                />
-              </div>
-              {canUseAdminRegistrationFilters && (
+              {canUseAdminRegistrationFilters && showLegacyFilters && (
+                <div>
+                  <label
+                    className={`mb-1.5 block text-xs font-medium ${isNightMode ? 'text-slate-400' : 'text-slate-600'}`}
+                  >
+                    Staff category
+                  </label>
+                  <Select
+                    options={CATEGORY_OPTIONS}
+                    value={categoryFilter}
+                    onChange={(e) => {
+                      setCategoryFilter(e.target.value as StaffCategory | '');
+                      setCurrentPage(1);
+                    }}
+                    className="w-full"
+                  />
+                </div>
+              )}
+              {canUseAdminRegistrationFilters && showLegacyFilters && (
                 <>
                   <div>
                     <label
@@ -704,7 +738,7 @@ export default function PatientList({
                       Insurance type
                     </label>
                     <Select
-                      options={INSURANCE_OPTIONS}
+                      options={VISIBLE_INSURANCE_OPTIONS}
                       value={insuranceTypeFilter}
                       onChange={(e) => {
                         setInsuranceTypeFilter(
@@ -715,24 +749,30 @@ export default function PatientList({
                       className="w-full"
                     />
                   </div>
-                  <div>
-                    <label
-                      className={`mb-1.5 block text-xs font-medium ${isNightMode ? 'text-slate-400' : 'text-slate-600'}`}
-                    >
-                      NHIS source
-                    </label>
-                    <Select
-                      options={NHIS_SOURCE_OPTIONS}
-                      value={nhisSourceFilter}
-                      onChange={(e) => {
-                        setNhisSourceFilter(
-                          e.target.value as NHISPatientSource | '',
-                        );
-                        setCurrentPage(1);
-                      }}
-                      className="w-full"
-                    />
-                  </div>
+                  {isNhisFeatureEnabled() && (
+                    <div>
+                      <label
+                        className={`mb-1.5 block text-xs font-medium ${isNightMode ? 'text-slate-400' : 'text-slate-600'}`}
+                      >
+                        NHIS source
+                      </label>
+                      <Select
+                        options={NHIS_SOURCE_OPTIONS}
+                        value={nhisSourceFilter}
+                        onChange={(e) => {
+                          setNhisSourceFilter(
+                            e.target.value as NHISPatientSource | '',
+                          );
+                          setCurrentPage(1);
+                        }}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+              {canUseAdminRegistrationFilters && (
+                <>
                   <div>
                     <label
                       className={`mb-1.5 block text-xs font-medium ${isNightMode ? 'text-slate-400' : 'text-slate-600'}`}

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Comprehensive Analytics Dashboard
+// XENOCARE EMR - Comprehensive Analytics Dashboard
 // Professional analytics with REAL database data
 // =============================================================================
 

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Wards API
+// XENOCARE EMR - Wards API
 // Supabase API functions for ward management
 // =============================================================================
 

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Details Component
+// XENOCARE EMR - Procedure Details Component
 // Detailed view of a single procedure with status management
 // =============================================================================
 
@@ -421,7 +421,7 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
         </div>
 
         <div class="header">
-          <h1>NDC Medical Centre - Procedure Details</h1>
+          <h1>XenoCare - Procedure Details</h1>
           <h2>${procedure.procedure_number}</h2>
         </div>
         
@@ -541,7 +541,7 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
         }
 
         <div class="footer">
-          Printed on ${new Date().toLocaleString()} | NDC Medical Centre EMR System
+          Printed on ${new Date().toLocaleString()} | XenoCare EMR System
         </div>
 
         <script>
@@ -584,13 +584,13 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
   const handlePrintConsentForm = () => {
     setShowActions(false);
 
-    // Load NDC logo as base64 for embedding in HTML
+    // Load XenoCare logo as base64 for embedding in HTML
     let ndcLogoBase64 = '';
     try {
-      const logoModule = require('../../../../../assets/ndclogo.png');
+      const logoModule = require('../../../../../assets/xenocare-logo.png');
       ndcLogoBase64 = logoModule.default || logoModule;
     } catch (error) {
-      console.warn('Could not load NDC logo:', error);
+      console.warn('Could not load XenoCare logo:', error);
     }
 
     // Format dates
@@ -1109,10 +1109,10 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
           <div class="header">
             <div class="logo-section">
               <div class="logo">
-                ${ndcLogoBase64 ? `<img src="${ndcLogoBase64}" alt="NDC Logo" />` : '<span style="font-size:18px;font-weight:bold;color:#059669;">NDC</span>'}
+                ${ndcLogoBase64 ? `<img src="${ndcLogoBase64}" alt="XenoCare Logo" />` : '<span style="font-size:18px;font-weight:bold;color:#059669;">XenoCare</span>'}
               </div>
               <div class="hospital-info">
-                <div class="hospital-name">NDC MEDICAL CENTRE</div>
+                <div class="hospital-name">XENOCARE</div>
                 <div class="hospital-subtitle">National Diagnostic Center</div>
                 <div class="hospital-tagline">Excellence in Healthcare Delivery</div>
               </div>
@@ -1160,7 +1160,7 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
           <div class="section">
             <div class="section-title">Patient Consent Statement</div>
             <div class="section-content">
-              I, the undersigned, hereby authorize the medical team at <strong>NDC Medical Centre</strong> to perform the above-named procedure. I acknowledge that:
+              I, the undersigned, hereby authorize the medical team at <strong>XenoCare</strong> to perform the above-named procedure. I acknowledge that:
               <ol class="consent-list">
                 <li>The nature, purpose, and expected benefits of the procedure have been explained to me.</li>
                 <li>The potential risks, complications, and alternatives have been discussed with me.</li>
@@ -1272,11 +1272,11 @@ const ProcedureDetails: React.FC<ProcedureDetailsProps> = ({
               This form is part of the patient's<br/>permanent medical record.
             </div>
             <div class="footer-center">
-              <div class="footer-logo">NDC MEDICAL CENTRE</div>
+              <div class="footer-logo">XENOCARE</div>
               <div class="footer-tagline">Excellence in Healthcare Delivery</div>
             </div>
             <div class="footer-right">
-              Form: NDC-CONSENT-001<br/>
+              Form: XC-CONSENT-001<br/>
               Rev: 2026.01
             </div>
           </div>

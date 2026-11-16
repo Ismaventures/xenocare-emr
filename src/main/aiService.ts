@@ -291,7 +291,7 @@ function getAIConfig(): LLMConfig {
   const provider = (process.env.AI_PROVIDER ||
     'ollama') as LLMConfig['provider'];
   log.info(
-    `[AI Config] Provider=${provider}, OLLAMA_CHAT_MODEL=${process.env.OLLAMA_CHAT_MODEL || 'qwen3-coder:480b-cloud'}, OLLAMA_BASE_URL=${process.env.OLLAMA_BASE_URL || 'http://localhost:11434'}`,
+    `[AI Config] Provider=${provider}, OLLAMA_CHAT_MODEL=${process.env.OLLAMA_CHAT_MODEL || 'gemma4:31b-cloud'}, OLLAMA_BASE_URL=${process.env.OLLAMA_BASE_URL || 'http://localhost:11434'}`,
   );
   return {
     provider,
@@ -314,7 +314,7 @@ function getAIConfig(): LLMConfig {
     ollama: {
       baseUrl: process.env.OLLAMA_BASE_URL || 'http://localhost:11434',
       apiKey: process.env.OLLAMA_API_KEY || '',
-      chatModel: process.env.OLLAMA_CHAT_MODEL || 'qwen3-coder:480b-cloud',
+      chatModel: process.env.OLLAMA_CHAT_MODEL || 'gemma4:31b-cloud',
       embeddingModel: process.env.OLLAMA_EMBEDDING_MODEL || 'nomic-embed-text',
       dimensions: Number(process.env.OLLAMA_EMBEDDING_DIMENSIONS) || 768,
     },
@@ -334,10 +334,237 @@ function endpointFromUrl(url: string): string {
   }
 }
 
+function hasConfiguredLLMProvider(config: LLMConfig): boolean {
+  switch (config.provider) {
+    case 'ollama':
+      return Boolean(config.ollama.baseUrl);
+    case 'groq':
+      return Boolean(config.groq.apiKey);
+    case 'gemini':
+      return Boolean(config.gemini.apiKey);
+    case 'openai':
+    default:
+      return Boolean(config.openai.apiKey);
+  }
+}
+
+function getConfiguredChatModel(config: LLMConfig): string {
+  switch (config.provider) {
+    case 'ollama':
+      return config.ollama.chatModel;
+    case 'groq':
+      return config.groq.model;
+    case 'gemini':
+      return config.gemini.model;
+    case 'openai':
+    default:
+      return config.openai.model;
+  }
+}
+
+function hasEmbeddingProviderConfigured(config: LLMConfig): boolean {
+  return Boolean(config.ollama.baseUrl || config.gemini.apiKey);
+}
+
+async function fetchOllamaModelNames(
+  baseUrl: string,
+  apiKey: string,
+): Promise<string[]> {
+  const headers: Record<string, string> = {};
+  if (apiKey) {
+    headers.Authorization = `Bearer ${apiKey}`;
+  }
+
+  const response = await fetchWithRetry(`${baseUrl}/api/tags`, {
+    method: 'GET',
+    headers,
+  });
+
+  const data = await response.json();
+  const models = Array.isArray(data?.models) ? data.models : [];
+  return models
+    .map((model) =>
+      typeof model?.name === 'string' ? model.name.trim() : undefined,
+    )
+    .filter((name): name is string => Boolean(name));
+}
+
+async function isOllamaModelAvailable(
+  baseUrl: string,
+  modelName: string,
+  apiKey: string,
+): Promise<boolean> {
+  const normalizedTarget = modelName.trim().toLowerCase();
+  if (!normalizedTarget) return false;
+
+  const installedModels = await fetchOllamaModelNames(baseUrl, apiKey);
+  return installedModels.some((installedModel) => {
+    const normalizedInstalled = installedModel.trim().toLowerCase();
+    return (
+      normalizedInstalled === normalizedTarget ||
+      normalizedInstalled === `${normalizedTarget}:latest` ||
+      `${normalizedInstalled}:latest` === normalizedTarget
+    );
+  });
+}
+
 const AI_FETCH_TIMEOUT_MS = Math.max(
   1000,
   Number(process.env.AI_FETCH_TIMEOUT_MS || 30000),
 );
+const AI_STREAM_IDLE_TIMEOUT_MS = Math.max(
+  1000,
+  Number(process.env.AI_STREAM_IDLE_TIMEOUT_MS || 45000),
+);
+const AI_CHAT_MAX_TOKENS = Math.max(
+  64,
+  Number(process.env.AI_CHAT_MAX_TOKENS || 2048),
+);
+const OLLAMA_CHAT_MAX_TOKENS = Math.max(
+  64,
+  Number(process.env.OLLAMA_CHAT_MAX_TOKENS || 384),
+);
+const OLLAMA_NUM_CTX = Math.max(
+  256,
+  Number(process.env.OLLAMA_NUM_CTX || 2048),
+);
+const LOCAL_OLLAMA_QUERY_MAX_RESULTS = Math.max(
+  1,
+  Number(process.env.OLLAMA_QUERY_MAX_RESULTS || 3),
+);
+const LOCAL_OLLAMA_PHARMACY_MAX_ROWS = Math.max(
+  4,
+  Number(process.env.OLLAMA_PHARMACY_MAX_ROWS || 12),
+);
+const LOCAL_OLLAMA_GLOBAL_MAX_ROWS = Math.max(
+  6,
+  Number(process.env.OLLAMA_GLOBAL_MAX_ROWS || 20),
+);
+const LOCAL_OLLAMA_GLOBAL_WIDE_MAX_ROWS = Math.max(
+  8,
+  Number(process.env.OLLAMA_GLOBAL_WIDE_MAX_ROWS || 40),
+);
+const LOCAL_OLLAMA_CHART_CONTEXT_CHARS = Math.max(
+  600,
+  Number(process.env.OLLAMA_CHART_CONTEXT_CHARS || 2200),
+);
+const LOCAL_OLLAMA_SEARCH_CONTEXT_CHARS = Math.max(
+  400,
+  Number(process.env.OLLAMA_SEARCH_CONTEXT_CHARS || 1400),
+);
+const LOCAL_OLLAMA_PHARMACY_CONTEXT_CHARS = Math.max(
+  500,
+  Number(process.env.OLLAMA_PHARMACY_CONTEXT_CHARS || 1800),
+);
+const LOCAL_OLLAMA_GLOBAL_CONTEXT_CHARS = Math.max(
+  700,
+  Number(process.env.OLLAMA_GLOBAL_CONTEXT_CHARS || 2600),
+);
+const LOCAL_OLLAMA_CONVERSATION_CHARS = Math.max(
+  250,
+  Number(process.env.OLLAMA_CONVERSATION_CHARS || 500),
+);
+const LOCAL_OLLAMA_QUERY_CHARS = Math.max(
+  120,
+  Number(process.env.OLLAMA_QUERY_CHARS || 600),
+);
+
+function getChatMaxTokens(provider: LLMConfig['provider']): number {
+  return provider === 'ollama' ? OLLAMA_CHAT_MAX_TOKENS : AI_CHAT_MAX_TOKENS;
+}
+
+function getOllamaChatOptions() {
+  return {
+    num_ctx: OLLAMA_NUM_CTX,
+    num_predict: OLLAMA_CHAT_MAX_TOKENS,
+    temperature: 0.2,
+  };
+}
+
+function isOllamaCloudModel(model: string): boolean {
+  return /(?:^|:|-|\b)cloud$/i.test(model.trim());
+}
+
+function isConstrainedLocalOllama(config: LLMConfig): boolean {
+  return (
+    config.provider === 'ollama' &&
+    !isOllamaCloudModel(config.ollama.chatModel) &&
+    OLLAMA_NUM_CTX <= 4096
+  );
+}
+
+function truncateForLocalModel(text: string, maxChars: number): string {
+  if (!text) return text;
+  if (text.length <= maxChars) return text;
+  const slice = text.slice(0, maxChars).trimEnd();
+  return `${slice}\n\n[Context truncated for local Phi-3 runtime]`;
+}
+
+function buildLLMUserContent(
+  config: LLMConfig,
+  sections: {
+    chartContext?: string;
+    pharmacyContext?: string;
+    globalClinicalContext?: string;
+    searchContext?: string;
+    searchResultCount?: number;
+    conversationContext?: string;
+    questionLabel: string;
+    query: string;
+  },
+): string {
+  const compactForLocalModel = isConstrainedLocalOllama(config);
+  const queryText = compactForLocalModel
+    ? truncateForLocalModel(sections.query, LOCAL_OLLAMA_QUERY_CHARS)
+    : sections.query;
+
+  const parts: string[] = [];
+
+  if (compactForLocalModel) {
+    parts.push(
+      '## LOCAL OLLAMA MODE\nUse the compact context below only. If evidence is missing, say so explicitly rather than inferring beyond the supplied records.',
+    );
+  }
+
+  if (sections.globalClinicalContext) {
+    parts.push(
+      `# GLOBAL CLINICAL CONTEXT\n\n${compactForLocalModel ? truncateForLocalModel(sections.globalClinicalContext, LOCAL_OLLAMA_GLOBAL_CONTEXT_CHARS) : sections.globalClinicalContext}`,
+    );
+  }
+
+  if (sections.chartContext) {
+    parts.push(
+      `# COMPLETE PATIENT CHART\n\n${compactForLocalModel ? truncateForLocalModel(sections.chartContext, LOCAL_OLLAMA_CHART_CONTEXT_CHARS) : sections.chartContext}`,
+    );
+  }
+
+  if (sections.pharmacyContext) {
+    parts.push(
+      `# PHARMACY OPERATIONAL CONTEXT\n\n${compactForLocalModel ? truncateForLocalModel(sections.pharmacyContext, LOCAL_OLLAMA_PHARMACY_CONTEXT_CHARS) : sections.pharmacyContext}`,
+    );
+  }
+
+  if (sections.searchContext) {
+    const searchHeading = `# SEARCH RESULTS (${sections.searchResultCount || 0} records matching "${queryText}")`;
+    parts.push(
+      `${searchHeading}\n\n${compactForLocalModel ? truncateForLocalModel(sections.searchContext, LOCAL_OLLAMA_SEARCH_CONTEXT_CHARS) : sections.searchContext}`,
+    );
+  }
+
+  if (sections.conversationContext) {
+    parts.push(
+      compactForLocalModel
+        ? truncateForLocalModel(
+            sections.conversationContext,
+            LOCAL_OLLAMA_CONVERSATION_CHARS,
+          )
+        : sections.conversationContext,
+    );
+  }
+
+  parts.push(`---\n\n**${sections.questionLabel}**: ${queryText}`);
+  return parts.filter(Boolean).join('\n\n');
+}
 
 // =============================================================================
 // LLM Chat Completion
@@ -607,9 +834,10 @@ async function chatCompletionStream(
     'Content-Type': 'application/json',
   };
   let model: string;
+  const maxTokens = getChatMaxTokens(config.provider);
 
   if (config.provider === 'ollama') {
-    url = `${config.ollama.baseUrl}/v1/chat/completions`;
+    url = `${config.ollama.baseUrl}/api/chat`;
     if (config.ollama.apiKey)
       headers.Authorization = `Bearer ${config.ollama.apiKey}`;
     model = config.ollama.chatModel;
@@ -640,23 +868,41 @@ async function chatCompletionStream(
     return result;
   }
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      model,
-      messages:
-        config.provider === 'openai'
-          ? messages
-          : messages.map((message) => ({
-              ...message,
-              content: flattenMessageContent(message.content),
-            })),
-      temperature: 0.2,
-      max_tokens: 2048,
-      stream: true,
-    }),
-  });
+  const streamController = new AbortController();
+  const requestBody =
+    config.provider === 'ollama'
+      ? {
+          model,
+          messages: messages.map((message) => ({
+            ...message,
+            content: flattenMessageContent(message.content),
+          })),
+          options: getOllamaChatOptions(),
+          stream: true,
+        }
+      : {
+          model,
+          messages:
+            config.provider === 'openai'
+              ? messages
+              : messages.map((message) => ({
+                  ...message,
+                  content: flattenMessageContent(message.content),
+                })),
+          temperature: 0.2,
+          max_tokens: maxTokens,
+          stream: true,
+        };
+  const response = await fetchWithRetry(
+    url,
+    {
+      method: 'POST',
+      headers,
+      signal: streamController.signal,
+      body: JSON.stringify(requestBody),
+    },
+    0,
+  );
 
   if (!response.ok) {
     const errBody = await response.text();
@@ -672,16 +918,65 @@ async function chatCompletionStream(
   const decoder = new TextDecoder();
   let buffer = '';
 
+  const readNextChunk = async () => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    try {
+      return await Promise.race([
+        reader.read(),
+        new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(() => {
+            streamController.abort();
+            void reader.cancel().catch(() => undefined);
+            reject(
+              new Error(
+                `AI stream stalled for more than ${AI_STREAM_IDLE_TIMEOUT_MS}ms`,
+              ),
+            );
+          }, AI_STREAM_IDLE_TIMEOUT_MS);
+        }),
+      ]);
+    } finally {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    }
+  };
+
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const { done, value } = await reader.read();
+    const { done, value } = await readNextChunk();
     if (done) break;
     buffer += decoder.decode(value, { stream: true });
     const lines = buffer.split('\n');
     buffer = lines.pop() || '';
     for (const line of lines) {
       const trimmed = line.trim();
-      if (!trimmed || trimmed === 'data: [DONE]') continue;
+      if (!trimmed) continue;
+      if (config.provider === 'ollama') {
+        try {
+          const json = JSON.parse(trimmed);
+          const delta = json.message?.content;
+          if (delta) {
+            fullContent += delta;
+            chunkCount += 1;
+            onChunk(delta);
+          }
+          if (json.done) {
+            const promptTokens =
+              typeof json.prompt_eval_count === 'number'
+                ? json.prompt_eval_count
+                : 0;
+            const completionTokens =
+              typeof json.eval_count === 'number' ? json.eval_count : 0;
+            tokensUsed = promptTokens + completionTokens;
+          }
+        } catch {
+          /* skip malformed Ollama stream line */
+        }
+        continue;
+      }
+
+      if (trimmed === 'data: [DONE]') continue;
       if (trimmed.startsWith('data: ')) {
         try {
           const json = JSON.parse(trimmed.slice(6));
@@ -736,7 +1031,7 @@ async function chatOpenAI(
         model: config.openai.model,
         messages,
         temperature: 0.2,
-        max_tokens: 2048,
+        max_tokens: getChatMaxTokens(config.provider),
       }),
     },
   );
@@ -753,7 +1048,7 @@ async function chatOllama(
   messages: ChatMessage[],
   config: LLMConfig,
 ): Promise<ChatResult> {
-  const url = `${config.ollama.baseUrl}/v1/chat/completions`;
+  const url = `${config.ollama.baseUrl}/api/chat`;
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -769,15 +1064,15 @@ async function chatOllama(
         ...message,
         content: flattenMessageContent(message.content),
       })),
-      temperature: 0.2,
-      max_tokens: 2048,
+      stream: false,
+      options: getOllamaChatOptions(),
     }),
   });
 
   const data = await response.json();
   return {
-    content: data.choices?.[0]?.message?.content ?? '',
-    tokensUsed: data.usage?.total_tokens ?? 0,
+    content: data.message?.content ?? '',
+    tokensUsed: (data.prompt_eval_count ?? 0) + (data.eval_count ?? 0),
     model: config.ollama.chatModel,
   };
 }
@@ -805,7 +1100,7 @@ async function chatGroq(
           content: flattenMessageContent(message.content),
         })),
         temperature: 0.2,
-        max_tokens: 2048,
+        max_tokens: getChatMaxTokens(config.provider),
       }),
     },
   );
@@ -994,10 +1289,16 @@ async function generateQueryEmbedding(text: string): Promise<number[]> {
 
   // Always use Ollama for embeddings (local, fast, no API quota issues)
   const ollamaUrl = `${config.ollama.baseUrl}/api/embed`;
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (config.ollama.apiKey) {
+    headers.Authorization = `Bearer ${config.ollama.apiKey}`;
+  }
   try {
     const resp = await fetch(ollamaUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         model: config.ollama.embeddingModel,
         input: text,
@@ -1036,11 +1337,31 @@ async function generateQueryEmbedding(text: string): Promise<number[]> {
     });
     return embedding;
   } catch (err) {
+    const allowCloudEmbeddingFallback =
+      config.provider !== 'ollama' && Boolean(config.gemini.apiKey);
+
+    if (!allowCloudEmbeddingFallback) {
+      log.warn(
+        '[AI Service] Ollama embedding failed in local-only mode. Install the configured Ollama embedding model and retry:',
+        String(err),
+      );
+      logOperationDuration({
+        module: 'AIService',
+        action: 'generateQueryEmbedding',
+        step: 'embedding_failed',
+        duration_ms: Date.now() - startedAt,
+        trace_id: traceId,
+        provider: 'ollama',
+        input_chars: text.length,
+        error: err instanceof Error ? err.message : String(err),
+      });
+      throw err;
+    }
+
     log.warn(
       '[AI Service] Ollama embedding failed, falling back to Gemini:',
       String(err),
     );
-    // Fallback to Gemini if Ollama is down
     if (config.gemini.apiKey) {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${config.gemini.embeddingModel}:embedContent?key=${config.gemini.apiKey}`;
       const geminiStartedAt = Date.now();
@@ -1069,16 +1390,6 @@ async function generateQueryEmbedding(text: string): Promise<number[]> {
       });
       return embedding;
     }
-    logOperationDuration({
-      module: 'AIService',
-      action: 'generateQueryEmbedding',
-      step: 'embedding_failed',
-      duration_ms: Date.now() - startedAt,
-      trace_id: traceId,
-      provider: 'ollama',
-      input_chars: text.length,
-      error: err instanceof Error ? err.message : String(err),
-    });
     throw err;
   }
 }
@@ -1087,7 +1398,7 @@ async function generateQueryEmbedding(text: string): Promise<number[]> {
 // System Prompt — Enhanced for comprehensive clinical decision support
 // =============================================================================
 
-const CLINICAL_SYSTEM_PROMPT = `You are NDC Medical AI Assistants, a senior clinical decision-support AI embedded in a hospital EMR. You support clinicians with accurate, structured summaries of the CURRENT patient only. Never replace clinical judgement.
+const CLINICAL_SYSTEM_PROMPT = `You are XenoCare Medical AI Assistant, a senior clinical decision-support AI embedded in a hospital EMR. You support clinicians with accurate, structured summaries of the CURRENT patient only. Never replace clinical judgement.
 
 STRICT SCOPING:
 - Use only data in the provided chart context.
@@ -1155,7 +1466,7 @@ ADDITIONAL RULES:
 - For no relevant results, return: "📭 No records found for this query."
 - For chart-based clinical answers, end with: "⚕️ AI-generated summary - verify with clinical records before making clinical decisions."`;
 
-const CLINICAL_GLOBAL_SYSTEM_PROMPT = `You are NDC Medical AI Assistants supporting cross-patient EMR analysis for authorized clinicians.
+const CLINICAL_GLOBAL_SYSTEM_PROMPT = `You are XenoCare Medical AI Assistant supporting cross-patient EMR analysis for authorized clinicians.
 
 GLOBAL MODE RULES:
 - Scope can include multiple patients and modules across the EMR.
@@ -1212,7 +1523,7 @@ SAFETY:
 
 const PHARMACY_SYSTEM_PROMPT = `SYSTEM PROMPT: PHARMACY AI - PRECISE RESPONSE MODE
 
-You are a Pharmacy AI assistant. Your role is to support pharmacists with medication management, dispensing, inventory, NHIS drug reporting, audits, and financial summaries.
+You are a Pharmacy AI assistant. Your role is to support pharmacists with medication management, dispensing, inventory, audits, and financial summaries.
 
 IMPORTANT: When responding to user queries:
 
@@ -1408,7 +1719,7 @@ function buildShortcutResponse(
   }
 
   if (scope === 'pharmacy') {
-    return 'Hi. I can help with dispensing queues, stock levels, NHIS status, and pharmacy billing checks. Ask a specific pharmacy question.';
+    return 'Hi. I can help with dispensing queues, stock levels, and pharmacy billing checks. Ask a specific pharmacy question.';
   }
 
   return 'Hi. I can help with patient chart review, vitals, consultations, labs, and timeline checks. Ask a focused question or request a full patient summary.';
@@ -3433,8 +3744,18 @@ function wrapSuccess(data: unknown) {
   return { success: true, data };
 }
 
-function wrapError(error: unknown) {
+function formatAIErrorMessage(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error);
+  if (
+    /operation was aborted|stream stalled|abort/i.test(message)
+  ) {
+    return 'Local Ollama request timed out before Phi-3 finished. Try a shorter, more specific question.';
+  }
+  return message;
+}
+
+function wrapError(error: unknown) {
+  const message = formatAIErrorMessage(error);
   log.error('[AI Service]', message);
   return { success: false, error: message };
 }
@@ -3489,6 +3810,9 @@ export function registerAIHandlers(): void {
 
       const searchType = req.searchType || 'hybrid';
       const maxResults = req.maxResults || 10;
+      const effectiveMaxResults = isConstrainedLocalOllama(config)
+        ? Math.min(maxResults, LOCAL_OLLAMA_QUERY_MAX_RESULTS)
+        : maxResults;
       const conversationContext = buildConversationHistoryContext(
         req.conversationHistory,
       );
@@ -3498,9 +3822,13 @@ export function registerAIHandlers(): void {
         !isPharmacyScope && detectGlobalClinicalIntent(req.query);
       const isGlobalClinicalQuery =
         !isPharmacyScope && (!req.patientId || hasGlobalClinicalIntent);
-      const globalClinicalMaxRows = hasGlobalClinicalIntent
-        ? Math.max(300, maxResults * 30)
-        : Math.max(80, maxResults * 8);
+      const globalClinicalMaxRows = isConstrainedLocalOllama(config)
+        ? hasGlobalClinicalIntent
+          ? LOCAL_OLLAMA_GLOBAL_WIDE_MAX_ROWS
+          : LOCAL_OLLAMA_GLOBAL_MAX_ROWS
+        : hasGlobalClinicalIntent
+          ? Math.max(300, maxResults * 30)
+          : Math.max(80, maxResults * 8);
       const systemPrompt = resolveSystemPrompt(req.assistantScope, {
         isGlobalClinical: isGlobalClinicalQuery,
       });
@@ -3515,7 +3843,9 @@ export function registerAIHandlers(): void {
             req.query,
             {
               patientId: req.patientId,
-              maxRows: Math.max(30, maxResults * 3),
+              maxRows: isConstrainedLocalOllama(config)
+                ? LOCAL_OLLAMA_PHARMACY_MAX_ROWS
+                : Math.max(30, maxResults * 3),
             },
           );
         } catch (pharmErr) {
@@ -3567,11 +3897,12 @@ export function registerAIHandlers(): void {
           );
         }
 
-        const userContent = [
-          `# PHARMACY OPERATIONAL CONTEXT\n\n${pharmacyContextResult.contextText}`,
-          conversationContext ? `\n\n${conversationContext}` : '',
-          `\n\n---\n\n**Pharmacist's Question**: ${req.query}`,
-        ].join('');
+        const userContent = buildLLMUserContent(config, {
+          pharmacyContext: pharmacyContextResult.contextText,
+          conversationContext,
+          questionLabel: "Pharmacist's Question",
+          query: req.query,
+        });
 
         const messages: ChatMessage[] = [
           { role: 'system', content: systemPrompt },
@@ -3661,13 +3992,14 @@ export function registerAIHandlers(): void {
           );
         }
 
-        const userContent = [
-          globalClinicalContextResult?.contextText
-            ? `# GLOBAL CLINICAL CONTEXT\n\n${globalClinicalContextResult.contextText}`
-            : '# GLOBAL CLINICAL CONTEXT\n\nNo global records matched this query scope.',
-          conversationContext ? `\n\n${conversationContext}` : '',
-          `\n\n---\n\n**Clinician's Question**: ${req.query}`,
-        ].join('');
+        const userContent = buildLLMUserContent(config, {
+          globalClinicalContext:
+            globalClinicalContextResult?.contextText ||
+            'No global records matched this query scope.',
+          conversationContext,
+          questionLabel: "Clinician's Question",
+          query: req.query,
+        });
 
         const messages: ChatMessage[] = [
           { role: 'system', content: systemPrompt },
@@ -3758,7 +4090,7 @@ export function registerAIHandlers(): void {
         req.query,
         queryEmbedding,
         effectiveSearchType,
-        maxResults,
+        effectiveMaxResults,
         config,
       );
 
@@ -3809,21 +4141,17 @@ export function registerAIHandlers(): void {
           : '';
 
       // 6. Build message with comprehensive context + search-specific results
-      const userContent = [
-        comprehensiveContext
-          ? `# COMPLETE PATIENT CHART\n\n${comprehensiveContext}`
-          : '',
-        pharmacyContextResult?.hasData
-          ? `\n\n# PHARMACY OPERATIONAL CONTEXT\n\n${pharmacyContextResult.contextText}`
-          : '',
-        searchContext
-          ? `\n\n# SEARCH RESULTS (${(searchResults || []).length} records matching "${req.query}")\n\n${searchContext}`
-          : '',
-        conversationContext ? `\n\n${conversationContext}` : '',
-        `\n\n---\n\n**${isPharmacyScope ? "Pharmacist's" : "Doctor's"} Question**: ${req.query}`,
-      ]
-        .filter(Boolean)
-        .join('');
+      const userContent = buildLLMUserContent(config, {
+        chartContext: comprehensiveContext,
+        pharmacyContext: pharmacyContextResult?.hasData
+          ? pharmacyContextResult.contextText
+          : undefined,
+        searchContext,
+        searchResultCount: (searchResults || []).length,
+        conversationContext,
+        questionLabel: `${isPharmacyScope ? "Pharmacist's" : "Doctor's"} Question`,
+        query: req.query,
+      });
 
       const messages: ChatMessage[] = [
         { role: 'system', content: systemPrompt },
@@ -3954,6 +4282,9 @@ export function registerAIHandlers(): void {
 
       const searchType = req.searchType || 'hybrid';
       const maxResults = req.maxResults || 10;
+      const effectiveMaxResults = isConstrainedLocalOllama(config)
+        ? Math.min(maxResults, LOCAL_OLLAMA_QUERY_MAX_RESULTS)
+        : maxResults;
       const conversationContext = buildConversationHistoryContext(
         req.conversationHistory,
       );
@@ -3964,9 +4295,13 @@ export function registerAIHandlers(): void {
         !isPharmacyScope && detectGlobalClinicalIntent(req.query);
       const isGlobalClinicalQuery =
         !isPharmacyScope && (!req.patientId || hasGlobalClinicalIntent);
-      const globalClinicalMaxRows = hasGlobalClinicalIntent
-        ? Math.max(300, maxResults * 30)
-        : Math.max(80, maxResults * 8);
+      const globalClinicalMaxRows = isConstrainedLocalOllama(config)
+        ? hasGlobalClinicalIntent
+          ? LOCAL_OLLAMA_GLOBAL_WIDE_MAX_ROWS
+          : LOCAL_OLLAMA_GLOBAL_MAX_ROWS
+        : hasGlobalClinicalIntent
+          ? Math.max(300, maxResults * 30)
+          : Math.max(80, maxResults * 8);
       const systemPrompt = resolveSystemPrompt(req.assistantScope, {
         isGlobalClinical: isGlobalClinicalQuery,
       });
@@ -3981,7 +4316,9 @@ export function registerAIHandlers(): void {
             req.query,
             {
               patientId: req.patientId,
-              maxRows: Math.max(30, maxResults * 3),
+              maxRows: isConstrainedLocalOllama(config)
+                ? LOCAL_OLLAMA_PHARMACY_MAX_ROWS
+                : Math.max(30, maxResults * 3),
             },
           );
         } catch (pharmErr) {
@@ -4037,11 +4374,12 @@ export function registerAIHandlers(): void {
           );
         }
 
-        const userContent = [
-          `# PHARMACY OPERATIONAL CONTEXT\n\n${pharmacyContextResult.contextText}`,
-          conversationContext ? `\n\n${conversationContext}` : '',
-          `\n\n---\n\n**Pharmacist's Question**: ${req.query}`,
-        ].join('');
+        const userContent = buildLLMUserContent(config, {
+          pharmacyContext: pharmacyContextResult.contextText,
+          conversationContext,
+          questionLabel: "Pharmacist's Question",
+          query: req.query,
+        });
 
         const messages: ChatMessage[] = [
           { role: 'system', content: systemPrompt },
@@ -4131,13 +4469,14 @@ export function registerAIHandlers(): void {
           );
         }
 
-        const userContent = [
-          globalClinicalContextResult?.contextText
-            ? `# GLOBAL CLINICAL CONTEXT\n\n${globalClinicalContextResult.contextText}`
-            : '# GLOBAL CLINICAL CONTEXT\n\nNo global records matched this query scope.',
-          conversationContext ? `\n\n${conversationContext}` : '',
-          `\n\n---\n\n**Clinician's Question**: ${req.query}`,
-        ].join('');
+        const userContent = buildLLMUserContent(config, {
+          globalClinicalContext:
+            globalClinicalContextResult?.contextText ||
+            'No global records matched this query scope.',
+          conversationContext,
+          questionLabel: "Clinician's Question",
+          query: req.query,
+        });
 
         const messages: ChatMessage[] = [
           { role: 'system', content: systemPrompt },
@@ -4213,7 +4552,7 @@ export function registerAIHandlers(): void {
         req.query,
         queryEmbedding,
         effectiveSearchType,
-        maxResults,
+        effectiveMaxResults,
         config,
       );
 
@@ -4260,21 +4599,17 @@ export function registerAIHandlers(): void {
               .join('\n\n---\n\n')
           : '';
 
-      const userContent = [
-        comprehensiveContext
-          ? `# COMPLETE PATIENT CHART\n\n${comprehensiveContext}`
-          : '',
-        pharmacyContextResult?.hasData
-          ? `\n\n# PHARMACY OPERATIONAL CONTEXT\n\n${pharmacyContextResult.contextText}`
-          : '',
-        searchContext
-          ? `\n\n# SEARCH RESULTS (${(searchResults || []).length} records matching "${req.query}")\n\n${searchContext}`
-          : '',
-        conversationContext ? `\n\n${conversationContext}` : '',
-        `\n\n---\n\n**${isPharmacyScope ? "Pharmacist's" : "Doctor's"} Question**: ${req.query}`,
-      ]
-        .filter(Boolean)
-        .join('');
+      const userContent = buildLLMUserContent(config, {
+        chartContext: comprehensiveContext,
+        pharmacyContext: pharmacyContextResult?.hasData
+          ? pharmacyContextResult.contextText
+          : undefined,
+        searchContext,
+        searchResultCount: (searchResults || []).length,
+        conversationContext,
+        questionLabel: `${isPharmacyScope ? "Pharmacist's" : "Doctor's"} Question`,
+        query: req.query,
+      });
 
       const messages: ChatMessage[] = [
         { role: 'system', content: systemPrompt },
@@ -4992,20 +5327,24 @@ Finally, end with:
     try {
       const health: Record<string, unknown> = {
         provider: config.provider,
-        configured: false,
+        configured: hasConfiguredLLMProvider(config),
         llmReachable: false,
         embeddingReachable: false,
+        supabaseConfigured: !!config.supabaseUrl && !!config.supabaseKey,
       };
 
-      if (config.provider === 'openai') {
-        health.configured = !!config.openai.apiKey;
-        if (health.configured) {
+      if (health.configured) {
+        if (config.provider === 'ollama') {
           try {
-            await generateQueryEmbedding('health check');
-            health.embeddingReachable = true;
+            health.llmReachable = await isOllamaModelAvailable(
+              config.ollama.baseUrl,
+              config.ollama.chatModel,
+              config.ollama.apiKey,
+            );
           } catch {
-            health.embeddingReachable = false;
+            health.llmReachable = false;
           }
+        } else {
           try {
             await chatCompletion([{ role: 'user', content: 'Hi' }]);
             health.llmReachable = true;
@@ -5013,32 +5352,20 @@ Finally, end with:
             health.llmReachable = false;
           }
         }
-      } else if (config.provider === 'groq') {
-        health.configured = !!config.groq.apiKey;
-        if (health.configured) {
+      }
+
+      if (hasEmbeddingProviderConfigured(config)) {
+        if (config.provider === 'ollama') {
           try {
-            await chatCompletion([{ role: 'user', content: 'Hi' }]);
-            health.llmReachable = true;
-          } catch {
-            health.llmReachable = false;
-          }
-          try {
-            await generateQueryEmbedding('health check');
-            health.embeddingReachable = true;
+            health.embeddingReachable = await isOllamaModelAvailable(
+              config.ollama.baseUrl,
+              config.ollama.embeddingModel,
+              config.ollama.apiKey,
+            );
           } catch {
             health.embeddingReachable = false;
           }
-        }
-      } else {
-        // Gemini
-        health.configured = !!config.gemini.apiKey;
-        if (health.configured) {
-          try {
-            await chatCompletion([{ role: 'user', content: 'Hi' }]);
-            health.llmReachable = true;
-          } catch {
-            health.llmReachable = false;
-          }
+        } else {
           try {
             await generateQueryEmbedding('health check');
             health.embeddingReachable = true;
@@ -5047,8 +5374,6 @@ Finally, end with:
           }
         }
       }
-
-      health.supabaseConfigured = !!config.supabaseUrl && !!config.supabaseKey;
 
       return wrapSuccess(
         validateResponse(aiHealthResponseSchema, health, 'ai:health'),
@@ -5060,19 +5385,16 @@ Finally, end with:
 
   // ─── ai:config — get AI configuration (redacted) ─────────────────────────
   ipcMain.handle('ai:config', async () => {
-    const chatModel =
-      config.provider === 'groq'
-        ? config.groq.model
-        : config.provider === 'gemini'
-          ? config.gemini.model
-          : config.openai.model;
+    const chatModel = getConfiguredChatModel(config);
     const embeddingModel = `ollama/${config.ollama.embeddingModel} (${config.ollama.dimensions}d)`;
     const hasApiKey =
-      config.provider === 'groq'
-        ? !!config.groq.apiKey
-        : config.provider === 'gemini'
-          ? !!config.gemini.apiKey
-          : !!config.openai.apiKey;
+      config.provider === 'ollama'
+        ? !!config.ollama.apiKey
+        : config.provider === 'groq'
+          ? !!config.groq.apiKey
+          : config.provider === 'gemini'
+            ? !!config.gemini.apiKey
+            : !!config.openai.apiKey;
 
     return wrapSuccess(
       validateResponse(
@@ -5082,6 +5404,7 @@ Finally, end with:
           chatModel,
           embeddingModel,
           hasApiKey,
+          ollamaBaseUrl: config.provider === 'ollama' ? config.ollama.baseUrl : undefined,
         },
         'ai:config',
       ),

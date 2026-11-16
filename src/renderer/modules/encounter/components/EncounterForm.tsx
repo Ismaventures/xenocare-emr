@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER FORM COMPONENT
+ * XENOCARE EMR - ENCOUNTER FORM COMPONENT
  * Description: Form for creating/editing encounters with NDC branding
  * =============================================================================
  */
@@ -54,15 +54,17 @@ import {
   useReferralQueue,
 } from '../../nhis/hooks';
 import { createScopedLogger } from '../../../utils/logger';
+import { isNhisFeatureEnabled } from '../../../config/features';
+import { DEPLOYMENT } from '../../../config/deployment';
 
 const log = createScopedLogger('EncounterForm');
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-10 w-auto"
     />
   );
@@ -93,7 +95,7 @@ function getPaymentCategoryFromInsurance(
   const type = insuranceType.toLowerCase().replace(/_/g, ' ');
   // DHML is Military NHIS HMO, not a separate category
   if (type === 'dhml' || type.includes('nhis') || type === 'gifship') {
-    return 'NHIS'; // All NHIS types map to 'NHIS' payment category
+    return isNhisFeatureEnabled() ? 'NHIS' : 'Cash';
   }
   if (type.includes('retainer') || type.includes('corporate')) {
     return 'Retainership';
@@ -260,6 +262,7 @@ function isAeClinic(
 
 // Helper: Check if patient is NHIS based on insurance type
 function isNhisPatient(insuranceType: string | undefined): boolean {
+  if (!isNhisFeatureEnabled()) return false;
   if (!insuranceType) return false;
   return [
     'Military_NHIS',
@@ -313,6 +316,7 @@ function requiresExternalNhisApproval(
 function isEligibleForExternalNhisReferral(
   nhisPatientSource: 'Internal' | 'Referral' | undefined,
 ): boolean {
+  if (!isNhisFeatureEnabled()) return false;
   // External NHIS Referral is ONLY for patients registered as "Referral"
   // (patients referred from another facility with valid referral documentation)
   // Internal patients are registered directly at this facility and should use standard workflows
@@ -336,6 +340,15 @@ function getNhisPatientSourceLabel(
 
 // Get human-readable insurance type description
 function getInsuranceTypeLabel(insuranceType: string | undefined): string {
+  if (
+    !isNhisFeatureEnabled() &&
+    insuranceType &&
+    ['dhml', 'gifship', 'civilian nhis', 'military nhis', 'security services nhis'].includes(
+      insuranceType.toLowerCase().replace(/_/g, ' '),
+    )
+  ) {
+    return 'Private';
+  }
   switch (insuranceType) {
     case 'DHML':
       return 'Military NHIS (DHML)';
@@ -668,6 +681,7 @@ const EncounterForm: React.FC<EncounterFormProps> = ({
   }, [selectedPatient, nhisProfile]);
 
   const isReferralAndUnverified = useMemo(() => {
+    if (!isNhisFeatureEnabled()) return false;
     if (!selectedPatient) return false;
     // Rule: Referral patients MUST have an active, verified NHIS profile
     // This profile is created/activated during the NHIS Module Verification process.
@@ -691,6 +705,7 @@ const EncounterForm: React.FC<EncounterFormProps> = ({
   }, [referralQueueData, selectedPatient]);
 
   const hasActiveReferralRequest = useMemo(() => {
+    if (!isNhisFeatureEnabled()) return false;
     return (
       referralQueueStatus === 'pending' || referralQueueStatus === 'in_review'
     );
@@ -700,7 +715,11 @@ const EncounterForm: React.FC<EncounterFormProps> = ({
     if (isReferralAndUnverified) {
       return ['Referred NHIS Patient (External)'] as VisitType[];
     }
-    return Array.from(VisitTypes) as VisitType[];
+    return (Array.from(VisitTypes) as VisitType[]).filter(
+      (visitType) =>
+        isNhisFeatureEnabled() ||
+        visitType !== 'Referred NHIS Patient (External)',
+    );
   }, [isReferralAndUnverified]);
 
   useEffect(() => {
@@ -1025,16 +1044,16 @@ const EncounterForm: React.FC<EncounterFormProps> = ({
           <div className="bg-gradient-to-r from-primary-700 to-primary-600 px-6 py-4 rounded-t-xl">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                {/* NDC Logo */}
+                {/* XenoCare Logo */}
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white p-1.5">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-white">
                     New Encounter
                   </h2>
                   <p className="text-sm text-white/80">
-                    NDC Medical Centre - Create Patient Visit
+                    XenoCare - Create Patient Visit
                   </p>
                 </div>
               </div>
@@ -1192,8 +1211,8 @@ const EncounterForm: React.FC<EncounterFormProps> = ({
                 <div className="flex items-center gap-2 text-sm text-gray-500 bg-amber-50 border border-amber-200 rounded-lg p-3">
                   <AlertCircle className="h-4 w-4 text-amber-600" />
                   <span>
-                    Search by name, phone, EMR number (e.g. "1" or "0001" for
-                    NDC-0001)
+                    Search by name, phone, EMR number (e.g. "1" or "000001"
+                    for {DEPLOYMENT.emrPrefix}-000001)
                   </span>
                 </div>
               </div>

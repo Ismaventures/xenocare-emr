@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - P1 Analytics Page
+// XENOCARE EMR - P1 Analytics Page
 // Unified page for all P1 priority operational analytics dashboards
 // =============================================================================
 
@@ -19,6 +19,7 @@ import DoctorProductivityDashboard from './DoctorProductivityDashboard';
 import LabTatDashboard from './LabTatDashboard';
 import PharmacyCostDashboard from './PharmacyCostDashboard';
 import MissingDocumentationDashboard from './MissingDocumentationDashboard';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 // =============================================================================
 // Types
@@ -81,7 +82,12 @@ const tabs: TabConfig[] = [
 // =============================================================================
 
 const P1AnalyticsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<P1Tab>('nhis');
+  const [activeTab, setActiveTab] = useState<P1Tab>(
+    isNhisFeatureEnabled() ? 'nhis' : 'doctor-productivity',
+  );
+  const visibleTabs = tabs.filter(
+    (tab) => isNhisFeatureEnabled() || tab.id !== 'nhis',
+  );
 
   const renderContent = () => {
     switch (activeTab) {
@@ -112,7 +118,7 @@ const P1AnalyticsPage: React.FC = () => {
                 Operational Analytics
               </h1>
               <p className="text-sm text-gray-500">
-                P1 Priority Dashboards - NHIS, Productivity, TAT, Cost Analysis
+                P1 Priority Dashboards - Productivity, TAT, Cost Analysis
               </p>
             </div>
           </div>
@@ -121,7 +127,7 @@ const P1AnalyticsPage: React.FC = () => {
         {/* Tab Navigation */}
         <div className="px-6">
           <nav className="flex space-x-1 overflow-x-auto" aria-label="Tabs">
-            {tabs.map((tab) => {
+            {visibleTabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
 

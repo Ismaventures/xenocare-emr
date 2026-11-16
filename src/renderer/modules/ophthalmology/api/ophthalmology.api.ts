@@ -8,6 +8,7 @@ import { validateEncounterForModification } from '../../../lib/encounter/validat
 import { logAudit, EntityType, AuditAction } from '../../../lib/audit';
 import { createBillingOrder } from '../../billing/api/billing-order.api';
 import { calculateNhisServiceCoverage } from '../../billing/utils/coverage.utils';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import type {
   EyeExamDTO,
   CreateEyeExamDTO,
@@ -30,6 +31,7 @@ const PAID_STATUSES = ['Paid', 'Paid_NHIS', 'Paid_Retainership'];
 
 // Helper to check if patient is NHIS (includes all NHIS categories + DHML which is Military NHIS HMO)
 function isNhisPatient(insuranceType: string): boolean {
+  if (!isNhisFeatureEnabled()) return false;
   const normalized = (insuranceType || '')
     .toLowerCase()
     .replace(/_/g, ' ')

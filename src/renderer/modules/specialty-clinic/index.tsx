@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - SPECIALTY CLINIC MODULE
+ * XENOCARE EMR - SPECIALTY CLINIC MODULE
  *
  * This module provides template-driven consultation forms for specialty OPD
  * clinics. Unlike the standard GOPD consultation wizard, this module uses
@@ -15,6 +15,7 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
+import { isNhisFeatureEnabled } from '../../config/features';
 import { Navigate } from 'react-router-dom';
 import {
   Microscope,
@@ -652,7 +653,7 @@ export default function SpecialtyClinicPage() {
         }
 
         // Process External NHIS Referral
-        if (externalNhisReferral) {
+        if (isNhisFeatureEnabled() && externalNhisReferral) {
           const resolvedEncounterId =
             consultation.encounter_id || consultation.visit_id;
           const staffUuid = staff?.id;

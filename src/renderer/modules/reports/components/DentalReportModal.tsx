@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Dental Report Modal
+ * XenoCare EMR — Dental Report Modal
  */
 
 import React, { useState } from 'react';
@@ -220,7 +220,7 @@ export function DentalReportModal({
         format,
         buildSheets(),
         buildPDFOpts(),
-        `NDC_Dental_Report_${new Date().toISOString().split('T')[0]}`,
+        `XenoCare_Dental_Report_${new Date().toISOString().split('T')[0]}`,
       );
     } catch (error) {
       showToast({

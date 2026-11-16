@@ -22,6 +22,7 @@ import {
 } from '../../contexts/PatientEncounterContext';
 import { EncounterTimeline } from './EncounterTimeline';
 import { SkeletonEncounterDetail } from '../ui/SkeletonLoader';
+import { isNhisFeatureEnabled } from '../../config/features';
 
 // =============================================================================
 // Patient Demographics Card
@@ -242,14 +243,16 @@ function PatientPaymentInfo({ patient }: PatientDemographicsProps) {
             </p>
           </div>
 
-          <div>
-            <label className="text-xs text-gray-500 uppercase">
-              NHIS Number
-            </label>
-            <p className="font-mono text-gray-700">
-              {patient.nhis_number || 'Not enrolled'}
-            </p>
-          </div>
+          {isNhisFeatureEnabled() && (
+            <div>
+              <label className="text-xs text-gray-500 uppercase">
+                NHIS Number
+              </label>
+              <p className="font-mono text-gray-700">
+                {patient.nhis_number || 'Not enrolled'}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </SectionGuard>

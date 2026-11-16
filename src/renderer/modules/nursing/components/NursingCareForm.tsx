@@ -40,12 +40,12 @@ import { useDebounce } from '../../../hooks/useDebounce';
 // Types
 // =============================================================================
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-12 w-auto"
     />
   );
@@ -216,11 +216,11 @@ export default function NursingCareForm({
             <div className="flex items-center justify-between px-6 py-3 bg-gradient-to-r from-primary-700 to-primary-600">
               <div className="flex items-center gap-4">
                 <div className="bg-white rounded-lg p-1.5 shadow-md">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div className="border-l border-white/30 pl-4">
                   <h1 className="text-white font-bold text-lg tracking-wide">
-                    NATIONAL DEFENCE COLLEGE
+                    XENOCARE
                   </h1>
                   <p className="text-green-100 text-xs font-medium">
                     Medical Centre - Nursing & Vitals Module

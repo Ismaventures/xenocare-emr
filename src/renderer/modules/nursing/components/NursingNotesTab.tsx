@@ -77,8 +77,8 @@ import {
 import { createMultipleInterventions } from '../api/nursing-interventions.api';
 import { formatPatientName } from '../../patient-registration/dtos/patient.dto';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types
@@ -830,7 +830,7 @@ function NoteForm({
               <div className="flex items-center gap-3">
                 <img
                   src={ndcLogoSrc}
-                  alt="NDC Logo"
+                  alt="XenoCare Logo"
                   className="h-10 w-10 rounded-lg bg-white p-1"
                 />
                 <div>
@@ -838,7 +838,7 @@ function NoteForm({
                     {editingNote ? 'Edit Nursing Report' : 'Add Nursing Report'}
                   </h2>
                   <p className="text-blue-100 text-xs">
-                    NDC Medical Centre - Nursing Documentation
+                    XenoCare - Nursing Documentation
                   </p>
                 </div>
               </div>
@@ -1423,7 +1423,7 @@ export default function NursingNotesTab({
     try {
       logoBase64 = ndcLogoSrc;
     } catch (e) {
-      console.warn('Could not load NDC logo for print');
+      console.warn('Could not load XenoCare logo for print');
     }
 
     const reportDate = new Date().toLocaleString('en-GB', {
@@ -1757,10 +1757,10 @@ export default function NursingNotesTab({
   <div class="container">
     <div class="header">
       <div class="logo">
-        ${logoBase64 ? `<img src="${logoBase64}" alt="NDC Logo">` : '<div style="width:80px;height:80px;background:#006838;border-radius:50%;"></div>'}
+        ${logoBase64 ? `<img src="${logoBase64}" alt="XenoCare Logo">` : '<div style="width:80px;height:80px;background:#006838;border-radius:50%;"></div>'}
       </div>
-      <div class="hospital-name">NDC MEDICAL CENTRE</div>
-      <div class="hospital-subtitle">National Defence College, Abuja</div>
+      <div class="hospital-name">XENOCARE</div>
+      <div class="hospital-subtitle">XenoCare</div>
     </div>
 
     <div class="report-title">
@@ -1906,7 +1906,7 @@ export default function NursingNotesTab({
 
     <!-- Footer -->
     <div class="page-footer">
-      <strong>NDC Medical Centre</strong> | National Defence College, Abuja<br>
+      <strong>XenoCare</strong> | XenoCare<br>
       This is an official medical document. Handle with confidentiality.<br>
       Generated: ${reportDate}
     </div>

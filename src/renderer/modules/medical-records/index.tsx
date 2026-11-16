@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - UNIFIED MEDICAL RECORDS MODULE
+ * XENOCARE EMR - UNIFIED MEDICAL RECORDS MODULE
  *
  * Entry point for all clinicians to access patient medical records.
  * Shows ALL patients with encounters from ANY clinic:

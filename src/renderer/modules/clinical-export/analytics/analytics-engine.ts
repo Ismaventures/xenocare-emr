@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Analytics Engine
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Clinical, operational, and financial analytics calculations
  * Following healthcare reporting standards

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COMPREHENSIVE URINALYSIS DIPSTICK RESULT FORM
+ * XENOCARE EMR - COMPREHENSIVE URINALYSIS DIPSTICK RESULT FORM
  * =============================================================================
  *
  * Production-grade urinalysis dipstick form supporting:

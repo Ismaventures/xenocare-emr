@@ -1278,14 +1278,14 @@ export function NhisVerificationPanel({
                 <div className="hidden sm:flex items-center gap-4 border-r border-white/20 pr-6">
                   <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center p-1.5 backdrop-blur-sm border border-white/10 shadow-inner">
                     <img
-                      src={require('../../../../../assets/ndclogo.png')}
-                      alt="NDC Logo"
+                      src={require('../../../../../assets/xenocare-logo.png')}
+                      alt="XenoCare Logo"
                       className="w-full h-full object-contain drop-shadow-sm"
                     />
                   </div>
                   <div>
                     <h4 className="font-bold text-sm leading-tight text-white">
-                      NDC MEDICAL CENTRE
+                      XENOCARE
                     </h4>
                     <span className="text-xs font-bold tracking-widest text-[#fbbf24] uppercase">
                       EMR System

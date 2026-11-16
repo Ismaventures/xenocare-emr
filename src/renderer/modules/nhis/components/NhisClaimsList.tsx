@@ -1,6 +1,6 @@
 // =============================================================================
 // NHIS Claims Management Component (Redesigned)
-// NDC MEDICAL CENTRE EMR - NHIS Module
+// XENOCARE EMR - NHIS Module
 // Full CAP / FFS / Private / Co-pay payment portion model
 // Configurable export field selector + enhanced claim detail modal
 // =============================================================================
@@ -51,8 +51,8 @@ import { getPayerSchemes } from '../../patient-registration/api/patient.api';
 import { NhisClaimsExportModal } from './NhisClaimsExportModal';
 import { SkeletonTable } from '../../../components/ui/SkeletonLoader';
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Helpers & Constants
@@ -563,14 +563,14 @@ function ClaimDetailModal({ claim, onClose }: ClaimDetailModalProps) {
           <div className="flex items-center gap-4">
             <img
               src={ndcLogoSrc}
-              alt="NDC Logo"
+              alt="XenoCare Logo"
               className="h-12 w-12 rounded-full bg-white p-1"
             />
             <div className="flex-1">
               <h3 className="text-lg font-bold text-white">
                 NHIS Claim Details
               </h3>
-              <p className="text-green-100 text-sm">NDC Medical Centre</p>
+              <p className="text-green-100 text-sm">XenoCare</p>
             </div>
             <div className="text-right">
               <p className="text-white text-sm font-mono">
@@ -1282,8 +1282,8 @@ export function NhisClaimsList() {
       };
 
       await downloadComprehensiveNhisClaimsPdf(filteredSummary, {
-        facilityName: 'NDC Medical Centre',
-        facilityAddress: 'National Defence College, Abuja',
+        facilityName: 'XenoCare',
+        facilityAddress: 'XenoCare',
         generatedBy: 'System',
         reportPeriod:
           filters.startDate && filters.endDate

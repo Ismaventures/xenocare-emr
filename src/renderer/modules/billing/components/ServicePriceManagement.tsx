@@ -59,6 +59,7 @@ import {
 import { formatCurrency } from '../dtos/billing.dto';
 import { useToast } from '../../../components/ui/Toast';
 import { useAuth } from '../../../contexts/AuthContext';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 // Import new section components
 import { ProcedurePricingSection } from './ProcedurePricingSection';
@@ -509,7 +510,7 @@ export function ServicePriceManagement() {
             Service Price Management
           </h2>
           <p className="text-xs text-gray-400 mt-0.5">
-            Configure pricing for all billable services, NHIS rates &amp; insurance coverage
+            Configure pricing for all billable services and standard rates
           </p>
         </div>
         <button
@@ -537,22 +538,24 @@ export function ServicePriceManagement() {
               </div>
             </div>
           </div>
-          <div className="rounded-xl border border-gray-100 bg-white p-3.5 transition-all hover:shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-50">
-                <Shield className="h-4 w-4 text-green-700" />
-              </div>
-              <div>
-                <div className="text-xl font-bold text-green-700">
-                  {stats.nhis_covered_count}
-                  <span className="text-xs font-normal text-gray-400 ml-1">
-                    ({stats.total_services > 0 ? ((stats.nhis_covered_count / stats.total_services) * 100).toFixed(0) : 0}%)
-                  </span>
+          {isNhisFeatureEnabled() && (
+            <div className="rounded-xl border border-gray-100 bg-white p-3.5 transition-all hover:shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-50">
+                  <Shield className="h-4 w-4 text-green-700" />
                 </div>
-                <div className="text-[11px] font-medium text-gray-400">NHIS Covered</div>
+                <div>
+                  <div className="text-xl font-bold text-green-700">
+                    {stats.nhis_covered_count}
+                    <span className="text-xs font-normal text-gray-400 ml-1">
+                      ({stats.total_services > 0 ? ((stats.nhis_covered_count / stats.total_services) * 100).toFixed(0) : 0}%)
+                    </span>
+                  </div>
+                  <div className="text-[11px] font-medium text-gray-400">NHIS Covered</div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <div className="rounded-xl border border-gray-100 bg-white p-3.5 transition-all hover:shadow-sm">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50">
@@ -616,7 +619,15 @@ export function ServicePriceManagement() {
             label: 'Audit History',
             icon: <History className="h-3.5 w-3.5" />,
           },
-        ].map((tab) => (
+        ]
+          .filter(
+            (tab) =>
+              isNhisFeatureEnabled() ||
+              (tab.id !== 'nhis-required' &&
+                tab.id !== 'nhis-config' &&
+                tab.id !== 'insurance'),
+          )
+          .map((tab) => (
           <button
             key={tab.id}
             onClick={() => setViewMode(tab.id as ViewMode)}
@@ -658,15 +669,17 @@ export function ServicePriceManagement() {
               <option value="radiology">Radiology</option>
               <option value="pharmacy">Pharmacy</option>
             </Select>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showNhisOnly}
-                onChange={(e) => setShowNhisOnly(e.target.checked)}
-                className="rounded border-gray-300 text-green-600 focus:ring-green-500"
-              />
-              <span className="text-sm text-gray-600">NHIS Covered Only</span>
-            </label>
+            {isNhisFeatureEnabled() && (
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={showNhisOnly}
+                  onChange={(e) => setShowNhisOnly(e.target.checked)}
+                  className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+                />
+                <span className="text-sm text-gray-600">NHIS Covered Only</span>
+              </label>
+            )}
 
             {/* Add New Service Dropdown */}
             <div className="relative group">
@@ -750,22 +763,26 @@ export function ServicePriceManagement() {
                                 <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
                                   Regular Price
                                 </th>
-                                <th
-                                  className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase"
-                                  title="Single source of truth for NHIS billing"
-                                >
-                                  NHIS Price (₦){' '}
-                                  <span className="text-green-600">*</span>
-                                </th>
-                                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">
-                                  NHIS Covered
-                                </th>
-                                <th
-                                  className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase"
-                                  title="Override percentage (0 = use default)"
-                                >
-                                  NHIS %
-                                </th>
+                                {isNhisFeatureEnabled() && (
+                                  <>
+                                    <th
+                                      className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+                                      title="Single source of truth for NHIS billing"
+                                    >
+                                      NHIS Price (₦){' '}
+                                      <span className="text-green-600">*</span>
+                                    </th>
+                                    <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">
+                                      NHIS Covered
+                                    </th>
+                                    <th
+                                      className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase"
+                                      title="Override percentage (0 = use default)"
+                                    >
+                                      NHIS %
+                                    </th>
+                                  </>
+                                )}
                                 <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">
                                   Status
                                 </th>
@@ -802,34 +819,38 @@ export function ServicePriceManagement() {
                                       {formatCurrency(service.price)}
                                     </span>
                                   </td>
-                                  <td className="px-4 py-3 text-right">
-                                    <span className="font-semibold text-green-600">
-                                      {formatCurrency(service.nhis_price)}
-                                    </span>
-                                  </td>
-                                  <td className="px-4 py-3 text-center">
-                                    {service.is_nhis_covered ? (
-                                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                                        <CheckCircle className="h-3 w-3 mr-1" />
-                                        Yes
-                                      </span>
-                                    ) : (
-                                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                                        No
-                                      </span>
-                                    )}
-                                  </td>
-                                  <td className="px-4 py-3 text-center">
-                                    {service.nhis_percentage > 0 ? (
-                                      <span className="font-medium text-green-600">
-                                        {service.nhis_percentage}%
-                                      </span>
-                                    ) : (
-                                      <span className="text-gray-400">
-                                        Default
-                                      </span>
-                                    )}
-                                  </td>
+                                  {isNhisFeatureEnabled() && (
+                                    <>
+                                      <td className="px-4 py-3 text-right">
+                                        <span className="font-semibold text-green-600">
+                                          {formatCurrency(service.nhis_price)}
+                                        </span>
+                                      </td>
+                                      <td className="px-4 py-3 text-center">
+                                        {service.is_nhis_covered ? (
+                                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                            <CheckCircle className="h-3 w-3 mr-1" />
+                                            Yes
+                                          </span>
+                                        ) : (
+                                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                            No
+                                          </span>
+                                        )}
+                                      </td>
+                                      <td className="px-4 py-3 text-center">
+                                        {service.nhis_percentage > 0 ? (
+                                          <span className="font-medium text-green-600">
+                                            {service.nhis_percentage}%
+                                          </span>
+                                        ) : (
+                                          <span className="text-gray-400">
+                                            Default
+                                          </span>
+                                        )}
+                                      </td>
+                                    </>
+                                  )}
                                   <td className="px-4 py-3 text-center">
                                     <StatusBadge
                                       status={
@@ -879,14 +900,20 @@ export function ServicePriceManagement() {
       {/* Beds/Wards View - NEW */}
       {viewMode === 'beds' && <BedPricingSection />}
 
-      {/* Insurance Type Pricing View - NEW */}
-      {viewMode === 'insurance' && <InsuranceTypePricingSection />}
+      {/* Insurance Type Pricing View */}
+      {isNhisFeatureEnabled() && viewMode === 'insurance' && (
+        <InsuranceTypePricingSection />
+      )}
 
-      {/* NHIS Pre-Authorization Required Services - NEW */}
-      {viewMode === 'nhis-required' && <NhisRequiredServicesSection />}
+      {/* NHIS Pre-Authorization Required Services */}
+      {isNhisFeatureEnabled() && viewMode === 'nhis-required' && (
+        <NhisRequiredServicesSection />
+      )}
 
       {/* NHIS Config View */}
-      {viewMode === 'nhis-config' && <NhisCoverageConfigSection />}
+      {isNhisFeatureEnabled() && viewMode === 'nhis-config' && (
+        <NhisCoverageConfigSection />
+      )}
 
       {/* Audit History View */}
       {viewMode === 'audit' && (
@@ -1071,6 +1098,8 @@ export function ServicePriceManagement() {
               </div>
             </div>
 
+            {isNhisFeatureEnabled() && (
+              <>
             {/* NHIS Price Section */}
             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
               <div className="flex items-center justify-between mb-3">
@@ -1220,6 +1249,8 @@ export function ServicePriceManagement() {
                 </div>
               </label>
             </div>
+              </>
+            )}
 
             <div className="flex justify-end gap-3 pt-4 border-t">
               <Button variant="outline" onClick={() => setEditingService(null)}>
@@ -1377,6 +1408,7 @@ export function ServicePriceManagement() {
             </div>
 
             {/* NHIS Section */}
+            {isNhisFeatureEnabled() && (
             <div className="bg-green-50 p-4 rounded-lg border border-green-200 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-medium text-green-800">
@@ -1456,6 +1488,7 @@ export function ServicePriceManagement() {
                 </div>
               </div>
             </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -1593,6 +1626,7 @@ export function ServicePriceManagement() {
             </div>
 
             {/* NHIS Section */}
+            {isNhisFeatureEnabled() && (
             <div className="bg-green-50 p-4 rounded-lg border border-green-200 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="font-medium text-green-800">
@@ -1672,6 +1706,7 @@ export function ServicePriceManagement() {
                 </div>
               </div>
             </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">

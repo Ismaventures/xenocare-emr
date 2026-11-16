@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Form Component
+// XENOCARE EMR - Procedure Form Component
 // Form for scheduling and creating new procedures
 // =============================================================================
 

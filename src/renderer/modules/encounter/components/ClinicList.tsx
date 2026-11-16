@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - CLINIC LIST COMPONENT
+ * XENOCARE EMR - CLINIC LIST COMPONENT
  * Description: Component for displaying and managing clinics
  * =============================================================================
  */

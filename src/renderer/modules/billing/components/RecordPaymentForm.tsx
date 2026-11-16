@@ -15,6 +15,7 @@ import {
 } from '../dtos/billing.dto';
 import { useRecordPayment, useInvoice } from '../hooks/useBilling';
 import { useToast } from '../../../components/ui/Toast';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 interface RecordPaymentFormProps {
   isOpen: boolean;
@@ -213,11 +214,13 @@ export function RecordPaymentForm({
           required
           value={paymentMethod}
           onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
-          options={PAYMENT_METHODS.map((m) => ({ value: m, label: m }))}
+          options={PAYMENT_METHODS.filter(
+            (m) => isNhisFeatureEnabled() || m !== 'NHIS',
+          ).map((m) => ({ value: m, label: m }))}
         />
 
         {/* Reference Number */}
-        {['Card', 'Bank Transfer', 'Cheque', 'Insurance', 'NHIS'].includes(
+        {['Card', 'Bank Transfer', 'Cheque', 'Insurance'].includes(
           paymentMethod,
         ) && (
           <Input

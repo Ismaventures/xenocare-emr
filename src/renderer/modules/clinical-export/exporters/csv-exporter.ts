@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - CSV Exporter
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Flat CSV export for data analysis and spreadsheet import
  *

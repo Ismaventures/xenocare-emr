@@ -53,7 +53,7 @@ import { AICompletenessScore } from './AICompletenessScore';
 import { AICodingSuggestions } from './AICodingSuggestions';
 import { AIDisclaimer } from './AIDisclaimer';
 
-import { useAIHealth } from '../hooks/useAIQuery';
+import { useAIConfig, useAIHealth } from '../hooks/useAIQuery';
 import { useAITrends } from '../hooks/useAITrends';
 import { useAICompleteness } from '../hooks/useAICompleteness';
 import { useEmbeddingSync } from '../hooks/useEmbeddingSync';
@@ -388,14 +388,6 @@ const PHARMACY_WORKFLOWS: BrowseWorkflow[] = [
     bg: 'hover:bg-amber-50 dark:hover:bg-amber-900/20',
   },
   {
-    icon: FileText,
-    label: 'NHIS Claim Readiness',
-    query:
-      'List NHIS dispensing documentation gaps and claim-readiness blockers in current pharmacy records.',
-    color: 'text-slate-600 dark:text-slate-400',
-    bg: 'hover:bg-slate-50 dark:hover:bg-slate-900/20',
-  },
-  {
     icon: Activity,
     label: 'Financial Snapshot',
     query:
@@ -410,6 +402,7 @@ const MAX_CHAT_SESSIONS = 40;
 const MAX_MESSAGES_PER_SESSION = 50;
 const CONTEXT_TURNS_LIMIT = 6;
 const CLIENT_MIN_SUBMIT_INTERVAL_MS = 1200;
+const CLIENT_STREAM_REQUEST_TIMEOUT_MS = 120000;
 
 const HOSPITAL_VISIT_SUMMARY_INTENT =
   /(entire|complete|full|all)\s+(hospital|visit|chart|patient)\s*(visit|visits|summary|history|timeline)|hospital\s+visits?\s+summary|patient\s+snapshot|visit\s+trajectory/i;
@@ -488,7 +481,7 @@ function getHospitalVisitSummaryTemplate(): string {
     '- **Clinician**: <action>',
     '- **Nurse**: <action>',
     '- **Records Office**: <action>',
-    '- **Billing/NHIS Desk**: <action>',
+    '- **Billing Desk**: <action>',
     '',
     '## Records Office Prompt Checklist',
     '1. ✅ Context dataset is internally consistent',
@@ -736,7 +729,7 @@ function extractRecordsOfficeChecklist(
       'Encounter timeline completeness (visit_id, status, current_stage)',
       'Clinical evidence set (vitals, labs, imaging, medications/allergies)',
       'Discharge/referral documentation completeness',
-      'Billing/NHIS documentation validation',
+      'Billing documentation validation',
     ];
   }
 
@@ -882,9 +875,9 @@ function buildSocraticClinicalQuery(
     'Keep reasoning internal; do not reveal process narration or methodology labels in the final answer.',
     'Do not include the words "Socratic", "thinking process", "reasoning process", or "objective" as section headings in the visible response.',
     'Return data-first output. Start directly with patient/visit data sections.',
-    'Tie findings to EMR fields/records where available: patient demographics, visits/encounters, current_stage, chief_complaint, vitals, consultations, nursing notes, lab/imaging results, medications/allergies, procedures, admissions/discharge, referrals, NHIS/billing metadata.',
+    'Tie findings to EMR fields/records where available: patient demographics, visits/encounters, current_stage, chief_complaint, vitals, consultations, nursing notes, lab/imaging results, medications/allergies, procedures, admissions/discharge, referrals, billing metadata.',
     'When asked about standards, map findings to international EMR standards and coding systems where relevant (HL7 FHIR, ICD-10, SNOMED CT, LOINC, RxNorm, SOAP/POMR) and clearly label standards guidance versus chart evidence.',
-    'If records are missing, explicitly list exact missing fields and who should provide them (clinician, nurse, records office, billing, NHIS desk).',
+    'If records are missing, explicitly list exact missing fields and who should provide them (clinician, nurse, records office, billing).',
     isEmbeddingPreparationMode
       ? 'For this request, prioritize exhaustive structured extraction across records over narrative summarization.'
       : 'Output sections should be concise and clinical, with tables where relevant.',
@@ -1038,12 +1031,84 @@ export function AIChatPanel({
 
   // ── Hooks ──
   const aiHealth = useAIHealth(true);
+  const aiConfig = useAIConfig(true);
   const syncStatus = useEmbeddingSync(effectivePatientId);
   const { data: trends, isLoading: trendsLoading } = useAITrends({
     patientId: patientId || '',
     enabled: activeTab === 'trends' && !!patientId,
   });
   const completenessScore = useAICompleteness(consultationData as any);
+
+  const { blockingReadinessIssues, advisoryReadinessIssues } = useMemo(() => {
+    const blocking: string[] = [];
+    const advisory: string[] = [];
+
+    if (aiHealth.error) {
+      blocking.push(
+        `AI health check failed: ${aiHealth.error.message || 'unknown error'}`,
+      );
+      return {
+        blockingReadinessIssues: blocking,
+        advisoryReadinessIssues: advisory,
+      };
+    }
+
+    const health = aiHealth.data;
+    if (!health) {
+      return {
+        blockingReadinessIssues: blocking,
+        advisoryReadinessIssues: advisory,
+      };
+    }
+
+    if (!health.supabaseConfigured) {
+      blocking.push(
+        'Supabase AI backend is not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_KEY, then run the AI assistant migrations.',
+      );
+    }
+
+    if (!health.configured) {
+      if (health.provider === 'openai') {
+        blocking.push(
+          'OpenAI is selected but OPENAI_API_KEY is missing in the main-process environment.',
+        );
+      } else if (health.provider === 'gemini') {
+        blocking.push(
+          'Gemini is selected but GEMINI_API_KEY is missing in the main-process environment.',
+        );
+      } else if (health.provider === 'groq') {
+        blocking.push(
+          'Groq is selected but GROQ_API_KEY is missing in the main-process environment.',
+        );
+      } else {
+        blocking.push(
+          `Ollama is selected but no reachable base URL is configured. Expected ${aiConfig.data?.ollamaBaseUrl || 'http://localhost:11434'}.`,
+        );
+      }
+    } else if (!health.llmReachable) {
+      if (health.provider === 'ollama') {
+        blocking.push(
+          `Ollama is not reachable at ${aiConfig.data?.ollamaBaseUrl || 'http://localhost:11434'}. Start Ollama and pull ${aiConfig.data?.chatModel || 'the configured chat model'}.`,
+        );
+      } else {
+        blocking.push(
+          `${health.provider.toUpperCase()} is configured but the chat model could not be reached. Check the API key, network access, and provider quota/model availability.`,
+        );
+      }
+    }
+
+    if (!health.embeddingReachable) {
+      advisory.push(
+        `Embeddings are unavailable. Hybrid and vector search will stay degraded until ${aiConfig.data?.embeddingModel || 'the configured embedding backend'} is reachable.`,
+      );
+    }
+
+    return {
+      blockingReadinessIssues: blocking,
+      advisoryReadinessIssues: advisory,
+    };
+  }, [aiConfig.data, aiHealth.data, aiHealth.error]);
+  const canRunAIQueries = canSubmitQueries && blockingReadinessIssues.length === 0;
 
   // ── Auto-scroll on new messages or streaming text ──
   useEffect(() => {
@@ -1157,6 +1222,11 @@ export function AIChatPanel({
     ) => {
       if (!canSubmitQueries || isStreaming) return;
 
+      if (blockingReadinessIssues.length > 0) {
+        setStreamError(blockingReadinessIssues[0]);
+        return;
+      }
+
       const now = Date.now();
       if (now - lastSubmitAt < CLIENT_MIN_SUBMIT_INTERVAL_MS) {
         setStreamError('Please wait a moment before sending another question.');
@@ -1242,7 +1312,22 @@ export function AIChatPanel({
         maxResults: resolvedGlobalClinicalMode ? 50 : 10,
       };
 
-      queryAIStream(request)
+      const runStreamRequest = async () => {
+        return Promise.race([
+          queryAIStream(request),
+          new Promise<never>((_, reject) => {
+            setTimeout(() => {
+              reject(
+                new Error(
+                  'AI response timed out. The local Phi-3 model is taking too long. Try a shorter question or retry once Ollama is idle.',
+                ),
+              );
+            }, CLIENT_STREAM_REQUEST_TIMEOUT_MS);
+          }),
+        ]);
+      };
+
+      runStreamRequest()
         .then((response) => {
           unsubscribe();
           streamCleanupRef.current = null;
@@ -1308,6 +1393,7 @@ export function AIChatPanel({
       userId,
       consultationData,
       isGlobalClinicalMode,
+      blockingReadinessIssues,
     ],
   );
 
@@ -1373,12 +1459,19 @@ export function AIChatPanel({
     );
   }
 
-  const healthOk = aiHealth.data?.configured && aiHealth.data?.llmReachable;
+  const healthOk =
+    aiHealth.data?.configured &&
+    aiHealth.data?.llmReachable &&
+    aiHealth.data?.supabaseConfigured;
   const healthLabel = healthOk
     ? `Connected • ${aiHealth.data?.provider ?? 'AI'}`
     : aiHealth.isLoading
       ? 'Connecting…'
-      : 'Offline';
+      : blockingReadinessIssues.length > 0
+        ? 'Setup required'
+        : advisoryReadinessIssues.length > 0
+          ? 'Limited mode'
+          : 'Offline';
 
   return (
     <div
@@ -1500,6 +1593,24 @@ export function AIChatPanel({
                     ? 'Global mode active: answers can reference records across all patients and modules.'
                     : 'Patient mode active: answers are narrowed to the selected patient chart.'}
                 </p>
+              </div>
+            )}
+            {(blockingReadinessIssues.length > 0 ||
+              advisoryReadinessIssues.length > 0) && (
+              <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-3 text-amber-900 dark:border-amber-900/70 dark:bg-amber-950/30 dark:text-amber-200">
+                <p className="text-xs font-semibold uppercase tracking-wide">
+                  {blockingReadinessIssues.length > 0
+                    ? 'AI setup required'
+                    : 'AI search degraded'}
+                </p>
+                <div className="mt-2 space-y-1.5 text-xs leading-5">
+                  {blockingReadinessIssues.map((issue) => (
+                    <p key={issue}>{issue}</p>
+                  ))}
+                  {advisoryReadinessIssues.map((issue) => (
+                    <p key={issue}>{issue}</p>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -1631,7 +1742,7 @@ export function AIChatPanel({
                                 ),
                               )
                             }
-                            disabled={!canSubmitQueries || isStreaming}
+                            disabled={!canRunAIQueries || isStreaming}
                             className={`group flex items-start gap-3 p-3 rounded-xl border border-transparent hover:border-gray-200 dark:hover:border-gray-700 text-left transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${item.bg}`}
                           >
                             <div
@@ -1830,12 +1941,13 @@ export function AIChatPanel({
                 <AIQueryInput
                   onSubmit={handleSubmit}
                   isLoading={isStreaming}
+                  disabled={!canRunAIQueries}
                   placeholder={
                     effectivePatientId
                       ? 'Ask a clinical question...'
                       : canQueryWithoutPatient
                         ? assistantScope === 'pharmacy'
-                          ? 'Ask about inventory, dispensing, NHIS, or pharmacy transactions...'
+                          ? 'Ask about inventory, dispensing, or pharmacy transactions...'
                           : 'Ask a global clinical question across encounters, labs, radiology, procedures, or billing...'
                         : 'Select a patient first'
                   }

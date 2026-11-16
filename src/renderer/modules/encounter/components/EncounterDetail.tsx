@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER DETAIL COMPONENT
+ * XENOCARE EMR - ENCOUNTER DETAIL COMPONENT
  * Description: Detailed view of a single encounter with NDC branding
  * =============================================================================
  */
@@ -60,12 +60,12 @@ import {
 } from '../../../lib/workflow/api';
 import { useToast } from '../../../components/ui/Toast';
 
-// NDC Logo component
-function NDCLogo() {
+// XenoCare Logo component
+function XenoCareLogo() {
   return (
     <img
-      src={require('../../../../../assets/ndclogo.png')}
-      alt="NDC Logo"
+      src={require('../../../../../assets/xenocare-logo.png')}
+      alt="XenoCare Logo"
       className="h-10 w-auto"
     />
   );
@@ -341,9 +341,9 @@ const EncounterDetail: React.FC<EncounterDetailProps> = ({
           <div className="bg-gradient-to-r from-primary-700 to-primary-600 px-6 py-5 rounded-t-xl">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-4">
-                {/* NDC Logo */}
+                {/* XenoCare Logo */}
                 <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm">
-                  <NDCLogo />
+                  <XenoCareLogo />
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-white">

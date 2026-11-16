@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS MODULE INDEX
+ * XENOCARE EMR - MEDICAL RECORDS MODULE INDEX
  * Barrel export for all medical records functionality
  * =============================================================================
  */

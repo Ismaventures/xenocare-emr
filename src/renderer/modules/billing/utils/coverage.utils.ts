@@ -6,6 +6,10 @@
  */
 
 import { supabase } from '../../../api/supabaseClient';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 
 // =============================================================================
 // Coverage Types
@@ -500,10 +504,20 @@ export function calculateCoverage(
   totalAmount: number,
   isServiceCovered: boolean = true,
 ): CoverageCalculation {
+  // NHIS is disabled for non-accredited facilities: treat every NHIS-backed
+  // category as a self-pay (Private) patient.
+  const nhisDisabled =
+    !isNhisFeatureEnabled() && isNhisCategory(coverageType);
+  const effectiveCoverageType: CoverageType = nhisDisabled
+    ? 'Private'
+    : coverageType;
+  const serviceCovered = nhisDisabled ? false : isServiceCovered;
+
   // Find the applicable rule
   let rule = DEFAULT_COVERAGE_RULES.find(
     (r) =>
-      r.coverageType === coverageType && r.serviceCategory === serviceCategory,
+      r.coverageType === effectiveCoverageType &&
+      r.serviceCategory === serviceCategory,
   );
 
   // If no rule found, default to Private (100% patient pays)
@@ -518,13 +532,13 @@ export function calculateCoverage(
   }
 
   // If service is not covered under this plan, patient pays 100%
-  if (!isServiceCovered || !rule.isCovered) {
+  if (!serviceCovered || !rule.isCovered) {
     return {
       totalAmount,
       patientAmount: totalAmount,
       insuranceAmount: 0,
       isCovered: false,
-      coverageType,
+      coverageType: effectiveCoverageType,
       serviceCategory,
       requiresAuthorization: false,
       maxCoverageApplied: false,
@@ -554,7 +568,7 @@ export function calculateCoverage(
     patientAmount,
     insuranceAmount,
     isCovered: true,
-    coverageType,
+    coverageType: effectiveCoverageType,
     serviceCategory,
     requiresAuthorization: rule.requiresAuthorization || false,
     maxCoverageApplied,
@@ -569,6 +583,10 @@ export async function calculateCoverageFromDb(
   serviceCategory: ServiceCategory,
   totalAmount: number,
 ): Promise<CoverageCalculation> {
+  if (!isNhisFeatureEnabled() && isNhisCategory(coverageType)) {
+    return calculateCoverage(coverageType, serviceCategory, totalAmount);
+  }
+
   try {
     const { data, error } = await supabase.rpc('calculate_billing_coverage', {
       p_coverage_type: coverageType,
@@ -608,6 +626,10 @@ export async function calculateCoverageFromDb(
 export function getCoverageTypeFromPaymentCategory(
   paymentCategory: string,
 ): CoverageType {
+  if (!isNhisFeatureEnabled() && isNhisCategory(paymentCategory)) {
+    return 'Private';
+  }
+
   const normalized = paymentCategory.toLowerCase().replace(/[^a-z]/g, '');
 
   // DHML = Defence Health Maintenance Limited — default HMO for Military NHIS, NOT a separate category
@@ -655,6 +677,10 @@ export function requiresPaymentBeforeService(
  * Check if NHIS patient can proceed without upfront payment
  */
 export function canProceedWithoutPayment(coverageType: CoverageType): boolean {
+  if (!isNhisFeatureEnabled()) {
+    return coverageType === 'Retainership' || coverageType === 'Waived';
+  }
+
   return (
     coverageType === 'Military_NHIS' ||
     coverageType === 'Retainership' ||
@@ -712,6 +738,8 @@ export function getDefaultNhisPercentage(
   insuranceType: string | null | undefined,
   serviceType: NhisServiceType = 'Other',
 ): number {
+  if (!isNhisFeatureEnabled()) return 0;
+
   const normalized = (insuranceType || '')
     .toLowerCase()
     .replace(/_/g, ' ')
@@ -761,6 +789,8 @@ export function getDefaultNhisPercentage(
 export function isNhisPatientType(
   insuranceType: string | null | undefined,
 ): boolean {
+  if (!isNhisFeatureEnabled()) return false;
+
   const normalized = (insuranceType || '')
     .toLowerCase()
     .replace(/_/g, ' ')

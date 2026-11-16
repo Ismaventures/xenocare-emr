@@ -1,13 +1,13 @@
 {
-  "name": "ndc-medical-centre-emr",
-  "description": "NDC Medical Centre Electronic Medical Records System - Powered by Xenolink Technologies",
+  "name": "xenocare-emr",
+  "description": "XenoCare Electronic Medical Records System - Powered by Xenolink Technologies",
   "keywords": [
     "emr",
     "hospital",
     "medical",
     "records",
     "healthcare",
-    "ndc"
+    "xenocare"
   ],
   "homepage": "https://Xenolink.tech",
   "bugs": {
@@ -199,7 +199,7 @@
     "webpack-merge": "^6.0.1"
   },
   "build": {
-    "productName": "NDC Medical Centre EMR",
+    "productName": "XenoCare",
     "appId": "com.Xenolink.ndcmedicalcentre.emr",
     "asar": true,
     "afterSign": ".erb/scripts/notarize.js",
@@ -209,7 +209,7 @@
       "node_modules",
       "package.json"
     ],
-    "icon": "assets/NDC_LOGO.png",
+    "icon": "assets/xenocare-logo.png",
     "mac": {
       "notarize": false,
       "target": {
@@ -224,7 +224,7 @@
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist",
       "gatekeeperAssess": false,
-      "icon": "assets/NDC_LOGO.png"
+      "icon": "assets/xenocare-logo.png"
     },
     "dmg": {
       "contents": [
@@ -244,7 +244,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "assets/NDC_LOGO.png"
+      "icon": "assets/xenocare-logo.png"
     },
     "nsis": {
       "oneClick": false,

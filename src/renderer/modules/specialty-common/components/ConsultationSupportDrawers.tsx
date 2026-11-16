@@ -93,7 +93,7 @@ export default function ConsultationSupportDrawers({
 
       {isAIOpen && (
         <DrawerShell
-          title="NDC Medical AI Assistants"
+          title="XenoCare AI Assistants"
           subtitle={patientName ? `${patientName}${emrNumber ? ` • ${emrNumber}` : ''}` : department}
           icon={<Bot className="h-5 w-5" />}
           onClose={onCloseAI}

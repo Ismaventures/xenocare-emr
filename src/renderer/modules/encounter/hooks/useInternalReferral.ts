@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - INTERNAL REFERRAL HOOKS
+ * XENOCARE EMR - INTERNAL REFERRAL HOOKS
  *
  * React Query hooks for managing internal referrals in the Encounter Office.
  * =============================================================================

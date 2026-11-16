@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER MODULE HOOKS
+ * XENOCARE EMR - ENCOUNTER MODULE HOOKS
  * Description: React Query hooks for encounters and clinics
  * =============================================================================
  */

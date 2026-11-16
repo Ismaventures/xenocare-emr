@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - Export Modal Component
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Comprehensive UI for configuring and executing clinical data exports
  * Uses the project's existing UI components.

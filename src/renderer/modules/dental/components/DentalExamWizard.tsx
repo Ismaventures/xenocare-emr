@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - DENTAL EXAMINATION WIZARD
+ * XENOCARE EMR - DENTAL EXAMINATION WIZARD
  * Modern step-based dental examination workflow with progress indicator
  * Following SOAP methodology tailored for dental practice
  * =============================================================================
@@ -54,6 +54,7 @@ import {
   useDrugCatalogue,
   useProcedureCatalogue,
 } from '../../clinical-consultation/hooks/useConsultation';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import type {
   LabOrderDTO,
   RadiologyOrderDTO,
@@ -61,6 +62,21 @@ import type {
   PrescriptionOrderDTO,
 } from '../../clinical-consultation/dtos/consultation.dto';
 import type { SpecialtyOrdersPayload } from '../../specialty-common/utils/specialty-order-submission';
+
+const DENTAL_TEMPLATE_CATEGORY = 'dental_exam';
+const DENTAL_TEMPLATE_FIELDS = [
+  'complaint_description',
+  'dental_history',
+  'medical_history',
+  'extraoral_findings',
+  'intraoral_findings',
+  'radiograph_findings',
+  'provisional_diagnosis',
+  'final_diagnosis',
+  'treatment_plan',
+] as const;
+
+type DentalTemplateField = (typeof DENTAL_TEMPLATE_FIELDS)[number];
 
 // =============================================================================
 // Shared Interactive UI Components
@@ -2168,10 +2184,41 @@ export default function DentalExamWizard({
 
   const isLastStep = currentStep === STEPS.length - 1;
 
+  const dentalTemplateValues: Record<DentalTemplateField, string> = {
+    complaint_description: formData.complaint_description || '',
+    dental_history: formData.dental_history || '',
+    medical_history: formData.medical_history || '',
+    extraoral_findings: formData.extraoral_findings || '',
+    intraoral_findings: formData.intraoral_findings || '',
+    radiograph_findings: formData.radiograph_findings || '',
+    provisional_diagnosis: formData.provisional_diagnosis || '',
+    final_diagnosis: formData.final_diagnosis || '',
+    treatment_plan: formData.treatment_plan || '',
+  };
+
   const handleFieldChange = useCallback(
     (field: keyof CreateDentalExamDTO, value: any) => {
       if (readOnly) return;
       setFormData((prev) => ({ ...prev, [field]: value }));
+    },
+    [readOnly],
+  );
+
+  const applyDentalTemplate = useCallback(
+    (templateData: Record<string, string>) => {
+      if (readOnly) return;
+
+      setFormData((prev) => {
+        const next = { ...prev };
+
+        for (const field of DENTAL_TEMPLATE_FIELDS) {
+          if (field in templateData) {
+            next[field] = templateData[field] ?? '';
+          }
+        }
+
+        return next;
+      });
     },
     [readOnly],
   );
@@ -2426,8 +2473,18 @@ export default function DentalExamWizard({
 
       {/* Footer Navigation */}
       <div className="border-t border-gray-200 bg-white px-6 py-4 flex items-center justify-between flex-shrink-0">
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          Step {currentStep + 1} of {STEPS.length}
+        <div className="flex items-center gap-3">
+          {!readOnly && (
+            <TemplateSearchPopover
+              templateType="dental"
+              category={DENTAL_TEMPLATE_CATEGORY}
+              currentValues={dentalTemplateValues}
+              onTemplateSelect={applyDentalTemplate}
+            />
+          )}
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            Step {currentStep + 1} of {STEPS.length}
+          </div>
         </div>
 
         {/* Navigation Buttons - Grouped together */}

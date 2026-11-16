@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - In-Patient Module Main Page
+// XENOCARE EMR - In-Patient Module Main Page
 // Ward management and patient admissions dashboard
 // =============================================================================
 
@@ -624,7 +624,7 @@ const InPatientPage: React.FC = () => {
                   New Admission
                 </h2>
                 <p className="text-sm text-blue-100">
-                  NDC Medical Centre - Patient Admission
+                  XenoCare - Patient Admission
                 </p>
               </div>
               <button

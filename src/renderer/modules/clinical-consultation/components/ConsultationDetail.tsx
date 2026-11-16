@@ -866,10 +866,18 @@ export default function ConsultationDetail({
                     key={rx.prescription_id}
                     className="p-3 bg-gray-50 rounded-lg border border-gray-100"
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-medium text-gray-900">
-                        {rx.drug?.drug_name} ({rx.drug?.strength})
-                      </span>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="font-medium text-gray-900 truncate">
+                          {rx.drug?.drug_name || rx.drug_name}
+                          {rx.drug?.strength ? ` (${rx.drug.strength})` : ''}
+                        </span>
+                        {rx.is_external && (
+                          <span className="px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide rounded border border-amber-200 bg-amber-50 text-amber-700">
+                            External
+                          </span>
+                        )}
+                      </div>
                       <StatusBadge
                         status={rx.status}
                         variant={getPrescriptionStatusColor(rx.status)}

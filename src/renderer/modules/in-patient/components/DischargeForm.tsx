@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Discharge Form Component
+// XENOCARE EMR - Discharge Form Component
 // Form for discharging patients from in-patient care
 // =============================================================================
 
@@ -26,6 +26,7 @@ import {
 import { useDischargePatient } from '../hooks/useAdmissions';
 import { useToast } from '../../../components/ui/Toast';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 import { supabase } from '../../../api/supabaseClient';
 import {
   getPatientOutstandingBalance,
@@ -630,6 +631,25 @@ const DischargeForm: React.FC<DischargeFormProps> = ({
           {/* Step 2: Discharge Summary */}
           {step === 2 && (
             <div className="space-y-6">
+              {/* Fill all discharge fields from template */}
+              <div className="flex justify-end">
+                <TemplateSearchPopover
+                  templateType="inpatient"
+                  category="discharge_summary"
+                  currentValues={{
+                    discharge_notes: formData.discharge_summary || '',
+                    discharge_medications: formData.discharge_instructions || '',
+                    hospital_course: '',
+                  }}
+                  onTemplateSelect={(data) => {
+                    if (data.hospital_course) setFormData(prev => ({ ...prev, discharge_summary: data.hospital_course }));
+                    if (data.discharge_notes) setFormData(prev => ({ ...prev, discharge_summary: data.discharge_notes }));
+                    if (data.discharge_medications || data.follow_up_instructions) setFormData(prev => ({ ...prev, discharge_instructions: data.discharge_medications || data.follow_up_instructions || prev.discharge_instructions }));
+                    if (data.discharge_condition) setFormData(prev => ({ ...prev, discharge_diagnosis: data.discharge_condition }));
+                  }}
+                  buttonText="Fill All Fields"
+                />
+              </div>
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="text-sm font-medium text-gray-700">

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Doctor Productivity Dashboard
+// XENOCARE EMR - Doctor Productivity Dashboard
 // Comprehensive physician performance and productivity analytics
 // =============================================================================
 

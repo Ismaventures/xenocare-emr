@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - CLINICAL PATIENT OVERVIEW PANEL
+ * XENOCARE EMR - CLINICAL PATIENT OVERVIEW PANEL
  * Professional clinical sidebar with patient summary, vitals, problems, and medications
  * Designed for rapid clinical assessment and decision support
  * =============================================================================

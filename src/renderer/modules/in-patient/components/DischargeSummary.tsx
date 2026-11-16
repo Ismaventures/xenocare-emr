@@ -104,7 +104,7 @@ export const DischargeSummary = forwardRef<
   (
     {
       data,
-      facilityName = 'NDC Medical Centre',
+      facilityName = 'XenoCare',
       facilityLogo,
       showPrintButton = true,
       onPrint,

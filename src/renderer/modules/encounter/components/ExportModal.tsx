@@ -1,6 +1,6 @@
-﻿/**
+/**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COMPREHENSIVE EXPORT MODAL (v2)
+ * XENOCARE EMR - COMPREHENSIVE EXPORT MODAL (v2)
  * Description: 3-step wizard for encounter data export with preview, selection,
  *              column configuration, revenue summaries, and saved preferences.
  * Steps: Configure â†’ Preview & Select â†’ Export
@@ -300,7 +300,7 @@ const encountersToExcel = (encounters: Encounter[], columns: ExportColumn[]): st
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
   <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
     <Title>NDC Encounter Report</Title>
-    <Author>NDC Medical Centre EMR</Author>
+    <Author>XenoCare EMR</Author>
     <Created>${new Date().toISOString()}</Created>
   </DocumentProperties>
   <Styles>

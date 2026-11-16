@@ -1,9 +1,10 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Admissions API
+// XENOCARE EMR - Admissions API
 // Supabase API functions for admission management
 // =============================================================================
 
 import { supabase } from '../../../api/supabaseClient';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   createBillingOrder,
   autoVerifyNhisBillingOrder,
@@ -184,9 +185,10 @@ export async function syncAdmissionAccommodationBilling(
     .replace(/_/g, ' ')
     .trim();
   const isNhis =
-    normalizedInsType.includes('nhis') ||
-    normalizedInsType === 'dhml' ||
-    normalizedInsType === 'gifship';
+    isNhisFeatureEnabled() &&
+    (normalizedInsType.includes('nhis') ||
+      normalizedInsType === 'dhml' ||
+      normalizedInsType === 'gifship');
 
   let unitCost = toAmount(
     admission.current_bed?.daily_rate ?? admission.current_ward?.price,
@@ -629,9 +631,10 @@ export async function confirmAdmissionRequest(
       .replace(/_/g, ' ')
       .trim();
     isNhis =
-      normalizedInsType.includes('nhis') ||
-      normalizedInsType === 'dhml' ||
-      normalizedInsType === 'gifship';
+      isNhisFeatureEnabled() &&
+      (normalizedInsType.includes('nhis') ||
+        normalizedInsType === 'dhml' ||
+        normalizedInsType === 'gifship');
 
     // Use bed daily rate if available, otherwise use ward price
     unitCost = Number(bed?.daily_rate || ward?.price || 0);
@@ -1160,9 +1163,10 @@ export async function createAdmission(
       .replace(/_/g, ' ')
       .trim();
     const isNhis =
-      normalizedAdmInsType.includes('nhis') ||
-      normalizedAdmInsType === 'dhml' ||
-      normalizedAdmInsType === 'gifship';
+      isNhisFeatureEnabled() &&
+      (normalizedAdmInsType.includes('nhis') ||
+        normalizedAdmInsType === 'dhml' ||
+        normalizedAdmInsType === 'gifship');
 
     // Determine price based on insurance status
     let unitCost = Number(admission.current_bed?.daily_rate || ward?.price || 0);

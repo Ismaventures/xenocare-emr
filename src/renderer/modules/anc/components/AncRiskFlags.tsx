@@ -24,6 +24,7 @@ import { ancRiskFlagSchema, type AncRiskFlagFormDTO } from '../dtos/anc.dto';
 import type { AncRiskFlag } from '../api/anc.types';
 import { SelectWithOther } from '../../shared/components/SelectWithOther';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface Props {
   pregnancyEpisodeId: string;
@@ -235,12 +236,23 @@ export default function AncRiskFlags({
               <label className="block text-xs font-medium text-gray-600">
                 Notes
               </label>
-              <SavedNotesPopover
-                category="anc_notes"
-                subcategory="risk_flag_notes"
-                currentValue={watch('notes') || ''}
-                onInsert={(content) => setValue('notes', content)}
-              />
+              <div className="flex items-center gap-1">
+                <TemplateSearchPopover
+                  templateType="anc"
+                  category="anc_notes"
+                  currentValues={{ notes: watch('notes') || '' }}
+                  onTemplateSelect={(data) => {
+                    if (data.notes || data.nursing_notes) setValue('notes', data.notes || data.nursing_notes || '');
+                  }}
+                  buttonText="Fill"
+                />
+                <SavedNotesPopover
+                  category="anc_notes"
+                  subcategory="risk_flag_notes"
+                  currentValue={watch('notes') || ''}
+                  onInsert={(content) => setValue('notes', content)}
+                />
+              </div>
             </div>
             <textarea
               {...register('notes')}

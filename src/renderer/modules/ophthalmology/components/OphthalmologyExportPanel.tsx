@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR — Ophthalmology Export Panel
+ * XenoCare EMR — Ophthalmology Export Panel
  * Inline export toolbar for the Ophthalmology module page.
  */
 
@@ -57,7 +57,7 @@ export function OphthalmologyExportPanel({
   const rows = data.map(toRow);
 
   async function handleExport(format: ExportFormat) {
-    const filename = `NDC_Ophthalmology_Export_${new Date().toISOString().split('T')[0]}`;
+    const filename = `XenoCare_Ophthalmology_Export_${new Date().toISOString().split('T')[0]}`;
     const pdfOpts = {
       title: 'Ophthalmology Procedures Export',
       generatedBy: staff ? `${staff.first_name} ${staff.last_name}` : '',

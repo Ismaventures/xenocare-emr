@@ -3,6 +3,8 @@
 // Central Payment Order Management
 // =============================================================================
 
+import { isNhisFeatureEnabled } from '../../../config/features';
+
 // Enums matching database
 export const BILLING_ORDER_STATUS = [
   'Pending',
@@ -422,6 +424,7 @@ export function calculateBillingOrderAmount(
 export function isNhisPaymentCategory(
   paymentCategory: string | null | undefined,
 ): boolean {
+  if (!isNhisFeatureEnabled()) return false;
   if (!paymentCategory) return false;
   const category = paymentCategory.toLowerCase().replace(/_/g, ' ');
   // DHML = Defence Health Maintenance Limited — default HMO for Military NHIS
@@ -447,6 +450,16 @@ export function calculateNHISAmounts(
   // Default: patient pays 100%
   let nhisPercentage = 0;
   let nhisCovered = false;
+
+  if (!isNhisFeatureEnabled()) {
+    return {
+      grossAmount,
+      nhisCovered: false,
+      nhisPercentage: 0,
+      nhisPayable: 0,
+      patientPayable: grossAmount,
+    };
+  }
 
   // Normalize payment category for comparison
   const category = paymentCategory?.toLowerCase().replace(/_/g, ' ') || '';
@@ -486,6 +499,8 @@ export function calculateNHISAmounts(
 
 // Get NHIS percentage for a payment category
 export function getNHISPercentage(paymentCategory: string): number {
+  if (!isNhisFeatureEnabled()) return 0;
+
   // Normalize payment category for comparison
   const category = paymentCategory?.toLowerCase().replace(/_/g, ' ') || '';
 
@@ -516,6 +531,8 @@ export function isNhisConsultationFullyCovered(order: {
   patient_payable?: number;
   service_type?: string;
 }): boolean {
+  if (!isNhisFeatureEnabled()) return false;
+
   // Must be NHIS covered
   if (!order.nhis_covered) return false;
 
@@ -542,6 +559,10 @@ export function shouldCountAsOutstanding(order: {
   status?: string;
   balance_amount?: number;
 }): boolean {
+  if (!isNhisFeatureEnabled()) {
+    return (Number(order.balance_amount) || 0) > 0;
+  }
+
   // Never count fully covered NHIS consultations
   if (isNhisConsultationFullyCovered(order)) {
     return false;
@@ -568,6 +589,10 @@ export function getEffectiveOutstanding(order: {
   balance_amount?: number;
   net_amount?: number;
 }): number {
+  if (!isNhisFeatureEnabled()) {
+    return Number(order.balance_amount) || Number(order.net_amount) || 0;
+  }
+
   // Fully covered NHIS consultations have 0 outstanding
   if (isNhisConsultationFullyCovered(order)) {
     return 0;

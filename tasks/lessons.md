@@ -7,3 +7,7 @@
 - For encounter switchers, never use record status in option labels (e.g., Pending); labels must prioritize encounter_number with a deterministic ENC-* fallback.
 - In dense clinical timelines, replace wide multi-button tab strips with a single explicit section dropdown to preserve writing space and reduce visual scatter.
 - In medical report workflows, always guard mutation IDs (`id`/`report_id`) before API calls and avoid hard-coding one key column when schema drift is possible.
+- Brand refreshes must not become global UI palette replacements. Preserve the product's established semantic palette unless the user explicitly approves a redesign; introduce parent-brand colours through isolated logo and attribution surfaces.
+- When a user says colours are mixed up, stop extending the palette work, present a focused design concept first, then implement the approved direction consistently.
+- For bulk source edits on Windows, use explicit UTF-8 reads/writes and recheck non-ASCII strings afterwards; `Get-Content` defaults can silently corrupt bullets, currency symbols, and accented characters.
+- A dev-server `Cannot GET /index.html` response means the HTML was not emitted; inspect webpack's module-resolution errors before changing routes or server config.

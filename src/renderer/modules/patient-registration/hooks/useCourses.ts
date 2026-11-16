@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COURSES HOOKS
+ * XENOCARE EMR - COURSES HOOKS
  * Description: React Query hooks for course management
  * =============================================================================
  */
@@ -76,10 +76,11 @@ export function useCourses(onlyActive: boolean = false) {
 /**
  * Hook to fetch only active courses (for dropdowns)
  */
-export function useActiveCourses() {
+export function useActiveCourses(enabled = true) {
   return useQuery({
     queryKey: courseKeys.active(),
     queryFn: getActiveCourses,
+    enabled,
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 }
@@ -98,10 +99,11 @@ export function useCourse(id: string) {
 /**
  * Hook to get the next course number
  */
-export function useNextCourseNumber() {
+export function useNextCourseNumber(enabled = true) {
   return useQuery({
     queryKey: courseKeys.nextNumber(),
     queryFn: getNextCourseNumber,
+    enabled,
   });
 }
 

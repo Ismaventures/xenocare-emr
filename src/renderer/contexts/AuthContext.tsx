@@ -17,6 +17,7 @@ import {
 } from '../api/queryClient';
 import { Staff, UserRole } from '../types';
 import { clearSessionData } from '../lib/cacheLayer';
+import { clearFacilityInfoCache, loadFacilityInfo } from '../lib/facility';
 import {
   getImagingCatalogue,
   getDrugCatalogue,
@@ -474,6 +475,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Send one immediate heartbeat on login to mark active quickly.
     void sendHeartbeat(true);
 
+    // Warm the facility-info cache so print/PDF templates can use it sync.
+    void loadFacilityInfo();
+
     heartbeatRef.current = setInterval(() => {
       void sendHeartbeat(false);
     }, HEARTBEAT_INTERVAL_MS);
@@ -594,6 +598,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // user-specific IndexedDB named stores so a subsequent user on the same
     // machine never sees this user's patients, encounters, orders, or billing.
     clearSessionData();
+    clearFacilityInfoCache();
 
     // 6. Reset the guard after a brief delay (allows clean re-login later)
     setTimeout(() => {

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Executive Command Center
+// XENOCARE EMR - Executive Command Center
 // Modern, high-visibility dashboard with KPIs and visual charts
 // =============================================================================
 

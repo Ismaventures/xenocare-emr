@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Bed Transfers API
+// XENOCARE EMR - Bed Transfers API
 // Supabase API functions for patient bed/ward transfers
 // =============================================================================
 

@@ -227,7 +227,7 @@ ipcMain.handle('save-and-open-pdf', async (_event, rawPayload: unknown) => {
     const filename = parseSafeFilename(payload.filename);
 
     // Create temp directory path
-    const tempDir = path.join(os.tmpdir(), 'ndc-emr-receipts');
+    const tempDir = path.join(os.tmpdir(), 'xenocare-receipts');
 
     // Ensure temp directory exists
     if (!fs.existsSync(tempDir)) {
@@ -265,7 +265,7 @@ ipcMain.handle('save-and-open-html', async (_event, rawPayload: unknown) => {
     const filename = parseSafeFilename(payload.filename);
 
     // Create temp directory path
-    const tempDir = path.join(os.tmpdir(), 'ndc-emr-forms');
+    const tempDir = path.join(os.tmpdir(), 'xenocare-forms');
 
     // Ensure temp directory exists
     if (!fs.existsSync(tempDir)) {
@@ -351,8 +351,8 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('NDC_LOGO.png'),
-    backgroundColor: '#006838', // NDC green - shows immediately while loading
+    icon: getAssetPath('xenocare-logo.png'),
+    backgroundColor: '#006838', // XenoCare green - shows immediately while loading
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')

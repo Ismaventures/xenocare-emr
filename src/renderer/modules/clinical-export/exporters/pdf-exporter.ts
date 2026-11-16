@@ -1,6 +1,6 @@
 /**
  * Clinical Export System - PDF Exporter
- * NDC MEDICAL CENTRE EMR - Military-Grade Clinical Documentation
+ * XENOCARE EMR - Military-Grade Clinical Documentation
  *
  * Comprehensive PDF generation for clinical records export
  * Following medical record documentation standards
@@ -19,7 +19,7 @@ import { getICD10ChapterTitle } from '../standards';
 // ==================== CONSTANTS ====================
 
 const COLORS = {
-  primary: [22, 101, 52] as [number, number, number], // NDC Green
+  primary: [22, 101, 52] as [number, number, number], // Xenolink navy
   secondary: [51, 65, 85] as [number, number, number], // Slate-700
   accent: [37, 99, 235] as [number, number, number], // Blue-600
   success: [22, 163, 74] as [number, number, number], // Green-600
@@ -29,7 +29,7 @@ const COLORS = {
   text: [17, 24, 39] as [number, number, number], // Gray-900
   muted: [100, 116, 139] as [number, number, number], // Slate-500
   confidential: [139, 0, 0] as [number, number, number], // Dark red for confidential
-  tableHeader: [22, 101, 52] as [number, number, number], // NDC Green
+  tableHeader: [22, 101, 52] as [number, number, number], // Xenolink navy
   tableAlt: [248, 250, 252] as [number, number, number], // Slate-50
 };
 
@@ -52,7 +52,7 @@ const MARGINS = {
 
 const CONFIDENTIALITY_NOTICE =
   'CONFIDENTIAL MEDICAL RECORD – UNAUTHORIZED DISCLOSURE IS PROHIBITED';
-const SYSTEM_NAME = 'NDC Medical Centre EMR v2.0';
+const SYSTEM_NAME = 'XenoCare EMR v2.0';
 
 // ==================== HELPER FUNCTIONS ====================
 
@@ -376,7 +376,7 @@ export class ClinicalPDFExporter {
     this.doc.setFontSize(FONTS.small);
     this.doc.setTextColor(...COLORS.muted);
     this.doc.setFont('helvetica', 'normal');
-    this.doc.text('National Defence College Medical Centre', MARGINS.left, 15);
+    this.doc.text('XenoCare', MARGINS.left, 15);
 
     // Page X of Y (placeholder - updated at end)
     this.doc.text(`Page ${this.pageNumber}`, width - MARGINS.right, 15, {
@@ -760,7 +760,7 @@ export class ClinicalPDFExporter {
     this.doc.setFontSize(22);
     this.doc.setTextColor(255, 255, 255);
     this.doc.setFont('helvetica', 'bold');
-    this.doc.text('NATIONAL DEFENCE COLLEGE', width / 2, 30, {
+    this.doc.text('XENOCARE', width / 2, 30, {
       align: 'center',
     });
     this.doc.setFontSize(16);
@@ -1675,7 +1675,7 @@ export class ClinicalPDFExporter {
     this.addSectionTitle('13. AUTHORIZATION & CERTIFICATION');
 
     this.addParagraph(
-      "This document is a certified export of electronic medical records from the National Defence College Medical Centre EMR system. The information contained herein has been extracted directly from the patient's electronic health record without modification.",
+      "This document is a certified export of electronic medical records from the XenoCare EMR system. The information contained herein has been extracted directly from the patient's electronic health record without modification.",
       { italic: false },
     );
 

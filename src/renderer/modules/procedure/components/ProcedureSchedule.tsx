@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Procedure Schedule Component
+// XENOCARE EMR - Procedure Schedule Component
 // Visual timeline/calendar view of scheduled procedures
 // =============================================================================
 

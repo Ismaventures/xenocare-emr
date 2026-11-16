@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER CLINICAL REPORT WRAPPER
+ * XENOCARE EMR - ENCOUNTER CLINICAL REPORT WRAPPER
  * =============================================================================
  * This wrapper fetches all clinical data for an encounter and passes it
  * to the EncounterClinicalReport component for rendering.

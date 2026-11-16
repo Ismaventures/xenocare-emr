@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER MODULE API
+ * XENOCARE EMR - ENCOUNTER MODULE API
  * Description: Supabase API functions for encounters and clinics
  * =============================================================================
  */
@@ -42,10 +42,12 @@ async function findPatientIdsByQuery(searchQuery: string): Promise<string[]> {
   if (/^\d+$/.test(cleanQuery)) {
     const num = parseInt(cleanQuery, 10);
 
-    // Pad to 4 digits (standard EMR format NDC-XXXX)
+    // Support legacy 4-digit and current 6-digit EMR formats.
     const padded4 = num.toString().padStart(4, '0');
+    const padded6 = num.toString().padStart(6, '0');
     conditions.push(`emr_number.ilike.%${padded4}%`);
-    conditions.push(`emr_number.ilike.%${padded4}`);
+    conditions.push(`emr_number.ilike.%${padded6}%`);
+    conditions.push(`emr_number.ilike.%${padded6}`);
     conditions.push(`emr_number.ilike.%-${cleanQuery}`);
   }
 

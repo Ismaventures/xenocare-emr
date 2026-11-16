@@ -12,6 +12,10 @@ import {
   Shield,
   Building2,
 } from 'lucide-react';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../config/features';
 
 // =============================================================================
 // Types
@@ -223,8 +227,13 @@ export function isPaymentBlocking(
   paymentStatus: PaymentStatus,
   paymentCategory?: string,
 ): boolean {
-  // NHIS and Retainership patients don't need to pay upfront
-  if (paymentCategory === 'NHIS' || paymentCategory === 'Retainership') {
+  // Retainership patients don't need to pay upfront. NHIS only bypasses
+  // payment when the NHIS feature is explicitly enabled.
+  if (
+    paymentCategory === 'Retainership' ||
+    (isNhisFeatureEnabled() &&
+      (paymentCategory === 'NHIS' || isNhisCategory(paymentCategory)))
+  ) {
     return false;
   }
 

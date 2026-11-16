@@ -1,3 +1,4 @@
+import { isNhisFeatureEnabled } from '../../config/features';
 import React, {
   useState,
   useMemo,
@@ -99,11 +100,12 @@ import { InlineGuidance } from '../../components/guidance/InlineGuidance';
 import { AIChatPanel } from '../ai-assistant/components/AIChatPanel';
 import { formatSpecialtyExamNarrative } from '../../utils/clinicalTextFormatter';
 import { createScopedLogger } from '../../utils/logger';
+import { getFacilityName } from '../../lib/facility';
 
 const log = createScopedLogger('ClinicalConsultation');
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../assets/ndclogo.png');
+// XenoCare logo
+const ndcLogoSrc = require('../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // Types
@@ -926,7 +928,7 @@ export default function ClinicalConsultation() {
         }
 
         // Create Internal Specialty Referral Requests (ALL specialty clinics)
-        // These are INTERNAL referrals within NDC Medical Centre - they route to Encounter Office first
+        // These are INTERNAL referrals within XenoCare - they route to Encounter Office first
         for (const referral of specialtyReferrals) {
           clinicalRequests.push({
             patient_id: resolvedPatientUuid,
@@ -948,7 +950,7 @@ export default function ClinicalConsultation() {
         }
 
         // Process External NHIS Referral separately - goes to nhis_referral_queue for NHIS desk approval
-        if (externalNhisReferral) {
+        if (isNhisFeatureEnabled() && externalNhisReferral) {
           try {
             await createOutgoingReferral({
               patient_id: resolvedPatientUuid,
@@ -1001,7 +1003,8 @@ export default function ClinicalConsultation() {
             procedureOrdersCount: procedureOrders.length,
             hasAdmissionOrder: !!admissionOrder,
             specialtyReferralsCount: specialtyReferrals.length,
-            hasExternalNhisReferral: !!externalNhisReferral,
+            hasExternalNhisReferral:
+              isNhisFeatureEnabled() && !!externalNhisReferral,
           },
         );
         showToast({
@@ -1207,7 +1210,8 @@ export default function ClinicalConsultation() {
         successParts.push(`${specialtyReferrals.length} internal referral(s)`);
 
       // Count external NHIS referral (separate from specialty)
-      if (externalNhisReferral) successParts.push('1 external NHIS referral');
+      if (isNhisFeatureEnabled() && externalNhisReferral)
+        successParts.push('1 external NHIS referral');
 
       // Count other clinical requests (procedures, admissions) - not including referrals
       if (clinicalRequests.length > specialtyReferrals.length) {
@@ -1605,7 +1609,7 @@ export default function ClinicalConsultation() {
         }
 
         // Process External NHIS Referral for specialty consultations
-        if (externalNhisReferral) {
+        if (isNhisFeatureEnabled() && externalNhisReferral) {
           const resolvedEncounterId =
             consultation.encounter_id || consultation.visit_id;
           let resolvedPatientUuid: string | null = null;
@@ -1726,7 +1730,8 @@ export default function ClinicalConsultation() {
         if (admissionOrder) successParts.push('admission request');
         if (specialtyReferrals && specialtyReferrals.length > 0)
           successParts.push(`${specialtyReferrals.length} referral(s)`);
-        if (externalNhisReferral) successParts.push('NHIS external referral');
+        if (isNhisFeatureEnabled() && externalNhisReferral)
+          successParts.push('NHIS external referral');
         if (followUpBooked) successParts.push('follow-up booked');
 
         const successMessage =
@@ -1804,7 +1809,7 @@ export default function ClinicalConsultation() {
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/95 p-1.5 shadow-lg ring-2 ring-white/35 sm:h-14 sm:w-14">
                     <img
                       src={ndcLogoSrc}
-                      alt="NDC Medical Centre"
+                      alt="XenoCare"
                       className="h-full w-full object-contain"
                     />
                   </div>
@@ -1825,7 +1830,7 @@ export default function ClinicalConsultation() {
                       </span>
                       <span className="text-white/45">·</span>
                       <span className="text-white/85">
-                        NDC Medical Centre EMR
+                        {getFacilityName()}
                       </span>
                     </p>
                   </div>
@@ -2162,12 +2167,12 @@ export default function ClinicalConsultation() {
                 <div className="bg-white rounded-lg p-1.5 shadow">
                   <img
                     src={ndcLogoSrc}
-                    alt="NDC"
+                    alt="XenoCare"
                     className="h-6 w-6 object-contain"
                   />
                 </div>
                 <span className="text-sm font-semibold">
-                  NDC Medical AI Assistants
+                  XenoCare AI Assistant
                 </span>
               </div>
               <div className="flex items-center gap-2">

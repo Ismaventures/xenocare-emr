@@ -13,6 +13,7 @@ import {
 import { useCreateAeProcedure, useAeProcedures } from '../../hooks/useAe';
 import { SelectWithOther } from '../../../shared/components/SelectWithOther';
 import SavedNotesPopover from '../../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../../components/ui/TemplateSearchPopover';
 import { useToast } from '../../../../components/ui/Toast';
 
 interface AeProcedureFormProps {
@@ -193,12 +194,29 @@ export default function AeProcedureForm({
             <label className="block text-sm font-medium text-gray-700">
               Findings / Description
             </label>
-            <SavedNotesPopover
-              category="ae_notes"
-              subcategory="procedure_findings"
-              currentValue={watch('findings') || ''}
-              onInsert={(content) => setValue('findings', content)}
-            />
+            <div className="flex items-center gap-1">
+              <TemplateSearchPopover
+                templateType="ae"
+                category="ae_notes"
+                currentValues={{
+                  findings: watch('findings') || '',
+                  notes: watch('notes') || '',
+                  complications: watch('complications') || '',
+                }}
+                onTemplateSelect={(data) => {
+                  if (data.findings) setValue('findings', data.findings);
+                  if (data.notes) setValue('notes', data.notes);
+                  if (data.complications) setValue('complications', data.complications);
+                }}
+                buttonText="Fill All Fields"
+              />
+              <SavedNotesPopover
+                category="ae_notes"
+                subcategory="procedure_findings"
+                currentValue={watch('findings') || ''}
+                onInsert={(content) => setValue('findings', content)}
+              />
+            </div>
           </div>
           <textarea
             {...register('findings')}

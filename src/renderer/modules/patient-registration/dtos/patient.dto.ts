@@ -254,10 +254,9 @@ export function validatePatientForm(data: CreatePatientDTO): PatientFormErrors {
     errors.surname = 'Surname must be at least 2 characters';
   }
 
-  // Date of Birth - Required
-  if (!data.date_of_birth) {
-    errors.date_of_birth = 'Date of birth is required';
-  } else {
+  // Date of birth is optional for this deployment ("where available"),
+  // but must be valid when supplied.
+  if (data.date_of_birth) {
     const dob = new Date(data.date_of_birth);
     const today = new Date();
     if (dob > today) {
@@ -282,31 +281,9 @@ export function validatePatientForm(data: CreatePatientDTO): PatientFormErrors {
     errors.contact_phone = 'Invalid phone number format';
   }
 
-  // Military validation
-  if (data.patient_category === 'Military') {
-    if (!data.service_number) {
-      errors.service_number =
-        'Service number is required for military personnel';
-    }
-    if (!data.rank) {
-      errors.rank = 'Rank is required for military personnel';
-    }
-    if (!data.military_branch) {
-      errors.military_branch =
-        'Military branch is required for military personnel';
-    }
-  }
-
-  // Dependent validation
-  if (data.patient_type === 'Dependent') {
-    if (!data.principal_id) {
-      errors.principal_id = 'Principal is required for dependents';
-    }
-    if (!data.relationship_to_principal) {
-      errors.relationship_to_principal =
-        'Relationship to principal is required';
-    }
-  }
+  // NOTE: MUHEDA CLINIC registrations do not use military, dependent or
+  // institutional classification fields. Existing legacy records remain
+  // untouched because these fields are preserved by the edit payload.
 
   // NOTE: NHIS Referral fields (referral_code, referring_facility_name, referral_date, referral_reason)
   // are optional at patient registration. They can be filled in during NHIS verification process.

@@ -9,6 +9,7 @@
 // =============================================================================
 
 import { supabase } from '../../api/supabaseClient';
+import { isNhisFeatureEnabled } from '../../config/features';
 
 // =============================================================================
 // Types
@@ -78,6 +79,8 @@ export interface ThresholdCheckResult {
 // =============================================================================
 
 export async function isPatientNhis(patientId: string): Promise<boolean> {
+  if (!isNhisFeatureEnabled()) return false;
+
   // Check both nhis_profiles and patient insurance_type
   const [profileResult, patientResult] = await Promise.all([
     supabase
@@ -130,6 +133,15 @@ export async function isEncounterNhisVerified(encounterId: string): Promise<{
   verificationStatus: string;
   tariffGroup: string | null;
 }> {
+  if (!isNhisFeatureEnabled()) {
+    return {
+      isNhis: false,
+      isVerified: false,
+      verificationStatus: 'not_applicable',
+      tariffGroup: null,
+    };
+  }
+
   const { data, error } = await supabase
     .from('visits')
     .select(
@@ -262,6 +274,15 @@ async function getTariffRules(
 export async function checkServiceApprovalRequired(
   request: Omit<ServiceApprovalRequest, 'requestedBy'> & { serviceId?: string },
 ): Promise<ThresholdCheckResult> {
+  if (!isNhisFeatureEnabled()) {
+    return {
+      requiresApproval: false,
+      autoApprove: true,
+      thresholdAmount: null,
+      reason: 'NHIS approval is disabled for this facility',
+    };
+  }
+
   // First check if patient is NHIS
   const isNhis = await isPatientNhis(request.patientId);
 
@@ -429,6 +450,15 @@ async function checkServiceCatalogueNhisFlag(
 export async function createServiceApprovalRequest(
   request: ServiceApprovalRequest,
 ): Promise<ServiceApprovalResult> {
+  if (!isNhisFeatureEnabled()) {
+    return {
+      requiresApproval: false,
+      autoApproved: true,
+      status: 'not_required',
+      reason: 'NHIS approval is disabled for this facility',
+    };
+  }
+
   // Check if approval is required
   const thresholdCheck = await checkServiceApprovalRequired(request);
 
@@ -550,6 +580,8 @@ export async function getServiceApprovalStatus(
   decidedAt?: string;
   rejectionReason?: string;
 } | null> {
+  if (!isNhisFeatureEnabled()) return null;
+
   const { data, error } = await supabase
     .from('nhis_approvals')
     .select(
@@ -590,6 +622,14 @@ export async function processBatchApproval(
   notes?: string,
   rejectionReason?: string,
 ): Promise<{ success: number; failed: number; errors: string[] }> {
+  if (!isNhisFeatureEnabled()) {
+    return {
+      success: 0,
+      failed: approvalIds.length,
+      errors: ['NHIS approval is disabled for this facility'],
+    };
+  }
+
   let success = 0;
   let failed = 0;
   const errors: string[] = [];
@@ -654,6 +694,8 @@ export async function processBatchApproval(
 export async function getPendingApprovalCounts(): Promise<
   Record<string, number>
 > {
+  if (!isNhisFeatureEnabled()) return {};
+
   const { data, error } = await supabase
     .from('nhis_approvals')
     .select('service_type')
@@ -682,6 +724,13 @@ export async function canServiceProceed(
   reason: string;
   approvalStatus?: NhisApprovalStatus;
 }> {
+  if (!isNhisFeatureEnabled()) {
+    return {
+      canProceed: true,
+      reason: 'NHIS approval is disabled for this facility',
+    };
+  }
+
   // Check if patient is NHIS
   const isNhis = await isPatientNhis(patientId);
 

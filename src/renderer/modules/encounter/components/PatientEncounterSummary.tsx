@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT ENCOUNTER SUMMARY COMPONENT
+ * XENOCARE EMR - PATIENT ENCOUNTER SUMMARY COMPONENT
  * Description: Consolidated view of encounters grouped by patient with expand/collapse
  * Shows patient with encounter count, expands to show all encounters on click
  * =============================================================================

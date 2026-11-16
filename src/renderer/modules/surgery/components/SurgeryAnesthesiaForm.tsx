@@ -22,6 +22,7 @@ import {
   SurgeryAnesthesiaRecord,
 } from '../types/surgery.types';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 const SurgeryAnesthesiaForm: React.FC = () => {
   const navigate = useNavigate();
@@ -209,6 +210,17 @@ const SurgeryAnesthesiaForm: React.FC = () => {
               />
             </div>
             <div className="md:col-span-2">
+              <div className="flex justify-end mb-2">
+                <TemplateSearchPopover
+                  templateType="surgery"
+                  category="surgery_anesthesia"
+                  currentValues={{ airway_management: airwayManagement }}
+                  onTemplateSelect={(data) => {
+                    if (data.airway_management) setAirwayManagement(data.airway_management);
+                  }}
+                  buttonText="Fill All Fields"
+                />
+              </div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-700">
                   Airway Management

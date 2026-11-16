@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - COMPREHENSIVE AUDIT TRAIL VIEWER
+ * XENOCARE EMR - COMPREHENSIVE AUDIT TRAIL VIEWER
  * Unified audit trail view for all system activities across all modules
  * Aggregates: comprehensive_audit_log, billing_audit_log, clinical_audit_log,
  * nhis_audit_log, nhis_activity_audit, user_session_audit
@@ -138,7 +138,7 @@ const ACTION_OPTIONS = [
   { value: 'view', label: 'Viewed' },
 ];
 
-const NDC_COLORS = {
+const BRAND_COLORS = {
   primary: '#166534',
   secondary: '#15803d',
   accent: '#22c55e',

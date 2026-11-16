@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - IDEMPOTENCY KEY UTILITIES
+ * XENOCARE EMR - IDEMPOTENCY KEY UTILITIES
  * Prevent duplicate record creation from network retries or double-clicks
  * =============================================================================
  *

@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Add Ward Modal
+// XENOCARE EMR - Add Ward Modal
 // Modal form for creating new wards
 // =============================================================================
 
@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { X, Building2, Loader2 } from 'lucide-react';
 import { useCreateWard } from '../hooks/useWards';
 import type { WardType } from '../../../types/database.types';
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 interface AddWardModalProps {
   isOpen: boolean;
@@ -49,8 +50,8 @@ const AddWardModal: React.FC<AddWardModalProps> = ({
     nurse_station_phone: '',
     price: '',
     nhis_price: '',
-    is_nhis_covered: true,
-    nhis_percentage: '70',
+    is_nhis_covered: isNhisFeatureEnabled(),
+    nhis_percentage: isNhisFeatureEnabled() ? '70' : '0',
   });
   const [error, setError] = useState<string | null>(null);
 
@@ -95,8 +96,8 @@ const AddWardModal: React.FC<AddWardModalProps> = ({
         nurse_station_phone: '',
         price: '',
         nhis_price: '',
-        is_nhis_covered: true,
-        nhis_percentage: '70',
+        is_nhis_covered: isNhisFeatureEnabled(),
+        nhis_percentage: isNhisFeatureEnabled() ? '70' : '0',
       });
 
       onSuccess?.();

@@ -14,6 +14,7 @@ import {
 import { useCreateOutcome, usePregnancyOutcome } from '../hooks/useAnc';
 import type { PregnancyOutcome } from '../api/anc.types';
 import SavedNotesPopover from '../../../components/ui/SavedNotesPopover';
+import TemplateSearchPopover from '../../../components/ui/TemplateSearchPopover';
 
 interface Props {
   pregnancyEpisodeId: string;
@@ -297,12 +298,23 @@ export default function DeliveryOutcomeForm({
           <Field label="Additional Notes">
             <span />
           </Field>
-          <SavedNotesPopover
-            category="anc_notes"
-            subcategory="delivery_notes"
-            currentValue={watch('notes') || ''}
-            onInsert={(content) => setValue('notes', content)}
-          />
+          <div className="flex items-center gap-1">
+            <TemplateSearchPopover
+              templateType="anc"
+              category="anc_notes"
+              currentValues={{ notes: watch('notes') || '' }}
+              onTemplateSelect={(data) => {
+                if (data.notes || data.nursing_notes) setValue('notes', data.notes || data.nursing_notes || '');
+              }}
+              buttonText="Fill"
+            />
+            <SavedNotesPopover
+              category="anc_notes"
+              subcategory="delivery_notes"
+              currentValue={watch('notes') || ''}
+              onInsert={(content) => setValue('notes', content)}
+            />
+          </div>
         </div>
         <textarea
           {...register('notes')}

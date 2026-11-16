@@ -266,7 +266,7 @@ async function hydrateLabTests(
   const { data: testData, error } = await supabase
     .from('lab_test_catalogue')
     .select(
-      'id, code, name, category, specimen_type, price, nhis_price, nhis_code, is_nhis_covered, nhis_percentage',
+      'id, code, name, category, category_code, specimen_type, price, nhis_price, nhis_code, is_nhis_covered, nhis_percentage, result_template_type, test_parameters',
     )
     .in('id', testIds);
 
@@ -293,6 +293,9 @@ async function hydrateLabTests(
         turnaround_time: null,
         sample_type: test.specimen_type,
         is_active: true,
+        category_code: test.category_code,
+        result_template_type: test.result_template_type,
+        test_parameters: test.test_parameters,
         created_at: new Date().toISOString(),
       } as import('../../../types/database.types').LabTestCatalogue,
     ]),
@@ -446,6 +449,78 @@ async function hydrateLabRequestStaff(
   });
 }
 
+
+/**
+ * Attach visit/clinic context used by the printable laboratory report.
+ */
+async function hydrateLabEncounter(
+  requests: LabRequestDTO[],
+): Promise<LabRequestDTO[]> {
+  if (!requests.length) return requests;
+
+  const encounterIds = Array.from(
+    new Set(
+      requests
+        .map((request) => request.encounter_id || request.visit_id)
+        .filter(
+          (id): id is string =>
+            typeof id === 'string' &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+              id,
+            ),
+        ),
+    ),
+  );
+
+  if (!encounterIds.length) return requests;
+
+  const { data: visits, error } = await supabase
+    .from('visits')
+    .select('id, visit_id, encounter_number, created_at, status, clinic_id')
+    .in('id', encounterIds);
+
+  if (error) {
+    log.warn('Could not hydrate lab encounter context', {
+      error: error.message,
+    });
+    return requests;
+  }
+
+  const clinicIds = Array.from(
+    new Set((visits || []).map((visit) => visit.clinic_id).filter(Boolean)),
+  );
+  const { data: clinics } = clinicIds.length
+    ? await supabase
+        .from('clinics')
+        .select('id, clinic_name')
+        .in('id', clinicIds)
+    : { data: [] as Array<{ id: string; clinic_name: string }> };
+
+  const clinicMap = new Map(
+    (clinics || []).map((clinic) => [clinic.id, clinic]),
+  );
+  const visitMap = new Map((visits || []).map((visit) => [visit.id, visit]));
+
+  return requests.map((request) => {
+    const encounterId = request.encounter_id || request.visit_id;
+    const visit = encounterId ? visitMap.get(encounterId) : undefined;
+    if (!visit) return request;
+    const clinic = visit.clinic_id ? clinicMap.get(visit.clinic_id) : undefined;
+    return {
+      ...request,
+      encounter: {
+        id: visit.id,
+        visit_id: visit.visit_id || '',
+        encounter_number: visit.encounter_number || null,
+        encounter_date: visit.created_at || null,
+        status: visit.status || '',
+        clinic_id: visit.clinic_id || null,
+        clinic_name: clinic?.clinic_name || null,
+      },
+    };
+  }) as LabRequestDTO[];
+}
+
 // =============================================================================
 // API Functions
 // =============================================================================
@@ -513,6 +588,7 @@ export async function getLabRequests(filters: LabRequestFilters = {}) {
   let enrichedData = await hydrateLabPatients((data as LabRequestDTO[]) || []);
   enrichedData = await hydrateLabTests(enrichedData);
   enrichedData = await hydrateLabRequestStaff(enrichedData);
+  enrichedData = await hydrateLabEncounter(enrichedData);
   enrichedData = await hydrateLabResults(enrichedData); // Fetch lab_results with structured_result
 
   // Filter by category if specified (need to do client-side since it's hydrated)
@@ -546,7 +622,37 @@ export async function getLabRequest(requestId: string): Promise<LabRequestDTO> {
   let [hydrated] = await hydrateLabPatients([data as LabRequestDTO]);
   [hydrated] = await hydrateLabTests([hydrated]);
   [hydrated] = await hydrateLabRequestStaff([hydrated]);
+  [hydrated] = await hydrateLabEncounter([hydrated]);
   [hydrated] = await hydrateLabResults([hydrated]); // Include lab_results with structured_result
+  return hydrated;
+}
+
+/**
+ * Fetch every laboratory request that belongs to the same submission/report.
+ * New requests carry lab_request_group_id. Historical rows fall back to the
+ * encounter so their reports remain accessible.
+ */
+export async function getLabReportRequests(
+  request: LabRequestDTO,
+): Promise<LabRequestDTO[]> {
+  let query = supabase.from('lab_requests').select(LAB_REQUEST_SELECT);
+
+  if (request.lab_request_group_id) {
+    query = query.eq('lab_request_group_id', request.lab_request_group_id);
+  } else if (request.encounter_id) {
+    query = query.eq('encounter_id', request.encounter_id);
+  } else {
+    query = query.eq('request_id', request.request_id);
+  }
+
+  const { data, error } = await query.order('created_at', { ascending: true });
+  if (error) throw error;
+
+  let hydrated = await hydrateLabPatients((data as LabRequestDTO[]) || []);
+  hydrated = await hydrateLabTests(hydrated);
+  hydrated = await hydrateLabRequestStaff(hydrated);
+  hydrated = await hydrateLabEncounter(hydrated);
+  hydrated = await hydrateLabResults(hydrated);
   return hydrated;
 }
 
@@ -702,6 +808,8 @@ export interface EnhancedLabResultInput {
     | 'amended';
   is_critical?: boolean;
   collected_at?: string;
+  specimen_type?: string;
+  specimen_identifier?: string;
 }
 
 /**
@@ -731,7 +839,12 @@ export async function enterEnhancedResult(
     workflow_status = 'pending',
     is_critical = false,
     collected_at,
+    specimen_type,
+    specimen_identifier,
   } = data;
+
+  // Payment is verified by the laboratory workflow before this action.
+  // Do not re-check every sibling request in a grouped report here.
 
   // Get current user for audit
   const {
@@ -780,6 +893,11 @@ export async function enterEnhancedResult(
   const requiresCriticalEscalation =
     is_critical &&
     ['approved', 'released'].includes(workflow_status.toLowerCase());
+  const validatedAt = ['verified', 'approved', 'released'].includes(
+    workflow_status.toLowerCase(),
+  )
+    ? new Date().toISOString()
+    : null;
   const criticalNotifiedAt = is_critical
     ? existingResult?.critical_notified_at ||
       (requiresCriticalEscalation ? new Date().toISOString() : null)
@@ -800,7 +918,11 @@ export async function enterEnhancedResult(
     structured_result: structured_result || null, // jsonb for template data
     result_template_type: result_template_type || null, // varchar(50)
     workflow_status: workflow_status || 'Pending', // varchar(50)
+    verified_by: validatedAt ? performedById : null,
+    verified_at: validatedAt,
     collected_at: collected_at || null, // timestamp
+    sample_collected_at: collected_at || null,
+    sample_type: specimen_type || null,
     reported_at: new Date().toISOString(), // timestamp
     critical_notified_at: criticalNotifiedAt,
     last_modified_by: performedById, // FK to staff(id) - audit trail
@@ -879,23 +1001,36 @@ export async function enterEnhancedResult(
     }
   }
 
-  // Update lab request status
+  // The lab_results trigger normally synchronizes request status. Mirror the
+  // convenience fields directly as a best-effort step, but never discard a
+  // successfully saved result because the parent request could not be touched.
   const requestStatus =
     workflow_status === 'released' ? 'Completed' : 'Result_Ready';
+  const { error: requestSyncError } = await supabase
+    .from('lab_requests')
+    .update({
+      status: requestStatus,
+      result,
+      result_value,
+      result_unit,
+      result_status,
+      reference_range,
+      interpretation,
+      methodology,
+      result_notes: remarks,
+      result_date: new Date().toISOString(),
+      processed_by: performedById,
+    })
+    .eq('request_id', lab_request_id);
 
-  return updateLabRequest({
-    request_id: lab_request_id,
-    status: requestStatus as LabRequestStatus,
-    result,
-    result_value,
-    result_unit,
-    result_status: result_status as any,
-    reference_range,
-    interpretation,
-    methodology,
-    result_notes: remarks,
-    result_date: new Date().toISOString(),
-  });
+  if (requestSyncError) {
+    log.warn('Lab result saved but request sync failed', {
+      requestId: lab_request_id,
+      error: requestSyncError.message,
+    });
+  }
+
+  return getLabRequest(lab_request_id);
 }
 
 /**

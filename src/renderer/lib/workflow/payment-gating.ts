@@ -8,6 +8,7 @@
 
 import { supabase } from '../../api/supabaseClient';
 import { createScopedLogger } from '../../utils/logger';
+import { isNhisFeatureEnabled } from '../../config/features';
 
 const PAID_STATUSES = ['Paid', 'Paid_NHIS', 'Paid_Retainership', 'Waived'];
 const log = createScopedLogger('PaymentGating');
@@ -271,10 +272,11 @@ export async function checkServicePaymentStatus(
     .replace(/_/g, ' ')
     .trim();
   const isNhisPatient =
-    paymentCategory === 'NHIS' ||
-    normalizedInsurance.includes('nhis') ||
-    normalizedInsurance === 'dhml' ||
-    normalizedInsurance === 'gifship';
+    isNhisFeatureEnabled() &&
+    (paymentCategory === 'NHIS' ||
+      normalizedInsurance.includes('nhis') ||
+      normalizedInsurance === 'dhml' ||
+      normalizedInsurance === 'gifship');
 
   // NHIS and Retainership patients can proceed without upfront payment
   if (isNhisPatient || paymentCategory === 'Retainership') {

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - DYNAMIC SPECIALTY CLINIC PAGE
+ * XENOCARE EMR - DYNAMIC SPECIALTY CLINIC PAGE
  * =============================================================================
  *
  * A unified, configuration-driven specialty dashboard that works for ALL
@@ -23,6 +23,7 @@ import React, {
   useRef,
 } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   Search,
   RefreshCw,
@@ -129,8 +130,8 @@ import { createScopedLogger } from '../../../utils/logger';
 
 const log = createScopedLogger('SpecialtyClinic');
 
-// NDC Logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// XenoCare Logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
 // ICON MAPPING (Static - avoids dynamic imports)
@@ -1121,7 +1122,7 @@ export default function SpecialtyClinicPage() {
       }
 
       // Process External NHIS Referral
-      if (externalNhisReferral) {
+      if (isNhisFeatureEnabled() && externalNhisReferral) {
         const resolvedEncounterId =
           consultation.encounter_id || consultation.visit_id;
         const staffUuid = staff?.id;
@@ -1709,14 +1710,14 @@ export default function SpecialtyClinicPage() {
               <div className="flex items-center gap-3">
                 <div className="bg-white/10 rounded-xl p-2 border border-white/20">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare"
                     className="h-6 w-6 object-contain filter brightness-0 invert"
                   />
                 </div>
                 <div>
                   <h2 className="text-base font-bold tracking-tight">
-                    NDC Medical AI Assistants
+                    XenoCare AI Assistants
                   </h2>
                   <p className="text-[10px] font-bold text-teal-100 uppercase tracking-widest">
                     Intelligent Diagnostic Suite
@@ -2330,7 +2331,7 @@ function HistoryTab({ history, specialtyName, isDark }: HistoryTabProps) {
 }
 
 // =============================================================================
-// CONSULTATION DETAIL MODAL — NDC BRANDED COMPREHENSIVE DESIGN
+// CONSULTATION DETAIL MODAL — XENOCARE BRANDED COMPREHENSIVE DESIGN
 // =============================================================================
 
 interface ConsultationDetailModalProps {
@@ -2469,22 +2470,22 @@ function ConsultationDetailModal({
 
       {/* Modal */}
       <div className="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-xl shadow-2xl bg-white ring-1 ring-black/5 flex flex-col animate-in zoom-in-95 duration-200">
-        {/* ──── NDC Branded Header ──── */}
+        {/* ──── XenoCare Branded Header ──── */}
         <div className="shrink-0 bg-gradient-to-r from-primary-700 to-[#008545] px-8 py-5 border-b border-green-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-5">
-              {/* NDC Logo */}
+              {/* XenoCare Logo */}
               <div className="hidden sm:flex items-center gap-3 border-r border-white/20 pr-5">
                 <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center border border-white/10 shadow-inner p-1.5 backdrop-blur-sm">
                   <img
-                    src={require('../../../../../assets/ndclogo.png')}
-                    alt="NDC Logo"
+                    src={require('../../../../../assets/xenocare-logo.png')}
+                    alt="XenoCare Logo"
                     className="w-full h-full object-contain drop-shadow-sm"
                   />
                 </div>
                 <div>
                   <h4 className="font-bold text-sm leading-tight text-white">
-                    NDC MEDICAL CENTRE
+                    XENOCARE
                   </h4>
                   <span className="text-xs font-bold tracking-widest text-[#fbbf24] uppercase">
                     EMR System
@@ -2733,7 +2734,7 @@ function ConsultationDetailModal({
             {/* ── Footer Meta ── */}
             <div className="flex items-center justify-between text-xs text-gray-400 uppercase tracking-wider px-1 pt-2 border-t border-gray-100">
               <span>Record ID: {consultation.id?.slice(0, 12)}</span>
-              <span>NDC Medical Centre EMR • Electronic Health Record</span>
+              <span>XenoCare EMR • Electronic Health Record</span>
               {consultation.updated_at && (
                 <span>
                   Last Updated:{' '}

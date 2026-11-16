@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - MEDICAL RECORDS UTILITIES
+ * XENOCARE EMR - MEDICAL RECORDS UTILITIES
  * Small utility functions for common operations
  * =============================================================================
  */

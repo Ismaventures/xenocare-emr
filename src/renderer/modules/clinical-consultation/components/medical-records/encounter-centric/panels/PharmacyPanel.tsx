@@ -30,6 +30,7 @@ export function PharmacyPanel({ encounter }: PharmacyPanelProps) {
           instructions: rx.instructions,
           route: rx.route,
           status: rx.dispensed ? 'Dispensed' : 'Pending',
+          is_external: rx.is_external,
           is_changed: rx.is_changed,
         }))
       : meds;
@@ -99,6 +100,11 @@ export function PharmacyPanel({ encounter }: PharmacyPanelProps) {
                 <div className="text-left">
                   <h3 className="font-semibold text-gray-900 flex items-center gap-2">
                     {med.drug_name}
+                    {med.is_external && (
+                      <span className="text-xs px-2 py-0.5 bg-slate-200 text-slate-700 rounded">
+                        External ? not dispensed
+                      </span>
+                    )}
                     {med.is_changed && (
                       <span className="text-xs px-2 py-0.5 bg-amber-200 text-amber-800 rounded">
                         Modified

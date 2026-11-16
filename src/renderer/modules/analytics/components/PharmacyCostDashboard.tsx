@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC MEDICAL CENTRE EMR - Pharmacy Cost Analysis Dashboard
+// XENOCARE EMR - Pharmacy Cost Analysis Dashboard
 // Comprehensive drug cost, margins, and inventory analytics
 // =============================================================================
 

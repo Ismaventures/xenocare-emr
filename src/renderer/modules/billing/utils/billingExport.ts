@@ -1,5 +1,5 @@
 // =============================================================================
-// NDC Billing Export Utility
+// XenoCare Billing Export Utility
 // Branded export templates for Excel, CSV, and PDF
 // =============================================================================
 
@@ -8,37 +8,22 @@ import autoTable from 'jspdf-autotable';
 import { InvoiceDTO, PaymentDTO, formatCurrency } from '../dtos/billing.dto';
 import { BillingFilters } from '../components/BillingFilterPanel';
 import { ExportType } from '../components/FilteredDataPreview';
+import { getFacilityBrand } from '../../../lib/facility';
+import {
+  APP_POWERED_BY,
+  FacilityBrand,
+} from '../../../shared/constants/branding';
 
-// Import NDC logo
-const ndcLogoSrc = require('../../../../../assets/ndclogo.png');
+// Import app logo
+const ndcLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 // =============================================================================
-// NDC Brand Configuration
+// Facility Brand (configurable via Configurations → Facility Settings)
 // =============================================================================
 
-export const NDC_BRAND = {
-  name: 'NDC Medical Centre',
-  fullName: 'National Defence College Medical Centre, Abuja',
-  tagline: 'Excellence in Healthcare & Service to Nation',
-  address:
-    'National Defence College Complex, G01 Zakaria Maimalari Street, Central Business District, Abuja, FCT, Nigeria',
-  phone: '+234 909 977 7440',
-  email: 'info@ndc.gov.ng',
-  website: 'www.ndc.gov.ng',
-  colors: {
-    primary: '#166534', // Green-800
-    secondary: '#15803d', // Green-700
-    accent: '#22c55e', // Green-500
-    success: '#16a34a', // Green-600
-    warning: '#ea580c', // Orange-600
-    danger: '#dc2626', // Red-600
-    text: '#111827', // Gray-900
-    textLight: '#6b7280', // Gray-500
-    background: '#ffffff',
-    border: '#e5e7eb', // Gray-200
-  },
-  logo: ndcLogoSrc,
-};
+export function getBrand(): FacilityBrand {
+  return getFacilityBrand(ndcLogoSrc);
+}
 
 // =============================================================================
 // Export Configuration by Type
@@ -206,7 +191,7 @@ export const getExportConfig = (
     payments: {
       title: 'Payment Records Report',
       subtitle: `Payment transactions - ${filterDesc}`,
-      filename: `NDC_Payments${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Payments${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 25 },
         { key: 'receipt_number', header: 'Receipt No.', width: 75 },
@@ -223,7 +208,7 @@ export const getExportConfig = (
     invoices: {
       title: 'Invoice Records Report',
       subtitle: `Invoice records - ${filterDesc}`,
-      filename: `NDC_Invoices${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Invoices${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 25 },
         { key: 'invoice_number', header: 'Invoice No.', width: 75 },
@@ -242,7 +227,7 @@ export const getExportConfig = (
     revenue: {
       title: 'Revenue Report',
       subtitle: `Revenue breakdown - ${filterDesc}`,
-      filename: `NDC_Revenue${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Revenue${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 40 },
         { key: 'category', header: 'Category', width: 150 },
@@ -254,7 +239,7 @@ export const getExportConfig = (
     outstanding: {
       title: 'Outstanding Payments Report (Debtors List)',
       subtitle: `Unpaid invoices as of ${new Date().toLocaleDateString()} - ${filterDesc}`,
-      filename: `NDC_Outstanding${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Outstanding${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 25 },
         { key: 'invoice_number', header: 'Invoice No.', width: 70 },
@@ -271,7 +256,7 @@ export const getExportConfig = (
     cashier: {
       title: 'Cashier Performance Report',
       subtitle: `Staff transaction summary - ${filterDesc}`,
-      filename: `NDC_Cashier_Report${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Cashier_Report${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 35 },
         { key: 'cashier_name', header: 'Cashier Name', width: 130 },
@@ -285,7 +270,7 @@ export const getExportConfig = (
     department: {
       title: 'Department Revenue Report',
       subtitle: `Revenue by department - ${filterDesc}`,
-      filename: `NDC_Department_Revenue${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Department_Revenue${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 35 },
         { key: 'department', header: 'Department', width: 130 },
@@ -299,7 +284,7 @@ export const getExportConfig = (
     audit: {
       title: 'Audit Trail Report',
       subtitle: `Audit log - ${filterDesc}`,
-      filename: `NDC_Audit_Report${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Audit_Report${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 35 },
         { key: 'timestamp', header: 'Timestamp', width: 110 },
@@ -313,7 +298,7 @@ export const getExportConfig = (
     summary: {
       title: 'Comprehensive Billing Summary Report',
       subtitle: `All invoices, receipts & NHIS records - ${filterDesc}`,
-      filename: `NDC_Billing_Summary${fileSuffix}_${dateStr}`,
+      filename: `XenoCare_Billing_Summary${fileSuffix}_${dateStr}`,
       columns: [
         { key: 'sn', header: 'S/N', width: 20 },
         { key: 'type', header: 'Type', width: 40 },
@@ -1066,9 +1051,9 @@ export function exportToCSV(
 ): void {
   // Build CSV header with branding
   const brandingRows = [
-    [NDC_BRAND.fullName],
-    [NDC_BRAND.tagline],
-    [NDC_BRAND.address],
+    [getBrand().fullName],
+    [getBrand().tagline],
+    [getBrand().address],
     [''],
     [config.title],
     [config.subtitle],
@@ -1154,33 +1139,33 @@ export function exportToExcel(
   <meta charset="UTF-8">
   <style>
     body { font-family: 'Calibri', 'Arial', sans-serif; }
-    .header { background-color: ${NDC_BRAND.colors.primary}; color: white; padding: 20px; text-align: center; }
+    .header { background-color: ${getBrand().colors.primary}; color: white; padding: 20px; text-align: center; }
     .header h1 { margin: 0; font-size: 24px; }
     .header p { margin: 5px 0; font-size: 14px; opacity: 0.9; }
-    .report-title { background-color: ${NDC_BRAND.colors.accent}; color: white; padding: 15px; margin-top: 10px; }
+    .report-title { background-color: ${getBrand().colors.accent}; color: white; padding: 15px; margin-top: 10px; }
     .report-title h2 { margin: 0; font-size: 18px; }
     .report-title p { margin: 5px 0 0 0; font-size: 12px; opacity: 0.9; }
     table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th { background-color: ${NDC_BRAND.colors.secondary}; color: white; padding: 12px 8px; text-align: left; font-size: 12px; font-weight: bold; border: 1px solid ${NDC_BRAND.colors.border}; }
-    td { padding: 10px 8px; border: 1px solid ${NDC_BRAND.colors.border}; font-size: 11px; }
+    th { background-color: ${getBrand().colors.secondary}; color: white; padding: 12px 8px; text-align: left; font-size: 12px; font-weight: bold; border: 1px solid ${getBrand().colors.border}; }
+    td { padding: 10px 8px; border: 1px solid ${getBrand().colors.border}; font-size: 11px; }
     tr:nth-child(even) { background-color: #f8fafc; }
     tr:hover { background-color: #e2e8f0; }
     .amount { text-align: right; font-family: 'Consolas', monospace; }
-    .status-paid { color: ${NDC_BRAND.colors.success}; font-weight: bold; }
-    .status-pending { color: ${NDC_BRAND.colors.warning}; font-weight: bold; }
-    .status-overdue { color: ${NDC_BRAND.colors.danger}; font-weight: bold; }
-    .totals-row { background-color: ${NDC_BRAND.colors.primary} !important; color: white; font-weight: bold; }
-    .totals-row td { border-color: ${NDC_BRAND.colors.secondary}; }
-    .footer { margin-top: 20px; padding: 15px; background-color: #f1f5f9; border-top: 2px solid ${NDC_BRAND.colors.primary}; font-size: 11px; color: ${NDC_BRAND.colors.textLight}; }
+    .status-paid { color: ${getBrand().colors.success}; font-weight: bold; }
+    .status-pending { color: ${getBrand().colors.warning}; font-weight: bold; }
+    .status-overdue { color: ${getBrand().colors.danger}; font-weight: bold; }
+    .totals-row { background-color: ${getBrand().colors.primary} !important; color: white; font-weight: bold; }
+    .totals-row td { border-color: ${getBrand().colors.secondary}; }
+    .footer { margin-top: 20px; padding: 15px; background-color: #f1f5f9; border-top: 2px solid ${getBrand().colors.primary}; font-size: 11px; color: ${getBrand().colors.textLight}; }
     .footer p { margin: 3px 0; }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>${NDC_BRAND.fullName}</h1>
-    <p>${NDC_BRAND.tagline}</p>
-    <p>${NDC_BRAND.address}</p>
-    <p>Tel: ${NDC_BRAND.phone} | Email: ${NDC_BRAND.email}</p>
+    <h1>${getBrand().fullName}</h1>
+    <p>${getBrand().tagline}</p>
+    <p>${getBrand().address}</p>
+    <p>Tel: ${getBrand().phone} | Email: ${getBrand().email}</p>
   </div>
   
   <div class="report-title">
@@ -1268,7 +1253,7 @@ export function exportToExcel(
 // PDF Export (using jsPDF for direct file download)
 // =============================================================================
 
-// NDC Logo as base64 - will be loaded dynamically
+// XenoCare logo as base64 - will be loaded dynamically
 let ndcLogoBase64: string | null = null;
 
 // Function to load logo as base64 from imported source
@@ -1406,13 +1391,13 @@ export async function exportToPDF(
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
-  doc.text(NDC_BRAND.fullName, textStartX, 9);
+  doc.text(getBrand().fullName, textStartX, 9);
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'normal');
-  doc.text(`${NDC_BRAND.tagline}`, textStartX, 14);
+  doc.text(`${getBrand().tagline}`, textStartX, 14);
   doc.text(
-    `Tel: ${NDC_BRAND.phone} | Email: ${NDC_BRAND.email}`,
+    `Tel: ${getBrand().phone} | Email: ${getBrand().email}`,
     textStartX,
     19,
   );
@@ -1879,11 +1864,14 @@ export async function exportToPDF(
     });
     doc.setFont('helvetica', 'normal');
     doc.text(
-      `© ${new Date().getFullYear()} ${NDC_BRAND.name} - Confidential`,
+      `© ${new Date().getFullYear()} ${getBrand().name} - Confidential`,
       pageWidth - margin,
       pageHeight - 6,
       { align: 'right' },
     );
+    doc.setFontSize(6);
+    doc.setTextColor(107, 114, 128);
+    doc.text(APP_POWERED_BY, margin, pageHeight - 3);
   }
 
   // Save the PDF

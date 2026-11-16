@@ -222,11 +222,11 @@ export function FilteredDataPreview({
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              {/* NDC Logo placeholder */}
+              {/* XenoCare Logo placeholder */}
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                 <img
-                  src="../../assets/ndclogo.png"
-                  alt="NDC Logo"
+                  src="../../assets/xenocare-logo.png"
+                  alt="XenoCare Logo"
                   className="w-10 h-10 object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';

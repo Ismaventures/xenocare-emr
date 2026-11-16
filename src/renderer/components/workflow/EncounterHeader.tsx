@@ -19,6 +19,10 @@ import {
   Lock,
 } from 'lucide-react';
 import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../config/features';
+import {
   EncounterSummary,
   EncounterStatus,
 } from '../../lib/encounter/validation';
@@ -99,10 +103,12 @@ const PaymentBadge: React.FC<{ category: string }> = ({ category }) => {
     Private: { bg: 'bg-amber-100', text: 'text-amber-800', label: 'Private' },
   };
 
-  const { bg, text, label } = config[category] || {
+  const effectiveCategory =
+    !isNhisFeatureEnabled() && isNhisCategory(category) ? 'Private' : category;
+  const { bg, text, label } = config[effectiveCategory] || {
     bg: 'bg-gray-100',
     text: 'text-gray-800',
-    label: category,
+    label: effectiveCategory,
   };
 
   return (

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - INTERNAL REFERRAL QUEUE
+ * XENOCARE EMR - INTERNAL REFERRAL QUEUE
  *
  * Component for Encounter Office to view and manage internal referrals.
  * Features:
@@ -12,6 +12,10 @@
  */
 
 import React, { useState, useMemo, useEffect } from 'react';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 import {
   ArrowRight,
   Calendar,
@@ -214,6 +218,7 @@ function NhisBadge({
   insuranceType: string | null;
   nhisApprovalStatus: string | null;
 }) {
+  if (!isNhisFeatureEnabled()) return null;
   const isNhis = insuranceType?.toLowerCase().includes('nhis');
   if (!isNhis) return null;
 
@@ -1185,10 +1190,14 @@ function ReferralDetailPanel({
             <div>
               <p className="text-gray-500">Insurance</p>
               <p className="font-medium text-gray-900">
-                {referral.insurance_type || 'N/A'}
+                {!isNhisFeatureEnabled() &&
+                isNhisCategory(referral.insurance_type)
+                  ? 'Private'
+                  : referral.insurance_type || 'N/A'}
               </p>
             </div>
-            {referral.insurance_type?.toLowerCase().includes('nhis') && (
+            {isNhisFeatureEnabled() &&
+              referral.insurance_type?.toLowerCase().includes('nhis') && (
               <div className="col-span-2">
                 <p className="text-gray-500">NHIS Verification</p>
                 <div className="mt-1">

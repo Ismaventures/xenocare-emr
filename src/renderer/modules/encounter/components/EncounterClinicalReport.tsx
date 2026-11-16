@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENCOUNTER CLINICAL REPORT
+ * XENOCARE EMR - ENCOUNTER CLINICAL REPORT
  * =============================================================================
  * Hospital-Grade Medical Report Export Template
  *
@@ -16,6 +16,10 @@
  */
 
 import React, { useRef, useState, useEffect } from 'react';
+import {
+  getFacilityAddress,
+  getFacilityName,
+} from '../../../lib/facility';
 import {
   X,
   Printer,
@@ -152,7 +156,7 @@ interface ValidationError {
 // Constants
 // =============================================================================
 
-const NDCLogoSrc = require('../../../../../assets/ndclogo.png');
+const XenoCareLogoSrc = require('../../../../../assets/xenocare-logo.png');
 
 const CONFIDENTIALITY_NOTICE = `
 CONFIDENTIAL MEDICAL RECORD - This document contains protected health information (PHI) 
@@ -160,13 +164,6 @@ and is intended solely for the authorized recipient(s). Unauthorized access, dis
 copying, distribution, or use of this information is strictly prohibited and may be 
 subject to civil and criminal penalties under applicable laws.
 `.trim();
-
-const HOSPITAL_INFO = {
-  name: 'NATIONAL DEFENCE COLLEGE MEDICAL CENTRE',
-  address: 'Abuja, Federal Capital Territory, Nigeria',
-  phone: '+234 XXX XXX XXXX',
-  email: 'medical@ndc.gov.ng',
-};
 
 // =============================================================================
 // Helper Functions
@@ -1048,15 +1045,17 @@ export function EncounterClinicalReport({
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-4">
               <img
-                src={NDCLogoSrc}
-                alt="NDC Medical Centre"
+                src={XenoCareLogoSrc}
+                alt="XenoCare"
                 className="h-16 w-16 bg-white rounded-lg p-1 object-contain print:h-14 print:w-14"
               />
               <div>
                 <h1 className="text-xl font-bold tracking-wide">
-                  {HOSPITAL_INFO.name}
+                  {getFacilityName().toUpperCase()}
                 </h1>
-                <p className="text-sm text-white/80">{HOSPITAL_INFO.address}</p>
+                <p className="text-sm text-white/80">
+                  {getFacilityAddress()}
+                </p>
               </div>
             </div>
             <div className="text-right text-sm">
@@ -1836,7 +1835,7 @@ export function EncounterClinicalReport({
             </div>
             <div className="text-center">
               <p className="font-semibold text-gray-700">
-                NDC Medical Centre Electronic Medical Records
+                XenoCare Electronic Medical Records
               </p>
               <p>Export Timestamp: {generatedAt}</p>
             </div>

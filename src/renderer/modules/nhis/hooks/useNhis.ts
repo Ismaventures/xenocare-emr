@@ -8,6 +8,7 @@ import {
   type UseBackgroundMutationOptions,
 } from '../../../hooks/useBackgroundMutation';
 import * as nhisApi from '../api';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   notifyNHISRequest,
   notifyNHISAuthorizationNeeded,
@@ -130,7 +131,7 @@ export function useNhisProfileByPatient(patientId: string, enabled = true) {
   return useQuery({
     queryKey: nhisQueryKeys.profileByPatient(patientId),
     queryFn: () => nhisApi.fetchNhisProfileByPatientId(patientId),
-    enabled: !!patientId && enabled,
+    enabled: isNhisFeatureEnabled() && !!patientId && enabled,
   });
 }
 
@@ -1033,6 +1034,7 @@ export function useReferralQueue(filters: ReferralQueueFilters = {}) {
   return useQuery({
     queryKey: nhisQueryKeys.referralQueueList(filters),
     queryFn: () => nhisApi.fetchReferralQueue(filters),
+    enabled: isNhisFeatureEnabled(),
     refetchInterval: 30000, // Refetch every 30 seconds
   });
 }
@@ -1041,6 +1043,7 @@ export function useReferralQueueStats() {
   return useQuery({
     queryKey: nhisQueryKeys.referralQueueStats(),
     queryFn: () => nhisApi.getReferralQueueStats(),
+    enabled: isNhisFeatureEnabled(),
     refetchInterval: 30000,
   });
 }

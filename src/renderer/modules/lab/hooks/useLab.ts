@@ -5,6 +5,7 @@ import { useBackgroundMutation } from '../../../hooks/useBackgroundMutation';
 import {
   getLabRequests,
   getLabRequest,
+  getLabReportRequests,
   updateLabRequest,
   collectSample,
   startProcessing,
@@ -32,6 +33,7 @@ import {
 } from '../api/lab.api';
 import {
   LabRequestFilters,
+  LabRequestDTO,
   UpdateLabRequestDTO,
   CreateLabResultDTO,
 } from '../dtos/lab.dto';
@@ -84,6 +86,25 @@ export function useLabRequest(requestId: string | null) {
     queryKey: labKeys.detail(requestId || ''),
     queryFn: () => getLabRequest(requestId!),
     enabled: !!requestId,
+  });
+}
+
+/**
+ * Get all requests belonging to the same report/submission.
+ */
+export function useLabReportRequests(request: LabRequestDTO | null) {
+  return useQuery({
+    queryKey: [
+      ...labKeys.details(),
+      'report',
+      request?.lab_request_group_id ||
+        request?.encounter_id ||
+        request?.request_id ||
+        'none',
+    ],
+    queryFn: () => getLabReportRequests(request!),
+    enabled: !!request,
+    staleTime: 15000,
   });
 }
 

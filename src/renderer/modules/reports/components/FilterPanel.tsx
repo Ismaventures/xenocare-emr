@@ -1,5 +1,5 @@
 /**
- * NDC Medical Centre EMR
+ * XenoCare EMR
  * Reusable Filter Panel — used across all medical module report systems
  *
  * Renders date range, patient search, status, and module-specific filters.
@@ -8,6 +8,10 @@
 
 import React, { useId, useState } from 'react';
 import { Search, Filter, ChevronDown, ChevronUp, X } from 'lucide-react';
+import {
+  isNhisCategory,
+  isNhisFeatureEnabled,
+} from '../../../config/features';
 import type {
   BaseExportFilters,
   LabExportFilters,
@@ -106,7 +110,10 @@ function LabFilters({
     'GIFSHIP',
     'Security_Services_NHIS',
     'Retainership',
-  ];
+  ].filter(
+    (insuranceType) =>
+      isNhisFeatureEnabled() || !isNhisCategory(insuranceType),
+  );
 
   return (
     <>
@@ -212,10 +219,14 @@ function LabFilters({
           }
         >
           <option value="">All Coverage Segments</option>
-          <option value="all_nhis">All NHIS Patients</option>
-          <option value="civilian_nhis">Civilian NHIS / GIFSHIP</option>
-          <option value="military_nhis">Military NHIS / DHML</option>
-          <option value="security_nhis">Security Services NHIS</option>
+          {isNhisFeatureEnabled() && (
+            <>
+              <option value="all_nhis">All NHIS Patients</option>
+              <option value="civilian_nhis">Civilian NHIS / GIFSHIP</option>
+              <option value="military_nhis">Military NHIS / DHML</option>
+              <option value="security_nhis">Security Services NHIS</option>
+            </>
+          )}
           <option value="retainership">Retainership</option>
           <option value="private">Private / Cash</option>
         </select>

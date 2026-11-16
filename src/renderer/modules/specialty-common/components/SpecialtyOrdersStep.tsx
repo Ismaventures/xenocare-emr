@@ -17,6 +17,7 @@
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
+import { isNhisFeatureEnabled } from '../../../config/features';
 import {
   X,
   Pill,
@@ -945,29 +946,31 @@ export default function SpecialtyOrdersStep({
                         <Building size={15} />
                         Internal (Within Hospital)
                       </button>
-                      <button
-                        type="button"
-                        disabled={readOnly}
-                        onClick={() =>
-                          onSpecialtyReferralsChange((prev) => ({
-                            ...prev,
-                            [key]: { ...prev[key], referralType: 'external' },
-                          }))
-                        }
-                        className={`flex-1 py-2.5 px-4 rounded-lg border-2 text-sm font-medium transition-all flex items-center justify-center gap-2 ${
-                          ref.referralType === 'external'
-                            ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                        }`}
-                      >
-                        <ExternalLink size={15} />
-                        External (NHIS / Outside Hospital)
-                      </button>
+                      {isNhisFeatureEnabled() && (
+                        <button
+                          type="button"
+                          disabled={readOnly}
+                          onClick={() =>
+                            onSpecialtyReferralsChange((prev) => ({
+                              ...prev,
+                              [key]: { ...prev[key], referralType: 'external' },
+                            }))
+                          }
+                          className={`flex-1 py-2.5 px-4 rounded-lg border-2 text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                            ref.referralType === 'external'
+                              ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+                              : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                          }`}
+                        >
+                          <ExternalLink size={15} />
+                          External (NHIS / Outside Hospital)
+                        </button>
+                      )}
                     </div>
                   </div>
 
                   {/* External-only fields */}
-                  {ref.referralType === 'external' && (
+                  {isNhisFeatureEnabled() && ref.referralType === 'external' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-indigo-50 rounded-lg border border-indigo-100">
                       <div>
                         <label className="block text-sm font-medium text-gray-900 mb-1.5">

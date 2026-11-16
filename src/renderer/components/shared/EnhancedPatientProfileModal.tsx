@@ -1,7 +1,7 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - ENHANCED PATIENT PROFILE MODAL
- * Professional patient profile with NDC branding and comprehensive audit trail
+ * XENOCARE EMR - ENHANCED PATIENT PROFILE MODAL
+ * Professional patient profile with XenoCare branding and comprehensive audit trail
  * Displays all patient activities, NHIS records, and clinical history
  * =============================================================================
  */
@@ -61,6 +61,7 @@ import type {
   NhisSchemeType,
   NhisTariffGroup,
 } from '../../modules/nhis/types';
+import { isNhisFeatureEnabled } from '../../config/features';
 
 // =============================================================================
 // Types
@@ -114,10 +115,10 @@ interface PatientEncounter {
 }
 
 // =============================================================================
-// NDC Brand Colors
+// XenoCare brand colors
 // =============================================================================
 
-const NDC_COLORS = {
+const BRAND_COLORS = {
   primary: '#4f46e5', // Indigo-600
   secondary: '#4338ca', // Indigo-700
   accent: '#818cf8', // Indigo-400
@@ -308,7 +309,7 @@ function PatientHeader({ patient }: { patient: PatientDTO }) {
     <div
       className="px-6 py-5 border-b border-slate-200/50"
       style={{
-        background: `linear-gradient(135deg, ${NDC_COLORS.primary} 0%, ${NDC_COLORS.secondary} 100%)`,
+        background: `linear-gradient(135deg, ${BRAND_COLORS.primary} 0%, ${BRAND_COLORS.secondary} 100%)`,
       }}
     >
       <div className="flex items-start justify-between">
@@ -316,7 +317,7 @@ function PatientHeader({ patient }: { patient: PatientDTO }) {
           {/* Patient Avatar */}
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-900/30"
-            style={{ backgroundColor: NDC_COLORS.accent }}
+            style={{ backgroundColor: BRAND_COLORS.accent }}
           >
             {patient.first_name?.[0]}
             {patient.surname?.[0] || patient.first_name?.[1] || ''}
@@ -351,9 +352,9 @@ function PatientHeader({ patient }: { patient: PatientDTO }) {
             {patient.status}
           </div>
 
-          {/* NDC Logo Area */}
+          {/* XenoCare brand badge */}
           <div className="bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2 text-white text-xs font-bold">
-            NDC
+            XenoCare
           </div>
         </div>
       </div>
@@ -375,20 +376,20 @@ function PatientInfo({ patient }: { patient: PatientDTO }) {
       <div className="flex items-center gap-3 py-2.5">
         <div
           className="p-2 rounded-xl"
-          style={{ backgroundColor: `${NDC_COLORS.primary}12` }}
+          style={{ backgroundColor: `${BRAND_COLORS.primary}12` }}
         >
-          <Icon size={16} style={{ color: NDC_COLORS.primary }} />
+          <Icon size={16} style={{ color: BRAND_COLORS.primary }} />
         </div>
         <div>
           <p
             className="text-xs font-medium"
-            style={{ color: NDC_COLORS.textSecondary }}
+            style={{ color: BRAND_COLORS.textSecondary }}
           >
             {label}
           </p>
           <p
             className="text-sm font-medium"
-            style={{ color: NDC_COLORS.textPrimary }}
+            style={{ color: BRAND_COLORS.textPrimary }}
           >
             {value || 'Not provided'}
           </p>
@@ -459,7 +460,7 @@ function AuditTrail({ patientId }: { patientId: string }) {
       {/* Filters */}
       <div className="flex items-center gap-3 mb-4">
         <div className="flex items-center gap-2">
-          <Search size={16} style={{ color: NDC_COLORS.textSecondary }} />
+          <Search size={16} style={{ color: BRAND_COLORS.textSecondary }} />
           <input
             type="text"
             placeholder="Search activities..."
@@ -486,9 +487,9 @@ function AuditTrail({ patientId }: { patientId: string }) {
           <RefreshCw
             className="animate-spin"
             size={20}
-            style={{ color: NDC_COLORS.primary }}
+            style={{ color: BRAND_COLORS.primary }}
           />
-          <span className="ml-2" style={{ color: NDC_COLORS.textSecondary }}>
+          <span className="ml-2" style={{ color: BRAND_COLORS.textSecondary }}>
             Loading audit trail...
           </span>
         </div>
@@ -497,7 +498,7 @@ function AuditTrail({ patientId }: { patientId: string }) {
           {filteredLogs.length === 0 ? (
             <div
               className="text-center py-8"
-              style={{ color: NDC_COLORS.textSecondary }}
+              style={{ color: BRAND_COLORS.textSecondary }}
             >
               <Activity className="mx-auto mb-2 opacity-50" size={32} />
               <p>No activity records found</p>
@@ -508,8 +509,8 @@ function AuditTrail({ patientId }: { patientId: string }) {
                 key={log.id}
                 className={`p-3 rounded-xl border transition-colors ${log.is_critical ? 'ring-2 ring-red-200' : 'hover:bg-slate-50/50'}`}
                 style={{
-                  backgroundColor: NDC_COLORS.cardBg,
-                  borderColor: log.is_critical ? '#fecaca' : NDC_COLORS.border,
+                  backgroundColor: BRAND_COLORS.cardBg,
+                  borderColor: log.is_critical ? '#fecaca' : BRAND_COLORS.border,
                 }}
               >
                 <div className="flex items-start justify-between">
@@ -522,7 +523,7 @@ function AuditTrail({ patientId }: { patientId: string }) {
                       </span>
                       <span
                         className="text-xs"
-                        style={{ color: NDC_COLORS.textSecondary }}
+                        style={{ color: BRAND_COLORS.textSecondary }}
                       >
                         {log.table_name.replace('_', ' ')}
                       </span>
@@ -533,14 +534,14 @@ function AuditTrail({ patientId }: { patientId: string }) {
 
                     <p
                       className="text-sm font-medium mb-1"
-                      style={{ color: NDC_COLORS.textPrimary }}
+                      style={{ color: BRAND_COLORS.textPrimary }}
                     >
                       {log.description}
                     </p>
 
                     <div
                       className="flex items-center gap-3 text-xs"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       <span className="flex items-center gap-1">
                         <User size={12} />
@@ -559,7 +560,7 @@ function AuditTrail({ patientId }: { patientId: string }) {
                       <div className="mt-2">
                         <p
                           className="text-xs font-medium mb-1"
-                          style={{ color: NDC_COLORS.textSecondary }}
+                          style={{ color: BRAND_COLORS.textSecondary }}
                         >
                           Changed Fields:
                         </p>
@@ -580,7 +581,7 @@ function AuditTrail({ patientId }: { patientId: string }) {
                   <div className="text-right">
                     <p
                       className="text-xs"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       {format(new Date(log.performed_at), 'MMM dd, HH:mm')}
                     </p>
@@ -609,9 +610,9 @@ function NhisActivity({ patientId }: { patientId: string }) {
           <RefreshCw
             className="animate-spin"
             size={20}
-            style={{ color: NDC_COLORS.primary }}
+            style={{ color: BRAND_COLORS.primary }}
           />
-          <span className="ml-2" style={{ color: NDC_COLORS.textSecondary }}>
+          <span className="ml-2" style={{ color: BRAND_COLORS.textSecondary }}>
             Loading NHIS activity...
           </span>
         </div>
@@ -620,7 +621,7 @@ function NhisActivity({ patientId }: { patientId: string }) {
           {nhisLogs.length === 0 ? (
             <div
               className="text-center py-8"
-              style={{ color: NDC_COLORS.textSecondary }}
+              style={{ color: BRAND_COLORS.textSecondary }}
             >
               <Shield className="mx-auto mb-2 opacity-50" size={32} />
               <p>No NHIS activity found</p>
@@ -631,8 +632,8 @@ function NhisActivity({ patientId }: { patientId: string }) {
                 key={log.id}
                 className="p-3 rounded-xl border hover:bg-slate-50/50 transition-colors"
                 style={{
-                  backgroundColor: NDC_COLORS.cardBg,
-                  borderColor: NDC_COLORS.border,
+                  backgroundColor: BRAND_COLORS.cardBg,
+                  borderColor: BRAND_COLORS.border,
                 }}
               >
                 <div className="flex items-start justify-between">
@@ -645,7 +646,7 @@ function NhisActivity({ patientId }: { patientId: string }) {
                       </span>
                       <span
                         className="text-xs"
-                        style={{ color: NDC_COLORS.textSecondary }}
+                        style={{ color: BRAND_COLORS.textSecondary }}
                       >
                         {log.event_type}
                       </span>
@@ -653,7 +654,7 @@ function NhisActivity({ patientId }: { patientId: string }) {
 
                     <div
                       className="flex items-center gap-3 text-xs mb-2"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       <span className="flex items-center gap-1">
                         <User size={12} />
@@ -675,7 +676,7 @@ function NhisActivity({ patientId }: { patientId: string }) {
                     {log.reason && (
                       <p
                         className="text-sm italic"
-                        style={{ color: NDC_COLORS.textSecondary }}
+                        style={{ color: BRAND_COLORS.textSecondary }}
                       >
                         "{log.reason}"
                       </p>
@@ -685,7 +686,7 @@ function NhisActivity({ patientId }: { patientId: string }) {
                   <div className="text-right">
                     <p
                       className="text-xs"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       {format(new Date(log.performed_at), 'MMM dd, HH:mm')}
                     </p>
@@ -714,9 +715,9 @@ function EncounterHistory({ patientId }: { patientId: string }) {
           <RefreshCw
             className="animate-spin"
             size={20}
-            style={{ color: NDC_COLORS.primary }}
+            style={{ color: BRAND_COLORS.primary }}
           />
-          <span className="ml-2" style={{ color: NDC_COLORS.textSecondary }}>
+          <span className="ml-2" style={{ color: BRAND_COLORS.textSecondary }}>
             Loading encounters...
           </span>
         </div>
@@ -725,7 +726,7 @@ function EncounterHistory({ patientId }: { patientId: string }) {
           {encounters.length === 0 ? (
             <div
               className="text-center py-8"
-              style={{ color: NDC_COLORS.textSecondary }}
+              style={{ color: BRAND_COLORS.textSecondary }}
             >
               <Stethoscope className="mx-auto mb-2 opacity-50" size={32} />
               <p>No encounters found</p>
@@ -736,8 +737,8 @@ function EncounterHistory({ patientId }: { patientId: string }) {
                 key={encounter.id}
                 className="p-3 rounded-xl border hover:bg-slate-50/50 transition-colors"
                 style={{
-                  backgroundColor: NDC_COLORS.cardBg,
-                  borderColor: NDC_COLORS.border,
+                  backgroundColor: BRAND_COLORS.cardBg,
+                  borderColor: BRAND_COLORS.border,
                 }}
               >
                 <div className="flex items-start justify-between">
@@ -745,7 +746,7 @@ function EncounterHistory({ patientId }: { patientId: string }) {
                     <div className="flex items-center gap-2 mb-2">
                       <span
                         className="font-medium"
-                        style={{ color: NDC_COLORS.textPrimary }}
+                        style={{ color: BRAND_COLORS.textPrimary }}
                       >
                         {encounter.encounter_number}
                       </span>
@@ -758,7 +759,7 @@ function EncounterHistory({ patientId }: { patientId: string }) {
 
                     <div
                       className="space-y-1 text-sm"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       {encounter.current_stage && (
                         <p>
@@ -798,7 +799,7 @@ function EncounterHistory({ patientId }: { patientId: string }) {
                   <div className="text-right">
                     <p
                       className="text-sm font-medium"
-                      style={{ color: NDC_COLORS.textPrimary }}
+                      style={{ color: BRAND_COLORS.textPrimary }}
                     >
                       {format(
                         new Date(encounter.encounter_date),
@@ -807,7 +808,7 @@ function EncounterHistory({ patientId }: { patientId: string }) {
                     </p>
                     <p
                       className="text-xs"
-                      style={{ color: NDC_COLORS.textSecondary }}
+                      style={{ color: BRAND_COLORS.textSecondary }}
                     >
                       {formatDistanceToNow(new Date(encounter.encounter_date), {
                         addSuffix: true,
@@ -1123,7 +1124,7 @@ function NhisDetails({
       <div className="p-6">
         <div
           className="text-center py-12"
-          style={{ color: NDC_COLORS.textSecondary }}
+          style={{ color: BRAND_COLORS.textSecondary }}
         >
           <Shield className="mx-auto mb-4 opacity-50" size={48} />
           <p className="text-lg font-medium">No NHIS Profile Found</p>
@@ -1224,7 +1225,7 @@ function NhisDetails({
       <section>
         <h3
           className="text-xs font-black uppercase tracking-widest mb-3"
-          style={{ color: NDC_COLORS.textSecondary }}
+          style={{ color: BRAND_COLORS.textSecondary }}
         >
           NHIS Configuration
         </h3>
@@ -1288,7 +1289,7 @@ function NhisDetails({
       <section>
         <h3
           className="text-xs font-black uppercase tracking-widest mb-3"
-          style={{ color: NDC_COLORS.textSecondary }}
+          style={{ color: BRAND_COLORS.textSecondary }}
         >
           Next of Kin
         </h3>
@@ -1325,7 +1326,7 @@ function NhisDetails({
         <section>
           <h3
             className="text-xs font-black uppercase tracking-widest mb-3"
-            style={{ color: NDC_COLORS.textSecondary }}
+            style={{ color: BRAND_COLORS.textSecondary }}
           >
             Verification Audit
           </h3>
@@ -1358,9 +1359,9 @@ function NhisDetails({
       <section>
         <h3
           className="text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2"
-          style={{ color: NDC_COLORS.textSecondary }}
+          style={{ color: BRAND_COLORS.textSecondary }}
         >
-          <FileText size={14} style={{ color: NDC_COLORS.primary }} />
+          <FileText size={14} style={{ color: BRAND_COLORS.primary }} />
           NHIS Approved Services
           {approvedServices.length > 0 && (
             <span className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full text-xs font-bold">
@@ -1374,9 +1375,9 @@ function NhisDetails({
             <RefreshCw
               className="animate-spin"
               size={20}
-              style={{ color: NDC_COLORS.primary }}
+              style={{ color: BRAND_COLORS.primary }}
             />
-            <span className="ml-2" style={{ color: NDC_COLORS.textSecondary }}>
+            <span className="ml-2" style={{ color: BRAND_COLORS.textSecondary }}>
               Loading services...
             </span>
           </div>
@@ -1478,7 +1479,7 @@ function NhisDetails({
               </span>
               <span
                 className="font-mono font-black text-sm"
-                style={{ color: NDC_COLORS.primary }}
+                style={{ color: BRAND_COLORS.primary }}
               >
                 â‚¦
                 {approvedServices
@@ -1513,7 +1514,10 @@ export default function EnhancedPatientProfileModal({
     { id: 'audit', label: 'Activity Log', icon: History },
     { id: 'nhis', label: 'NHIS Activity', icon: Activity },
     { id: 'encounters', label: 'Encounters', icon: Stethoscope },
-  ];
+  ].filter(
+    (tab) =>
+      isNhisFeatureEnabled() || (tab.id !== 'nhis-details' && tab.id !== 'nhis'),
+  );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="" size="2xl" noPadding>
@@ -1620,7 +1624,7 @@ export default function EnhancedPatientProfileModal({
           className="px-6 py-3 border-t border-slate-200 flex items-center justify-between text-xs bg-slate-50 text-slate-500"
         >
           <div className="flex items-center gap-4">
-            <span>© 2026 NDC Medical Centre</span>
+            <span>© {new Date().getFullYear()} XenoCare</span>
             <span>•</span>
             <span>Patient Data Management System</span>
           </div>
@@ -1628,7 +1632,7 @@ export default function EnhancedPatientProfileModal({
           <div className="flex items-center gap-1">
             <span>Powered by</span>
             <span className="font-bold text-indigo-600">
-              NDC EMR
+              XenoCare
             </span>
           </div>
         </div>

@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * NDC MEDICAL CENTRE EMR - PATIENT ID RESOLVER
+ * XENOCARE EMR - PATIENT ID RESOLVER
  * Centralized patient identifier resolution with fallback strategies
  * =============================================================================
  */

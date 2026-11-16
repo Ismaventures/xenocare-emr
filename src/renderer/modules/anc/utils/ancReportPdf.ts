@@ -35,7 +35,7 @@ interface AncReportPdfOptions {
 }
 
 // ── NDC Unified PDF Theme ────────────────────────────────────────────────────
-const FACILITY_NAME = 'National Defence College Medical Centre';
+const FACILITY_NAME = 'XenoCare';
 const REPORT_TITLE = 'Antenatal Care (ANC) — Monthly Report';
 const NDC_GREEN: [number, number, number] = [22, 101, 52];
 const NDC_GREEN_LIGHT: [number, number, number] = [240, 253, 244];
@@ -302,7 +302,7 @@ export async function exportAncReportPdf(
       doc.setFontSize(7);
       doc.setTextColor(...MUTED_COLOR);
       doc.text(
-        `NDC Medical Centre  •  Page ${hookData.pageNumber}`,
+        `XenoCare  •  Page ${hookData.pageNumber}`,
         pageWidth / 2,
         pageHeight - 8,
         { align: 'center' },

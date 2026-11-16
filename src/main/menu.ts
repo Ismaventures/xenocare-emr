@@ -54,17 +54,18 @@ export default class MenuBuilder {
 
   buildDarwinTemplate(): MenuItemConstructorOptions[] {
     const subMenuAbout: DarwinMenuItemConstructorOptions = {
-      label: 'NDC Medical Centre EMR',
+      label: 'XenoCare',
       submenu: [
         {
-          label: 'About NDC Medical Centre EMR',
+          label: 'About XenoCare',
           selector: 'orderFrontStandardAboutPanel:',
         },
+        { label: 'Powered by Xenolink', enabled: false },
         { type: 'separator' },
         { label: 'Services', submenu: [] },
         { type: 'separator' },
         {
-          label: 'Hide NDC Medical Centre EMR',
+          label: 'Hide XenoCare',
           accelerator: 'Command+H',
           selector: 'hide:',
         },

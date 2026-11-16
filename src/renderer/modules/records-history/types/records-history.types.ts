@@ -1,6 +1,6 @@
 /**
  * Records History Module - Type Definitions
- * NDC MEDICAL CENTRE EMR
+ * XENOCARE EMR
  *
  * Unified record types for cross-module history browsing and export.
  */
@@ -8,6 +8,8 @@
 // ---------------------------------------------------------------------------
 // Record categories mirroring clinical modules
 // ---------------------------------------------------------------------------
+
+import { isNhisFeatureEnabled } from '../../../config/features';
 
 export type RecordCategory =
   | 'encounter'
@@ -32,7 +34,7 @@ export interface RecordCategoryMeta {
   color: string; // Tailwind bg-* class
 }
 
-export const RECORD_CATEGORIES: RecordCategoryMeta[] = [
+const ALL_RECORD_CATEGORIES: RecordCategoryMeta[] = [
   { key: 'encounter', label: 'Encounters', color: 'bg-emerald-500' },
   { key: 'consultation', label: 'Consultations', color: 'bg-green-500' },
   { key: 'specialty', label: 'Specialty Clinics', color: 'bg-violet-500' },
@@ -49,6 +51,10 @@ export const RECORD_CATEGORIES: RecordCategoryMeta[] = [
   { key: 'billing', label: 'Billing', color: 'bg-teal-500' },
   { key: 'nhis_claim', label: 'NHIS Claims', color: 'bg-green-600' },
 ];
+
+export const RECORD_CATEGORIES: RecordCategoryMeta[] = isNhisFeatureEnabled()
+  ? ALL_RECORD_CATEGORIES
+  : ALL_RECORD_CATEGORIES.filter((category) => category.key !== 'nhis_claim');
 
 // ---------------------------------------------------------------------------
 // Unified record row displayed in the history table
