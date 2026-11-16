@@ -1,0 +1,33 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "webpack": false,
+  "tags": ["-lintignore"],
+  "ignore": ["**/*.d.ts", ".erb/**/*"],
+  "ignoreDependencies": [
+    "@electron/notarize",
+    "@svgr/webpack",
+    "@teamsupercell/typings-for-css-modules-loader",
+    "browserslist-config-erb",
+    "core-js",
+    "css-loader",
+    "dotenv-webpack",
+    "eslint-config-airbnb-base",
+    "eslint-import-resolver-webpack",
+    "eslint-plugin-compat",
+    "eslint-plugin-jest",
+    "eslint-plugin-jsx-a11y",
+    "eslint-plugin-promise",
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "file-loader",
+    "postcss-loader",
+    "prettier",
+    "sass",
+    "sass-loader",
+    "style-loader",
+    "ts-loader",
+    "url-loader"
+  ],
+  "exclude": ["duplicates"],
+  "entry": ["src/main/main.ts", "src/renderer/index.tsx", "src/main/preload.ts"]
+}

@@ -1,0 +1,6932 @@
+[
+  {
+    "nhia_code": "NHIA-010-001",
+    "type": "General Description",
+    "procedure": "Specialist Initial Consultation",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-002",
+    "type": "General Description",
+    "procedure": "Specialist Review (Per visit)",
+    "price": "2,600.00"
+  },
+  {
+    "nhia_code": "NHIA-010-003",
+    "type": "General Description",
+    "procedure": "Nursing Care (per day)",
+    "price": "1,800.00"
+  },
+  {
+    "nhia_code": "NHIA-010-004",
+    "type": "General Description",
+    "procedure": "Special Nursing Care (e.g., Intensive care, SCBU, Paediatric Emergency etc)",
+    "price": "3,250.00"
+  },
+  {
+    "nhia_code": "NHIA-010-005",
+    "type": "General Description",
+    "procedure": "Hospital Bed Occupancy",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-007",
+    "type": "General Description",
+    "procedure": "Bed Fee (per day) - Critical Care In I.C.U",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-008",
+    "type": "General Description",
+    "procedure": "Nursing Care (per day) - Critical Care In I.C.U",
+    "price": "3,250.00"
+  },
+  {
+    "nhia_code": "NHIA-010-009",
+    "type": "General Description",
+    "procedure": "Mechanical ventilation (per day) - Critical Care In I.C.U",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-010",
+    "type": "General Description",
+    "procedure": "Oxygen Therapy (per day) (ICU) - Critical Care In I.C.U",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-011",
+    "type": "General Description",
+    "procedure": "Central Venous Cannulation (per session) - Critical Care In I.C.U",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-012",
+    "type": "General Description",
+    "procedure": "Endotracheal Intubation (per session) - Critical Care In I.C.U",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-014",
+    "type": "General Description",
+    "procedure": "Bed Fee (per day) - Critical Care (paediatrics)",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-015",
+    "type": "General Description",
+    "procedure": "Nursing Care (per day) - Critical Care (paediatrics)",
+    "price": "3,250.00"
+  },
+  {
+    "nhia_code": "NHIA-010-016",
+    "type": "General Description",
+    "procedure": "Mechanical Ventilation (per day) - Critical Care (paediatrics)",
+    "price": "13,800.00"
+  },
+  {
+    "nhia_code": "NHIA-010-017",
+    "type": "General Description",
+    "procedure": "Oxygen therapy (per day) - Critical Care (paediatrics)",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-018",
+    "type": "General Description",
+    "procedure": "Central Venous Cannulation (per session) - Critical Care (paediatrics)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-019",
+    "type": "General Description",
+    "procedure": "Endotracheal Intubation (per session) - Critical Care (paediatrics)",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-020",
+    "type": "General Description",
+    "procedure": "Oxygen Therapy (per hour) - Critical Care (paediatrics)",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-010-021",
+    "type": "General Description",
+    "procedure": "Continuous Positive Airway Pressure (Moved to ICU)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-021-001",
+    "type": "Ent",
+    "procedure": "Antral Washout",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-021-002",
+    "type": "Ent",
+    "procedure": "Aseptic Destruction of Labyrinth for Meniere's Disease",
+    "price": "52,675.00"
+  },
+  {
+    "nhia_code": "NHIA-021-003",
+    "type": "Ent",
+    "procedure": "Audiometry",
+    "price": "20,666.67"
+  },
+  {
+    "nhia_code": "NHIA-021-004",
+    "type": "Ent",
+    "procedure": "Electrocautery of Nose",
+    "price": "42,916.67"
+  },
+  {
+    "nhia_code": "NHIA-021-005",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Ear",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-021-006",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Ingestion Airway",
+    "price": "30,800.00"
+  },
+  {
+    "nhia_code": "NHIA-021-007",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Oesophagus",
+    "price": "30,800.00"
+  },
+  {
+    "nhia_code": "NHIA-021-008",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Nose (Ordinary)",
+    "price": "11,583.33"
+  },
+  {
+    "nhia_code": "NHIA-021-009",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Nose (Under GA)",
+    "price": "38,080.00"
+  },
+  {
+    "nhia_code": "NHIA-021-010",
+    "type": "Ent",
+    "procedure": "Foreign Body Removal from Throat",
+    "price": "30,800.00"
+  },
+  {
+    "nhia_code": "NHIA-021-011",
+    "type": "Ent",
+    "procedure": "I&D of quinsy/retropharyngeal abscess/Ludwig angina",
+    "price": "32,000.00"
+  },
+  {
+    "nhia_code": "NHIA-021-012",
+    "type": "Ent",
+    "procedure": "Indirect Laryngoscopy",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-021-013",
+    "type": "Ent",
+    "procedure": "Myringoplasty",
+    "price": "73,480.00"
+  },
+  {
+    "nhia_code": "NHIA-021-014",
+    "type": "Ent",
+    "procedure": "Myringotomy; bilateral, unilateral, with grommet",
+    "price": "63,857.14"
+  },
+  {
+    "nhia_code": "NHIA-021-015",
+    "type": "Ent",
+    "procedure": "Preauricular Sinus repair",
+    "price": "70,480.00"
+  },
+  {
+    "nhia_code": "NHIA-021-016",
+    "type": "Ent",
+    "procedure": "Sinus Antroscopy",
+    "price": "67,800.00"
+  },
+  {
+    "nhia_code": "NHIA-021-017",
+    "type": "Ent",
+    "procedure": "Staples Mobilisation",
+    "price": "71,600.00"
+  },
+  {
+    "nhia_code": "NHIA-021-018",
+    "type": "Ent",
+    "procedure": "Tympanometry",
+    "price": "51,833.33"
+  },
+  {
+    "nhia_code": "NHIA-021-019",
+    "type": "Ent",
+    "procedure": "Ear Syringing per ear",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-022-001",
+    "type": "Ent",
+    "procedure": "Antrostomy - Nasal Sinus Surgery (e.g., middle/inferior meatal/ Caldwell Luc)",
+    "price": "65,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-002",
+    "type": "Ent",
+    "procedure": "Aural Polypectomy = Clinic + Biopsy",
+    "price": "62,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-003",
+    "type": "Ent",
+    "procedure": "Cortical Mastoidectomy",
+    "price": "73,400.00"
+  },
+  {
+    "nhia_code": "NHIA-022-004",
+    "type": "Ent",
+    "procedure": "Cryosurgery",
+    "price": "102,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-005",
+    "type": "Ent",
+    "procedure": "Direct Laryngoscopy (Under GA)",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-006",
+    "type": "Ent",
+    "procedure": "EUA Nasopharynx + Biopsy",
+    "price": "79,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-007",
+    "type": "Ent",
+    "procedure": "EUA Oropharynx/Hypopharynx, Larynx + biopsy",
+    "price": "86,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-008",
+    "type": "Ent",
+    "procedure": "Excision of Nasomaxillary mass",
+    "price": "116,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-009",
+    "type": "Ent",
+    "procedure": "Lateral Rhinotomy",
+    "price": "106,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-010",
+    "type": "Ent",
+    "procedure": "Meatoplasty (for Traumatic Meatus Atresia)",
+    "price": "116,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-011",
+    "type": "Ent",
+    "procedure": "Nasal Polypectomy",
+    "price": "98,400.00"
+  },
+  {
+    "nhia_code": "NHIA-022-012",
+    "type": "Ent",
+    "procedure": "Oesophagoscopy",
+    "price": "59,400.00"
+  },
+  {
+    "nhia_code": "NHIA-022-013",
+    "type": "Ent",
+    "procedure": "Emergency Oesophagoscopy + FB Removal",
+    "price": "76,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-014",
+    "type": "Ent",
+    "procedure": "Partial Amputation of the pinna",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-015",
+    "type": "Ent",
+    "procedure": "Septoplasty",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-016",
+    "type": "Ent",
+    "procedure": "Tonsillectomy/Adenotonsilectomy",
+    "price": "76,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-017",
+    "type": "Ent",
+    "procedure": "Turbinectomy",
+    "price": "103,800.00"
+  },
+  {
+    "nhia_code": "NHIA-022-018",
+    "type": "Ent",
+    "procedure": "Young's Operation",
+    "price": "102,142.86"
+  },
+  {
+    "nhia_code": "NHIA-023-001",
+    "type": "Ent",
+    "procedure": "Anterior Ethmoidal Artery ligation",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-002",
+    "type": "Ent",
+    "procedure": "Arytenoidectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-003",
+    "type": "Ent",
+    "procedure": "Dacryocystorhinostomy (DCR)",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-004",
+    "type": "Ent",
+    "procedure": "Ethmoidectomy; Fronto, External",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-005",
+    "type": "Ent",
+    "procedure": "Internal Auditory Meatus Surgery",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-006",
+    "type": "Ent",
+    "procedure": "Intranasal ethmoidectomy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-007",
+    "type": "Ent",
+    "procedure": "Labyrinthectomy",
+    "price": "158,800.00"
+  },
+  {
+    "nhia_code": "NHIA-023-008",
+    "type": "Ent",
+    "procedure": "Laryngeal Stenosis, Laryngocele, Abductor Paralysis, Laryngo-Fissure",
+    "price": "184,800.00"
+  },
+  {
+    "nhia_code": "NHIA-023-009",
+    "type": "Ent",
+    "procedure": "Laryngectomy (All types)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-010",
+    "type": "Ent",
+    "procedure": "Laryngoplasty",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-011",
+    "type": "Ent",
+    "procedure": "Mastoid Surgery/Mastoidectomy",
+    "price": "170,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-012",
+    "type": "Ent",
+    "procedure": "Muscle Grafting to Mastoid Cavity",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-013",
+    "type": "Ent",
+    "procedure": "Neck exploration for penetrating neck Injury",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-014",
+    "type": "Ent",
+    "procedure": "Parapharyngeal Excision/I&D/Tumour excision",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-015",
+    "type": "Ent",
+    "procedure": "Pharyngoplasty",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-016",
+    "type": "Ent",
+    "procedure": "Posterior Canal Reconstruction After Radical Mastoidectomy",
+    "price": "184,800.00"
+  },
+  {
+    "nhia_code": "NHIA-023-017",
+    "type": "Ent",
+    "procedure": "Rhinoplasty",
+    "price": "120,571.43"
+  },
+  {
+    "nhia_code": "NHIA-023-018",
+    "type": "Ent",
+    "procedure": "Stapedial Surgery for Otosclerosis/Stapedectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-019",
+    "type": "Ent",
+    "procedure": "Styloidectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-023-020",
+    "type": "Ent",
+    "procedure": "Tympanoplasty",
+    "price": "137,214.29"
+  },
+  {
+    "nhia_code": "NHIA-023-021",
+    "type": "Ent",
+    "procedure": "Vidian Neurectomy",
+    "price": "146,285.71"
+  },
+  {
+    "nhia_code": "NHIA-030-001",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Antenatal care",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-030-002",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Normal Delivery",
+    "price": "35,000.00"
+  },
+  {
+    "nhia_code": "NHIA-030-003",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Delivery of Multiple Pregnancy",
+    "price": "55,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-001",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Cervical Polypectomy",
+    "price": "65,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-002",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Cervical Cone Biopsy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-003",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Colposcopy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-004",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "D&C / Evacuation of Retained Products of Conception",
+    "price": "45,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-005",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Destructive delivery (Cranioembryotomy) [restricted]",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-006",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Excision / Diathermy of Warts",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-007",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Excision of Vaginal Septum",
+    "price": "86,600.00"
+  },
+  {
+    "nhia_code": "NHIA-031-008",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Hysteroscopy",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-009",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Labial Cyst",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-010",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Laparoscopy + Dye Test",
+    "price": "85,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-011",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Marsupialization (Bartholin’s Cyst)",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-012",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Pap Smear Procedure",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-013",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Repair of Episiotomy",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-014",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Uterine Evacuation",
+    "price": "45,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-015",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Vaginal Cyst Enucleation (Under LA)",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-031-016",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Vaginal Cyst Enucleation (Under GA)",
+    "price": "68,833.33"
+  },
+  {
+    "nhia_code": "NHIA-032-001",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Cervical Cerclage/Shirodkar Suture",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-002",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Colporrhaphy - Vaginal wall repair/Colpoperineorrhaphy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-003",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Diagnostic Laparoscopy",
+    "price": "85,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-004",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Laparoscopy (therapeutic)",
+    "price": "90,500.00"
+  },
+  {
+    "nhia_code": "NHIA-032-005",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Hydrotubation",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-006",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Hymenectomy and repair of Hymen",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-007",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Instrumental Delivery (Forceps, Vacuum Extraction)",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-008",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Mini Laparotomy",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-032-009",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Repair of Third-Degree Tear",
+    "price": "55,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-001",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Amputation of the Cervix",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-002",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Bilateral Tubal Ligation",
+    "price": "147,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-003",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Broad Ligament Haematoma",
+    "price": "149,400.00"
+  },
+  {
+    "nhia_code": "NHIA-033-004",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Caesarean Section, (elective, emergency, single live born, twin etc)",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-005",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Caesarean Section with Bilateral Tubal Ligation",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-006",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Caesarean Section with Hysterectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-007",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Cervical Cautery",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-008",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Wedge Resection of The Ovary",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-009",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Examination Under Anaesthesia (EUA)",
+    "price": "94,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-010",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Hysterectomy And Bilateral Salpingo-Oophorectomy (Abdominal/Vaginal))",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-011",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Hysterectomy/Manchester Repair (all types)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-012",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Laparotomy Diagnostic / Therapeutic, Inter- Sex",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-013",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Myomectomy (Abdominal)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-014",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Ovarian Biopsy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-015",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Ovarectomy/Oophrectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-016",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Pelvic Haematocele",
+    "price": "190,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-017",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Pelvic/Abdominal Abscess Drainage",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-018",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Reconstruction of Vagina (e.g. Secondary to Vaginal Atresia)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-019",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Reconstruction Surgery E.G Straussman Operation",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-020",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Rectovaginal Fistula Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-021",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Repair of Inverted Uterus",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-022",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Repair of Perforated Uterus",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-023",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Repair of Ruptured Uterus",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-024",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Salpingectomy (e.g for Ectopic Pregnancy)",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-025",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Salpingo-Oophorectomy",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-026",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Tubal Reconstruction",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-027",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Ureterovaginal Fistula Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-028",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Uterovesical Fistula Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-029",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Vaginoclesis",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-030",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Ventrosuspension of The Bladder",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-031",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Ventrosuspension Procedures of Correction of Uterine Prolapse",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-033-032",
+    "type": "Obstetrics & Gynaecology",
+    "procedure": "Vulvectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-001",
+    "type": "Internal Medicine",
+    "procedure": "Aspiration",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-002",
+    "type": "Internal Medicine",
+    "procedure": "Aspirations (USS guided)",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-003",
+    "type": "Internal Medicine",
+    "procedure": "Diagnostic Paracentesis",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-004",
+    "type": "Internal Medicine",
+    "procedure": "Haemodialysis/Haemodiafiltration/Peritoneal Dialysis (50:50 partial coverage; up to 6 sessions)",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-005",
+    "type": "Internal Medicine",
+    "procedure": "Therapeutic Paracentesis",
+    "price": "34,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-006",
+    "type": "Internal Medicine",
+    "procedure": "Endotracheal Intubation (per session)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-007",
+    "type": "Internal Medicine",
+    "procedure": "Trans Thoracic Echocardiography",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-008",
+    "type": "Internal Medicine",
+    "procedure": "Electrocardiography (ECG)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-009",
+    "type": "Internal Medicine",
+    "procedure": "Electro-Encephalography (EEG)",
+    "price": "30,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-010",
+    "type": "Internal Medicine",
+    "procedure": "24 Hour ECG (Holter ECG)",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-011",
+    "type": "Internal Medicine",
+    "procedure": "Exercise ECG",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-012",
+    "type": "Internal Medicine",
+    "procedure": "Ambulatory BP Monitoring",
+    "price": "9,500.00"
+  },
+  {
+    "nhia_code": "NHIA-040-013",
+    "type": "Internal Medicine",
+    "procedure": "Gastric Lavage",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-014",
+    "type": "Internal Medicine",
+    "procedure": "Lumbar Puncture",
+    "price": "12,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-015",
+    "type": "Internal Medicine",
+    "procedure": "Lung Function Test",
+    "price": "8,550.00"
+  },
+  {
+    "nhia_code": "NHIA-040-016",
+    "type": "Internal Medicine",
+    "procedure": "Nebulisation (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-040-017",
+    "type": "Internal Medicine",
+    "procedure": "Oxygen Therapy (per day)",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-018",
+    "type": "Internal Medicine",
+    "procedure": "Oxygen Therapy (per hour)",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-019",
+    "type": "Internal Medicine",
+    "procedure": "Tissue Biopsy (other than skin)",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-020",
+    "type": "Internal Medicine",
+    "procedure": "Skin Biopsy",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-040-021",
+    "type": "Internal Medicine",
+    "procedure": "Bone Marrow Biopsy",
+    "price": "21,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-001",
+    "type": "Orthopaedics",
+    "procedure": "Above Knee POP Cast",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-002",
+    "type": "Orthopaedics",
+    "procedure": "Cylinder POP Cast",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-003",
+    "type": "Orthopaedics",
+    "procedure": "Below Knee POP Cast",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-004",
+    "type": "Orthopaedics",
+    "procedure": "Boot POP Cast",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-005",
+    "type": "Orthopaedics",
+    "procedure": "Above Knee Back Slab",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-006",
+    "type": "Orthopaedics",
+    "procedure": "Below Knee Back Slab",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-007",
+    "type": "Orthopaedics",
+    "procedure": "Above Elbow POP Cast",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-008",
+    "type": "Orthopaedics",
+    "procedure": "Below Elbow POP Cast",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-009",
+    "type": "Orthopaedics",
+    "procedure": "U- Shaped POP Cast",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-010",
+    "type": "Orthopaedics",
+    "procedure": "U- Shaped POP Back Slap",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-011",
+    "type": "Orthopaedics",
+    "procedure": "Hanging Cast",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-012",
+    "type": "Orthopaedics",
+    "procedure": "Hip Spica POP Cast",
+    "price": "44,700.00"
+  },
+  {
+    "nhia_code": "NHIA-051-013",
+    "type": "Orthopaedics",
+    "procedure": "Mineaur Jacket POP Cast",
+    "price": "44,700.00"
+  },
+  {
+    "nhia_code": "NHIA-051-014",
+    "type": "Orthopaedics",
+    "procedure": "Thoracolumbar POP Cast",
+    "price": "32,125.00"
+  },
+  {
+    "nhia_code": "NHIA-051-016",
+    "type": "Orthopaedics",
+    "procedure": "Above Knee POP Cast (MUA & POP Application)",
+    "price": "30,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-017",
+    "type": "Orthopaedics",
+    "procedure": "Cylinder POP Cast (MUA & POP Application)",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-018",
+    "type": "Orthopaedics",
+    "procedure": "Below Knee POP Cast (MUA & POP Application)",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-051-019",
+    "type": "Orthopaedics",
+    "procedure": "Boot POP Cast (MUA & POP Application)",
+    "price": "7,750.00"
+  },
+  {
+    "nhia_code": "NHIA-052-001",
+    "type": "Orthopaedics",
+    "procedure": "Amputation - Fingers",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-052-002",
+    "type": "Orthopaedics",
+    "procedure": "Amputation - Toes",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-052-003",
+    "type": "Orthopaedics",
+    "procedure": "Excision biopsy",
+    "price": "28,857.14"
+  },
+  {
+    "nhia_code": "NHIA-052-004",
+    "type": "Orthopaedics",
+    "procedure": "Knee Effusion Tap",
+    "price": "44,400.00"
+  },
+  {
+    "nhia_code": "NHIA-052-005",
+    "type": "Orthopaedics",
+    "procedure": "Surgical Release in Stenosing Tenosynovitis",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-052-006",
+    "type": "Orthopaedics",
+    "procedure": "Synovectomy",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-052-007",
+    "type": "Orthopaedics",
+    "procedure": "Grafting of minor amputation",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-001",
+    "type": "Orthopaedics",
+    "procedure": "Closed Reduction of Fracture",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-002",
+    "type": "Orthopaedics",
+    "procedure": "Drainage of Septic Arthritis",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-003",
+    "type": "Orthopaedics",
+    "procedure": "Exostectomy/Bunionectomy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-004",
+    "type": "Orthopaedics",
+    "procedure": "Saucerization of Chronically Infected Bone",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-005",
+    "type": "Orthopaedics",
+    "procedure": "Sequestrectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-006",
+    "type": "Orthopaedics",
+    "procedure": "Simple Congenital Talipes Repair [restricted to special intervention]",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-007",
+    "type": "Orthopaedics",
+    "procedure": "Skin Traction (Application)",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-008",
+    "type": "Orthopaedics",
+    "procedure": "Subperiosteal Drainage of Acute Osteomyelitis",
+    "price": "93,400.00"
+  },
+  {
+    "nhia_code": "NHIA-053-009",
+    "type": "Orthopaedics",
+    "procedure": "Surgical Correction of Dupuytren's Contracture",
+    "price": "113,400.00"
+  },
+  {
+    "nhia_code": "NHIA-053-010",
+    "type": "Orthopaedics",
+    "procedure": "Syndactylysis",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-011",
+    "type": "Orthopaedics",
+    "procedure": "Pollicization of The Index Finger",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-012",
+    "type": "Orthopaedics",
+    "procedure": "Carpal Tunnel Release",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-053-013",
+    "type": "Orthopaedics",
+    "procedure": "Removal of Implant",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-001",
+    "type": "Orthopaedics",
+    "procedure": "Amputation and Disarticulation of Joints",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-002",
+    "type": "Orthopaedics",
+    "procedure": "Amputation and Limb Substitution",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-003",
+    "type": "Orthopaedics",
+    "procedure": "Anterior and Posterior Spine Fixation",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-004",
+    "type": "Orthopaedics",
+    "procedure": "Arthrodesis",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-005",
+    "type": "Orthopaedics",
+    "procedure": "Arthroplasty",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-006",
+    "type": "Orthopaedics",
+    "procedure": "Arthrotomy (+ Synovectomy)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-007",
+    "type": "Orthopaedics",
+    "procedure": "Bone Grafting",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-008",
+    "type": "Orthopaedics",
+    "procedure": "Foot - Open Reduction and Internal Fixation of Fractures of",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-009",
+    "type": "Orthopaedics",
+    "procedure": "Fore- Arm - Open Reduction and Internal Fixation of Fractures of",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-010",
+    "type": "Orthopaedics",
+    "procedure": "Hand - Open Reduction and Internal Fixation of Fractures of",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-011",
+    "type": "Orthopaedics",
+    "procedure": "Leg - Open Reduction and Internal Fixation of Fractures of",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-012",
+    "type": "Orthopaedics",
+    "procedure": "Pectoral Girdle - Open Reduction and Internal Fixation of Fractures of",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-013",
+    "type": "Orthopaedics",
+    "procedure": "Pelvic Girdle - Open Reduction and Internal Fixation of Fractures of",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-014",
+    "type": "Orthopaedics",
+    "procedure": "Ribs - Open Reduction and Internal Fixation of Fractures of",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-015",
+    "type": "Orthopaedics",
+    "procedure": "Thigh - Open Reduction and Internal Fixation of Fractures of",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-016",
+    "type": "Orthopaedics",
+    "procedure": "Upper Arm - Open Reduction and Internal Fixation of Fractures of",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-017",
+    "type": "Orthopaedics",
+    "procedure": "Spinal Column - Open Reduction and Internal Fixation of Fractures of",
+    "price": "300,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-018",
+    "type": "Orthopaedics",
+    "procedure": "Osteoclasis, Internal Fixation of Mal-union",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-019",
+    "type": "Orthopaedics",
+    "procedure": "Reconstruction Surgeries: Acromium, Head of Femur etc",
+    "price": "300,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-020",
+    "type": "Orthopaedics",
+    "procedure": "Surgical Repair of Congenital Talipes Equanovarus/ Valgus [restricted to special intervention]",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-021",
+    "type": "Orthopaedics",
+    "procedure": "Tendon Grafting",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-022",
+    "type": "Orthopaedics",
+    "procedure": "Tendon Transplant",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-023",
+    "type": "Orthopaedics",
+    "procedure": "Decompression of Carpal Tunnel Syndrome",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-054-024",
+    "type": "Orthopaedics",
+    "procedure": "Tenoplasty",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-001",
+    "type": "General Surgery",
+    "procedure": "Adventitious Bursae - Excision",
+    "price": "42,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-002",
+    "type": "General Surgery",
+    "procedure": "Bakers Cyst - Excision",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-003",
+    "type": "General Surgery",
+    "procedure": "Biopsy of Oesophageal Mass",
+    "price": "48,500.00"
+  },
+  {
+    "nhia_code": "NHIA-061-004",
+    "type": "General Surgery",
+    "procedure": "Biopsy of Prostate",
+    "price": "47,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-005",
+    "type": "General Surgery",
+    "procedure": "Biopsy of Tumour of Abdominal Wall",
+    "price": "47,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-006",
+    "type": "General Surgery",
+    "procedure": "Bursa - Excision",
+    "price": "39,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-007",
+    "type": "General Surgery",
+    "procedure": "Catheterization of Urinary Bladder per session (up to three sessions annually)",
+    "price": "36,100.00"
+  },
+  {
+    "nhia_code": "NHIA-061-008",
+    "type": "General Surgery",
+    "procedure": "Cervical Lymph nodes - Excision",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-009",
+    "type": "General Surgery",
+    "procedure": "Circumcision of the Grown-Up",
+    "price": "42,500.00"
+  },
+  {
+    "nhia_code": "NHIA-061-010",
+    "type": "General Surgery",
+    "procedure": "Debridement And Toilet of Wounds",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-011",
+    "type": "General Surgery",
+    "procedure": "Dermoid Cyst Excision",
+    "price": "50,500.00"
+  },
+  {
+    "nhia_code": "NHIA-061-012",
+    "type": "General Surgery",
+    "procedure": "Dissection of Inguinal Nodes",
+    "price": "50,500.00"
+  },
+  {
+    "nhia_code": "NHIA-061-013",
+    "type": "General Surgery",
+    "procedure": "Dorsal Slit and Reduction of Paraphimosis",
+    "price": "50,500.00"
+  },
+  {
+    "nhia_code": "NHIA-061-014",
+    "type": "General Surgery",
+    "procedure": "Electrofulguration of Condylomata Acuminata",
+    "price": "45,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-015",
+    "type": "General Surgery",
+    "procedure": "Excision of Breast Lump",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-016",
+    "type": "General Surgery",
+    "procedure": "Excision of Intrascrostal Mass",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-017",
+    "type": "General Surgery",
+    "procedure": "Excision of Neurofibroma",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-018",
+    "type": "General Surgery",
+    "procedure": "Excision of Tophi",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-019",
+    "type": "General Surgery",
+    "procedure": "Excision of Fibroadenoma of the Breast - Unilateral",
+    "price": "59,250.00"
+  },
+  {
+    "nhia_code": "NHIA-061-020",
+    "type": "General Surgery",
+    "procedure": "Ganglion - Excision",
+    "price": "49,142.86"
+  },
+  {
+    "nhia_code": "NHIA-061-021",
+    "type": "General Surgery",
+    "procedure": "Gastroduodenoscopy/ Endoscopies",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-022",
+    "type": "General Surgery",
+    "procedure": "Granuloma - Excision",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-023",
+    "type": "General Surgery",
+    "procedure": "Herniotomy",
+    "price": "66,625.00"
+  },
+  {
+    "nhia_code": "NHIA-061-024",
+    "type": "General Surgery",
+    "procedure": "Incision And Drainage of Abscess",
+    "price": "51,750.00"
+  },
+  {
+    "nhia_code": "NHIA-061-025",
+    "type": "General Surgery",
+    "procedure": "Infected Bunion Foot - Excision",
+    "price": "56,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-026",
+    "type": "General Surgery",
+    "procedure": "In-growing Toenail (Excision)",
+    "price": "61,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-027",
+    "type": "General Surgery",
+    "procedure": "Intercostals Drainage Insertion (Chest tube Insertion) Closed tube thoracothomy Drainage",
+    "price": "64,333.33"
+  },
+  {
+    "nhia_code": "NHIA-061-028",
+    "type": "General Surgery",
+    "procedure": "Lipectomy",
+    "price": "47,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-029",
+    "type": "General Surgery",
+    "procedure": "Liver/ Kidney/ Bone Marrow Biopsy",
+    "price": "87,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-030",
+    "type": "General Surgery",
+    "procedure": "Lords Procedure (Fissure-in-Ano)",
+    "price": "70,714.29"
+  },
+  {
+    "nhia_code": "NHIA-061-031",
+    "type": "General Surgery",
+    "procedure": "Lumpectomy – Excision",
+    "price": "61,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-032",
+    "type": "General Surgery",
+    "procedure": "Oesophagoscopy for foreign body removal",
+    "price": "56,600.00"
+  },
+  {
+    "nhia_code": "NHIA-061-033",
+    "type": "General Surgery",
+    "procedure": "Paracentesis (A/C Wash Out)",
+    "price": "51,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-034",
+    "type": "General Surgery",
+    "procedure": "Pericardiocentesis",
+    "price": "81,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-035",
+    "type": "General Surgery",
+    "procedure": "Priapism, Shunt Procedure All Types",
+    "price": "59,880.00"
+  },
+  {
+    "nhia_code": "NHIA-061-036",
+    "type": "General Surgery",
+    "procedure": "Proctoscopy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-037",
+    "type": "General Surgery",
+    "procedure": "Punch Biopsy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-038",
+    "type": "General Surgery",
+    "procedure": "Rectal Dilation",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-039",
+    "type": "General Surgery",
+    "procedure": "Sebaceous Cyst - Excision",
+    "price": "55,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-040",
+    "type": "General Surgery",
+    "procedure": "Sigmoidoscopy",
+    "price": "51,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-041",
+    "type": "General Surgery",
+    "procedure": "Sinus - Excision",
+    "price": "81,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-042",
+    "type": "General Surgery",
+    "procedure": "Surgical Drainage in Haematoma of Rectus Abdominis",
+    "price": "81,200.00"
+  },
+  {
+    "nhia_code": "NHIA-061-043",
+    "type": "General Surgery",
+    "procedure": "Surgical Drainage of Anal Abscess",
+    "price": "64,285.71"
+  },
+  {
+    "nhia_code": "NHIA-061-044",
+    "type": "General Surgery",
+    "procedure": "Surgical Drainage of Galactocoele",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-045",
+    "type": "General Surgery",
+    "procedure": "Surgical Release of Stenosing Tenosynovitis",
+    "price": "79,250.00"
+  },
+  {
+    "nhia_code": "NHIA-061-046",
+    "type": "General Surgery",
+    "procedure": "Suture of Major Wounds",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-047",
+    "type": "General Surgery",
+    "procedure": "Syndactylus",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-048",
+    "type": "General Surgery",
+    "procedure": "Testicular Biopsy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-061-049",
+    "type": "General Surgery",
+    "procedure": "Varicocoelectomy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-001",
+    "type": "General Surgery",
+    "procedure": "Anal Fistulectomy Repair",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-002",
+    "type": "General Surgery",
+    "procedure": "Anal Sphincteroplasty",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-003",
+    "type": "General Surgery",
+    "procedure": "Anorectoplasty",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-004",
+    "type": "General Surgery",
+    "procedure": "Appendicectomy",
+    "price": "135,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-005",
+    "type": "General Surgery",
+    "procedure": "Bilateral Cutaneous Ureterostomy",
+    "price": "110,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-006",
+    "type": "General Surgery",
+    "procedure": "Bilateral Ureteoenterostomy",
+    "price": "80,400.00"
+  },
+  {
+    "nhia_code": "NHIA-062-007",
+    "type": "General Surgery",
+    "procedure": "Branchial Fistula",
+    "price": "73,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-008",
+    "type": "General Surgery",
+    "procedure": "Bronchial Cyst",
+    "price": "73,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-009",
+    "type": "General Surgery",
+    "procedure": "Bronchoscopy",
+    "price": "81,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-010",
+    "type": "General Surgery",
+    "procedure": "Cystic Hygroma Excision",
+    "price": "58,285.71"
+  },
+  {
+    "nhia_code": "NHIA-062-011",
+    "type": "General Surgery",
+    "procedure": "Cystourethroscopy",
+    "price": "93,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-012",
+    "type": "General Surgery",
+    "procedure": "Drainage of Ischio Rectal Abscess",
+    "price": "93,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-013",
+    "type": "General Surgery",
+    "procedure": "Drainage of Psoas Abscess",
+    "price": "107,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-014",
+    "type": "General Surgery",
+    "procedure": "Enterocele Or Vault Prolapse Repair",
+    "price": "91,142.86"
+  },
+  {
+    "nhia_code": "NHIA-062-015",
+    "type": "General Surgery",
+    "procedure": "Epididectomy",
+    "price": "87,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-016",
+    "type": "General Surgery",
+    "procedure": "Evacuation of Scrotal Hematoma",
+    "price": "81,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-017",
+    "type": "General Surgery",
+    "procedure": "Excision Bronchial Sinus",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-018",
+    "type": "General Surgery",
+    "procedure": "Excision Mammary Fistula",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-019",
+    "type": "General Surgery",
+    "procedure": "Excision of Urethral Carbuncle",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-020",
+    "type": "General Surgery",
+    "procedure": "Excision Pilonidal Sinus",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-021",
+    "type": "General Surgery",
+    "procedure": "Excision of Haemangiomas",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-022",
+    "type": "General Surgery",
+    "procedure": "Facial Decompression",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-023",
+    "type": "General Surgery",
+    "procedure": "Fibroadenoma - Bilateral (Bilateral Breast Mass Excision)",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-024",
+    "type": "General Surgery",
+    "procedure": "Fibroma - Excision",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-025",
+    "type": "General Surgery",
+    "procedure": "Fissurectomy",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-026",
+    "type": "General Surgery",
+    "procedure": "Fistula In - Ano Repair",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-027",
+    "type": "General Surgery",
+    "procedure": "Fistula Repair",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-028",
+    "type": "General Surgery",
+    "procedure": "Fistulectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-029",
+    "type": "General Surgery",
+    "procedure": "Fulguration (Anal, Penile, Perineal)",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-030",
+    "type": "General Surgery",
+    "procedure": "Haemangioma - Excision",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-031",
+    "type": "General Surgery",
+    "procedure": "Haemorrhoidectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-032",
+    "type": "General Surgery",
+    "procedure": "Herniorrhaphies (all types)",
+    "price": "97,333.33"
+  },
+  {
+    "nhia_code": "NHIA-062-033",
+    "type": "General Surgery",
+    "procedure": "Hiatus Herniorrhaphy",
+    "price": "107,714.29"
+  },
+  {
+    "nhia_code": "NHIA-062-034",
+    "type": "General Surgery",
+    "procedure": "Hydrocoelectomy",
+    "price": "79,857.14"
+  },
+  {
+    "nhia_code": "NHIA-062-035",
+    "type": "General Surgery",
+    "procedure": "Inguinal Node (bulk dissection) Axial",
+    "price": "87,800.00"
+  },
+  {
+    "nhia_code": "NHIA-062-036",
+    "type": "General Surgery",
+    "procedure": "Injection Sclerotherapy of Varicose Veins (minor)",
+    "price": "83,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-037",
+    "type": "General Surgery",
+    "procedure": "Low Fistulectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-038",
+    "type": "General Surgery",
+    "procedure": "McIndoe Procedure",
+    "price": "67,600.00"
+  },
+  {
+    "nhia_code": "NHIA-062-039",
+    "type": "General Surgery",
+    "procedure": "Oesophagoscopy",
+    "price": "77,125.00"
+  },
+  {
+    "nhia_code": "NHIA-062-040",
+    "type": "General Surgery",
+    "procedure": "Orchidectomy",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-041",
+    "type": "General Surgery",
+    "procedure": "Orchidopexy",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-042",
+    "type": "General Surgery",
+    "procedure": "Papilloma Rectum - Excision",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-043",
+    "type": "General Surgery",
+    "procedure": "Polypectomy (Cervical)",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-044",
+    "type": "General Surgery",
+    "procedure": "Rectal polyp",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-045",
+    "type": "General Surgery",
+    "procedure": "Scrotal Swelling (Multiple) - Excision",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-046",
+    "type": "General Surgery",
+    "procedure": "Skin Grafting",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-047",
+    "type": "General Surgery",
+    "procedure": "Submandibular Lymphs - Excision",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-048",
+    "type": "General Surgery",
+    "procedure": "Suprapubic Cystostomy",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-049",
+    "type": "General Surgery",
+    "procedure": "Surgery of Torsion of Spermatic Cord",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-050",
+    "type": "General Surgery",
+    "procedure": "Surgical corrections of Duputytren's contracture",
+    "price": "83,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-051",
+    "type": "General Surgery",
+    "procedure": "Umbilical Sinus - Excision",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-062-052",
+    "type": "General Surgery",
+    "procedure": "Vasectomy",
+    "price": "90,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-001",
+    "type": "General Surgery",
+    "procedure": "Abdominal Rectopexy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-002",
+    "type": "General Surgery",
+    "procedure": "Abdomino-Perineal Resection",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-003",
+    "type": "General Surgery",
+    "procedure": "Adrenalectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-004",
+    "type": "General Surgery",
+    "procedure": "Anal Pull Through",
+    "price": "170,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-005",
+    "type": "General Surgery",
+    "procedure": "Appendicular Abscess - Drainage",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-006",
+    "type": "General Surgery",
+    "procedure": "Appendicular Perforation",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-007",
+    "type": "General Surgery",
+    "procedure": "Axillary Dissection of Breast",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-008",
+    "type": "General Surgery",
+    "procedure": "Biopsy of Retroperitoneal Tumor",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-009",
+    "type": "General Surgery",
+    "procedure": "Broad Ligament Haematoma Evacuation",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-010",
+    "type": "General Surgery",
+    "procedure": "Burst Abdomen Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-011",
+    "type": "General Surgery",
+    "procedure": "Caecopexy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-012",
+    "type": "General Surgery",
+    "procedure": "Cavernospongiosum Shunt",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-013",
+    "type": "General Surgery",
+    "procedure": "Cholecystectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-014",
+    "type": "General Surgery",
+    "procedure": "Cholecystectomy & Exploration",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-015",
+    "type": "General Surgery",
+    "procedure": "Choledochal Cystojejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-016",
+    "type": "General Surgery",
+    "procedure": "Choledocho Jejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-017",
+    "type": "General Surgery",
+    "procedure": "Choledochostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-018",
+    "type": "General Surgery",
+    "procedure": "Closure of Hollow Viscus Perforation",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-019",
+    "type": "General Surgery",
+    "procedure": "Colectomy-Partial or Total",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-020",
+    "type": "General Surgery",
+    "procedure": "Colon Reconstruction After Hartmann's Procedure",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-021",
+    "type": "General Surgery",
+    "procedure": "Colostomy Construction/Closure",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-022",
+    "type": "General Surgery",
+    "procedure": "Commando Operation",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-023",
+    "type": "General Surgery",
+    "procedure": "Condilectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-024",
+    "type": "General Surgery",
+    "procedure": "Continent Ileostomy Pouch",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-025",
+    "type": "General Surgery",
+    "procedure": "Corporosavenous Shunt",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-026",
+    "type": "General Surgery",
+    "procedure": "Craniotomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-027",
+    "type": "General Surgery",
+    "procedure": "Cricopharyngeal Myotomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-028",
+    "type": "General Surgery",
+    "procedure": "Cystectomy Partial/Total",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-029",
+    "type": "General Surgery",
+    "procedure": "Excision of Cystic/Fibrous Dysplasia",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-030",
+    "type": "General Surgery",
+    "procedure": "Cystolithotomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-031",
+    "type": "General Surgery",
+    "procedure": "Decortication",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-032",
+    "type": "General Surgery",
+    "procedure": "Diaphragmatic Hernia Repair",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-033",
+    "type": "General Surgery",
+    "procedure": "Dissection of the Mediastinum",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-034",
+    "type": "General Surgery",
+    "procedure": "Diverticululectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-035",
+    "type": "General Surgery",
+    "procedure": "Drainage of Gastric Abscess",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-036",
+    "type": "General Surgery",
+    "procedure": "Drainage of Hepatic Abscess",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-037",
+    "type": "General Surgery",
+    "procedure": "Drainage of Subdiaphramatic Abscess",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-038",
+    "type": "General Surgery",
+    "procedure": "Drainage of Pericardial Effusion",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-039",
+    "type": "General Surgery",
+    "procedure": "Duodenal Diverticulum",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-040",
+    "type": "General Surgery",
+    "procedure": "Duodeno- Jejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-041",
+    "type": "General Surgery",
+    "procedure": "Duodenectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-042",
+    "type": "General Surgery",
+    "procedure": "Ectopic Parathyroidectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-043",
+    "type": "General Surgery",
+    "procedure": "Encephalocoele Excision",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-044",
+    "type": "General Surgery",
+    "procedure": "Enterostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-045",
+    "type": "General Surgery",
+    "procedure": "Excision Meckel’s Diverticulum",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-046",
+    "type": "General Surgery",
+    "procedure": "Excision of Liver Abscess",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-047",
+    "type": "General Surgery",
+    "procedure": "Excision of Lymphoedematous Lymph Tissues",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-048",
+    "type": "General Surgery",
+    "procedure": "Excision of Pelvi-Rectal Fistula",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-049",
+    "type": "General Surgery",
+    "procedure": "Exploratory Laparatomy/Lysis of Adhesions",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-050",
+    "type": "General Surgery",
+    "procedure": "Extensive (Small and Large) Bowel Resection and Anastomoses",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-051",
+    "type": "General Surgery",
+    "procedure": "Fissurectomy and Haemorrhoidectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-052",
+    "type": "General Surgery",
+    "procedure": "Fissurectomy with Eversion of Sac",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-053",
+    "type": "General Surgery",
+    "procedure": "Foreign Body Removal in Deep Region",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-054",
+    "type": "General Surgery",
+    "procedure": "Fundoplication",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-055",
+    "type": "General Surgery",
+    "procedure": "Gastrectomy- Partial/Total",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-056",
+    "type": "General Surgery",
+    "procedure": "Gastroenterostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-057",
+    "type": "General Surgery",
+    "procedure": "Gastrojejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-058",
+    "type": "General Surgery",
+    "procedure": "Gastrotomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-059",
+    "type": "General Surgery",
+    "procedure": "Glossectomy-Partial/Total",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-060",
+    "type": "General Surgery",
+    "procedure": "Grahams Operation",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-061",
+    "type": "General Surgery",
+    "procedure": "Haemorrhoidectomy+ Fistulectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-062",
+    "type": "General Surgery",
+    "procedure": "Heller's Procedure",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-063",
+    "type": "General Surgery",
+    "procedure": "Hemi Glossectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-064",
+    "type": "General Surgery",
+    "procedure": "Hemicolectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-065",
+    "type": "General Surgery",
+    "procedure": "Heminephrectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-066",
+    "type": "General Surgery",
+    "procedure": "Hemithyroplasty",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-067",
+    "type": "General Surgery",
+    "procedure": "Hepatic Resection (Lobectomy)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-068",
+    "type": "General Surgery",
+    "procedure": "Hepatic Segmentectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-069",
+    "type": "General Surgery",
+    "procedure": "Herniorrhaphy and Hydrocelectomy (Sac Excision)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-070",
+    "type": "General Surgery",
+    "procedure": "Drainage/excision Hydatid Cyst of Liver / Liver Drainage",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-071",
+    "type": "General Surgery",
+    "procedure": "Hydrocelectomy + Orchidectomy",
+    "price": "170,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-072",
+    "type": "General Surgery",
+    "procedure": "Hypospadiacs Repair",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-073",
+    "type": "General Surgery",
+    "procedure": "Ileostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-074",
+    "type": "General Surgery",
+    "procedure": "Ileostomy Pouch Revision",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-075",
+    "type": "General Surgery",
+    "procedure": "Ilieo Sigmoidostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-076",
+    "type": "General Surgery",
+    "procedure": "Intussusception Operation",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-077",
+    "type": "General Surgery",
+    "procedure": "Jejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-078",
+    "type": "General Surgery",
+    "procedure": "Laparotomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-079",
+    "type": "General Surgery",
+    "procedure": "Laryngectomy & Pharyngeal Diverticulum (Throat)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-080",
+    "type": "General Surgery",
+    "procedure": "Laryngectomy with Block Dissection (Throat)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-081",
+    "type": "General Surgery",
+    "procedure": "Laryngo Fissure (Throat)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-082",
+    "type": "General Surgery",
+    "procedure": "Laryngopharyngectomy (Throat)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-083",
+    "type": "General Surgery",
+    "procedure": "Ligation of Hepatic/Left Gastric Splenic Artery",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-084",
+    "type": "General Surgery",
+    "procedure": "Local Resection of Pelvic Tumour",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-085",
+    "type": "General Surgery",
+    "procedure": "Longitudinal Pancreatojejunostomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-086",
+    "type": "General Surgery",
+    "procedure": "Lymphatic Channel Transplantation",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-087",
+    "type": "General Surgery",
+    "procedure": "Mastectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-088",
+    "type": "General Surgery",
+    "procedure": "Meckel's Diverticulectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-089",
+    "type": "General Surgery",
+    "procedure": "Mesenteric Caval Anastomosis",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-090",
+    "type": "General Surgery",
+    "procedure": "Mesenteric Cyst - Excision",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-091",
+    "type": "General Surgery",
+    "procedure": "Nephrectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-092",
+    "type": "General Surgery",
+    "procedure": "Nephrolithotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-093",
+    "type": "General Surgery",
+    "procedure": "Oddis Sphincteroplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-094",
+    "type": "General Surgery",
+    "procedure": "Oesophageal, 2 & 3 Stage, Thoraco-Abdominal, Fistula Repair",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-095",
+    "type": "General Surgery",
+    "procedure": "Oesophageal Atresia and Tracheo-Oesophageal Fistula Repair",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-096",
+    "type": "General Surgery",
+    "procedure": "Oesophageal Substitution, Diverticulum Excision",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-097",
+    "type": "General Surgery",
+    "procedure": "Oesophageal Transection",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-098",
+    "type": "General Surgery",
+    "procedure": "Oesophagectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-099",
+    "type": "General Surgery",
+    "procedure": "Oesophagogastrectomy With Interposition of Colonic/Jejunal Segment",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-100",
+    "type": "General Surgery",
+    "procedure": "Oesophagostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-101",
+    "type": "General Surgery",
+    "procedure": "Orchidectomy + Herniorraphy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-102",
+    "type": "General Surgery",
+    "procedure": "Pancreatic Cystectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-103",
+    "type": "General Surgery",
+    "procedure": "Pancreaticoduodenectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-104",
+    "type": "General Surgery",
+    "procedure": "Pancreaticojejunostomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-105",
+    "type": "General Surgery",
+    "procedure": "Parathyroidectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-106",
+    "type": "General Surgery",
+    "procedure": "Parodectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-107",
+    "type": "General Surgery",
+    "procedure": "Partial Pancreatectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-108",
+    "type": "General Surgery",
+    "procedure": "Pelvic Abscess - Open Drainage",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-109",
+    "type": "General Surgery",
+    "procedure": "Pelvic Evisceration",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-110",
+    "type": "General Surgery",
+    "procedure": "Penectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-111",
+    "type": "General Surgery",
+    "procedure": "Penoplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-112",
+    "type": "General Surgery",
+    "procedure": "Pericardiectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-113",
+    "type": "General Surgery",
+    "procedure": "Pharyngectomy & Reconstruction - Total",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-114",
+    "type": "General Surgery",
+    "procedure": "Phytomatous Growth in the Scalp - Excision",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-115",
+    "type": "General Surgery",
+    "procedure": "Plastic Repair of Bladder Neck",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-116",
+    "type": "General Surgery",
+    "procedure": "Pleurectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-117",
+    "type": "General Surgery",
+    "procedure": "Pleuropneumonectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-118",
+    "type": "General Surgery",
+    "procedure": "Pneumonectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-119",
+    "type": "General Surgery",
+    "procedure": "Portocaval Shunt/Anastomosis",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-120",
+    "type": "General Surgery",
+    "procedure": "Proctocolectomy, Ileostomy & Ileostomy Pouch",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-121",
+    "type": "General Surgery",
+    "procedure": "Prolapsed Rectum Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-122",
+    "type": "General Surgery",
+    "procedure": "Prostatectomy [all types including Transurethral Resection of the Prostate (TURP) ]",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-123",
+    "type": "General Surgery",
+    "procedure": "Pulmonary Embolectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-124",
+    "type": "General Surgery",
+    "procedure": "Pulmonary Resection",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-125",
+    "type": "General Surgery",
+    "procedure": "Pyelolithotomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-126",
+    "type": "General Surgery",
+    "procedure": "Pyeloromyotomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-127",
+    "type": "General Surgery",
+    "procedure": "Pyelotomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-128",
+    "type": "General Surgery",
+    "procedure": "Pyloroplasty",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-129",
+    "type": "General Surgery",
+    "procedure": "Radical Cystectomy",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-130",
+    "type": "General Surgery",
+    "procedure": "Mastectomy + Axililary Dissection",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-131",
+    "type": "General Surgery",
+    "procedure": "Radical Neck Dissection - Excision",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-132",
+    "type": "General Surgery",
+    "procedure": "Radical Pancreatectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-133",
+    "type": "General Surgery",
+    "procedure": "Radical Prostatectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-134",
+    "type": "General Surgery",
+    "procedure": "Reconstruction of The Ureter",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-135",
+    "type": "General Surgery",
+    "procedure": "Rectopexy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-136",
+    "type": "General Surgery",
+    "procedure": "Recto-Urethral Fistula Closure",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-137",
+    "type": "General Surgery",
+    "procedure": "Rectovesical Fistula Closure",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-138",
+    "type": "General Surgery",
+    "procedure": "Renal Aneurysmectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-139",
+    "type": "General Surgery",
+    "procedure": "Renal Cystectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-140",
+    "type": "General Surgery",
+    "procedure": "Renal Decapsulation",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-141",
+    "type": "General Surgery",
+    "procedure": "Renopelvic Lymphatectomy",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-142",
+    "type": "General Surgery",
+    "procedure": "Repair of Bochidalek Diaphragmatic Congenital Defect",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-143",
+    "type": "General Surgery",
+    "procedure": "Repair of Bowel Perforations",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-144",
+    "type": "General Surgery",
+    "procedure": "Repair of Common Bile Duct",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-145",
+    "type": "General Surgery",
+    "procedure": "Repair of Gastric Lacerations",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-146",
+    "type": "General Surgery",
+    "procedure": "Repair of Oesophageal Lacerations",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-147",
+    "type": "General Surgery",
+    "procedure": "Repair of Splenic Laceration",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-148",
+    "type": "General Surgery",
+    "procedure": "Resection Anastomosis (Large Intestine)",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-149",
+    "type": "General Surgery",
+    "procedure": "Resection Anastomosis (Small Intestine)",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-150",
+    "type": "General Surgery",
+    "procedure": "Resection of Median Band Obstruction",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-151",
+    "type": "General Surgery",
+    "procedure": "Retroperitoneal Drainage of Perinephric Abscess",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-152",
+    "type": "General Surgery",
+    "procedure": "Retroperitoneal Tumor - Excision",
+    "price": "230,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-153",
+    "type": "General Surgery",
+    "procedure": "Roux-En-Y Pancreatic Jejunostomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-154",
+    "type": "General Surgery",
+    "procedure": "Segmental Resection of Bladder Lesion",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-155",
+    "type": "General Surgery",
+    "procedure": "Selective Vagotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-156",
+    "type": "General Surgery",
+    "procedure": "Resection of Sigmoid Diverticulum",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-157",
+    "type": "General Surgery",
+    "procedure": "Simple Closure - Peptic perforation",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-158",
+    "type": "General Surgery",
+    "procedure": "Splenectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-159",
+    "type": "General Surgery",
+    "procedure": "Splenic Artery Aneurysmectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-160",
+    "type": "General Surgery",
+    "procedure": "Splenorhaphy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-161",
+    "type": "General Surgery",
+    "procedure": "Stripping And Ligation of Varicose Veins",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-162",
+    "type": "General Surgery",
+    "procedure": "Subcutaneous Venous Omphalo Saphenous Shunt",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-163",
+    "type": "General Surgery",
+    "procedure": "Super Selective Vagotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-164",
+    "type": "General Surgery",
+    "procedure": "Surgery of Acute Intra-Abdominal Vascular Disease",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-165",
+    "type": "General Surgery",
+    "procedure": "Surgery of Complications of Diverticular Disease",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-166",
+    "type": "General Surgery",
+    "procedure": "Surgery of Complications of Pancreatitis",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-167",
+    "type": "General Surgery",
+    "procedure": "Surgery of Hepatic Trauma",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-168",
+    "type": "General Surgery",
+    "procedure": "Surgery of Intestinal Obstruction",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-169",
+    "type": "General Surgery",
+    "procedure": "Surgery of Seminal Vesicle",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-170",
+    "type": "General Surgery",
+    "procedure": "Surgery of Complications of Appendicitis",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-171",
+    "type": "General Surgery",
+    "procedure": "Surgical Exploration for Anorchism",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-172",
+    "type": "General Surgery",
+    "procedure": "Sympathectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-173",
+    "type": "General Surgery",
+    "procedure": "Thoracoplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-174",
+    "type": "General Surgery",
+    "procedure": "Thoracotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-175",
+    "type": "General Surgery",
+    "procedure": "Thrombectomy by Forgarty's Catheterisation",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-176",
+    "type": "General Surgery",
+    "procedure": "Thyroglossal Cysts and Fistula Excision",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-177",
+    "type": "General Surgery",
+    "procedure": "Thyroid Lobectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-178",
+    "type": "General Surgery",
+    "procedure": "Thyroidectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-179",
+    "type": "General Surgery",
+    "procedure": "Subtotal Thyroidectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-180",
+    "type": "General Surgery",
+    "procedure": "Thyroplasty",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-181",
+    "type": "General Surgery",
+    "procedure": "Total Pancreatectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-182",
+    "type": "General Surgery",
+    "procedure": "Total Proctocolectomy & Ileostomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-183",
+    "type": "General Surgery",
+    "procedure": "Tracheal Resection",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-184",
+    "type": "General Surgery",
+    "procedure": "Tracheal Stenosis (End to End Anastamosis) (Throat)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-185",
+    "type": "General Surgery",
+    "procedure": "Tracheoplasty (Throat)",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-186",
+    "type": "General Surgery",
+    "procedure": "Transcystotomy Excision",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-187",
+    "type": "General Surgery",
+    "procedure": "Transcystotomy Fulguration",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-188",
+    "type": "General Surgery",
+    "procedure": "Transcystotomy Lithotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-189",
+    "type": "General Surgery",
+    "procedure": "Transduodenal Choledochal Cystectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-190",
+    "type": "General Surgery",
+    "procedure": "Transduodenal Sphincteroplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-191",
+    "type": "General Surgery",
+    "procedure": "Transoesophageal Variceal Ligation",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-192",
+    "type": "General Surgery",
+    "procedure": "Transurethral Desiccation of Congenital Meatal Stenoses",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-193",
+    "type": "General Surgery",
+    "procedure": "Transurethral Excision of Bladder Lesion",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-194",
+    "type": "General Surgery",
+    "procedure": "Transurethral Fulguration of Bladder Lesion",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-195",
+    "type": "General Surgery",
+    "procedure": "Urethra-Reconstruction/ Repair of Prostatic/Membraneous Urethra",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-196",
+    "type": "General Surgery",
+    "procedure": "Ureteral Reinplantation into The Bladder",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-197",
+    "type": "General Surgery",
+    "procedure": "Ureterolithotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-198",
+    "type": "General Surgery",
+    "procedure": "Ureterosigmoidostomy With Rectal Bladder/Colostomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-199",
+    "type": "General Surgery",
+    "procedure": "Uretherectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-200",
+    "type": "General Surgery",
+    "procedure": "Urethroplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-201",
+    "type": "General Surgery",
+    "procedure": "Urethrotomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-202",
+    "type": "General Surgery",
+    "procedure": "Urethro-Vesicopexy, Combined Abdominal and Vaginal Approach",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-203",
+    "type": "General Surgery",
+    "procedure": "Uretro Vaginal Fistula Repair",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-204",
+    "type": "General Surgery",
+    "procedure": "Uretro Vesical Fistula Repair",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-205",
+    "type": "General Surgery",
+    "procedure": "Vagoplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-206",
+    "type": "General Surgery",
+    "procedure": "Vagotomy/Pyloroplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-207",
+    "type": "General Surgery",
+    "procedure": "Vasoplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-208",
+    "type": "General Surgery",
+    "procedure": "Vein Patch Angioplasty",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-209",
+    "type": "General Surgery",
+    "procedure": "Vesical Diverticulectomy",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-210",
+    "type": "General Surgery",
+    "procedure": "Vesicovaginal Fistula Repair",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-211",
+    "type": "General Surgery",
+    "procedure": "Volvulus of Large Bowel",
+    "price": "220,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-212",
+    "type": "General Surgery",
+    "procedure": "Vulvectomy",
+    "price": "170,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-213",
+    "type": "General Surgery",
+    "procedure": "Warrens Shunt",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-214",
+    "type": "General Surgery",
+    "procedure": "Wound Debridement (Under GA)",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-215",
+    "type": "General Surgery",
+    "procedure": "Release of Chordae",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-216",
+    "type": "General Surgery",
+    "procedure": "Vagotomy with Gastrojejunostomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-218",
+    "type": "General Surgery",
+    "procedure": "Excision of Aortic Aneurysm",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-063-219",
+    "type": "General Surgery",
+    "procedure": "Flap Surgeries",
+    "price": "170,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-001",
+    "type": "Endoscopic Procedures",
+    "procedure": "Ablation of Endometriotic Spot",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-002",
+    "type": "Endoscopic Procedures",
+    "procedure": "Adhesiolysis",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-003",
+    "type": "Endoscopic Procedures",
+    "procedure": "Appendectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-004",
+    "type": "Endoscopic Procedures",
+    "procedure": "Cholecystectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-005",
+    "type": "Endoscopic Procedures",
+    "procedure": "Cholecystectomy and Drainage of Liver abscess",
+    "price": "190,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-006",
+    "type": "Endoscopic Procedures",
+    "procedure": "Cholecystectomy with Excision of TO Mass",
+    "price": "190,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-007",
+    "type": "Endoscopic Procedures",
+    "procedure": "Cyst Aspiration",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-008",
+    "type": "Endoscopic Procedures",
+    "procedure": "Endometria to Endometria Anastomosis",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-009",
+    "type": "Endoscopic Procedures",
+    "procedure": "Fimbriolysis",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-010",
+    "type": "Endoscopic Procedures",
+    "procedure": "Hemicolectomy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-011",
+    "type": "Endoscopic Procedures",
+    "procedure": "Hysterectomy with bilateral SalpingoOperectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-012",
+    "type": "Endoscopic Procedures",
+    "procedure": "Incisional Hernia - Repair",
+    "price": "217,750.00"
+  },
+  {
+    "nhia_code": "NHIA-071-013",
+    "type": "Endoscopic Procedures",
+    "procedure": "Inguinal Hernia - Bilateral",
+    "price": "198,142.86"
+  },
+  {
+    "nhia_code": "NHIA-071-014",
+    "type": "Endoscopic Procedures",
+    "procedure": "Inguinal hernia - Unilateral",
+    "price": "205,333.33"
+  },
+  {
+    "nhia_code": "NHIA-071-015",
+    "type": "Endoscopic Procedures",
+    "procedure": "Intestinal resection",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-016",
+    "type": "Endoscopic Procedures",
+    "procedure": "Myomectomy",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-017",
+    "type": "Endoscopic Procedures",
+    "procedure": "Oophorectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-018",
+    "type": "Endoscopic Procedures",
+    "procedure": "Ovarian Cystectomy",
+    "price": "198,600.00"
+  },
+  {
+    "nhia_code": "NHIA-071-019",
+    "type": "Endoscopic Procedures",
+    "procedure": "Peritonitis",
+    "price": "196,333.33"
+  },
+  {
+    "nhia_code": "NHIA-071-020",
+    "type": "Endoscopic Procedures",
+    "procedure": "Repair of Ureterocoele",
+    "price": "183,466.67"
+  },
+  {
+    "nhia_code": "NHIA-071-021",
+    "type": "Endoscopic Procedures",
+    "procedure": "Salpingo Oophorectomy",
+    "price": "210,600.00"
+  },
+  {
+    "nhia_code": "NHIA-071-022",
+    "type": "Endoscopic Procedures",
+    "procedure": "Salpingostomy",
+    "price": "210,600.00"
+  },
+  {
+    "nhia_code": "NHIA-071-023",
+    "type": "Endoscopic Procedures",
+    "procedure": "Uterine septum",
+    "price": "100,740.00"
+  },
+  {
+    "nhia_code": "NHIA-071-024",
+    "type": "Endoscopic Procedures",
+    "procedure": "Varicocoele - Bilateral",
+    "price": "182,160.00"
+  },
+  {
+    "nhia_code": "NHIA-071-025",
+    "type": "Endoscopic Procedures",
+    "procedure": "Varicocoele - Unilateral",
+    "price": "108,160.00"
+  },
+  {
+    "nhia_code": "NHIA-071-026",
+    "type": "Endoscopic Procedures",
+    "procedure": "Bronchoscopy",
+    "price": "103,800.00"
+  },
+  {
+    "nhia_code": "NHIA-071-027",
+    "type": "Endoscopic Procedures",
+    "procedure": "Cystourethroscopy",
+    "price": "103,800.00"
+  },
+  {
+    "nhia_code": "NHIA-071-028",
+    "type": "Endoscopic Procedures",
+    "procedure": "Oesophagoscopy",
+    "price": "107,250.00"
+  },
+  {
+    "nhia_code": "NHIA-071-029",
+    "type": "Endoscopic Procedures",
+    "procedure": "Upper GI Endoscopy",
+    "price": "95,800.00"
+  },
+  {
+    "nhia_code": "NHIA-071-030",
+    "type": "Endoscopic Procedures",
+    "procedure": "Lower GI Endoscopy",
+    "price": "122,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-031",
+    "type": "Endoscopic Procedures",
+    "procedure": "Microlaryngoscopic Surgery (microlaryngoscopy)",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-071-032",
+    "type": "Endoscopic Procedures",
+    "procedure": "Laparoscopic Cholecystectomy",
+    "price": "189,250.00"
+  },
+  {
+    "nhia_code": "NHIA-081-001",
+    "type": "Optometry",
+    "procedure": "Manual Refraction",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-002",
+    "type": "Optometry",
+    "procedure": "Auto Refraction",
+    "price": "3,750.00"
+  },
+  {
+    "nhia_code": "NHIA-081-003",
+    "type": "Optometry",
+    "procedure": "Tonometry (Pulsair/Goldmann Applanation)",
+    "price": "4,562.50"
+  },
+  {
+    "nhia_code": "NHIA-081-004",
+    "type": "Optometry",
+    "procedure": "Pupillary Dilation Unilateral",
+    "price": "3,500.00"
+  },
+  {
+    "nhia_code": "NHIA-081-005",
+    "type": "Optometry",
+    "procedure": "Pupillary Dilation Bilateral",
+    "price": "5,500.00"
+  },
+  {
+    "nhia_code": "NHIA-081-006",
+    "type": "Optometry",
+    "procedure": "Indirect Ophthalmoscopy",
+    "price": "8,300.00"
+  },
+  {
+    "nhia_code": "NHIA-081-007",
+    "type": "Optometry",
+    "procedure": "Direct Ophthalmoscopy",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-008",
+    "type": "Optometry",
+    "procedure": "Visual Field Assessment",
+    "price": "5,525.00"
+  },
+  {
+    "nhia_code": "NHIA-081-009",
+    "type": "Optometry",
+    "procedure": "Slit Lamp Examination",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-010",
+    "type": "Optometry",
+    "procedure": "Cycloplegic Refraction",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-011",
+    "type": "Optometry",
+    "procedure": "Foreign Body Removal (per eye)",
+    "price": "7,814.29"
+  },
+  {
+    "nhia_code": "NHIA-081-012",
+    "type": "Optometry",
+    "procedure": "Corneal Pachymetry",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-081-013",
+    "type": "Optometry",
+    "procedure": "Keratometry",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-081-014",
+    "type": "Optometry",
+    "procedure": "Gonioscopy",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-015",
+    "type": "Optometry",
+    "procedure": "Low-priced spectacles/contact lens - frame and lens (1 in not less than 18 months)",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-016",
+    "type": "Optometry",
+    "procedure": "Fundus Photography",
+    "price": "20,166.67"
+  },
+  {
+    "nhia_code": "NHIA-081-017",
+    "type": "Optometry",
+    "procedure": "Low Vision Assessment",
+    "price": "12,025.00"
+  },
+  {
+    "nhia_code": "NHIA-081-018",
+    "type": "Optometry",
+    "procedure": "Colour Vision Testing",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-019",
+    "type": "Optometry",
+    "procedure": "Dry Eye Assessment (Schirmer's test)",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-020",
+    "type": "Optometry",
+    "procedure": "Binocular Vision Testing",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-081-021",
+    "type": "Optometry",
+    "procedure": "Visual Rehabilitation Therapy (per session)",
+    "price": "10,800.00"
+  },
+  {
+    "nhia_code": "NHIA-081-022",
+    "type": "Optometry",
+    "procedure": "Fluorescein staining",
+    "price": "1,200.00"
+  },
+  {
+    "nhia_code": "NHIA-081-023",
+    "type": "Optometry",
+    "procedure": "Eye Dressing (per session)",
+    "price": "1,437.50"
+  },
+  {
+    "nhia_code": "NHIA-081-024",
+    "type": "Optometry",
+    "procedure": "Visual Acuity Testing",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-081-025",
+    "type": "Optometry",
+    "procedure": "OCT Scan (Per eye) - 50% partial coverage",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-001",
+    "type": "Ophthalmology",
+    "procedure": "Abscess Drainage of Lid",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-002",
+    "type": "Ophthalmology",
+    "procedure": "Anterior Chamber Reconstruction",
+    "price": "83,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-003",
+    "type": "Ophthalmology",
+    "procedure": "Paracentesis (A/C Washout)",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-004",
+    "type": "Ophthalmology",
+    "procedure": "Bowman's Cautery",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-005",
+    "type": "Ophthalmology",
+    "procedure": "Buckle Removal",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-006",
+    "type": "Ophthalmology",
+    "procedure": "Canaliculo Dacryocysto Rhinostomy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-007",
+    "type": "Ophthalmology",
+    "procedure": "Capsulotomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-008",
+    "type": "Ophthalmology",
+    "procedure": "Cataract + Pterygium",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-009",
+    "type": "Ophthalmology",
+    "procedure": "Cataract Removal - Bilateral",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-010",
+    "type": "Ophthalmology",
+    "procedure": "Cataract Removal - Unilateral",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-011",
+    "type": "Ophthalmology",
+    "procedure": "Chalazion Excision",
+    "price": "66,142.86"
+  },
+  {
+    "nhia_code": "NHIA-091-012",
+    "type": "Ophthalmology",
+    "procedure": "Combined Cataract Extraction with Trabeculectomy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-013",
+    "type": "Ophthalmology",
+    "procedure": "Conjunctival Laceration Repair",
+    "price": "90,500.00"
+  },
+  {
+    "nhia_code": "NHIA-091-014",
+    "type": "Ophthalmology",
+    "procedure": "Conjuctivectomy And Cryoapplication",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-015",
+    "type": "Ophthalmology",
+    "procedure": "Corneal Grafting",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-016",
+    "type": "Ophthalmology",
+    "procedure": "Cryoretinopexy - Closed",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-017",
+    "type": "Ophthalmology",
+    "procedure": "Cxyoretinopexy - Open",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-018",
+    "type": "Ophthalmology",
+    "procedure": "Cyclocryoablation/Cyclocryotherapy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-019",
+    "type": "Ophthalmology",
+    "procedure": "Dacrocystectomy With Pterygium - Excision",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-020",
+    "type": "Ophthalmology",
+    "procedure": "Dacryocystorhinostomy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-021",
+    "type": "Ophthalmology",
+    "procedure": "Dacryocystectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-022",
+    "type": "Ophthalmology",
+    "procedure": "Diode Laser Cycloablation",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-023",
+    "type": "Ophthalmology",
+    "procedure": "Diode Laser Panretinal Photocoagulation",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-024",
+    "type": "Ophthalmology",
+    "procedure": "Ectropion Correction",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-025",
+    "type": "Ophthalmology",
+    "procedure": "Endoscopic Optic Nerve Decompression",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-026",
+    "type": "Ophthalmology",
+    "procedure": "Endoscopic Optic Orbital Decompression",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-027",
+    "type": "Ophthalmology",
+    "procedure": "Entropion And Ectropion Repairs",
+    "price": "87,800.00"
+  },
+  {
+    "nhia_code": "NHIA-091-028",
+    "type": "Ophthalmology",
+    "procedure": "Evisceration/Enucleation/Extenteration",
+    "price": "139,500.00"
+  },
+  {
+    "nhia_code": "NHIA-091-029",
+    "type": "Ophthalmology",
+    "procedure": "Extracapsular Cataract Extraction",
+    "price": "90,750.00"
+  },
+  {
+    "nhia_code": "NHIA-091-030",
+    "type": "Ophthalmology",
+    "procedure": "Granuloma Excision (the eye)",
+    "price": "89,250.00"
+  },
+  {
+    "nhia_code": "NHIA-091-031",
+    "type": "Ophthalmology",
+    "procedure": "Intraocular Foreign Body Removal",
+    "price": "76,750.00"
+  },
+  {
+    "nhia_code": "NHIA-091-032",
+    "type": "Ophthalmology",
+    "procedure": "Iridectomy",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-033",
+    "type": "Ophthalmology",
+    "procedure": "IRIS Prolapse - Repair",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-034",
+    "type": "Ophthalmology",
+    "procedure": "Keratoplasty",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-035",
+    "type": "Ophthalmology",
+    "procedure": "Lacrimal Probing and Syringing",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-036",
+    "type": "Ophthalmology",
+    "procedure": "Lensectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-091-037",
+    "type": "Ophthalmology",
+    "procedure": "Limbal Dermoid Removal",
+    "price": "51,333.33"
+  },
+  {
+    "nhia_code": "NHIA-092-001",
+    "type": "Ophthalmology",
+    "procedure": "Membranectomy",
+    "price": "88,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-002",
+    "type": "Ophthalmology",
+    "procedure": "Paracentesis (A/C Washout)",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-003",
+    "type": "Ophthalmology",
+    "procedure": "Penetrating Keratoplasty",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-004",
+    "type": "Ophthalmology",
+    "procedure": "Perforating Corneo - Scleral Injury",
+    "price": "134,500.00"
+  },
+  {
+    "nhia_code": "NHIA-092-005",
+    "type": "Ophthalmology",
+    "procedure": "Pterigium + Conjunctival Autograft",
+    "price": "87,250.00"
+  },
+  {
+    "nhia_code": "NHIA-092-006",
+    "type": "Ophthalmology",
+    "procedure": "Pterygium Excision",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-007",
+    "type": "Ophthalmology",
+    "procedure": "Ptosis Repair",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-008",
+    "type": "Ophthalmology",
+    "procedure": "Radial Keratotomy",
+    "price": "131,750.00"
+  },
+  {
+    "nhia_code": "NHIA-092-009",
+    "type": "Ophthalmology",
+    "procedure": "Removal of Foreign Bodies from Conjunctiva And Cornea",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-010",
+    "type": "Ophthalmology",
+    "procedure": "Retinal Detachment Surgery (Partial Coverage)",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-011",
+    "type": "Ophthalmology",
+    "procedure": "Scleral Buckling Procedures",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-012",
+    "type": "Ophthalmology",
+    "procedure": "Socket Reconstruction",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-013",
+    "type": "Ophthalmology",
+    "procedure": "Squint Surgery",
+    "price": "76,666.67"
+  },
+  {
+    "nhia_code": "NHIA-092-014",
+    "type": "Ophthalmology",
+    "procedure": "Syringing And Probing",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-015",
+    "type": "Ophthalmology",
+    "procedure": "Trabeculectomy With Antimetabolites",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-016",
+    "type": "Ophthalmology",
+    "procedure": "Traumatic Canalicular Repair",
+    "price": "147,500.00"
+  },
+  {
+    "nhia_code": "NHIA-092-017",
+    "type": "Ophthalmology",
+    "procedure": "Traumatic Corneal and/or Limbal/Scleral Laceration Repair",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-018",
+    "type": "Ophthalmology",
+    "procedure": "Traumatic Lid Laceration Repair",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-019",
+    "type": "Ophthalmology",
+    "procedure": "Tumour Excision from Lid",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-020",
+    "type": "Ophthalmology",
+    "procedure": "Tumours of IRIS",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-021",
+    "type": "Ophthalmology",
+    "procedure": "Vitrectomy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-092-022",
+    "type": "Ophthalmology",
+    "procedure": "Vitrectomy + Retinal Detachment (Partial Coverage)",
+    "price": "300,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-000",
+    "type": "Ophthalmology",
+    "procedure": "Other Procedures/surgeries (Ophthalmology)",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-001",
+    "type": "Ophthalmology",
+    "procedure": "Fundus Imaging",
+    "price": "30,500.00"
+  },
+  {
+    "nhia_code": "NHIA-093-002",
+    "type": "Ophthalmology",
+    "procedure": "Optical Coherence Tomography OCT per eye (Partial coverage)",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-003",
+    "type": "Ophthalmology",
+    "procedure": "Exenteration",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-004",
+    "type": "Ophthalmology",
+    "procedure": "Enucleation",
+    "price": "67,571.43"
+  },
+  {
+    "nhia_code": "NHIA-093-005",
+    "type": "Ophthalmology",
+    "procedure": "Evisceration",
+    "price": "39,714.29"
+  },
+  {
+    "nhia_code": "NHIA-093-006",
+    "type": "Ophthalmology",
+    "procedure": "Gonioscopy",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-007",
+    "type": "Ophthalmology",
+    "procedure": "Flourescein Angiography",
+    "price": "39,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-008",
+    "type": "Ophthalmology",
+    "procedure": "Subconj. Injection",
+    "price": "5,066.67"
+  },
+  {
+    "nhia_code": "NHIA-093-009",
+    "type": "Ophthalmology",
+    "procedure": "Biometry",
+    "price": "16,400.00"
+  },
+  {
+    "nhia_code": "NHIA-093-010",
+    "type": "Ophthalmology",
+    "procedure": "Flourescein staining",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-011",
+    "type": "Ophthalmology",
+    "procedure": "Excisional Biopsy (Conjunctival)",
+    "price": "50,833.33"
+  },
+  {
+    "nhia_code": "NHIA-093-012",
+    "type": "Ophthalmology",
+    "procedure": "Excisional/incisional Biopsy",
+    "price": "50,833.33"
+  },
+  {
+    "nhia_code": "NHIA-093-013",
+    "type": "Ophthalmology",
+    "procedure": "Chalazion Incision & Curretage",
+    "price": "56,250.00"
+  },
+  {
+    "nhia_code": "NHIA-093-014",
+    "type": "Ophthalmology",
+    "procedure": "Lacrimal Probing & Syringing",
+    "price": "29,500.00"
+  },
+  {
+    "nhia_code": "NHIA-093-015",
+    "type": "Ophthalmology",
+    "procedure": "Tonometry",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-016",
+    "type": "Ophthalmology",
+    "procedure": "Confrontation Visual Field Test (CVF)",
+    "price": "13,500.00"
+  },
+  {
+    "nhia_code": "NHIA-093-017",
+    "type": "Ophthalmology",
+    "procedure": "Refraction",
+    "price": "7,714.29"
+  },
+  {
+    "nhia_code": "NHIA-093-018",
+    "type": "Ophthalmology",
+    "procedure": "Pachymetry",
+    "price": "6,500.00"
+  },
+  {
+    "nhia_code": "NHIA-093-019",
+    "type": "Ophthalmology",
+    "procedure": "Dilatation",
+    "price": "7,160.00"
+  },
+  {
+    "nhia_code": "NHIA-093-020",
+    "type": "Ophthalmology",
+    "procedure": "Conjunctiva Foreign Body Removal",
+    "price": "8,720.00"
+  },
+  {
+    "nhia_code": "NHIA-093-021",
+    "type": "Ophthalmology",
+    "procedure": "Epilation",
+    "price": "5,466.67"
+  },
+  {
+    "nhia_code": "NHIA-093-022",
+    "type": "Ophthalmology",
+    "procedure": "Gonioscopy",
+    "price": "4,600.00"
+  },
+  {
+    "nhia_code": "NHIA-093-023",
+    "type": "Ophthalmology",
+    "procedure": "Cornea staining",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-024",
+    "type": "Ophthalmology",
+    "procedure": "Pterygium Excision",
+    "price": "47,500.00"
+  },
+  {
+    "nhia_code": "NHIA-093-025",
+    "type": "Ophthalmology",
+    "procedure": "Lid Repair (All Patients) - Unilateral",
+    "price": "27,800.00"
+  },
+  {
+    "nhia_code": "NHIA-093-026",
+    "type": "Ophthalmology",
+    "procedure": "Lid Repair (All Patients) - Bilateral",
+    "price": "64,333.33"
+  },
+  {
+    "nhia_code": "NHIA-093-027",
+    "type": "Ophthalmology",
+    "procedure": "Phaco",
+    "price": "190,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-028",
+    "type": "Ophthalmology",
+    "procedure": "Small Incision Cataract Surgery (SICS)",
+    "price": "96,285.71"
+  },
+  {
+    "nhia_code": "NHIA-093-029",
+    "type": "Ophthalmology",
+    "procedure": "Extracapsular Cataract Extraction (ECCE)",
+    "price": "106,666.67"
+  },
+  {
+    "nhia_code": "NHIA-093-030",
+    "type": "Ophthalmology",
+    "procedure": "Intracapsular Cataract Extraction (ICCE)",
+    "price": "149,000.00"
+  },
+  {
+    "nhia_code": "NHIA-093-031",
+    "type": "Ophthalmology",
+    "procedure": "Trabeculectomy",
+    "price": "85,714.29"
+  },
+  {
+    "nhia_code": "NHIA-093-032",
+    "type": "Ophthalmology",
+    "procedure": "Peripheral Iridectomy",
+    "price": "145,900.00"
+  },
+  {
+    "nhia_code": "NHIA-093-033",
+    "type": "Ophthalmology",
+    "procedure": "Squint Surgery",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-001",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Electroconvulsive Therapy (Course of 6 sessions) per session",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-002",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Abreaction (Diagnostic and Forensic)",
+    "price": "12,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-003",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Psychiatric Assessment",
+    "price": "11,571.43"
+  },
+  {
+    "nhia_code": "NHIA-101-004",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Psychometric Assessment, Scoring & Interpretation",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-005",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Psychotherapies (Max: 10 sessions)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-006",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Behaviour Modifications",
+    "price": "15,500.00"
+  },
+  {
+    "nhia_code": "NHIA-101-007",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Sleep Deprivation Therapy",
+    "price": "12,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-008",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Electroencephalography",
+    "price": "24,200.00"
+  },
+  {
+    "nhia_code": "NHIA-101-009",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Transmagnetic Stimulation",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-010",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Personality Assessment",
+    "price": "19,000.00"
+  },
+  {
+    "nhia_code": "NHIA-101-011",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Violence Risk Assessment",
+    "price": "20,250.00"
+  },
+  {
+    "nhia_code": "NHIA-101-012",
+    "type": "Psychiatric Services/Mental Health Services",
+    "procedure": "Cognitive Behavioural Therapy",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-111-001",
+    "type": "Paediatrics",
+    "procedure": "Central Venous Cannulation (per session)",
+    "price": "8,900.00"
+  },
+  {
+    "nhia_code": "NHIA-111-002",
+    "type": "Paediatrics",
+    "procedure": "Endotracheal Intubation (per session)",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-111-003",
+    "type": "Paediatrics",
+    "procedure": "Oxygen Therapy (per hour)",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-111-004",
+    "type": "Paediatrics",
+    "procedure": "Continuous Positive Airway Pressure (Moved to ICU)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-111-005",
+    "type": "Paediatrics",
+    "procedure": "Nebulisation per session",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-111-006",
+    "type": "Paediatrics",
+    "procedure": "Gastric Lavage",
+    "price": "5,850.00"
+  },
+  {
+    "nhia_code": "NHIA-111-007",
+    "type": "Paediatrics",
+    "procedure": "Aspiration",
+    "price": "9,650.00"
+  },
+  {
+    "nhia_code": "NHIA-111-008",
+    "type": "Paediatrics",
+    "procedure": "Aspiration (USS guided)",
+    "price": "17,625.00"
+  },
+  {
+    "nhia_code": "NHIA-111-009",
+    "type": "Paediatrics",
+    "procedure": "Diagnostic Paracentesis",
+    "price": "14,083.33"
+  },
+  {
+    "nhia_code": "NHIA-111-010",
+    "type": "Paediatrics",
+    "procedure": "Therapeutic Paracentesis",
+    "price": "16,666.67"
+  },
+  {
+    "nhia_code": "NHIA-111-011",
+    "type": "Paediatrics",
+    "procedure": "Tissue Biopsies",
+    "price": "21,375.00"
+  },
+  {
+    "nhia_code": "NHIA-111-012",
+    "type": "Paediatrics",
+    "procedure": "Lumbar Puncture",
+    "price": "4,875.00"
+  },
+  {
+    "nhia_code": "NHIA-111-013",
+    "type": "Paediatrics",
+    "procedure": "Phototherapy per day",
+    "price": "4,200.00"
+  },
+  {
+    "nhia_code": "NHIA-111-014",
+    "type": "Paediatrics",
+    "procedure": "Incubator Care per day",
+    "price": "7,600.00"
+  },
+  {
+    "nhia_code": "NHIA-111-015",
+    "type": "Paediatrics",
+    "procedure": "Exchange Blood Transfusion (EBT)",
+    "price": "34,333.33"
+  },
+  {
+    "nhia_code": "NHIA-112-001",
+    "type": "Paediatric Surgery",
+    "procedure": "Anal Dilatation",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-002",
+    "type": "Paediatric Surgery",
+    "procedure": "Rectal Polyp",
+    "price": "40,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-003",
+    "type": "Paediatric Surgery",
+    "procedure": "Anal Transposition for Ectopic Anus",
+    "price": "87,833.33"
+  },
+  {
+    "nhia_code": "NHIA-112-004",
+    "type": "Paediatric Surgery",
+    "procedure": "Hernia - Epigastric",
+    "price": "95,833.33"
+  },
+  {
+    "nhia_code": "NHIA-112-005",
+    "type": "Paediatric Surgery",
+    "procedure": "Hernia - Umbilical",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-006",
+    "type": "Paediatric Surgery",
+    "procedure": "Hernia-Inguinal - Bilateral",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-007",
+    "type": "Paediatric Surgery",
+    "procedure": "Hernia-Inguirial -Unilateral",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-008",
+    "type": "Paediatric Surgery",
+    "procedure": "Orchidopexy - Unilateral)",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-009",
+    "type": "Paediatric Surgery",
+    "procedure": "Orchidopexy - Bilateral",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-010",
+    "type": "Paediatric Surgery",
+    "procedure": "Abdomino Peritoneal (Exomphalos)",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-011",
+    "type": "Paediatric Surgery",
+    "procedure": "Chordee Correction",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-012",
+    "type": "Paediatric Surgery",
+    "procedure": "Closure Colostomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-013",
+    "type": "Paediatric Surgery",
+    "procedure": "Colectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-014",
+    "type": "Paediatric Surgery",
+    "procedure": "Colon Transplant",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-015",
+    "type": "Paediatric Surgery",
+    "procedure": "Cystolithotomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-016",
+    "type": "Paediatric Surgery",
+    "procedure": "Oesophageal Atresia (Fistula)",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-017",
+    "type": "Paediatric Surgery",
+    "procedure": "Gastrostomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-018",
+    "type": "Paediatric Surgery",
+    "procedure": "Hernia - Diaphragmatic",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-019",
+    "type": "Paediatric Surgery",
+    "procedure": "Meckels Diverticulectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-020",
+    "type": "Paediatric Surgery",
+    "procedure": "Meniscectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-021",
+    "type": "Paediatric Surgery",
+    "procedure": "Nephrolithotomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-022",
+    "type": "Paediatric Surgery",
+    "procedure": "Pyelolithotomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-023",
+    "type": "Paediatric Surgery",
+    "procedure": "Pyeloplasty",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-024",
+    "type": "Paediatric Surgery",
+    "procedure": "Pyloric Stenosis (Ramsted OP)",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-025",
+    "type": "Paediatric Surgery",
+    "procedure": "Rectal Biopsy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-026",
+    "type": "Paediatric Surgery",
+    "procedure": "Colostomy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-027",
+    "type": "Paediatric Surgery",
+    "procedure": "Pull Through for Hirshprung's Disease (for all stages of surgery)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-028",
+    "type": "Paediatric Surgery",
+    "procedure": "Excision Biopsy",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-029",
+    "type": "Paediatric Surgery",
+    "procedure": "Posterior Saggital Anorectoplasty (for all stages of surgery)",
+    "price": "157,400.00"
+  },
+  {
+    "nhia_code": "NHIA-112-030",
+    "type": "Paediatric Surgery",
+    "procedure": "Appendectomy",
+    "price": "135,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-031",
+    "type": "Paediatric Surgery",
+    "procedure": "Hypospadias Repair",
+    "price": "167,500.00"
+  },
+  {
+    "nhia_code": "NHIA-112-032",
+    "type": "Paediatric Surgery",
+    "procedure": "Meatotomy/Meatoplasty",
+    "price": "64,600.00"
+  },
+  {
+    "nhia_code": "NHIA-112-033",
+    "type": "Paediatric Surgery",
+    "procedure": "*** Circumcision",
+    "price": "22,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-034",
+    "type": "Paediatric Surgery",
+    "procedure": "Laparoscopy",
+    "price": "94,750.00"
+  },
+  {
+    "nhia_code": "NHIA-112-035",
+    "type": "Paediatric Surgery",
+    "procedure": "Excision of Sacrococcygeal Teratoma",
+    "price": "58,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-036",
+    "type": "Paediatric Surgery",
+    "procedure": "**For other paediatric surgery procedures pls check general surgery",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-112-037",
+    "type": "Paediatric Surgery",
+    "procedure": "Urethral catheterisation",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-001",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "- Periapical (X-Ray)",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-002",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "- Bitewings (X-Ray)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-003",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "- Panoramic View (X-Ray)",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-004",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Scaling & Polishing - heavy (therapeutic)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-005",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Scaling & Polishing - light (therapeutic)",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-006",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Curettage",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-007",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Amalgam Restoration",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-008",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Amalgam Restoration (Class II)",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-009",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Composite Restoration",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-010",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Pulpal Treatment for Children",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-011",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Periodontal Gum Treatment",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-012",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Fissure Selant",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-013",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Fistulectomy",
+    "price": "48,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-014",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Sequestrectomy",
+    "price": "32,800.00"
+  },
+  {
+    "nhia_code": "NHIA-121-015",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Root Canal Therapy Anterior",
+    "price": "30,000.00"
+  },
+  {
+    "nhia_code": "NHIA-121-016",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Root Canal Therapy Posterior",
+    "price": "28,250.00"
+  },
+  {
+    "nhia_code": "NHIA-121-017",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Dentures",
+    "price": "11,777.78"
+  },
+  {
+    "nhia_code": "NHIA-121-018",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Denture (relining/repair/impression}",
+    "price": "6,600.00"
+  },
+  {
+    "nhia_code": "NHIA-022-001",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Release of Tongue Tie",
+    "price": "26,833.33"
+  },
+  {
+    "nhia_code": "NHIA-022-002",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Simple Extraction",
+    "price": "21,222.22"
+  },
+  {
+    "nhia_code": "NHIA-022-003",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Surgical Extraction",
+    "price": "16,666.67"
+  },
+  {
+    "nhia_code": "NHIA-123-001",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Adenoidectomy",
+    "price": "120,000.00"
+  },
+  {
+    "nhia_code": "NHIA-123-002",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Cleft Lip Repairs.",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-003",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Submandibular gland excision",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-004",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Superficial Parotidectomy",
+    "price": "118,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-005",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Thyroglossal Cyst/Fistula Excision",
+    "price": "93,000.00"
+  },
+  {
+    "nhia_code": "NHIA-022-006",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Tracheostomy",
+    "price": "58,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-001",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Autogenous Bone Graft to Mastoid Cavity",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-002",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Cleft Palate Repairs.",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-003",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Fenestration",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-004",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Fracture Reduction of the Nose",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-005",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Reduction and fFxation of Jaw fractures",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-006",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Reduction and Fixation of Maxillary fractures",
+    "price": "150,200.00"
+  },
+  {
+    "nhia_code": "NHIA-124-007",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Major Sequestrectomy (Under GA)",
+    "price": "120,160.00"
+  },
+  {
+    "nhia_code": "NHIA-124-008",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Minor Sequestrectomy (Under LA)",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-009",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Total parotidectomy",
+    "price": "131,966.67"
+  },
+  {
+    "nhia_code": "NHIA-124-010",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Fixation of fracture of the jaw",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-011",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Salivary Gland - Excision",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-012",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Hemi Mandibulectomy",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-013",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Submandibular Mass Excision + Reconstruction",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-124-014",
+    "type": "Dental Surgery And Maxillofacial Surgery",
+    "procedure": "Submandibular Sialoadenectomy",
+    "price": "150,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-001",
+    "type": "Physiotherapy",
+    "procedure": "Cerebrovascular Accident (per session)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-002",
+    "type": "Physiotherapy",
+    "procedure": "Chest Conditions (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-131-003",
+    "type": "Physiotherapy",
+    "procedure": "Diabetic Neuropathy",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-131-004",
+    "type": "Physiotherapy",
+    "procedure": "Facial/Bell's Palsy",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-131-005",
+    "type": "Physiotherapy",
+    "procedure": "Spinal Cord Lesion",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-006",
+    "type": "Physiotherapy",
+    "procedure": "Parkinsonism",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-007",
+    "type": "Physiotherapy",
+    "procedure": "Peripheral Nerve Injuries",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-008",
+    "type": "Physiotherapy",
+    "procedure": "Sciatica",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-009",
+    "type": "Physiotherapy",
+    "procedure": "Incontinence",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-131-010",
+    "type": "Physiotherapy",
+    "procedure": "Nerve Root compression",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-001",
+    "type": "Physiotherapy",
+    "procedure": "Delayed Developmental Milestone",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-132-002",
+    "type": "Physiotherapy",
+    "procedure": "Cerebral Palsy",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-003",
+    "type": "Physiotherapy",
+    "procedure": "Erb’s Palsy (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-004",
+    "type": "Physiotherapy",
+    "procedure": "Talipes Manipulation (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-005",
+    "type": "Physiotherapy",
+    "procedure": "Injection Trauma/palsy (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-006",
+    "type": "Physiotherapy",
+    "procedure": "Congenital Hip Dislocation (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-007",
+    "type": "Physiotherapy",
+    "procedure": "Fractures (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-132-008",
+    "type": "Physiotherapy",
+    "procedure": "Polio Deformities (per session)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-001",
+    "type": "Physiotherapy",
+    "procedure": "Arthritis per visit",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-002",
+    "type": "Physiotherapy",
+    "procedure": "Slipped Disc (Prolapsed Intervertebral Disc)/Low back pain per visit",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-133-003",
+    "type": "Physiotherapy",
+    "procedure": "Mouth Fracture",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-004",
+    "type": "Physiotherapy",
+    "procedure": "Burns",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-005",
+    "type": "Physiotherapy",
+    "procedure": "Chest Physiotherapy",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-006",
+    "type": "Physiotherapy",
+    "procedure": "Post-Surgical rehabilitation",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-133-007",
+    "type": "Physiotherapy",
+    "procedure": "Fractures/Dislocations/Subluxation",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-133-008",
+    "type": "Physiotherapy",
+    "procedure": "Spondylosis/Scoliosis",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-134-001",
+    "type": "Physiotherapy",
+    "procedure": "Pelvic Inflammatory Disease (PID)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-134-002",
+    "type": "Physiotherapy",
+    "procedure": "Obstetrics Trauma/Paresis/Paralysis",
+    "price": "25,000.00"
+  },
+  {
+    "nhia_code": "NHIA-134-003",
+    "type": "Physiotherapy",
+    "procedure": "Uterine Prolapse",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-140-001",
+    "type": "Hysteroscopic Procedures",
+    "procedure": "Ablation of Endometrium",
+    "price": "50,000.00"
+  },
+  {
+    "nhia_code": "NHIA-140-002",
+    "type": "Hysteroscopic Procedures",
+    "procedure": "Hysteroscopic Tubal Cannulation",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-140-003",
+    "type": "Hysteroscopic Procedures",
+    "procedure": "Polypectomy",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-140-004",
+    "type": "Hysteroscopic Procedures",
+    "procedure": "Uterine Synaechia - Cutting",
+    "price": "75,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-001",
+    "type": "Neurosurgery",
+    "procedure": "Repair & Transposition Nerve",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-002",
+    "type": "Neurosurgery",
+    "procedure": "Skull Traction",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-003",
+    "type": "Neurosurgery",
+    "procedure": "Subdural aspiration",
+    "price": "180,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-004",
+    "type": "Neurosurgery",
+    "procedure": "Ventricular Puncture",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-005",
+    "type": "Neurosurgery",
+    "procedure": "Cervical Ribs Resection",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-006",
+    "type": "Neurosurgery",
+    "procedure": "Cranio Ventricular Shunt",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-007",
+    "type": "Neurosurgery",
+    "procedure": "Cranioplasty",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-008",
+    "type": "Neurosurgery",
+    "procedure": "Duroplasty",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-009",
+    "type": "Neurosurgery",
+    "procedure": "Local Neurectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-010",
+    "type": "Neurosurgery",
+    "procedure": "Lumbar Disc (Discectomy)",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-011",
+    "type": "Neurosurgery",
+    "procedure": "Microdiscectomy - Cervical/Lumbar",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-012",
+    "type": "Neurosurgery",
+    "procedure": "Neurolysis",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-013",
+    "type": "Neurosurgery",
+    "procedure": "Peripheral Nerve Surgery",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-014",
+    "type": "Neurosurgery",
+    "procedure": "Shunt",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-015",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Canal Stenosis Decompression",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-016",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Disc Cervical/Lumber Discectomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-017",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Extradural Tumour Excision",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-018",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Intradural Tumour Excision",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-019",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Intramedullar Tumour Excision",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-020",
+    "type": "Neurosurgery",
+    "procedure": "Temporal Rhizotomy",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-021",
+    "type": "Neurosurgery",
+    "procedure": "Trans Sphenoidal surgery",
+    "price": "200,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-022",
+    "type": "Neurosurgery",
+    "procedure": "Burr hole",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-023",
+    "type": "Neurosurgery",
+    "procedure": "Carotid Endarterectomy",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-024",
+    "type": "Neurosurgery",
+    "procedure": "Craniostenosis -Decompression",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-025",
+    "type": "Neurosurgery",
+    "procedure": "Haematoma - Brain (head injuries) - Evacuation",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-026",
+    "type": "Neurosurgery",
+    "procedure": "Haematoma - Brain (hypertensive) - Evacuation",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-027",
+    "type": "Neurosurgery",
+    "procedure": "Haematoma (Child irritable subdural) - Evacuation",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-028",
+    "type": "Neurosurgery",
+    "procedure": "Laminectomy with Fusion",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-029",
+    "type": "Neurosurgery",
+    "procedure": "Repair of Meningocele - Anterior",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-030",
+    "type": "Neurosurgery",
+    "procedure": "Posterior Fossa - Decompression",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-031",
+    "type": "Neurosurgery",
+    "procedure": "Brachial Plexus - Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-032",
+    "type": "Neurosurgery",
+    "procedure": "Spina Bifida - Large - Repair",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-033",
+    "type": "Neurosurgery",
+    "procedure": "Spina Bifida - Small - Repair",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-034",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Anterior Decompression",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-035",
+    "type": "Neurosurgery",
+    "procedure": "Spine - Decompression & Fusion",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-036",
+    "type": "Neurosurgery",
+    "procedure": "Tumours - Supratentorial - Excision",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-037",
+    "type": "Neurosurgery",
+    "procedure": "Tumours Meninges - Gocussa - Excision",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-038",
+    "type": "Neurosurgery",
+    "procedure": "Tumours Meninges - Posterior - Excision",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-039",
+    "type": "Neurosurgery",
+    "procedure": "Aneurysm Repair",
+    "price": "280,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-040",
+    "type": "Neurosurgery",
+    "procedure": "Anterior Encephalocele",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-041",
+    "type": "Neurosurgery",
+    "procedure": "Meningocele - Lumbar",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-151-042",
+    "type": "Neurosurgery",
+    "procedure": "Meningocele – Occipital",
+    "price": "250,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-001",
+    "type": "Radiology Investigations",
+    "procedure": "Hand/Finger (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-002",
+    "type": "Radiology Investigations",
+    "procedure": "Wrist (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-003",
+    "type": "Radiology Investigations",
+    "procedure": "Forearm (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-004",
+    "type": "Radiology Investigations",
+    "procedure": "Elbow (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-005",
+    "type": "Radiology Investigations",
+    "procedure": "Humerus (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-006",
+    "type": "Radiology Investigations",
+    "procedure": "Shoulder (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-007",
+    "type": "Radiology Investigations",
+    "procedure": "Clavicle (1 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-171-008",
+    "type": "Radiology Investigations",
+    "procedure": "Scaphoid series",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-172-001",
+    "type": "Radiology Investigations",
+    "procedure": "Foot/Toe (2 views)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-172-002",
+    "type": "Radiology Investigations",
+    "procedure": "Ankle (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-172-003",
+    "type": "Radiology Investigations",
+    "procedure": "Leg (Tibia/Fibula) (2 views)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-172-004",
+    "type": "Radiology Investigations",
+    "procedure": "Knee (2 views)",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-172-005",
+    "type": "Radiology Investigations",
+    "procedure": "Hip (2 views)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-172-006",
+    "type": "Radiology Investigations",
+    "procedure": "Femur Or Thigh (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-172-007",
+    "type": "Radiology Investigations",
+    "procedure": "Pelvic (1view)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-001",
+    "type": "Radiology Investigations",
+    "procedure": "Chest (PA/AP) (1 view)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-002",
+    "type": "Radiology Investigations",
+    "procedure": "Chest (Lateral) (1 view)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-003",
+    "type": "Radiology Investigations",
+    "procedure": "Chest For Ribs (Oblique) (1 view)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-004",
+    "type": "Radiology Investigations",
+    "procedure": "Apical/Lordotic (1view)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-005",
+    "type": "Radiology Investigations",
+    "procedure": "Sternum (1 view)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-173-006",
+    "type": "Radiology Investigations",
+    "procedure": "Thoracic Inlet (Adult) (1 view)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-001",
+    "type": "Radiology Investigations",
+    "procedure": "Cervical Spine (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-002",
+    "type": "Radiology Investigations",
+    "procedure": "Lateral Neck (Soft Tissue) (1view)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-003",
+    "type": "Radiology Investigations",
+    "procedure": "Thoracic Spine (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-004",
+    "type": "Radiology Investigations",
+    "procedure": "Thoraco Lumber Spine (2 views)",
+    "price": "11,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-005",
+    "type": "Radiology Investigations",
+    "procedure": "Lumbar Spine (2 views)",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-174-006",
+    "type": "Radiology Investigations",
+    "procedure": "Lumbo Sacral Spine (2 views)",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-007",
+    "type": "Radiology Investigations",
+    "procedure": "Sacrum (1 view)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-174-008",
+    "type": "Radiology Investigations",
+    "procedure": "Sacro Iliac Joint (S.I.J.) (1 view)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-174-009",
+    "type": "Radiology Investigations",
+    "procedure": "Cervical Spine (Oblique) (2 views)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-174-010",
+    "type": "Radiology Investigations",
+    "procedure": "Sacro-Coccyx (1 view)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-175-001",
+    "type": "Radiology Investigations",
+    "procedure": "Abdomen (Plain) (2 views)",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-175-002",
+    "type": "Radiology Investigations",
+    "procedure": "Abdomen (Erect/Supine) (2 views)",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-175-003",
+    "type": "Radiology Investigations",
+    "procedure": "Abdomen (Pregnancy) Remove",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-001",
+    "type": "Radiology Investigations",
+    "procedure": "Skull (AP/Lat) (2 views)",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-002",
+    "type": "Radiology Investigations",
+    "procedure": "Skull (Pa/Lat/Townes) (3 views)",
+    "price": "10,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-003",
+    "type": "Radiology Investigations",
+    "procedure": "Mastoids (Owens/ Townes) (1view)",
+    "price": "13,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-004",
+    "type": "Radiology Investigations",
+    "procedure": "Sinuses AP/LNT/OM (3 views)",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-005",
+    "type": "Radiology Investigations",
+    "procedure": "Mandibles (Jaw) (2 views)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-006",
+    "type": "Radiology Investigations",
+    "procedure": "Temporo-Mandibular Joints (TMJ) (3 views)",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-007",
+    "type": "Radiology Investigations",
+    "procedure": "Sella Turcica (1 view)",
+    "price": "10,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-008",
+    "type": "Radiology Investigations",
+    "procedure": "Tagential Remove",
+    "price": "12,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-009",
+    "type": "Radiology Investigations",
+    "procedure": "Occipito-Mental (OM) Remove",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-010",
+    "type": "Radiology Investigations",
+    "procedure": "Cranio-cordial Remove",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-176-011",
+    "type": "Radiology Investigations",
+    "procedure": "Nasopharynx Remove replace with Post nasalspace (1 view)",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-176-012",
+    "type": "Radiology Investigations",
+    "procedure": "Paranasal sinuses Remove",
+    "price": "9,500.00"
+  },
+  {
+    "nhia_code": "NHIA-177-001",
+    "type": "Radiology Investigations",
+    "procedure": "Periapical (Dental X-ray)",
+    "price": "4,500.00"
+  },
+  {
+    "nhia_code": "NHIA-177-002",
+    "type": "Radiology Investigations",
+    "procedure": "Bitewings (Dental X-ray)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-177-003",
+    "type": "Radiology Investigations",
+    "procedure": "Panoramic View (Dental X-ray)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-001",
+    "type": "Radiology Investigations",
+    "procedure": "Barium Swallow",
+    "price": "29,125.00"
+  },
+  {
+    "nhia_code": "NHIA-178-002",
+    "type": "Radiology Investigations",
+    "procedure": "Barium Meal/Follow Through",
+    "price": "33,375.00"
+  },
+  {
+    "nhia_code": "NHIA-178-003",
+    "type": "Radiology Investigations",
+    "procedure": "Barium Enema",
+    "price": "31,825.00"
+  },
+  {
+    "nhia_code": "NHIA-178-004",
+    "type": "Radiology Investigations",
+    "procedure": "Intravenous Urography (IVU)",
+    "price": "37,335.71"
+  },
+  {
+    "nhia_code": "NHIA-178-005",
+    "type": "Radiology Investigations",
+    "procedure": "Hysterosalpingogram (HSG)",
+    "price": "31,350.00"
+  },
+  {
+    "nhia_code": "NHIA-178-006",
+    "type": "Radiology Investigations",
+    "procedure": "Cysto-Urethrogram",
+    "price": "31,025.00"
+  },
+  {
+    "nhia_code": "NHIA-178-007",
+    "type": "Radiology Investigations",
+    "procedure": "Fistulogram",
+    "price": "29,723.75"
+  },
+  {
+    "nhia_code": "NHIA-178-008",
+    "type": "Radiology Investigations",
+    "procedure": "Myelogram",
+    "price": "93,200.00"
+  },
+  {
+    "nhia_code": "NHIA-178-009",
+    "type": "Radiology Investigations",
+    "procedure": "Skeletal Survey",
+    "price": "38,437.50"
+  },
+  {
+    "nhia_code": "NHIA-178-010",
+    "type": "Radiology Investigations",
+    "procedure": "Electrocardiography (E C G)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-011",
+    "type": "Radiology Investigations",
+    "procedure": "Echocardiography",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-012",
+    "type": "Radiology Investigations",
+    "procedure": "Electroencephalography",
+    "price": "30,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-013",
+    "type": "Radiology Investigations",
+    "procedure": "Micturating Cyto-Urethrogram",
+    "price": "25,398.33"
+  },
+  {
+    "nhia_code": "NHIA-178-014",
+    "type": "Radiology Investigations",
+    "procedure": "Retrograde Urethrogram",
+    "price": "29,800.00"
+  },
+  {
+    "nhia_code": "NHIA-178-015",
+    "type": "Radiology Investigations",
+    "procedure": "Intravenous cholangiogram (IVC)",
+    "price": "29,750.00"
+  },
+  {
+    "nhia_code": "NHIA-178-016",
+    "type": "Radiology Investigations",
+    "procedure": "Phlebogram-One Leg",
+    "price": "31,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-017",
+    "type": "Radiology Investigations",
+    "procedure": "Venogram-One Leg",
+    "price": "31,700.00"
+  },
+  {
+    "nhia_code": "NHIA-178-018",
+    "type": "Radiology Investigations",
+    "procedure": "Arthrogram",
+    "price": "30,877.50"
+  },
+  {
+    "nhia_code": "NHIA-178-019",
+    "type": "Radiology Investigations",
+    "procedure": "Sialogram",
+    "price": "26,252.50"
+  },
+  {
+    "nhia_code": "NHIA-178-020",
+    "type": "Radiology Investigations",
+    "procedure": "Sinogram",
+    "price": "25,002.00"
+  },
+  {
+    "nhia_code": "NHIA-178-021",
+    "type": "Radiology Investigations",
+    "procedure": "MRI Scan (Adult) - Partial Coverage (50%)",
+    "price": "100,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-022",
+    "type": "Radiology Investigations",
+    "procedure": "MRI Scan (Children)",
+    "price": "80,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-023",
+    "type": "Radiology Investigations",
+    "procedure": "CT scan (Adult) - Partial Coverage (50%)",
+    "price": "70,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-024",
+    "type": "Radiology Investigations",
+    "procedure": "CT scan (Children) - Partial Coverage (50%)",
+    "price": "60,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-025",
+    "type": "Radiology Investigations",
+    "procedure": "Mammogram",
+    "price": "26,770.00"
+  },
+  {
+    "nhia_code": "NHIA-178-026",
+    "type": "Radiology Investigations",
+    "procedure": "Radiotherapy - radical treatment (per session) - Partial Coverage (50%)",
+    "price": "68,750.00"
+  },
+  {
+    "nhia_code": "NHIA-178-027",
+    "type": "Radiology Investigations",
+    "procedure": "Radiotherapy - palliative (per session) - Partial Coverage (50%)",
+    "price": "68,750.00"
+  },
+  {
+    "nhia_code": "NHIA-178-028",
+    "type": "Radiology Investigations",
+    "procedure": "Bone Scan",
+    "price": "92,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-029",
+    "type": "Radiology Investigations",
+    "procedure": "Renal scan (DTPA, DMSA)",
+    "price": "32,800.00"
+  },
+  {
+    "nhia_code": "NHIA-178-030",
+    "type": "Radiology Investigations",
+    "procedure": "GIT: Hepatobiliary Scan; Mackel scan",
+    "price": "38,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-031",
+    "type": "Radiology Investigations",
+    "procedure": "Perfusion Lung Scan",
+    "price": "38,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-032",
+    "type": "Radiology Investigations",
+    "procedure": "CNS: Cisternography; Cerebral Perfusion",
+    "price": "47,000.00"
+  },
+  {
+    "nhia_code": "NHIA-178-033",
+    "type": "Radiology Investigations",
+    "procedure": "Lymphoscintigraphy",
+    "price": "44,250.00"
+  },
+  {
+    "nhia_code": "NHIA-178-034",
+    "type": "Radiology Investigations",
+    "procedure": "Muga Scan",
+    "price": "47,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-001",
+    "type": "Radiology Investigations",
+    "procedure": "Obstetric Scan",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-002",
+    "type": "Radiology Investigations",
+    "procedure": "Abdominal Scan",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-003",
+    "type": "Radiology Investigations",
+    "procedure": "Pelvic Scan (TA/TVS)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-004",
+    "type": "Radiology Investigations",
+    "procedure": "Breast Scan",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-005",
+    "type": "Radiology Investigations",
+    "procedure": "Bladder Scan",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-006",
+    "type": "Radiology Investigations",
+    "procedure": "Abdominal Pelvic Scan",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-007",
+    "type": "Radiology Investigations",
+    "procedure": "Prostate Scan (TA&TVS)",
+    "price": "8,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-008",
+    "type": "Radiology Investigations",
+    "procedure": "Thyroid Scan",
+    "price": "9,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-009",
+    "type": "Radiology Investigations",
+    "procedure": "Testes/Scrotal Scan (Each)",
+    "price": "9,500.00"
+  },
+  {
+    "nhia_code": "NHIA-179-010",
+    "type": "Radiology Investigations",
+    "procedure": "Ovulometry/Transvaginal Scan (3 Sections)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-011",
+    "type": "Radiology Investigations",
+    "procedure": "Trans-Fontanelle (Children)",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-012",
+    "type": "Radiology Investigations",
+    "procedure": "Doppler Scan",
+    "price": "20,000.00"
+  },
+  {
+    "nhia_code": "NHIA-179-013",
+    "type": "Radiology Investigations",
+    "procedure": "Ocular scan",
+    "price": "11,000.00"
+  },
+  {
+    "nhia_code": "NHIA-180-001",
+    "type": "Laboratory Investigations",
+    "procedure": "Packed Cell Volume (PCV)",
+    "price": "1,300.00"
+  },
+  {
+    "nhia_code": "NHIA-180-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Haemoglobin (HB)",
+    "price": "1,200.00"
+  },
+  {
+    "nhia_code": "NHIA-180-003",
+    "type": "Laboratory Investigations",
+    "procedure": "White Blood Cell Count (WBC)",
+    "price": "1,800.00"
+  },
+  {
+    "nhia_code": "NHIA-180-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Differential White Blood Cell Count (WBC-Diff)",
+    "price": "2,200.00"
+  },
+  {
+    "nhia_code": "NHIA-180-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Total White Cell Count (WBC)",
+    "price": "2,400.00"
+  },
+  {
+    "nhia_code": "NHIA-180-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Erythrocyte Sedimentation Rate (ESR)",
+    "price": "1,700.00"
+  },
+  {
+    "nhia_code": "NHIA-180-007",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood Film for Malarial Parasites (MP)",
+    "price": "1,800.00"
+  },
+  {
+    "nhia_code": "NHIA-180-008",
+    "type": "Laboratory Investigations",
+    "procedure": "Widal Test",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-180-009",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood Grouping (ABO & Rh)",
+    "price": "1,700.00"
+  },
+  {
+    "nhia_code": "NHIA-180-010",
+    "type": "Laboratory Investigations",
+    "procedure": "VDRL",
+    "price": "1,600.00"
+  },
+  {
+    "nhia_code": "NHIA-180-011",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood Microfilaria",
+    "price": "2,800.00"
+  },
+  {
+    "nhia_code": "NHIA-180-012",
+    "type": "Laboratory Investigations",
+    "procedure": "Urine Microscopy",
+    "price": "2,800.00"
+  },
+  {
+    "nhia_code": "NHIA-180-013",
+    "type": "Laboratory Investigations",
+    "procedure": "Urinalysis",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-180-014",
+    "type": "Laboratory Investigations",
+    "procedure": "Pregnancy Test (Urine)",
+    "price": "1,500.00"
+  },
+  {
+    "nhia_code": "NHIA-180-015",
+    "type": "Laboratory Investigations",
+    "procedure": "Stool Analysis (R/E Only)",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-180-016",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood Sugar (FBS/ RBS)",
+    "price": "1,500.00"
+  },
+  {
+    "nhia_code": "NHIA-180-017",
+    "type": "Laboratory Investigations",
+    "procedure": "HB Genotype",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-180-018",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood film comments",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-001",
+    "type": "Laboratory Investigations",
+    "procedure": "Sodium",
+    "price": "1,250.00"
+  },
+  {
+    "nhia_code": "NHIA-181-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Potassium",
+    "price": "1,250.00"
+  },
+  {
+    "nhia_code": "NHIA-181-003",
+    "type": "Laboratory Investigations",
+    "procedure": "Chloride",
+    "price": "1,250.00"
+  },
+  {
+    "nhia_code": "NHIA-181-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Bicarbonate",
+    "price": "1,250.00"
+  },
+  {
+    "nhia_code": "NHIA-181-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Urea",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Creatinine",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-008",
+    "type": "Laboratory Investigations",
+    "procedure": "Unconjugated Bilirubin",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-009",
+    "type": "Laboratory Investigations",
+    "procedure": "Conjugated Bilirubin",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-010",
+    "type": "Laboratory Investigations",
+    "procedure": "Alkaline Phosphatase",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-011",
+    "type": "Laboratory Investigations",
+    "procedure": "Alanine Aminotransferase (SGPT)",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-012",
+    "type": "Laboratory Investigations",
+    "procedure": "Aspartate Aminotransferase (SGOT)",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-013",
+    "type": "Laboratory Investigations",
+    "procedure": "Total Protein",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-014",
+    "type": "Laboratory Investigations",
+    "procedure": "Albumin",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-015",
+    "type": "Laboratory Investigations",
+    "procedure": "Gamma-GT",
+    "price": "1,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-016",
+    "type": "Laboratory Investigations",
+    "procedure": "Globulin",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-017",
+    "type": "Laboratory Investigations",
+    "procedure": "Acid Phosphatase (Total & Prostatic) Each",
+    "price": "2,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-018",
+    "type": "Laboratory Investigations",
+    "procedure": "Total Cholesterol",
+    "price": "2,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-019",
+    "type": "Laboratory Investigations",
+    "procedure": "Total Cholesterol (Lipid Profile)",
+    "price": "2,200.00"
+  },
+  {
+    "nhia_code": "NHIA-181-020",
+    "type": "Laboratory Investigations",
+    "procedure": "Triglyceride",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-021",
+    "type": "Laboratory Investigations",
+    "procedure": "Low- Density Lipoprotein (LDL)",
+    "price": "2,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-022",
+    "type": "Laboratory Investigations",
+    "procedure": "High -Density Lipoprotein (HDL)",
+    "price": "2,250.00"
+  },
+  {
+    "nhia_code": "NHIA-181-023",
+    "type": "Laboratory Investigations",
+    "procedure": "Amylase",
+    "price": "4,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-024",
+    "type": "Laboratory Investigations",
+    "procedure": "Fasting Blood Sugar (FBS)",
+    "price": "1,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-025",
+    "type": "Laboratory Investigations",
+    "procedure": "Random Blood Sugar (RBS)",
+    "price": "1,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-026",
+    "type": "Laboratory Investigations",
+    "procedure": "2-Hr Post Prandial Blood Sugar",
+    "price": "2,750.00"
+  },
+  {
+    "nhia_code": "NHIA-181-027",
+    "type": "Laboratory Investigations",
+    "procedure": "24 HR- Urine Protein",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-028",
+    "type": "Laboratory Investigations",
+    "procedure": "Oral Glucose Tolerance Test (OGTT)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-029",
+    "type": "Laboratory Investigations",
+    "procedure": "Uric Acid",
+    "price": "2,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-030",
+    "type": "Laboratory Investigations",
+    "procedure": "Iron",
+    "price": "3,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-031",
+    "type": "Laboratory Investigations",
+    "procedure": "Magnesium",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-032",
+    "type": "Laboratory Investigations",
+    "procedure": "Creatine Phosphokinase (CPK)",
+    "price": "3,600.00"
+  },
+  {
+    "nhia_code": "NHIA-181-033",
+    "type": "Laboratory Investigations",
+    "procedure": "Phosphate",
+    "price": "2,200.00"
+  },
+  {
+    "nhia_code": "NHIA-181-034",
+    "type": "Laboratory Investigations",
+    "procedure": "Lactate Dehydrogenase (LDH)",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-035",
+    "type": "Laboratory Investigations",
+    "procedure": "CSF: Chloride",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-036",
+    "type": "Laboratory Investigations",
+    "procedure": "CSF: Protein (Total)",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-037",
+    "type": "Laboratory Investigations",
+    "procedure": "CSF: Glucose",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-038",
+    "type": "Laboratory Investigations",
+    "procedure": "Urinalysis (Secondary/Tertiary)",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-039",
+    "type": "Laboratory Investigations",
+    "procedure": "Urea Clearance",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-040",
+    "type": "Laboratory Investigations",
+    "procedure": "Urease Breathe",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-041",
+    "type": "Laboratory Investigations",
+    "procedure": "Urea/Creatinine ratio",
+    "price": "4,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-042",
+    "type": "Laboratory Investigations",
+    "procedure": "Inorganic Phosphorus",
+    "price": "2,300.00"
+  },
+  {
+    "nhia_code": "NHIA-181-043",
+    "type": "Laboratory Investigations",
+    "procedure": "Creatinine Clearance",
+    "price": "2,100.00"
+  },
+  {
+    "nhia_code": "NHIA-181-044",
+    "type": "Laboratory Investigations",
+    "procedure": "Glycosylated Haemoglobin (HBA1C)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-045",
+    "type": "Laboratory Investigations",
+    "procedure": "Pregnancy Test: Urine",
+    "price": "1,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-046",
+    "type": "Laboratory Investigations",
+    "procedure": "Pregnancy Test: Blood",
+    "price": "1,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-047",
+    "type": "Laboratory Investigations",
+    "procedure": "Calcium",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-048",
+    "type": "Laboratory Investigations",
+    "procedure": "Total Calcium",
+    "price": "3,600.00"
+  },
+  {
+    "nhia_code": "NHIA-181-049",
+    "type": "Laboratory Investigations",
+    "procedure": "Ionised Calcium",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-050",
+    "type": "Laboratory Investigations",
+    "procedure": "Myoglobin",
+    "price": "3,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-051",
+    "type": "Laboratory Investigations",
+    "procedure": "CK",
+    "price": "14,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-052",
+    "type": "Laboratory Investigations",
+    "procedure": "CK-MB Mass",
+    "price": "12,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-053",
+    "type": "Laboratory Investigations",
+    "procedure": "Troponin T.",
+    "price": "16,800.00"
+  },
+  {
+    "nhia_code": "NHIA-181-055",
+    "type": "Laboratory Investigations",
+    "procedure": "Follicle Stimulating Hormone (FSH)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-056",
+    "type": "Laboratory Investigations",
+    "procedure": "Luteinizing Hormone (LH)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-057",
+    "type": "Laboratory Investigations",
+    "procedure": "Prolactin",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-058",
+    "type": "Laboratory Investigations",
+    "procedure": "Progesterone",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-059",
+    "type": "Laboratory Investigations",
+    "procedure": "Testosterone",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-060",
+    "type": "Laboratory Investigations",
+    "procedure": "Free Testosterone",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-061",
+    "type": "Laboratory Investigations",
+    "procedure": "Oestradiol (E2)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-062",
+    "type": "Laboratory Investigations",
+    "procedure": "Oestriol (E3)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-063",
+    "type": "Laboratory Investigations",
+    "procedure": "Oxytocin",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-064",
+    "type": "Laboratory Investigations",
+    "procedure": "Cortisol",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-065",
+    "type": "Laboratory Investigations",
+    "procedure": "Insulin",
+    "price": "9,800.00"
+  },
+  {
+    "nhia_code": "NHIA-181-066",
+    "type": "Laboratory Investigations",
+    "procedure": "b-HCG (Hormonal)",
+    "price": "7,200.00"
+  },
+  {
+    "nhia_code": "NHIA-181-067",
+    "type": "Laboratory Investigations",
+    "procedure": "DHEA-Sulphate (17 ketosteroids)",
+    "price": "9,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-068",
+    "type": "Laboratory Investigations",
+    "procedure": "AMH hormone (Anti Mullerian Hormone)",
+    "price": "11,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-070",
+    "type": "Laboratory Investigations",
+    "procedure": "Triiodothyronine (T3)",
+    "price": "8,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-071",
+    "type": "Laboratory Investigations",
+    "procedure": "Thyroid globulin",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-072",
+    "type": "Laboratory Investigations",
+    "procedure": "Free Triiodothyronine (T3)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-073",
+    "type": "Laboratory Investigations",
+    "procedure": "Free Thyroxine (T4)",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-074",
+    "type": "Laboratory Investigations",
+    "procedure": "Thyroxine (T4)",
+    "price": "8,100.00"
+  },
+  {
+    "nhia_code": "NHIA-181-075",
+    "type": "Laboratory Investigations",
+    "procedure": "Thyroid Stimulating Hormones (TSH)",
+    "price": "6,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-077",
+    "type": "Laboratory Investigations",
+    "procedure": "Carcinoembryonic Antigen (CEA)",
+    "price": "7,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-078",
+    "type": "Laboratory Investigations",
+    "procedure": "Breast Cancer Antigen/ CA 15-3",
+    "price": "12,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-079",
+    "type": "Laboratory Investigations",
+    "procedure": "Ovarian Cancer Antigen /CA 125",
+    "price": "11,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-080",
+    "type": "Laboratory Investigations",
+    "procedure": "Pancreatic/Gut Cancer Antigen / CA19-9",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-081",
+    "type": "Laboratory Investigations",
+    "procedure": "Alpha-Feto Protein (AFP)",
+    "price": "15,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-083",
+    "type": "Laboratory Investigations",
+    "procedure": "Prostate Specific Antigen (PSA): Total",
+    "price": "10,500.00"
+  },
+  {
+    "nhia_code": "NHIA-181-084",
+    "type": "Laboratory Investigations",
+    "procedure": "Prostate Specific Antigen (PSA): Free",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-181-085",
+    "type": "Laboratory Investigations",
+    "procedure": "Vanillyl Mandellic Acid (VMA)",
+    "price": "24,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-001",
+    "type": "Laboratory Investigations",
+    "procedure": "Full Blood Count (FBC) (All Parameters)",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Haemoglobin (HB) (Secondary/Tertiary)",
+    "price": "1,500.00"
+  },
+  {
+    "nhia_code": "NHIA-182-003",
+    "type": "Laboratory Investigations",
+    "procedure": "Packed Cell Volume (PCV) (Secondary/Tertiary)",
+    "price": "1,437.78"
+  },
+  {
+    "nhia_code": "NHIA-182-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Erythrocyte Sedimentation Rate (ESR) (Secondary/Tertiary)",
+    "price": "1,373.33"
+  },
+  {
+    "nhia_code": "NHIA-182-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Reticulocyte Count",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Bleeding Time",
+    "price": "2,500.00"
+  },
+  {
+    "nhia_code": "NHIA-182-007",
+    "type": "Laboratory Investigations",
+    "procedure": "Clotting Time",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-008",
+    "type": "Laboratory Investigations",
+    "procedure": "Prothrombin Time (PT)",
+    "price": "3,382.86"
+  },
+  {
+    "nhia_code": "NHIA-182-009",
+    "type": "Laboratory Investigations",
+    "procedure": "Kaolin-Cephalin Clotting Time",
+    "price": "3,247.00"
+  },
+  {
+    "nhia_code": "NHIA-182-010",
+    "type": "Laboratory Investigations",
+    "procedure": "Prothrombin Time with Kaolin (PTTK)",
+    "price": "3,233.33"
+  },
+  {
+    "nhia_code": "NHIA-182-011",
+    "type": "Laboratory Investigations",
+    "procedure": "Partial Prothrombin Time (PTT)",
+    "price": "3,696.67"
+  },
+  {
+    "nhia_code": "NHIA-182-012",
+    "type": "Laboratory Investigations",
+    "procedure": "Partial Thromboplastin Time (PTT)",
+    "price": "3,395.71"
+  },
+  {
+    "nhia_code": "NHIA-182-013",
+    "type": "Laboratory Investigations",
+    "procedure": "HB Genotype (Secondary/Tertiary)",
+    "price": "2,500.00"
+  },
+  {
+    "nhia_code": "NHIA-182-014",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood Grouping (ABO & RH) (Secondary/Tertiary)",
+    "price": "1,800.00"
+  },
+  {
+    "nhia_code": "NHIA-182-015",
+    "type": "Laboratory Investigations",
+    "procedure": "Sickling Test",
+    "price": "2,183.33"
+  },
+  {
+    "nhia_code": "NHIA-182-016",
+    "type": "Laboratory Investigations",
+    "procedure": "Direct Coomb’s Test",
+    "price": "2,480.00"
+  },
+  {
+    "nhia_code": "NHIA-182-017",
+    "type": "Laboratory Investigations",
+    "procedure": "Indirect Coomb’s Test",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-018",
+    "type": "Laboratory Investigations",
+    "procedure": "Screening of Donor Blood",
+    "price": "6,939.56"
+  },
+  {
+    "nhia_code": "NHIA-182-019",
+    "type": "Laboratory Investigations",
+    "procedure": "Cross Match",
+    "price": "5,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-020",
+    "type": "Laboratory Investigations",
+    "procedure": "Le Cells",
+    "price": "4,093.60"
+  },
+  {
+    "nhia_code": "NHIA-182-021",
+    "type": "Laboratory Investigations",
+    "procedure": "G-6-PD Screening",
+    "price": "8,381.67"
+  },
+  {
+    "nhia_code": "NHIA-182-022",
+    "type": "Laboratory Investigations",
+    "procedure": "Osmotic Fragility",
+    "price": "5,148.33"
+  },
+  {
+    "nhia_code": "NHIA-182-023",
+    "type": "Laboratory Investigations",
+    "procedure": "Coagulation Profile",
+    "price": "8,066.00"
+  },
+  {
+    "nhia_code": "NHIA-182-024",
+    "type": "Laboratory Investigations",
+    "procedure": "Bone Marrow Examination",
+    "price": "9,142.86"
+  },
+  {
+    "nhia_code": "NHIA-182-025",
+    "type": "Laboratory Investigations",
+    "procedure": "Fibrinogen",
+    "price": "7,478.00"
+  },
+  {
+    "nhia_code": "NHIA-182-026",
+    "type": "Laboratory Investigations",
+    "procedure": "Fresh Frozen plasma",
+    "price": "9,738.33"
+  },
+  {
+    "nhia_code": "NHIA-182-027",
+    "type": "Laboratory Investigations",
+    "procedure": "Blood gas Analysis",
+    "price": "9,603.75"
+  },
+  {
+    "nhia_code": "NHIA-182-028",
+    "type": "Laboratory Investigations",
+    "procedure": "D-Dimer",
+    "price": "11,352.78"
+  },
+  {
+    "nhia_code": "NHIA-182-029",
+    "type": "Laboratory Investigations",
+    "procedure": "Ferritin",
+    "price": "7,218.00"
+  },
+  {
+    "nhia_code": "NHIA-182-030",
+    "type": "Laboratory Investigations",
+    "procedure": "Homocysteine",
+    "price": "14,020.00"
+  },
+  {
+    "nhia_code": "NHIA-182-031",
+    "type": "Laboratory Investigations",
+    "procedure": "Vitamin D",
+    "price": "10,000.00"
+  },
+  {
+    "nhia_code": "NHIA-182-032",
+    "type": "Laboratory Investigations",
+    "procedure": "Vitamin B12",
+    "price": "11,181.67"
+  },
+  {
+    "nhia_code": "NHIA-182-033",
+    "type": "Laboratory Investigations",
+    "procedure": "Folate",
+    "price": "7,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-001",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy (Urine)",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Urinalysis (Microbiology)",
+    "price": "2,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-003",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy, Culture & Sensitivity (Urine)",
+    "price": "3,610.00"
+  },
+  {
+    "nhia_code": "NHIA-183-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy R/E only (Stool)",
+    "price": "2,314.29"
+  },
+  {
+    "nhia_code": "NHIA-183-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy, Culture & Sensitivity (Stool)",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Faecal Occult Blood",
+    "price": "4,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-007",
+    "type": "Laboratory Investigations",
+    "procedure": "H. Pylori ab (Serum)",
+    "price": "3,000.00"
+  },
+  {
+    "nhia_code": "NHIA-183-009",
+    "type": "Laboratory Investigations",
+    "procedure": "Culture & Sensitivity (Blood)",
+    "price": "7,662.50"
+  },
+  {
+    "nhia_code": "NHIA-183-010",
+    "type": "Laboratory Investigations",
+    "procedure": "Malaria Parasites (Blood)",
+    "price": "3,216.25"
+  },
+  {
+    "nhia_code": "NHIA-183-011",
+    "type": "Laboratory Investigations",
+    "procedure": "Microfilaria (Blood)",
+    "price": "3,951.11"
+  },
+  {
+    "nhia_code": "NHIA-183-012",
+    "type": "Laboratory Investigations",
+    "procedure": "Trypanosomes (Blood)",
+    "price": "2,616.67"
+  },
+  {
+    "nhia_code": "NHIA-183-013",
+    "type": "Laboratory Investigations",
+    "procedure": "Semen Analysis",
+    "price": "4,527.78"
+  },
+  {
+    "nhia_code": "NHIA-183-014",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy, Culture & Sensitivity (Seminal Fluid)",
+    "price": "6,544.44"
+  },
+  {
+    "nhia_code": "NHIA-183-015",
+    "type": "Laboratory Investigations",
+    "procedure": "Gram Stain (Sputum)",
+    "price": "1,577.14"
+  },
+  {
+    "nhia_code": "NHIA-183-016",
+    "type": "Laboratory Investigations",
+    "procedure": "Z.N stain for AFB x 3 (Sputum)",
+    "price": "4,585.00"
+  },
+  {
+    "nhia_code": "NHIA-183-017",
+    "type": "Laboratory Investigations",
+    "procedure": "Culture & Sensitivity (Sputum)",
+    "price": "5,233.33"
+  },
+  {
+    "nhia_code": "NHIA-183-018",
+    "type": "Laboratory Investigations",
+    "procedure": "Cell Count + Microscopy (C.S.F)",
+    "price": "4,326.67"
+  },
+  {
+    "nhia_code": "NHIA-183-019",
+    "type": "Laboratory Investigations",
+    "procedure": "Culture & Sensitivity (C.S.F)",
+    "price": "5,960.00"
+  },
+  {
+    "nhia_code": "NHIA-183-020",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy (Swabs)",
+    "price": "2,171.43"
+  },
+  {
+    "nhia_code": "NHIA-183-021",
+    "type": "Laboratory Investigations",
+    "procedure": "Gram stain (where applicable) (Swabs)",
+    "price": "2,817.50"
+  },
+  {
+    "nhia_code": "NHIA-183-022",
+    "type": "Laboratory Investigations",
+    "procedure": "Culture & Sensitivity (Swabs)",
+    "price": "5,325.00"
+  },
+  {
+    "nhia_code": "NHIA-183-023",
+    "type": "Laboratory Investigations",
+    "procedure": "Snip (microfilaria) (Skin)",
+    "price": "4,191.43"
+  },
+  {
+    "nhia_code": "NHIA-183-024",
+    "type": "Laboratory Investigations",
+    "procedure": "Microscopy (KOH mount) (Skin)",
+    "price": "2,977.14"
+  },
+  {
+    "nhia_code": "NHIA-183-025",
+    "type": "Laboratory Investigations",
+    "procedure": "Scraping For Fungal Element (Culture) (Skin)",
+    "price": "3,780.00"
+  },
+  {
+    "nhia_code": "NHIA-183-026",
+    "type": "Laboratory Investigations",
+    "procedure": "Mantoux test",
+    "price": "5,260.00"
+  },
+  {
+    "nhia_code": "NHIA-184-000",
+    "type": "Laboratory Investigations",
+    "procedure": "Widal Test (Serological)",
+    "price": "2,310.00"
+  },
+  {
+    "nhia_code": "NHIA-184-001",
+    "type": "Laboratory Investigations",
+    "procedure": "VDRL (Serological)",
+    "price": "2,031.11"
+  },
+  {
+    "nhia_code": "NHIA-184-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Rheumatoid Factor",
+    "price": "3,768.00"
+  },
+  {
+    "nhia_code": "NHIA-184-003",
+    "type": "Laboratory Investigations",
+    "procedure": "Anti-Streptolysin O Titre (ASO Titre)",
+    "price": "4,596.00"
+  },
+  {
+    "nhia_code": "NHIA-184-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis B Surface Antigen (HbsAg)",
+    "price": "4,628.57"
+  },
+  {
+    "nhia_code": "NHIA-184-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis B Confirmatory Test (Core Antigen)",
+    "price": "8,671.43"
+  },
+  {
+    "nhia_code": "NHIA-184-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis A (IgM)",
+    "price": "7,871.43"
+  },
+  {
+    "nhia_code": "NHIA-184-007",
+    "type": "Laboratory Investigations",
+    "procedure": "HbcAg/HbeAg",
+    "price": "8,028.57"
+  },
+  {
+    "nhia_code": "NHIA-184-008",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis B DNA Viral Load",
+    "price": "38,000.00"
+  },
+  {
+    "nhia_code": "NHIA-184-009",
+    "type": "Laboratory Investigations",
+    "procedure": "HIV Screening",
+    "price": "9,992.86"
+  },
+  {
+    "nhia_code": "NHIA-184-010",
+    "type": "Laboratory Investigations",
+    "procedure": "HIV Confirmatory Test",
+    "price": "8,158.00"
+  },
+  {
+    "nhia_code": "NHIA-184-011",
+    "type": "Laboratory Investigations",
+    "procedure": "CD4 Count",
+    "price": "14,042.00"
+  },
+  {
+    "nhia_code": "NHIA-184-012",
+    "type": "Laboratory Investigations",
+    "procedure": "HIV Viral load",
+    "price": "10,754.00"
+  },
+  {
+    "nhia_code": "NHIA-184-013",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis C Antibody (HCVAb)",
+    "price": "11,112.50"
+  },
+  {
+    "nhia_code": "NHIA-184-014",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis C RNA Viral Load*",
+    "price": "34,942.86"
+  },
+  {
+    "nhia_code": "NHIA-184-015",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis C RNA Viral Load (GeneXpert PCR) *",
+    "price": "34,916.67"
+  },
+  {
+    "nhia_code": "NHIA-184-016",
+    "type": "Laboratory Investigations",
+    "procedure": "Hepatitis C Genotype",
+    "price": "13,000.00"
+  },
+  {
+    "nhia_code": "NHIA-184-017",
+    "type": "Laboratory Investigations",
+    "procedure": "Serum Tuberculosis Antigen",
+    "price": "4,750.00"
+  },
+  {
+    "nhia_code": "NHIA-184-018",
+    "type": "Laboratory Investigations",
+    "procedure": "Chlamydia Antigen",
+    "price": "11,800.00"
+  },
+  {
+    "nhia_code": "NHIA-184-019",
+    "type": "Laboratory Investigations",
+    "procedure": "Herpes Simplex 1 & 11 Antigen",
+    "price": "13,458.33"
+  },
+  {
+    "nhia_code": "NHIA-184-020",
+    "type": "Laboratory Investigations",
+    "procedure": "Toxoplasma Gondii",
+    "price": "11,271.67"
+  },
+  {
+    "nhia_code": "NHIA-184-021",
+    "type": "Laboratory Investigations",
+    "procedure": "Rubella",
+    "price": "11,333.33"
+  },
+  {
+    "nhia_code": "NHIA-184-022",
+    "type": "Laboratory Investigations",
+    "procedure": "Helicobacter Pylori",
+    "price": "8,366.67"
+  },
+  {
+    "nhia_code": "NHIA-184-023",
+    "type": "Laboratory Investigations",
+    "procedure": "Infectious Mononucleosis",
+    "price": "5,326.00"
+  },
+  {
+    "nhia_code": "NHIA-184-024",
+    "type": "Laboratory Investigations",
+    "procedure": "C-Reactive Protein",
+    "price": "13,887.14"
+  },
+  {
+    "nhia_code": "NHIA-184-025",
+    "type": "Laboratory Investigations",
+    "procedure": "Antibody screening",
+    "price": "11,760.00"
+  },
+  {
+    "nhia_code": "NHIA-184-026",
+    "type": "Laboratory Investigations",
+    "procedure": "Cytomegalovirus (CMV) (Qualitative)",
+    "price": "12,180.00"
+  },
+  {
+    "nhia_code": "NHIA-185-001",
+    "type": "Laboratory Investigations",
+    "procedure": "Tissue Biopsy (Small)",
+    "price": "10,870.00"
+  },
+  {
+    "nhia_code": "NHIA-185-002",
+    "type": "Laboratory Investigations",
+    "procedure": "Tissue Biopsy (Multiple)",
+    "price": "15,001.67"
+  },
+  {
+    "nhia_code": "NHIA-185-003",
+    "type": "Laboratory Investigations",
+    "procedure": "Bone Tissues (Special stains)",
+    "price": "16,402.00"
+  },
+  {
+    "nhia_code": "NHIA-185-004",
+    "type": "Laboratory Investigations",
+    "procedure": "Lymph Nodes Biopsy",
+    "price": "25,470.00"
+  },
+  {
+    "nhia_code": "NHIA-185-005",
+    "type": "Laboratory Investigations",
+    "procedure": "Pap Smear",
+    "price": "11,320.00"
+  },
+  {
+    "nhia_code": "NHIA-185-006",
+    "type": "Laboratory Investigations",
+    "procedure": "Fine Needle Aspiration (FNA)",
+    "price": "10,076.00"
+  },
+  {
+    "nhia_code": "NHIA-185-007",
+    "type": "Laboratory Investigations",
+    "procedure": "Nasal Smear Cytology",
+    "price": "8,500.00"
+  }
+]

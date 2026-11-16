@@ -1,0 +1,113 @@
+{
+	"folders": [
+		{
+			"name": "emr",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			".eslintrc": "jsonc",
+			".prettierrc": "jsonc",
+			".eslintignore": "ignore"
+		},
+		"eslint.enable": false,
+		"javascript.validate.enable": false,
+		"javascript.format.enable": false,
+		"typescript.format.enable": false,
+		"typescript.tsserver.maxTsServerMemory": 4096,
+		"typescript.tsserver.experimental.enableProjectDiagnostics": false,
+		"typescript.tsserver.watchOptions": {
+			"watchFile": "useFsEvents",
+			"watchDirectory": "useFsEvents",
+			"fallbackPolling": "dynamicPriority",
+			"synchronousWatchDirectory": false
+		},
+		"editor.maxTokenizationLineLength": 20000,
+		"editor.largeFileOptimizations": true,
+		"files.watcherExclude": {
+			"**/.git/**": true,
+			"**/node_modules/**": true,
+			"**/.erb/**": true,
+			"**/release/**": true,
+			"**/src/node_modules/**": true,
+			"**/.eslintcache": true,
+			"**/dist/**": true,
+			"**/migrations/**": true,
+			"**/migrations_split/**": true,
+			"**/supabase/**": true,
+			"**/docs/**": true,
+			"**/*.asar": true,
+			"**/*.sql": true,
+			"**/*.bak": true
+		},
+		"files.exclude": {
+			"**/.git": true,
+			"**/.DS_Store": true,
+			"release/**": true,
+			".erb/dll/**": true,
+			".erb/node_modules/**": true,
+			"migrations_split/**": true,
+			"seed_data.sql": true,
+			"seed_data_utf8.sql": true,
+			"schema_dump.sql": true,
+			"schema.sql": true,
+			"temp_deploy.sql": true,
+			"tsc_*.txt": true,
+			"build_log.txt": true,
+			"simulation_output.txt": true,
+			"start_result*.txt": true,
+			"start_gemini.txt": true,
+			"prestart_result.txt": true,
+			"test_out.txt": true,
+			"validation_output.txt": true,
+			"NHIA_Medicine_2025.json": true,
+			"NHIS_Medicine.json": true,
+			"NHIS-Procedure.json": true,
+			"NHIS-HMOs.json": true,
+			"sim_billings.json": true,
+			"package-lock.json": true,
+			"**/*.bak": true
+		},
+		"search.exclude": {
+			".git": true,
+			".eslintcache": true,
+			".erb/**": true,
+			"release/**": true,
+			"node_modules": true,
+			"src/node_modules": true,
+			"npm-debug.log.*": true,
+			"test/**/__snapshots__": true,
+			"package-lock.json": true,
+			"*.{css,sass,scss}.d.ts": true,
+			"migrations_split/**": true,
+			"migrations/**": true,
+			"seed_data*.sql": true,
+			"schema_dump.sql": true,
+			"*.txt": true,
+			"*.sql": true,
+			"supabase/**": true,
+			"docs/**": true
+		},
+		"editor.quickSuggestions": {
+			"other": "on",
+			"comments": "off",
+			"strings": "off"
+		},
+		"editor.suggestOnTriggerCharacters": true,
+		"editor.wordBasedSuggestions": "off",
+		"editor.occurrencesHighlight": "off",
+		"editor.semanticHighlighting.enabled": false,
+		"editor.bracketPairColorization.enabled": false,
+		"editor.codeLens": false,
+		"editor.hover.enabled": "on",
+		"editor.minimap.enabled": false,
+		"editor.folding": false,
+		"editor.links": false,
+		"git.enabled": true,
+		"extensions.experimental.affinity": {
+			"dbaeumer.vscode-eslint": 2
+		},
+		"github.copilot.chat.summarizeAgentConversationHistory.enabled": true
+	}
+}

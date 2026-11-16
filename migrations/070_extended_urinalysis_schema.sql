@@ -1,0 +1,224 @@
+-- ============================================================================
+-- MIGRATION: Extended Urinalysis Dipstick Schema
+-- ============================================================================
+-- Description: Documents the extended urinalysis structured_result JSON schema
+--              for lab_results table supporting comprehensive dipstick panels
+-- 
+-- This migration adds documentation and validation for extended urinalysis
+-- parameters including microalbumin, creatinine, ACR, ascorbic acid, and calcium.
+-- 
+-- The lab_results.structured_result JSONB column stores these values.
+-- ============================================================================
+
+-- ============================================================================
+-- URINALYSIS STRUCTURED_RESULT JSON SCHEMA DOCUMENTATION
+-- ============================================================================
+-- 
+-- When result_template_type = 'urinalysis_checklist', the structured_result
+-- column should contain JSON matching this schema:
+--
+-- {
+--   "templateType": "urinalysis_checklist",
+--   
+--   -- Dipstick Panel Type (determines which parameters are collected)
+--   -- Standard Combi strips range from 1-parameter to 14-parameter
+--   "dipstickType": "complete" | "single_glucose" | "single_protein" | "single_ketone"
+--                   | "param_2" | "param_3" | "param_5" | "param_7" | "param_9"
+--                   | "standard_10" | "standard_11" | "extended_13" | "extended_14"
+--                   | "pediatric" | "diabetic" | "renal" | "liver" | "infection" 
+--                   | "microalbuminuria" | "pregnancy" | "dipstick_only",
+--   
+--   -- Specimen Metadata
+--   "specimenType": "Random" | "First Morning" | "Midstream Clean Catch" 
+--                   | "24-Hour Collection" | "Catheter" | "Suprapubic",
+--   "collectionTime": "ISO 8601 datetime string",
+--   "testMethod": "string (e.g., 'Urine Dipstick Analysis')",
+--   
+--   -- Physical Examination
+--   "physical": {
+--     "color": "Colorless" | "Pale Yellow" | "Yellow" | "Dark Yellow" | "Amber" 
+--              | "Orange" | "Pink/Red" | "Brown" | "Green" | "Milky/Cloudy",
+--     "appearance": "Clear" | "Slightly Cloudy" | "Cloudy" | "Turbid" | "Hazy",
+--     "specificGravity": 1.001 - 1.035 (numeric),
+--     "volume": numeric (mL),
+--     "odor": "Normal" | "Ammoniacal" | "Fruity" | "Foul/Putrid" | "Sweet" | "Fishy"
+--   },
+--   
+--   -- Chemical Examination (Dipstick Results)
+--   "chemical": {
+--     -- Standard 10-Parameter Dipstick
+--     "ph": 4.5 - 9.0 (numeric),
+--     "protein": "Negative" | "Trace" | "+" | "++" | "+++" | "++++",
+--     "glucose": "Negative" | "Trace" | "+" | "++" | "+++" | "++++",
+--     "ketones": "Negative" | "Trace" | "+" | "++" | "+++",
+--     "blood": "Negative" | "Trace" | "+" | "++" | "+++",
+--     "bilirubin": "Negative" | "+" | "++" | "+++",
+--     "urobilinogen": "Normal (0.2-1.0)" | "Elevated (+)" | "Markedly Elevated (++)",
+--     "nitrite": "Negative" | "Positive",
+--     "leukocyteEsterase": "Negative" | "Trace" | "+" | "++" | "+++",
+--     
+--     -- Extended Parameters (N11, N13, N14 Dipsticks) - NEW FIELDS
+--     "ascorbicAcid": "Negative" | "+" | "++" | "+++",
+--     "microalbumin": "Normal (<20)" | "Low (20-50)" | "Moderate (50-100)" 
+--                     | "High (100-200)" | "Very High (>200)",
+--     "creatinine": "Low (<3.5)" | "Normal (3.5-26.5)" | "High (>26.5)",
+--     "albumin_creatinine_ratio": numeric (mg/mmol, calculated),
+--     "calcium": "Normal" | "Elevated",
+--     
+--     -- Optional Numeric Values for Quantitative Results
+--     "protein_numeric": numeric (mg/dL or g/L),
+--     "glucose_numeric": numeric (mg/dL or mmol/L),
+--     "microalbumin_numeric": numeric (mg/L),
+--     "creatinine_numeric": numeric (mmol/L)
+--   },
+--   
+--   -- Microscopic Examination
+--   "microscopy": {
+--     "rbc": "None" | "0-2" | "2-5" | "5-10" | "10-20" | "20-50" | ">50" | "TNTC",
+--     "wbc": "None" | "0-2" | "2-5" | "5-10" | "10-20" | "20-50" | ">50" | "TNTC",
+--     "epithelialCells": "string (e.g., 'Few squamous')",
+--     "casts": "string (e.g., '0-2')",
+--     "castTypes": ["Hyaline", "Granular", "Fine Granular", "Coarse Granular", 
+--                   "RBC", "WBC", "Epithelial", "Waxy", "Fatty", "Broad"],
+--     "crystals": "string (e.g., 'Few')",
+--     "crystalTypes": ["Uric Acid", "Calcium Oxalate (Monohydrate)", 
+--                      "Calcium Oxalate (Dihydrate)", "Amorphous Urates",
+--                      "Triple Phosphate", "Amorphous Phosphates", 
+--                      "Calcium Carbonate", "Ammonium Biurate",
+--                      "Cystine", "Tyrosine", "Leucine", "Cholesterol", 
+--                      "Bilirubin", "Sulfonamide", "Drug Crystals"],
+--     "bacteria": "None Seen" | "Few" | "Moderate" | "Many" | "Loaded",
+--     "yeast": "None Seen" | "Few" | "Moderate" | "Many" | "Loaded",
+--     "parasites": "string (specify if seen)",
+--     "mucus": "None Seen" | "Few" | "Moderate" | "Many" | "Loaded",  -- NEW FIELD
+--     "otherFindings": "string (free text)"
+--   },
+--   
+--   "interpretation": "string (clinical interpretation)",
+--   "comments": "string (additional notes)"
+-- }
+-- ============================================================================
+
+-- ============================================================================
+-- DIPSTICK PANEL PARAMETER MATRIX (Full Range: 1-14 Parameters)
+-- ============================================================================
+-- 
+-- Panel Type          | Parameters Included
+-- --------------------|----------------------------------------------------
+-- SINGLE PARAMETER STRIPS (1-param)
+-- single_glucose      | GLU only
+-- single_protein      | PRO only  
+-- single_ketone       | KET only
+-- 
+-- BASIC MULTI-PARAMETER STRIPS
+-- param_2             | GLU, PRO
+-- param_3             | GLU, PRO, pH
+-- param_5             | GLU, PRO, pH, BLD, KET
+-- param_7             | GLU, PRO, pH, BLD, KET, NIT, LEU
+-- param_9             | GLU, PRO, pH, BLD, KET, NIT, LEU, BIL, URO
+-- 
+-- STANDARD FULL DIPSTICK STRIPS
+-- standard_10 (N10)   | GLU, PRO, pH, BLD, KET, NIT, LEU, BIL, URO, SG
+-- standard_11 (N11)   | N10 + ASC (ascorbic acid)
+-- extended_13 (N13)   | N11 + MAU (microalbumin), CRE (creatinine)
+-- extended_14 (N14)   | N13 + CA (calcium)
+-- 
+-- SPECIALIZED CLINICAL PANELS
+-- complete            | All parameters + microscopy + physical
+-- pediatric           | LEU, NIT, PRO, pH, BLD, GLU + microscopy + physical
+-- diabetic            | GLU, KET, PRO, MAU, CRE, pH + physical
+-- renal               | PRO, BLD, MAU, CRE, pH, LEU, NIT + microscopy + physical
+-- liver               | BIL, URO, PRO, pH, BLD + physical
+-- infection (UTI)     | LEU, NIT, BLD, PRO, pH + microscopy + physical
+-- microalbuminuria    | MAU, CRE, PRO (no physical/microscopy)
+-- pregnancy           | PRO, GLU, LEU, NIT, KET, BLD, pH + microscopy + physical
+-- dipstick_only       | Standard 10 parameters, no microscopy
+-- ============================================================================
+
+-- ============================================================================
+-- REFERENCE RANGES AND CLINICAL SIGNIFICANCE
+-- ============================================================================
+
+COMMENT ON TABLE lab_results IS 
+'Lab results table. For urinalysis (result_template_type = urinalysis_checklist), 
+the structured_result JSONB column supports extended dipstick parameters including:
+
+INFECTION INDICATORS:
+- leukocyteEsterase: Negative (normal), Trace/+/++/+++ (abnormal) - WBC marker
+- nitrite: Negative (normal), Positive (abnormal) - bacterial infection
+
+RENAL FUNCTION MARKERS:
+- protein: Negative/Trace (normal), +/++/+++/++++ (abnormal) - kidney damage
+- blood: Negative (normal), Trace/+/++/+++ (abnormal) - hematuria
+- microalbumin: <20 mg/L (normal), 20-200 (microalbuminuria), >200 (macroalbuminuria)
+- creatinine: 3.5-26.5 mmol/L (normal) - urine concentration
+- albumin_creatinine_ratio: <3 mg/mmol (normal), 3-30 (moderate), >30 (severe)
+- calcium: Normal/Elevated - hypercalciuria screening
+
+METABOLIC INDICATORS:
+- glucose: Negative (normal), +/++/+++/++++ (abnormal) - diabetes screening
+- ketones: Negative (normal), +/++/+++ (abnormal) - ketosis/DKA
+- pH: 5.0-8.0 (normal range) - acid-base status
+- ascorbicAcid: Negative (normal) - may cause false negatives for glucose/blood
+
+LIVER & HEMOLYSIS MARKERS:
+- bilirubin: Negative (normal), +/++/+++ (abnormal) - liver/biliary disease
+- urobilinogen: 0.2-1.0 EU/dL (normal) - liver function/hemolysis
+
+PHYSICAL CHARACTERISTICS:
+- specificGravity: 1.005-1.030 (normal) - concentration/hydration
+- color: Pale Yellow/Yellow (normal) - various conditions affect color
+- appearance: Clear (normal) - cloudiness indicates cells/bacteria/crystals';
+
+-- ============================================================================
+-- SAMPLE EXTENDED URINALYSIS RESULT JSON
+-- ============================================================================
+-- 
+-- Example of a complete extended urinalysis result:
+-- 
+-- {
+--   "templateType": "urinalysis_checklist",
+--   "dipstickType": "extended_13",
+--   "specimenType": "Midstream Clean Catch",
+--   "collectionTime": "2025-01-28T08:30:00Z",
+--   "testMethod": "Urine Dipstick Analysis - Combi N13",
+--   "physical": {
+--     "color": "Yellow",
+--     "appearance": "Clear",
+--     "specificGravity": 1.015,
+--     "volume": 50,
+--     "odor": "Normal"
+--   },
+--   "chemical": {
+--     "ph": 6.0,
+--     "protein": "Negative",
+--     "glucose": "Negative",
+--     "ketones": "Negative",
+--     "blood": "Negative",
+--     "bilirubin": "Negative",
+--     "urobilinogen": "Normal (0.2-1.0)",
+--     "nitrite": "Negative",
+--     "leukocyteEsterase": "Negative",
+--     "ascorbicAcid": "Negative",
+--     "microalbumin": "Normal (<20)",
+--     "creatinine": "Normal (3.5-26.5)"
+--   },
+--   "microscopy": {
+--     "rbc": "0-2",
+--     "wbc": "0-2",
+--     "epithelialCells": "Few squamous",
+--     "bacteria": "None Seen",
+--     "casts": "None",
+--     "crystals": "None",
+--     "yeast": "None Seen",
+--     "mucus": "None Seen"
+--   },
+--   "interpretation": "Normal urinalysis. No evidence of infection, proteinuria, or glucosuria.",
+--   "comments": "Sample collected as midstream clean catch. Good sample quality."
+-- }
+-- ============================================================================
+
+-- No actual schema changes needed - the structured_result JSONB column already
+-- supports any JSON structure. This migration documents the expected format.
+
+SELECT 'Extended urinalysis schema documentation added' AS status;

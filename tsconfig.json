@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2022",
+    "module": "es2022",
+    "lib": ["dom", "es2022"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": ".erb/dll"
+  },
+  "exclude": [
+    "test",
+    "release",
+    ".erb/dll",
+    ".erb/node_modules",
+    "node_modules",
+    "src/node_modules",
+    "migrations",
+    "migrations_split",
+    "*.sql",
+    "*.txt",
+    "NHIA_Medicine_2025.json",
+    "NHIS_Medicine.json",
+    "NHIS-Procedure.json",
+    "NHIS-HMOs.json",
+    "sim_billings.json"
+  ]
+}

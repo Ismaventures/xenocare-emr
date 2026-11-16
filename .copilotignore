@@ -1,0 +1,65 @@
+# =============================================================================
+# .copilotignore — Reduces Copilot's indexing scope to prevent extension hangs
+# =============================================================================
+
+# Build artifacts & dependencies
+node_modules/
+release/
+.erb/dll/
+.erb/node_modules/
+src/node_modules/
+dist/
+
+# Large data/seed files
+*.sql
+*.json
+!package.json
+!tsconfig.json
+!.eslintrc.json
+!postcss.config.js
+!tailwind.config.js
+
+# Migration files (not relevant for code completion)
+migrations/
+migrations_split/
+supabase/
+
+# Large text/log outputs
+*.txt
+*.log
+*.csv
+*.bak
+
+# Specialty template data files (static config, not logic)
+src/renderer/modules/clinical-consultation/constants/specialty-templates/cardiology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/dermatology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/orthopaedics.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/ent.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/urology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/neurology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/neuropsychiatry.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/gastroenterology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/nephrology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/paediatrics.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/neurosurgery.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/general-surgery.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/gynaecology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/oral-maxillofacial.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/pulmonology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/endocrinology.ts
+src/renderer/modules/clinical-consultation/constants/specialty-templates/plastic-surgery.ts
+
+# Other large static data constants
+src/renderer/modules/patient-registration/constants/world-locations.ts
+
+# Docs (not code)
+docs/
+*.md
+
+# Test scripts
+test_*.ps1
+verify_*.ps1
+check_*.js
+
+# Assets
+assets/

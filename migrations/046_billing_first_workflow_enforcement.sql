@@ -1,0 +1,88 @@
+-- =============================================================================
+-- Migration: Enforce Billing-First Workflow
+-- Date: 2025-01-20
+-- Description: Documents and enforces the correct encounter workflow where all
+--              encounters MUST go through Billing verification before Nursing
+-- =============================================================================
+
+-- =============================================================================
+-- WORKFLOW ENFORCEMENT DOCUMENTATION
+-- =============================================================================
+--
+-- CORRECT WORKFLOW:
+-- 
+--   ┌──────────────────┐
+--   │   REGISTRATION   │
+--   │  (Create Visit)  │
+--   └────────┬─────────┘
+--            │
+--            ▼
+--   ┌──────────────────┐
+--   │  BILLING QUEUE   │ ◄── ALL encounters start here
+--   │ (Payment Gate)   │     - Consultation billing order created
+--   └────────┬─────────┘     - Patient waits for payment verification
+--            │
+--            │ Payment Verified ✓
+--            ▼
+--   ┌──────────────────┐
+--   │  NURSING CARE    │ ◄── Only after payment verified
+--   │   (Vitals/Triage)│     - For GOPD/General clinics
+--   └────────┬─────────┘
+--            │           OR
+--            ▼
+--   ┌──────────────────┐
+--   │ SPECIALTY QUEUE  │ ◄── For specialty clinics (skip Nursing)
+--   │ (Dental/Eye/PT)  │     - Dental, Ophthalmology, Physiotherapy
+--   └────────┬─────────┘
+--            │
+--            ▼
+--   ┌──────────────────┐
+--   │   CONSULTATION   │
+--   │   (Doctor Visit) │
+--   └──────────────────┘
+--
+-- CANCELLATION WORKFLOW:
+-- 
+--   When administrator cancels an encounter:
+--   1. Remove from Billing queue (if present)
+--   2. Remove from Nursing queue (if present)
+--   3. Remove from Specialty queues (if present)
+--   4. Cancel all pending billing orders
+--   5. Mark all billing items as cancelled
+--   6. Encounter excluded from all financial calculations
+--
+-- KEY ENFORCEMENT RULES:
+--
+--   1. Billing is the GATEKEEPER
+--      - No patient can proceed to clinical care without payment verification
+--      - Even NHIS patients must have billing verified (0% patient portion)
+--
+--   2. Nursing Care is DOWNSTREAM
+--      - Never receives encounters with pending payments
+--      - Only activated after billing admin verifies payment
+--
+--   3. Cancelled Encounters are EXCLUDED
+--      - Removed from all queues
+--      - Excluded from billing calculations
+--      - Excluded from financial exports/reports
+--      - Cannot be cancelled if payments verified (requires refund first)
+--
+-- =============================================================================
+
+-- Note: The actual workflow enforcement is implemented in:
+-- 
+-- 1. src/renderer/lib/workflow/api.ts
+--    - createEncounter() - Routes ALL new encounters to Billing queue
+--    - cancelEncounter() - Removes from ALL queues on cancellation
+--
+-- 2. src/renderer/modules/billing/api/billing-order.api.ts
+--    - verifyPayment() - Routes to Nursing/Specialty AFTER payment
+--    - getBillingQueue() - Filters out cancelled encounters
+--    - getBillingOrderStats() - Excludes cancelled encounters
+--
+-- 3. src/renderer/modules/nursing/api/nursing.api.ts
+--    - getNursingQueuePatients() - Filters out cancelled queue entries
+--    - Only shows patients routed from Billing after verification
+--
+-- This migration serves as documentation of the workflow enforcement.
+-- The enforcement is handled at the application level, not database level.

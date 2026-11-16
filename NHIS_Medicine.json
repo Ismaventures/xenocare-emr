@@ -1,0 +1,4186 @@
+[
+  {
+    "code": "NHIA-01-01-01",
+    "name": "Halothane",
+    "dosage_form": "Inhalation, Liquid",
+    "strengths": "10 mg/ml in 20 ml,",
+    "presentation": "Per 1ml",
+    "price": "250"
+  },
+  {
+    "code": "NHIA-01-01-02",
+    "name": "Ketamine",
+    "dosage_form": "Injection (HCL)",
+    "strengths": "50mg/ml in 10ml, 100mg/ml in 5ml",
+    "presentation": "vial",
+    "price": "2,700"
+  },
+  {
+    "code": "NHIA-01-01-03",
+    "name": "Nitrous oxide",
+    "dosage_form": "Inhalation, medicinal gas",
+    "strengths": null,
+    "presentation": "Gas",
+    "price": "11,000"
+  },
+  {
+    "code": "NHIA-01-01-04",
+    "name": "Oxygen",
+    "dosage_form": "Inhalation, medicinal gas",
+    "strengths": "per hour",
+    "presentation": "Gas",
+    "price": "4,200"
+  },
+  {
+    "code": "NHIA-01-01-05",
+    "name": "Thiopental",
+    "dosage_form": "Injection (powder) for IV as sodium salt",
+    "strengths": "100 mg/ml in 5 ml",
+    "presentation": "Vial",
+    "price": "6,500"
+  },
+  {
+    "code": "NHIA-01-02-01",
+    "name": "Atropine",
+    "dosage_form": "Injection (sulphate)",
+    "strengths": "0.5mg/amp",
+    "presentation": "Amp.",
+    "price": "155"
+  },
+  {
+    "code": "NHIA-01-02-02",
+    "name": "Atropine",
+    "dosage_form": "Injection (sulphate)",
+    "strengths": "1mg/ 1ml",
+    "presentation": "Amp.",
+    "price": "970"
+  },
+  {
+    "code": "NHIA-01-02-03",
+    "name": "Diazepam",
+    "dosage_form": "Injection",
+    "strengths": "5mg/ml in 2 ml",
+    "presentation": "Amp.",
+    "price": "800"
+  },
+  {
+    "code": "NHIA-01-02-04",
+    "name": "Hyoscine N -Butylbromide",
+    "dosage_form": "Injection",
+    "strengths": "20mg/ml",
+    "presentation": "amp",
+    "price": "180"
+  },
+  {
+    "code": "NHIA-01-02-05",
+    "name": "Midazolam 15mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "15mg",
+    "presentation": "Injection",
+    "price": "3,900"
+  },
+  {
+    "code": "NHIA-01-02-06",
+    "name": "Morphine",
+    "dosage_form": "Injection (Sulphate or Hcl)",
+    "strengths": "10 mg/ml, 15mg/ml in 1ml ampoules",
+    "presentation": "Amp",
+    "price": "8,500"
+  },
+  {
+    "code": "NHIA-01-02-07",
+    "name": "Morphine [may not be available]",
+    "dosage_form": "Injection (Sulphate or Hcl)",
+    "strengths": "25mg, (Hydrochloride)",
+    "presentation": "Amp",
+    "price": "3,526"
+  },
+  {
+    "code": "NHIA-01-02-08",
+    "name": "Promethazine",
+    "dosage_form": "Tablets",
+    "strengths": "5mg",
+    "presentation": "Tab.",
+    "price": "10"
+  },
+  {
+    "code": "NHIA-01-02-09",
+    "name": "Promethazine",
+    "dosage_form": "Syrup",
+    "strengths": "25mg/ml (HC1) in 1 ml",
+    "presentation": "60mls",
+    "price": "670"
+  },
+  {
+    "code": "NHIA-01-02-10",
+    "name": "Promethazine",
+    "dosage_form": "Injection",
+    "strengths": "2ml Ampoule",
+    "presentation": "Amp",
+    "price": "110"
+  },
+  {
+    "code": "NHIA-01-02-11",
+    "name": "Glycopyrrolate 0.2mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "0.2mg",
+    "presentation": "Injection",
+    "price": "1,138"
+  },
+  {
+    "code": "NHIA-01-03-01",
+    "name": "Atracurium",
+    "dosage_form": "Injection",
+    "strengths": "50 mg/ml",
+    "presentation": "Amp.",
+    "price": "4,636"
+  },
+  {
+    "code": "NHIA-01-03-02",
+    "name": "Edrophonium",
+    "dosage_form": "Injection (chloride)",
+    "strengths": "10mg/ml",
+    "presentation": "Amp",
+    "price": "2,733"
+  },
+  {
+    "code": "NHIA-01-03-03",
+    "name": "Neostigmine",
+    "dosage_form": "Injection (methylsulphate)",
+    "strengths": "2.5mg/ml in 1ml ampoule",
+    "presentation": "Amp",
+    "price": "1,464"
+  },
+  {
+    "code": "NHIA-01-03-04",
+    "name": "Pancuronium",
+    "dosage_form": "Injection (Bromide)",
+    "strengths": "4mg/2ml",
+    "presentation": "Amp",
+    "price": "2,684"
+  },
+  {
+    "code": "NHIA-01-03-05",
+    "name": "Pancuronium",
+    "dosage_form": "Injection (Bromide)",
+    "strengths": "1mg/ml",
+    "presentation": "Amp.",
+    "price": "1,985"
+  },
+  {
+    "code": "NHIA-01-03-06",
+    "name": "Suxamethonium",
+    "dosage_form": "Injection (Chloride)",
+    "strengths": "100mg/2ml",
+    "presentation": "Amp.",
+    "price": "1,687"
+  },
+  {
+    "code": "NHIA-01-03-07",
+    "name": "Propofol 1% Injection",
+    "dosage_form": "Injection",
+    "strengths": "1%",
+    "presentation": "Injection",
+    "price": "3,285"
+  },
+  {
+    "code": "NHIA-01-04-01",
+    "name": "Lidocaine",
+    "dosage_form": "Injection (HCL)",
+    "strengths": "1%, /2% + Adrenaline 1:200000",
+    "presentation": "Vial50mls",
+    "price": "1,342"
+  },
+  {
+    "code": "NHIA-01-04-02",
+    "name": "Bupivacaine",
+    "dosage_form": "Injection (HCL)",
+    "strengths": "Plain or with epinephrine",
+    "presentation": "Amp",
+    "price": "5,000"
+  },
+  {
+    "code": "NHIA-01-04-03",
+    "name": "Lidocaine",
+    "dosage_form": null,
+    "strengths": "10%",
+    "presentation": null,
+    "price": "1,281"
+  },
+  {
+    "code": "NHIA-01-04-04",
+    "name": "Lidocaine",
+    "dosage_form": "Topical spray",
+    "strengths": "2-4%",
+    "presentation": "Spray",
+    "price": "4,597"
+  },
+  {
+    "code": "NHIA-01-04-05",
+    "name": "Lidocaine",
+    "dosage_form": "Jelly",
+    "strengths": "2-5%",
+    "presentation": "Tube",
+    "price": "2,013"
+  },
+  {
+    "code": "NHIA-01-04-06",
+    "name": "Lidocaine",
+    "dosage_form": "Cream, Ointment",
+    "strengths": "2% + epinephrine (adrenaline) 1:80,000",
+    "presentation": "Tube",
+    "price": "2,879"
+  },
+  {
+    "code": "NHIA-01-04-07",
+    "name": "Lidocaine",
+    "dosage_form": "Dental cartridge",
+    "strengths": "0.25%, 0.5%, in 10ml amp (with or without epinephrine (adrenaline) 1:200,000)",
+    "presentation": "Tube",
+    "price": "1,174"
+  },
+  {
+    "code": "NHIA-01-04-08",
+    "name": "Prilocaine",
+    "dosage_form": "Injection",
+    "strengths": "3% with felypressin 0.03units/ml",
+    "presentation": "Amp",
+    "price": "1,708"
+  },
+  {
+    "code": "NHIA-02-01-01",
+    "name": "Morphine",
+    "dosage_form": "Injection",
+    "strengths": "10mg (SO4 or HC1) in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "8,500"
+  },
+  {
+    "code": "NHIA-02-01-02",
+    "name": "Morphine",
+    "dosage_form": "Injection",
+    "strengths": "15mg (SO4 or HC1) in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "8,500"
+  },
+  {
+    "code": "NHIA-02-01-03",
+    "name": "Morphine",
+    "dosage_form": "Tablet",
+    "strengths": "30mg",
+    "presentation": "Tab.",
+    "price": "920"
+  },
+  {
+    "code": "NHIA-02-01-04",
+    "name": "Pentazocine",
+    "dosage_form": "Injection (lactate)",
+    "strengths": "30mg/ml",
+    "presentation": "Amp.",
+    "price": "2,300"
+  },
+  {
+    "code": "NHIA-02-01-05",
+    "name": "Pethidine",
+    "dosage_form": "Injection",
+    "strengths": "50mg/ml in 2 ml Ampoule",
+    "presentation": "Amp.",
+    "price": "4,000"
+  },
+  {
+    "code": "NHIA-02-01-06",
+    "name": "Tramadol",
+    "dosage_form": "Tablet",
+    "strengths": "50mg",
+    "presentation": "Tab.",
+    "price": "85"
+  },
+  {
+    "code": "NHIA-02-01-07",
+    "name": "Tramadol",
+    "dosage_form": "Injection",
+    "strengths": "50mg/ml ampoule",
+    "presentation": "Amp.",
+    "price": "700"
+  },
+  {
+    "code": "NHIA-02-01-08",
+    "name": "Morphine 1mg/ml Syrup 200ml",
+    "dosage_form": "Syrup",
+    "strengths": "1mg/ml(200ml)",
+    "presentation": "Syrup",
+    "price": "2,655"
+  },
+  {
+    "code": "NHIA-02-01-09",
+    "name": "Morphine 1mg/ml Syrup 500ml",
+    "dosage_form": "Syrup",
+    "strengths": "1mg/ml(500ml)",
+    "presentation": "Syrup",
+    "price": "3,076"
+  },
+  {
+    "code": "NHIA-02-01-10",
+    "name": "Dihydrocodeine 30mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "30mg",
+    "presentation": "Tablet",
+    "price": "400"
+  },
+  {
+    "code": "NHIA-02-01-11",
+    "name": "Codeine/Paracetamol (8/500mg) tab",
+    "dosage_form": "Tablet",
+    "strengths": "8/500mg",
+    "presentation": "Tablet",
+    "price": "242"
+  },
+  {
+    "code": "NHIA-02-01-12",
+    "name": "Codeine/Paracetamol(30/500mg) tab",
+    "dosage_form": "Tablet",
+    "strengths": "30/500mg",
+    "presentation": "Tablet",
+    "price": "329"
+  },
+  {
+    "code": "NHIA-02-02-01",
+    "name": "Naloxone",
+    "dosage_form": "Injection",
+    "strengths": "0.4mg/ml in 1ml Ampoule",
+    "presentation": "Amp",
+    "price": "3,900"
+  },
+  {
+    "code": "NHIA-02-03-01",
+    "name": "Acetyl salicylic Acid",
+    "dosage_form": "Tablet, capsule",
+    "strengths": "300mg",
+    "presentation": "Tab/Caps.",
+    "price": "30"
+  },
+  {
+    "code": "NHIA-02-03-02",
+    "name": "Paracetamol",
+    "dosage_form": "Tablets",
+    "strengths": "500mg",
+    "presentation": "Tab",
+    "price": "27"
+  },
+  {
+    "code": "NHIA-02-03-03",
+    "name": "Paracetamol",
+    "dosage_form": "Suppository",
+    "strengths": "100 mg",
+    "presentation": "Supp.",
+    "price": "228"
+  },
+  {
+    "code": "NHIA-02-03-04",
+    "name": "Paracetamol",
+    "dosage_form": "Syrup/suspension",
+    "strengths": "125mg/5ml",
+    "presentation": "60mls",
+    "price": "440"
+  },
+  {
+    "code": "NHIA-02-03-05",
+    "name": "Paracetamol",
+    "dosage_form": "Drop",
+    "strengths": "125mg/5ml",
+    "presentation": "15mls",
+    "price": "482"
+  },
+  {
+    "code": "NHIA-02-03-06",
+    "name": "Paracetamol",
+    "dosage_form": "Injection",
+    "strengths": "150mg/ml",
+    "presentation": "Amp.",
+    "price": "120"
+  },
+  {
+    "code": "NHIA-02-03-07",
+    "name": "Diclofenac",
+    "dosage_form": "Eye drops",
+    "strengths": "0.10%",
+    "presentation": "5mls",
+    "price": "1,090"
+  },
+  {
+    "code": "NHIA-02-04-01",
+    "name": "Allopurinol",
+    "dosage_form": "Tablet",
+    "strengths": "100mg",
+    "presentation": "Tab.",
+    "price": "100"
+  },
+  {
+    "code": "NHIA-02-04-02",
+    "name": "Allopurinol",
+    "dosage_form": "Tablet",
+    "strengths": "300mg",
+    "presentation": "Tab.",
+    "price": "180"
+  },
+  {
+    "code": "NHIA-02-04-03",
+    "name": "Celecoxib",
+    "dosage_form": "Capsules",
+    "strengths": "200mg",
+    "presentation": "Caps.",
+    "price": "210"
+  },
+  {
+    "code": "NHIA-02-04-04",
+    "name": "Chondroitin sulphate+ Glucoseamine",
+    "dosage_form": "Capsules",
+    "strengths": "200mg+250mg",
+    "presentation": "Caps.",
+    "price": "350"
+  },
+  {
+    "code": "NHIA-02-04-05",
+    "name": "Diclofenac (sodium or potassium salt)",
+    "dosage_form": "Tablet",
+    "strengths": "100mg,",
+    "presentation": "Tab.",
+    "price": "60"
+  },
+  {
+    "code": "NHIA-02-04-06",
+    "name": "Diclofenac (sodium or potassium salt)",
+    "dosage_form": "Tablet",
+    "strengths": "50mg",
+    "presentation": "Tab.",
+    "price": "35"
+  },
+  {
+    "code": "NHIA-02-04-07",
+    "name": "Diclofenac (sodium or potassium salt)",
+    "dosage_form": "Injection",
+    "strengths": "25mg/ml Ampoule",
+    "presentation": "Amp.",
+    "price": "125"
+  },
+  {
+    "code": "NHIA-02-04-08",
+    "name": "Diclofenac sodium",
+    "dosage_form": "Gel",
+    "strengths": "1%",
+    "presentation": "Tube",
+    "price": "1,200"
+  },
+  {
+    "code": "NHIA-02-04-09",
+    "name": "Diclofenac sodium + misoprostol",
+    "dosage_form": "Tab",
+    "strengths": "75/200mg",
+    "presentation": "Tab",
+    "price": "340"
+  },
+  {
+    "code": "NHIA-02-04-10",
+    "name": "Diclofenac sodium+B1+B6+B12",
+    "dosage_form": "Tablet",
+    "strengths": null,
+    "presentation": null,
+    "price": "78"
+  },
+  {
+    "code": "NHIA-02-04-11",
+    "name": "Diclofenac sodium + Cholestyramine",
+    "dosage_form": "Tablet",
+    "strengths": "75mg/65mg",
+    "presentation": "Tab",
+    "price": "317"
+  },
+  {
+    "code": "NHIA-02-04-12",
+    "name": "Ibuprofen",
+    "dosage_form": "Tablets, capsules",
+    "strengths": "200mg,",
+    "presentation": "Tab.",
+    "price": "43"
+  },
+  {
+    "code": "NHIA-02-04-13",
+    "name": "Ibuprofen",
+    "dosage_form": "Tablets, capsules",
+    "strengths": "400mg",
+    "presentation": "Tab",
+    "price": "55"
+  },
+  {
+    "code": "NHIA-02-04-14",
+    "name": "Ibuprofen",
+    "dosage_form": "Suspension",
+    "strengths": "100mg/5ml",
+    "presentation": "100mls",
+    "price": "1,000"
+  },
+  {
+    "code": "NHIA-02-04-15",
+    "name": "Ketoprofen",
+    "dosage_form": "Capsules",
+    "strengths": "200mg",
+    "presentation": "Caps./tabs",
+    "price": "200"
+  },
+  {
+    "code": "NHIA-02-04-16",
+    "name": "Ketoprofen",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "2ml Amp",
+    "price": "281"
+  },
+  {
+    "code": "NHIA-02-04-17",
+    "name": "Ketoprofen",
+    "dosage_form": "Topical",
+    "strengths": "50gm",
+    "presentation": "Tube",
+    "price": "1,700"
+  },
+  {
+    "code": "NHIA-02-04-18",
+    "name": "Naproxen",
+    "dosage_form": "Tablet",
+    "strengths": "250mg",
+    "presentation": "Tab.",
+    "price": "177"
+  },
+  {
+    "code": "NHIA-02-04-19",
+    "name": "Naproxen",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tab.",
+    "price": "226"
+  },
+  {
+    "code": "NHIA-02-04-20",
+    "name": "Piroxicam",
+    "dosage_form": "Capsules",
+    "strengths": "20mg",
+    "presentation": "Caps.",
+    "price": "25"
+  },
+  {
+    "code": "NHIA-02-04-21",
+    "name": "Piroxicam",
+    "dosage_form": "Injection",
+    "strengths": "10mg/ml",
+    "presentation": "2ml Amp",
+    "price": "150"
+  },
+  {
+    "code": "NHIA-02-04-22",
+    "name": "Meloxicam 15mg Capsule",
+    "dosage_form": "Capsule",
+    "strengths": "15mg",
+    "presentation": "Capsule",
+    "price": "120"
+  },
+  {
+    "code": "NHIA-02-04-23",
+    "name": "Meloxicam 7.5mg Capsule",
+    "dosage_form": "Capsule",
+    "strengths": "7.5mg",
+    "presentation": "Capsule",
+    "price": "100"
+  },
+  {
+    "code": "NHIA-02-04-24",
+    "name": "Diclofenac 100mg Suppository",
+    "dosage_form": "Suppository",
+    "strengths": "100mg",
+    "presentation": "Suppository",
+    "price": "940"
+  },
+  {
+    "code": "NHIA-02-04-25",
+    "name": "Diclofenac 12.5mg Suppository",
+    "dosage_form": "Suppository",
+    "strengths": "12.5mg",
+    "presentation": "Suppository",
+    "price": "623"
+  },
+  {
+    "code": "NHIA-02-04-26",
+    "name": "Diclofenac 50mg Suppository",
+    "dosage_form": "Suppository",
+    "strengths": "50mg",
+    "presentation": "Suppository",
+    "price": "871"
+  },
+  {
+    "code": "NHIA-02-04-27",
+    "name": "Tenoxicam",
+    "dosage_form": "Capsule",
+    "strengths": "20mg",
+    "presentation": "Capsule",
+    "price": "100"
+  },
+  {
+    "code": "NHIA-02-04-28",
+    "name": "Aceclofenac",
+    "dosage_form": "Tablet",
+    "strengths": "100mg/tab",
+    "presentation": "Tablet",
+    "price": "110"
+  },
+  {
+    "code": "NHIA-02-04-29",
+    "name": "Aceclofenac + paracetamol + Serratiopeptidase",
+    "dosage_form": "Tablet",
+    "strengths": "100mg+325mg+15mg",
+    "presentation": "Tablet",
+    "price": "208"
+  },
+  {
+    "code": "NHIA-02-04-30",
+    "name": "Methyl salicylate",
+    "dosage_form": "Ointment",
+    "strengths": "35gm",
+    "presentation": "Tube",
+    "price": "800"
+  },
+  {
+    "code": "NHIA-02-05-01",
+    "name": "Orphenadrine",
+    "dosage_form": "Tablet (citrate)",
+    "strengths": "100mg",
+    "presentation": "Tab.",
+    "price": "160"
+  },
+  {
+    "code": "NHIA-02-05-02",
+    "name": "Orphenadrine + Paracetamol",
+    "dosage_form": "Tablet (citrate)",
+    "strengths": "35mg+ 450mg",
+    "presentation": "Tab.",
+    "price": "180"
+  },
+  {
+    "code": "NHIA-02-05-03",
+    "name": "Tizanidine",
+    "dosage_form": "Tablet",
+    "strengths": "4mg",
+    "presentation": "Tab.",
+    "price": "180"
+  },
+  {
+    "code": "NHIA-02-05-04",
+    "name": "Tizanidine",
+    "dosage_form": "Tablet",
+    "strengths": "2mg",
+    "presentation": "Tab.",
+    "price": "160"
+  },
+  {
+    "code": "NHIA-02-05-05",
+    "name": "Baclofen 10mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "10mg",
+    "presentation": "Tablet",
+    "price": "146"
+  },
+  {
+    "code": "NHIA-02-05-06",
+    "name": "Methocarbamol",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tablet",
+    "price": "120"
+  },
+  {
+    "code": "NHIA-03-01-01",
+    "name": "Cetrizine",
+    "dosage_form": "Tablet",
+    "strengths": "10mg",
+    "presentation": "Tab.",
+    "price": "116"
+  },
+  {
+    "code": "NHIA-03-01-02",
+    "name": "Cetrizine",
+    "dosage_form": "Syrup",
+    "strengths": "1mg/5ml",
+    "presentation": "100ml",
+    "price": "2,013"
+  },
+  {
+    "code": "NHIA-03-01-03",
+    "name": "Chlorpheniramine",
+    "dosage_form": "Tablet",
+    "strengths": "4mg (Maleate)",
+    "presentation": "Tab.",
+    "price": "37"
+  },
+  {
+    "code": "NHIA-03-01-04",
+    "name": "Chlorpheniramine",
+    "dosage_form": "Syrup",
+    "strengths": "2mg/5ml",
+    "presentation": "60mls",
+    "price": "683"
+  },
+  {
+    "code": "NHIA-03-01-05",
+    "name": "Chlorpheniramine",
+    "dosage_form": "Injection",
+    "strengths": "10mg (Maleate) in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "85"
+  },
+  {
+    "code": "NHIA-03-01-06",
+    "name": "Clemastine",
+    "dosage_form": "Tablet",
+    "strengths": "1mg",
+    "presentation": "Tab.",
+    "price": "67"
+  },
+  {
+    "code": "NHIA-03-01-07",
+    "name": "Clemastine",
+    "dosage_form": "Syrup",
+    "strengths": "500mcg/5ml",
+    "presentation": "100ml",
+    "price": "1,046"
+  },
+  {
+    "code": "NHIA-03-01-08",
+    "name": "Loratidine",
+    "dosage_form": "Tablet",
+    "strengths": "10mg",
+    "presentation": "Tab.",
+    "price": "50"
+  },
+  {
+    "code": "NHIA-03-01-09",
+    "name": "Loratidine",
+    "dosage_form": "Syrup",
+    "strengths": "5mg/5ml",
+    "presentation": "60ml",
+    "price": "1,100"
+  },
+  {
+    "code": "NHIA-03-01-10",
+    "name": "Promethazine",
+    "dosage_form": "Tablets",
+    "strengths": "25mg, (Hydrochloride)",
+    "presentation": "Tab.",
+    "price": "10"
+  },
+  {
+    "code": "NHIA-03-01-11",
+    "name": "Promethazine",
+    "dosage_form": "Syrup",
+    "strengths": "5mg/5ml",
+    "presentation": "60mls",
+    "price": "670"
+  },
+  {
+    "code": "NHIA-03-01-12",
+    "name": "Promethazine",
+    "dosage_form": "Injection",
+    "strengths": "25mg/ml (HC1) in 1 ml and 2ml Ampoule",
+    "presentation": "Amp.",
+    "price": "85"
+  },
+  {
+    "code": "NHIA-03-01-13",
+    "name": "Cinnarizine",
+    "dosage_form": "Tablet",
+    "strengths": "25mg",
+    "presentation": "Tablet",
+    "price": "100"
+  },
+  {
+    "code": "NHIA-03-01-14",
+    "name": "Fexofenadine 120mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "120mg",
+    "presentation": "Tablet",
+    "price": "165"
+  },
+  {
+    "code": "NHIA-03-01-15",
+    "name": "Fexofenadine 180mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "180mg",
+    "presentation": "Tablet",
+    "price": "217"
+  },
+  {
+    "code": "NHIA-03-02-01",
+    "name": "Dexamethasone",
+    "dosage_form": "Injection (sodium phosphate)",
+    "strengths": "4mg/1ml",
+    "presentation": "Amp",
+    "price": "200"
+  },
+  {
+    "code": "NHIA-03-02-02",
+    "name": "Epinephrine (Adrenaline)",
+    "dosage_form": "Injection",
+    "strengths": "1mg/ml (1 in 1000) as Acid tartrate or",
+    "presentation": "Amp.",
+    "price": "650"
+  },
+  {
+    "code": "NHIA-03-02-03",
+    "name": "Epinephrine (Adrenaline)",
+    "dosage_form": "Injection",
+    "strengths": "HC1 in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "793"
+  },
+  {
+    "code": "NHIA-03-02-04",
+    "name": "Hydrocortisone",
+    "dosage_form": "Injection",
+    "strengths": "(Sodium Succinate) in vial",
+    "presentation": "Vial",
+    "price": "800"
+  },
+  {
+    "code": "NHIA-04-01-01",
+    "name": "Atropine",
+    "dosage_form": "Injection",
+    "strengths": "1.0mg (Sulphate) in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "440"
+  },
+  {
+    "code": "NHIA-04-01-02",
+    "name": "Atropine",
+    "dosage_form": "Tablet",
+    "strengths": "1 mg",
+    "presentation": "Tab.",
+    "price": "970"
+  },
+  {
+    "code": "NHIA-04-01-03",
+    "name": "Deferoxamine",
+    "dosage_form": "Injection (mesilate)",
+    "strengths": "500 mg/vial",
+    "presentation": "Vial",
+    "price": "5,620"
+  },
+  {
+    "code": "NHIA-04-01-04",
+    "name": "Dimercaprol",
+    "dosage_form": "Injection",
+    "strengths": "50 mg/ml in 2 ml Ampoules",
+    "presentation": "Amp.",
+    "price": "1,398"
+  },
+  {
+    "code": "NHIA-04-01-05",
+    "name": "Methylene blue",
+    "dosage_form": "Injection",
+    "strengths": "5ml",
+    "presentation": "Amp.",
+    "price": "1,117"
+  },
+  {
+    "code": "NHIA-04-01-06",
+    "name": "Methylene blue",
+    "dosage_form": "Injection",
+    "strengths": "50 ml",
+    "presentation": "Amp.",
+    "price": "5,048"
+  },
+  {
+    "code": "NHIA-04-01-07",
+    "name": "Naloxone",
+    "dosage_form": "Injection (HCL)",
+    "strengths": "400mcg/ml",
+    "presentation": "Amp.",
+    "price": "3,900"
+  },
+  {
+    "code": "NHIA-04-01-08",
+    "name": "Phytomenadione (Vitamin K1)",
+    "dosage_form": "Ampoule",
+    "strengths": "10mg/ml in 1ml",
+    "presentation": "Amp.",
+    "price": "1,093"
+  },
+  {
+    "code": "NHIA-04-01-09",
+    "name": "Potassium ferric hexacyanoferrate (11) (Prussian blue)",
+    "dosage_form": "Powder for oral administration",
+    "strengths": null,
+    "presentation": "Powder",
+    "price": "2,415"
+  },
+  {
+    "code": "NHIA-04-01-10",
+    "name": "Protamine sulphate",
+    "dosage_form": "Injection",
+    "strengths": "10mg/ml in 5 ml",
+    "presentation": "Amp.",
+    "price": "4,819"
+  },
+  {
+    "code": "NHIA-04-01-11",
+    "name": "Sodium calcium edetate",
+    "dosage_form": "Injection",
+    "strengths": "200mg/ml in 5 ml",
+    "presentation": "Amp.",
+    "price": "1,871"
+  },
+  {
+    "code": "NHIA-04-01-12",
+    "name": "Sodium nitrite",
+    "dosage_form": "Injection",
+    "strengths": "30mg/ml in 10 ml vial",
+    "presentation": "Vial",
+    "price": "1,738"
+  },
+  {
+    "code": "NHIA-04-01-13",
+    "name": "Sodium thiosulphate",
+    "dosage_form": "Injection",
+    "strengths": "500mg/ml",
+    "presentation": "Amp",
+    "price": "1,525"
+  },
+  {
+    "code": "NHIA-04-01-14",
+    "name": "Acetylcysteine 200mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "200mg/vial",
+    "presentation": "Injection",
+    "price": "10,004"
+  },
+  {
+    "code": "NHIA-04-01-15",
+    "name": "Acetylcysteine 500mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tablet",
+    "price": "404"
+  },
+  {
+    "code": "NHIA-04-02-01",
+    "name": "Activated charcoal",
+    "dosage_form": "Tablet",
+    "strengths": "Tablet",
+    "presentation": "Tab.",
+    "price": "247"
+  },
+  {
+    "code": "NHIA-04-02-02",
+    "name": "Activated charcoal",
+    "dosage_form": "Granule, Powder for",
+    "strengths": "5g/satchet, powder 25 g, 50 g pack, for",
+    "presentation": null,
+    "price": "1,425"
+  },
+  {
+    "code": "NHIA-05-01-01",
+    "name": "Carbamazepine",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "149"
+  },
+  {
+    "code": "NHIA-05-01-02",
+    "name": "Carbamazepine",
+    "dosage_form": "Tablet",
+    "strengths": "400mg SR",
+    "presentation": "Tab.",
+    "price": "278"
+  },
+  {
+    "code": "NHIA-05-01-03",
+    "name": "Carbamazepine",
+    "dosage_form": "Syrup",
+    "strengths": "100mg/5ml",
+    "presentation": "100ml",
+    "price": "10,546"
+  },
+  {
+    "code": "NHIA-05-01-04",
+    "name": "Diazepam",
+    "dosage_form": "Injection",
+    "strengths": "5mg/ml in 2ml Ampoule",
+    "presentation": "Amp.",
+    "price": "800"
+  },
+  {
+    "code": "NHIA-05-01-05",
+    "name": "Ethosuximide",
+    "dosage_form": "Caps/tablets",
+    "strengths": "250 mg",
+    "presentation": "Caps.",
+    "price": "393"
+  },
+  {
+    "code": "NHIA-05-01-06",
+    "name": "Ethosuximide",
+    "dosage_form": "Syrup",
+    "strengths": "250mg/5ml",
+    "presentation": "100mls",
+    "price": "3,401"
+  },
+  {
+    "code": "NHIA-05-01-07",
+    "name": "Magnesium sulphate",
+    "dosage_form": "Injection",
+    "strengths": "50% (500 mg/ml) in 2 ml",
+    "presentation": "Amp.",
+    "price": "2,989"
+  },
+  {
+    "code": "NHIA-05-01-08",
+    "name": "Paraldehyde",
+    "dosage_form": "Injection",
+    "strengths": "10ml, 5 mls",
+    "presentation": "Amp.",
+    "price": "1,928"
+  },
+  {
+    "code": "NHIA-05-01-09",
+    "name": "Phenobarbital",
+    "dosage_form": "Tablets",
+    "strengths": "15mg,",
+    "presentation": "Tab.",
+    "price": "40"
+  },
+  {
+    "code": "NHIA-05-01-10",
+    "name": "Phenobarbital",
+    "dosage_form": "Tablets",
+    "strengths": "30mg, 60mg",
+    "presentation": "Tab",
+    "price": "47"
+  },
+  {
+    "code": "NHIA-05-01-11",
+    "name": "Phenobarbital",
+    "dosage_form": "Elixir, Syrup",
+    "strengths": "15mg/5ml",
+    "presentation": "60mls",
+    "price": "1,406"
+  },
+  {
+    "code": "NHIA-05-01-12",
+    "name": "Phenobarbital",
+    "dosage_form": "Injection",
+    "strengths": "200mg/ml",
+    "presentation": "Amp.",
+    "price": "6,094"
+  },
+  {
+    "code": "NHIA-05-01-13",
+    "name": "Phenytoin Sodium",
+    "dosage_form": "Capsule",
+    "strengths": "100mg, 50 mg, 25, mg",
+    "presentation": "Caps",
+    "price": "92"
+  },
+  {
+    "code": "NHIA-05-01-14",
+    "name": "Sodium valproate",
+    "dosage_form": "Tablets",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "174"
+  },
+  {
+    "code": "NHIA-05-01-15",
+    "name": "Sodium valproate",
+    "dosage_form": "Tablets",
+    "strengths": "500mg SR",
+    "presentation": "Tab",
+    "price": "354"
+  },
+  {
+    "code": "NHIA-05-01-16",
+    "name": "Sodium valproate",
+    "dosage_form": "Elixir/syrup",
+    "strengths": "200mg/5ml",
+    "presentation": "200mls",
+    "price": "11,000"
+  },
+  {
+    "code": "NHIA-05-01-17",
+    "name": "Pregabalin",
+    "dosage_form": "Tablet",
+    "strengths": "75mg",
+    "presentation": "Tablet",
+    "price": "228"
+  },
+  {
+    "code": "NHIA-05-01-18",
+    "name": "Pregabalin",
+    "dosage_form": "Tablet",
+    "strengths": "150mg",
+    "presentation": "Tablet",
+    "price": "364"
+  },
+  {
+    "code": "NHIA-05-01-19",
+    "name": "Pregabalin + Methylcobalamin",
+    "dosage_form": "Tablet",
+    "strengths": "75mg+750mcg",
+    "presentation": "Tablet",
+    "price": "343"
+  },
+  {
+    "code": "NHIA-06-01-01",
+    "name": "Metronidazole",
+    "dosage_form": "Tablets",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "12"
+  },
+  {
+    "code": "NHIA-06-01-02",
+    "name": "Metronidazole",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tab.",
+    "price": "23"
+  },
+  {
+    "code": "NHIA-06-01-03",
+    "name": "Metronidazole",
+    "dosage_form": "Suspension",
+    "strengths": "200mg/5ml",
+    "presentation": "60mls",
+    "price": "632"
+  },
+  {
+    "code": "NHIA-06-01-04",
+    "name": "Metronidazole",
+    "dosage_form": "IV Injection",
+    "strengths": "500mg in 100ml bottle",
+    "presentation": "100mls",
+    "price": "732"
+  },
+  {
+    "code": "NHIA-06-01-05",
+    "name": "Metronidazole",
+    "dosage_form": "Suppository",
+    "strengths": "500mg",
+    "presentation": "supp/ovule",
+    "price": "453"
+  },
+  {
+    "code": "NHIA-06-01-06",
+    "name": "Secnidazole",
+    "dosage_form": "4 Tablets (single dose)",
+    "strengths": "500mg",
+    "presentation": "4 tabs",
+    "price": "847"
+  },
+  {
+    "code": "NHIA-06-01-07",
+    "name": "Tinidazole",
+    "dosage_form": "4 Tablets (Single dose)",
+    "strengths": "500mg",
+    "presentation": "4 tabs",
+    "price": "311"
+  },
+  {
+    "code": "NHIA-06-02-01",
+    "name": "Albendazole",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "2 tabs",
+    "price": "365"
+  },
+  {
+    "code": "NHIA-06-02-02",
+    "name": "Albendazole",
+    "dosage_form": "Suspension Oral",
+    "strengths": "100mg/5ml",
+    "presentation": "30mls",
+    "price": "700"
+  },
+  {
+    "code": "NHIA-06-02-03",
+    "name": "Levamisole",
+    "dosage_form": "Tablet",
+    "strengths": "40mg",
+    "presentation": "Tab.",
+    "price": "127"
+  },
+  {
+    "code": "NHIA-06-02-04",
+    "name": "Levamisole",
+    "dosage_form": "Suspension",
+    "strengths": "40mg/5ml",
+    "presentation": "30mls",
+    "price": "374"
+  },
+  {
+    "code": "NHIA-06-02-05",
+    "name": "Mebendazole",
+    "dosage_form": "Tablet",
+    "strengths": "100mg,",
+    "presentation": "6`s",
+    "price": "564"
+  },
+  {
+    "code": "NHIA-06-02-06",
+    "name": "Mebendazole",
+    "dosage_form": "Tablet",
+    "strengths": "500 mg",
+    "presentation": "x 1",
+    "price": "777"
+  },
+  {
+    "code": "NHIA-06-02-07",
+    "name": "Mebendazole",
+    "dosage_form": "Suspension",
+    "strengths": "100mg/5ml",
+    "presentation": "30mls",
+    "price": "541"
+  },
+  {
+    "code": "NHIA-06-02-08",
+    "name": "Pyrantel Pamoate",
+    "dosage_form": "Tablet",
+    "strengths": "125mg (pamoate)",
+    "presentation": "6`s",
+    "price": "746"
+  },
+  {
+    "code": "NHIA-06-02-09",
+    "name": "Pyrantel Pamoate",
+    "dosage_form": "Syrup",
+    "strengths": "125mg/5ml",
+    "presentation": "15mls",
+    "price": "760"
+  },
+  {
+    "code": "NHIA-06-03-01",
+    "name": "Praziquantel",
+    "dosage_form": "Tablet",
+    "strengths": "600mg",
+    "presentation": "Tab.",
+    "price": "145"
+  },
+  {
+    "code": "NHIA-06-03-02",
+    "name": "Oxaminquine, tablet",
+    "dosage_form": "Tablet",
+    "strengths": null,
+    "presentation": null,
+    "price": "0"
+  },
+  {
+    "code": "NHIA-06-03-03",
+    "name": "Metrifonate, tablet (restricted)",
+    "dosage_form": "Tablet",
+    "strengths": null,
+    "presentation": null,
+    "price": "0"
+  },
+  {
+    "code": "NHIA-06-04-01",
+    "name": "Ivermectin",
+    "dosage_form": "Tablet",
+    "strengths": "6mg",
+    "presentation": "Tab.",
+    "price": "54"
+  },
+  {
+    "code": "NHIA-06-04-02",
+    "name": "Suramin",
+    "dosage_form": null,
+    "strengths": null,
+    "presentation": null,
+    "price": "0"
+  },
+  {
+    "code": "NHIA-06-04-03",
+    "name": "Diethylcarbamazine",
+    "dosage_form": "Tablet",
+    "strengths": null,
+    "presentation": null,
+    "price": "61"
+  },
+  {
+    "code": "NHIA-06-05-01",
+    "name": "\u03b2 \u2013Arteether Injection",
+    "dosage_form": "Ampoules",
+    "strengths": "150mg/2ml",
+    "presentation": "Amp x 3s",
+    "price": "2,500"
+  },
+  {
+    "code": "NHIA-06-05-02",
+    "name": "\u03b2 \u2013Arteether Injection",
+    "dosage_form": "Ampoules",
+    "strengths": "75mg/2ml",
+    "presentation": "Amp x 3s",
+    "price": "2,000"
+  },
+  {
+    "code": "NHIA-06-05-03",
+    "name": "Artemeter",
+    "dosage_form": "Injection (Phosphate)",
+    "strengths": "80mg/ml",
+    "presentation": "Amp.",
+    "price": "1,037"
+  },
+  {
+    "code": "NHIA-06-05-04",
+    "name": "Artemether",
+    "dosage_form": "Injection (Phosphate)",
+    "strengths": "40mg/ml in 1ml Ampoule",
+    "presentation": "Amp.",
+    "price": "1,084"
+  },
+  {
+    "code": "NHIA-06-05-05",
+    "name": "Artemether + Lumefantrine",
+    "dosage_form": "Tablet/caps/soft Gel/Others",
+    "strengths": "20mg/120mg",
+    "presentation": "Tab x 24s",
+    "price": "1,049"
+  },
+  {
+    "code": "NHIA-06-05-06",
+    "name": "Artemether + Lumefantrine",
+    "dosage_form": "Tablet/caps/soft Gel/Others",
+    "strengths": "80mg/480mg",
+    "presentation": "Tab x 6s",
+    "price": "1,684"
+  },
+  {
+    "code": "NHIA-06-05-07",
+    "name": "Artemether + Lumefantrine",
+    "dosage_form": "Paediatric Dispersible Tablet",
+    "strengths": "10mg/60mg",
+    "presentation": "Per Tablet",
+    "price": "1,487"
+  },
+  {
+    "code": "NHIA-06-05-08",
+    "name": "Artemether + Lumefantrine",
+    "dosage_form": "Suspension",
+    "strengths": "180mg/1080mg",
+    "presentation": "60mls",
+    "price": "2,391"
+  },
+  {
+    "code": "NHIA-06-05-09",
+    "name": "Artesunate [Restricted]",
+    "dosage_form": "Tablet",
+    "strengths": "50mg/tab",
+    "presentation": "12 Tablet",
+    "price": "1,130"
+  },
+  {
+    "code": "NHIA-06-05-10",
+    "name": "Artesunate [Restricted]",
+    "dosage_form": "Syrup",
+    "strengths": "80mg/5ml",
+    "presentation": "100ml",
+    "price": "1,964"
+  },
+  {
+    "code": "NHIA-06-05-11",
+    "name": "Artesunate 120mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "120mg Ampoule",
+    "presentation": "Injection",
+    "price": "1,879"
+  },
+  {
+    "code": "NHIA-06-05-12",
+    "name": "Artesunate 30mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "30mg Ampoule",
+    "presentation": "Injection",
+    "price": "878"
+  },
+  {
+    "code": "NHIA-06-05-13",
+    "name": "Artesunate 60mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "60mg Ampoule",
+    "presentation": "Injection",
+    "price": "1,025"
+  },
+  {
+    "code": "NHIA-06-05-14",
+    "name": "Atersunate + Sulphadoxine+ Pyrimethamine",
+    "dosage_form": "Tablet (Adult)",
+    "strengths": "200mg/500mg/25mg",
+    "presentation": "Tab.x3s",
+    "price": "1,586"
+  },
+  {
+    "code": "NHIA-06-05-15",
+    "name": "Atersunate + Sulphadoxine+ Pyrimethamine",
+    "dosage_form": "(Paed)",
+    "strengths": "100mg/250mg/12.5mg",
+    "presentation": "Tab.x3s",
+    "price": "1,515"
+  },
+  {
+    "code": "NHIA-06-05-16",
+    "name": "Atersunate + Amodiaquine",
+    "dosage_form": "Tablet",
+    "strengths": "50mg/200mg",
+    "presentation": "Tab x 12s",
+    "price": "1,716"
+  },
+  {
+    "code": "NHIA-06-05-17",
+    "name": "Atersunate + Amodiaquine",
+    "dosage_form": "\u201c DS",
+    "strengths": "200mg/600mg",
+    "presentation": "6\u2019s",
+    "price": "1,871"
+  },
+  {
+    "code": "NHIA-06-05-18",
+    "name": "Atersunate + Amodiaquine",
+    "dosage_form": "Paediatric Powder (under 1yr)",
+    "strengths": "25mg/75mg",
+    "presentation": "Sachet x 6s",
+    "price": "1,298"
+  },
+  {
+    "code": "NHIA-06-05-19",
+    "name": "Atersunate + Amodiaquine",
+    "dosage_form": "Paediatric Powder (1 -6yrs)",
+    "strengths": "150mg/75mg",
+    "presentation": "Sachet x 6s",
+    "price": "3,273"
+  },
+  {
+    "code": "NHIA-06-05-20",
+    "name": "Atersunate + Mefloquine",
+    "dosage_form": "Tablet (Adult)",
+    "strengths": "200mg/250mg",
+    "presentation": "Tab x 6s",
+    "price": "2,462"
+  },
+  {
+    "code": "NHIA-06-05-21",
+    "name": "Atersunate + Mefloquine",
+    "dosage_form": "(Paed)",
+    "strengths": "100mg/125mg",
+    "presentation": "Tab x 6s",
+    "price": "514"
+  },
+  {
+    "code": "NHIA-06-05-22",
+    "name": "Chloroquine (restricted)",
+    "dosage_form": "Tablet, Capsule",
+    "strengths": "300 mg,",
+    "presentation": "Tab/ Caps.",
+    "price": "340"
+  },
+  {
+    "code": "NHIA-06-05-23",
+    "name": "Chloroquine (restricted)",
+    "dosage_form": "Injection",
+    "strengths": "200mg/5ml,",
+    "presentation": "Ampoules",
+    "price": "1,068"
+  },
+  {
+    "code": "NHIA-06-05-24",
+    "name": "Chloroquine (restricted)",
+    "dosage_form": "Syrup",
+    "strengths": "75mg/5ml,",
+    "presentation": "60 ml",
+    "price": "1,661"
+  },
+  {
+    "code": "NHIA-06-05-25",
+    "name": "Dihydroartemisinin + Piperaquine phosphate",
+    "dosage_form": "Tab",
+    "strengths": "40mg/320mg",
+    "presentation": "Tabx9s",
+    "price": "1,686"
+  },
+  {
+    "code": "NHIA-06-05-26",
+    "name": "Dihydroartemisinin + Piperaquine phosphate",
+    "dosage_form": "\u201cDS (Double Strength)",
+    "strengths": "62.5mg/375mg",
+    "presentation": "Tabx3s",
+    "price": "1,903"
+  },
+  {
+    "code": "NHIA-06-05-27",
+    "name": "Dihydroartemisinin + Piperaquine phosphate",
+    "dosage_form": "Suspension",
+    "strengths": "80/640mg",
+    "presentation": "80mls Bottle",
+    "price": "3,001"
+  },
+  {
+    "code": "NHIA-06-05-28",
+    "name": "Proguanil",
+    "dosage_form": "Tablet",
+    "strengths": "100mg (HC1)",
+    "presentation": "Tab.",
+    "price": "140"
+  },
+  {
+    "code": "NHIA-06-05-29",
+    "name": "Pyrimethamine + Sulphadoxine",
+    "dosage_form": "Tablet",
+    "strengths": "25mg Pyrimethamine +500mg Sulphadoxine",
+    "presentation": "3\u2019s",
+    "price": "756"
+  },
+  {
+    "code": "NHIA-06-05-30",
+    "name": "Pyrimethamine",
+    "dosage_form": "Tablet",
+    "strengths": "25mg Pyrimethamine",
+    "presentation": "Tab",
+    "price": "33"
+  },
+  {
+    "code": "NHIA-06-05-31",
+    "name": "Quinine",
+    "dosage_form": "Tablet",
+    "strengths": "300mg",
+    "presentation": "Tab",
+    "price": "262"
+  },
+  {
+    "code": "NHIA-06-05-32",
+    "name": "Quinine",
+    "dosage_form": "Injection",
+    "strengths": "300mg (dihydrochloride)/ml in 2ml amp",
+    "presentation": "Amp.",
+    "price": "451"
+  },
+  {
+    "code": "NHIA-06-05-33",
+    "name": "Quinine",
+    "dosage_form": "Syrup",
+    "strengths": null,
+    "presentation": "100ml",
+    "price": "2,330"
+  },
+  {
+    "code": "NHIA-06-06-01",
+    "name": "Meglumine antimonate",
+    "dosage_form": "Injection,",
+    "strengths": "30% equiv to 8.5% of total antimony in 5ml amp",
+    "presentation": "Amp",
+    "price": "2,367"
+  },
+  {
+    "code": "NHIA-06-06-02",
+    "name": "Meglumine antimonate",
+    "dosage_form": "Injection,",
+    "strengths": "300mg (isethionate)/ vial",
+    "presentation": "Amp",
+    "price": "2,391"
+  },
+  {
+    "code": "NHIA-06-06-03",
+    "name": "Melarsoprol",
+    "dosage_form": "Injection",
+    "strengths": "3.6% solution in propylene glycol",
+    "presentation": "Vial",
+    "price": "2,147"
+  },
+  {
+    "code": "NHIA-06-06-04",
+    "name": "Pentamidine",
+    "dosage_form": "Injection, powder",
+    "strengths": "10% of total antimony",
+    "presentation": "Vial",
+    "price": "2,367"
+  },
+  {
+    "code": "NHIA-06-06-05",
+    "name": "Sodium stibogluconate",
+    "dosage_form": "Injection",
+    "strengths": "1gm/vial",
+    "presentation": "Amp,",
+    "price": "2,342"
+  },
+  {
+    "code": "NHIA-06-06-06",
+    "name": "Suramin",
+    "dosage_form": "Injection, powder",
+    "strengths": null,
+    "presentation": "Vial",
+    "price": "2,318"
+  },
+  {
+    "code": "NHIA-06-07-01",
+    "name": "Amikacin 500mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "500mg/vial",
+    "presentation": "Injection",
+    "price": "1,537"
+  },
+  {
+    "code": "NHIA-06-07-02",
+    "name": "Amoxycillin",
+    "dosage_form": "Capsule",
+    "strengths": "250mg",
+    "presentation": "Caps.",
+    "price": "101"
+  },
+  {
+    "code": "NHIA-06-07-03",
+    "name": "Amoxycillin",
+    "dosage_form": "Capsule",
+    "strengths": "500 mg",
+    "presentation": "Caps.",
+    "price": "120"
+  },
+  {
+    "code": "NHIA-06-07-04",
+    "name": "Amoxycillin",
+    "dosage_form": "Powder for oral suspension",
+    "strengths": "125mg/5ml",
+    "presentation": "100mls",
+    "price": "1,500"
+  },
+  {
+    "code": "NHIA-06-07-05",
+    "name": "Amoxycillin",
+    "dosage_form": "Injection",
+    "strengths": "500mg in vials",
+    "presentation": "Vial",
+    "price": "1,098"
+  },
+  {
+    "code": "NHIA-06-07-06",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Tablet, Capsules",
+    "strengths": "250 mg amoxycillin (Trihydrate) +125 mg clavulanic Acid (Potassium Salt)",
+    "presentation": "Tab.",
+    "price": "153"
+  },
+  {
+    "code": "NHIA-06-07-07",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Tablet, Capsules",
+    "strengths": "500mg amoxycillin (Trihydrate) + 125mg clavulanic acid (potassium salt)",
+    "presentation": "Tab.",
+    "price": "295"
+  },
+  {
+    "code": "NHIA-06-07-08",
+    "name": "Amoxicillin + Clavulanic Acid 1g Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "1g",
+    "presentation": "Tablet",
+    "price": "349"
+  },
+  {
+    "code": "NHIA-06-07-09",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Powder for oral suspension",
+    "strengths": "200 mg Amoxycillin (trihydrate) + 28 mg Clavulanic acid (Potassium salt)/5 ml",
+    "presentation": "100mls",
+    "price": "3,022"
+  },
+  {
+    "code": "NHIA-06-07-10",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Powder for oral suspension",
+    "strengths": "400 mg Amoxycillin (trihydrate) + 57 mg Clavulanic acid (Potassium salt)/5 ml",
+    "presentation": "100mls",
+    "price": "4,172"
+  },
+  {
+    "code": "NHIA-06-07-11",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Injection",
+    "strengths": "500 mg Amoxycillin (Sodium salt) + 100 mg Clavulanic acid (Potassium salt) in vial",
+    "presentation": "Vial",
+    "price": "3,013"
+  },
+  {
+    "code": "NHIA-06-07-12",
+    "name": "Amoxycillin plus Clavulanic Acid (Co-amoxiclav)",
+    "dosage_form": "Injection",
+    "strengths": "1g Amoxycillin (Sodium salt) + 200 mg Clavulanic acid (Potassium salt) in vial",
+    "presentation": "Vial",
+    "price": "3,587"
+  },
+  {
+    "code": "NHIA-06-07-13",
+    "name": "Ampicillin + Cloxacillin",
+    "dosage_form": "Capsule",
+    "strengths": "250mg of each constituent (500mg)",
+    "presentation": "Caps.",
+    "price": "189"
+  },
+  {
+    "code": "NHIA-06-07-14",
+    "name": "Ampicillin + Cloxacillin",
+    "dosage_form": "Powder for oral suspension",
+    "strengths": "125mg of each/5ml",
+    "presentation": "100mls",
+    "price": "1,200"
+  },
+  {
+    "code": "NHIA-06-07-15",
+    "name": "Ampicillin + Cloxacillin",
+    "dosage_form": "Neonatal Drops",
+    "strengths": "Ampicillin 60mg + Cloxacillin 30mg/0.6mls",
+    "presentation": "8mls",
+    "price": "2,031"
+  },
+  {
+    "code": "NHIA-06-07-16",
+    "name": "Ampicillin + Cloxacillin",
+    "dosage_form": "Neonatal injection",
+    "strengths": "Ampicillin 50mg + cloxacillin 25 mg",
+    "presentation": "Amp.",
+    "price": "796"
+  },
+  {
+    "code": "NHIA-06-07-17",
+    "name": "Ampicillin + Cloxacillin",
+    "dosage_form": "Injection",
+    "strengths": "Ampicillin 250mg+Cloxacillin 250mg per vial (sodium salt of each)",
+    "presentation": "Amp.",
+    "price": "488"
+  },
+  {
+    "code": "NHIA-06-07-18",
+    "name": "Ampicillin + sulbactam 1.5g Injection",
+    "dosage_form": "Injection",
+    "strengths": "1.5g/vial",
+    "presentation": "Injection",
+    "price": "2,051"
+  },
+  {
+    "code": "NHIA-06-07-19",
+    "name": "Ampicillin/Sulbactam injection",
+    "dosage_form": "Injection",
+    "strengths": "3g/vial",
+    "presentation": "Injection",
+    "price": "2,199"
+  },
+  {
+    "code": "NHIA-06-07-20",
+    "name": "Ampicillin Injection",
+    "dosage_form": "Injection",
+    "strengths": "500mg/vial",
+    "presentation": null,
+    "price": "683"
+  },
+  {
+    "code": "NHIA-06-07-21",
+    "name": "Azithromycin",
+    "dosage_form": "Capsules",
+    "strengths": "250mg",
+    "presentation": "Caps.",
+    "price": "317"
+  },
+  {
+    "code": "NHIA-06-07-22",
+    "name": "Azithromycin",
+    "dosage_form": "Capsules",
+    "strengths": "500mg",
+    "presentation": "Caps.",
+    "price": "470"
+  },
+  {
+    "code": "NHIA-06-07-23",
+    "name": "Azithromycin",
+    "dosage_form": "Suspension",
+    "strengths": "200mg/ 5ml",
+    "presentation": "30mls",
+    "price": "1,500"
+  },
+  {
+    "code": "NHIA-06-07-24",
+    "name": "Benzathine- Benzylpenicillin",
+    "dosage_form": "Injections",
+    "strengths": "2.4 M.U. of benzylpenicillin",
+    "presentation": "Vial",
+    "price": "1,403"
+  },
+  {
+    "code": "NHIA-06-07-25",
+    "name": "Benzylpenicillin",
+    "dosage_form": "Injection, powder",
+    "strengths": "1.0 MU Vial",
+    "presentation": "Vial",
+    "price": "600"
+  },
+  {
+    "code": "NHIA-06-07-26",
+    "name": "Benzylpenicillin",
+    "dosage_form": "Injection, powder",
+    "strengths": "5 MU Vial",
+    "presentation": "Vial",
+    "price": "308"
+  },
+  {
+    "code": "NHIA-06-07-27",
+    "name": "Cefixime",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tab",
+    "price": "390"
+  },
+  {
+    "code": "NHIA-06-07-28",
+    "name": "Cefixime",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tab",
+    "price": "537"
+  },
+  {
+    "code": "NHIA-06-07-29",
+    "name": "Cefixime",
+    "dosage_form": "Suspension",
+    "strengths": "100mg/5ml",
+    "presentation": "100ml",
+    "price": "2,904"
+  },
+  {
+    "code": "NHIA-06-07-30",
+    "name": "Cefixime 50mg Granules",
+    "dosage_form": "Granules",
+    "strengths": "50mg",
+    "presentation": "Granules",
+    "price": "342"
+  },
+  {
+    "code": "NHIA-06-07-31",
+    "name": "Cefotaxime",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "Vial",
+    "price": "2,635"
+  },
+  {
+    "code": "NHIA-06-07-32",
+    "name": "Cefpodoxime 100mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "100mg",
+    "presentation": "Tablet",
+    "price": "464"
+  },
+  {
+    "code": "NHIA-06-07-33",
+    "name": "Cefpodoxime 200mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tablet",
+    "price": "622"
+  },
+  {
+    "code": "NHIA-06-07-34",
+    "name": "Cefpodoxime 40mg/5ml Suspension",
+    "dosage_form": "Suspension",
+    "strengths": "40mg/5ml",
+    "presentation": "100 ml Suspension",
+    "price": "4,709"
+  },
+  {
+    "code": "NHIA-06-07-35",
+    "name": "Ceftazidime",
+    "dosage_form": "Injection",
+    "strengths": "1gm",
+    "presentation": "Vial",
+    "price": "3,318"
+  },
+  {
+    "code": "NHIA-06-07-36",
+    "name": "Ceftriaxone",
+    "dosage_form": "Injection",
+    "strengths": "250mg,",
+    "presentation": "Vial",
+    "price": "1,036"
+  },
+  {
+    "code": "NHIA-06-07-37",
+    "name": "Ceftriaxone",
+    "dosage_form": "Injection",
+    "strengths": "500mg I.M.",
+    "presentation": "Vial",
+    "price": "1,059"
+  },
+  {
+    "code": "NHIA-06-07-38",
+    "name": "Ceftriaxone",
+    "dosage_form": "Injection",
+    "strengths": "1g IV",
+    "presentation": "Vial",
+    "price": "2,123"
+  },
+  {
+    "code": "NHIA-06-07-39",
+    "name": "Ceftriaxone/ sulbactam (SYCEPH)",
+    "dosage_form": "Injection",
+    "strengths": null,
+    "presentation": null,
+    "price": "4,648"
+  },
+  {
+    "code": "NHIA-06-07-40",
+    "name": "Cefuroxime",
+    "dosage_form": "Tablets",
+    "strengths": "250mg,",
+    "presentation": "Tab.",
+    "price": "348"
+  },
+  {
+    "code": "NHIA-06-07-41",
+    "name": "Cefuroxime",
+    "dosage_form": "Tablets",
+    "strengths": "500 mg",
+    "presentation": "Tab.",
+    "price": "543"
+  },
+  {
+    "code": "NHIA-06-07-42",
+    "name": "Cefuroxime",
+    "dosage_form": "Suspension",
+    "strengths": "125mg/5ml",
+    "presentation": "100mls",
+    "price": "2,635"
+  },
+  {
+    "code": "NHIA-06-07-43",
+    "name": "Cefuroxime",
+    "dosage_form": "Injection (sodium salt)",
+    "strengths": "750mg",
+    "presentation": "Vial",
+    "price": "1,122"
+  },
+  {
+    "code": "NHIA-06-07-44",
+    "name": "Cefuroxime",
+    "dosage_form": "Injection (sodium salt)",
+    "strengths": "250 mg",
+    "presentation": "Vial",
+    "price": "521"
+  },
+  {
+    "code": "NHIA-06-07-45",
+    "name": "Cephalexin",
+    "dosage_form": "Capsules/Tablet",
+    "strengths": "500mg",
+    "presentation": "Caps/Tab",
+    "price": "137"
+  },
+  {
+    "code": "NHIA-06-07-46",
+    "name": "Cephalexin",
+    "dosage_form": "Suspension",
+    "strengths": "125mg/5ml",
+    "presentation": "100mls",
+    "price": "1,574"
+  },
+  {
+    "code": "NHIA-06-07-47",
+    "name": "Cephalexin",
+    "dosage_form": "Suspension",
+    "strengths": "250mg/5ml",
+    "presentation": "100mls",
+    "price": "1,649"
+  },
+  {
+    "code": "NHIA-06-07-48",
+    "name": "Chloramphenicol (restricted)",
+    "dosage_form": "Capsule",
+    "strengths": "250mg",
+    "presentation": "Caps.",
+    "price": "2"
+  },
+  {
+    "code": "NHIA-06-07-49",
+    "name": "Chloramphenicol (restricted)",
+    "dosage_form": "Suspension, Oral",
+    "strengths": "125mg/5ml (Palmitate)",
+    "presentation": "100mls",
+    "price": "803"
+  },
+  {
+    "code": "NHIA-06-07-50",
+    "name": "Chloramphenicol (restricted)",
+    "dosage_form": "Injection",
+    "strengths": "1g (sodium succinate) in vial",
+    "presentation": "Vial",
+    "price": "602"
+  },
+  {
+    "code": "NHIA-06-07-51",
+    "name": "Ciprofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "250mg (HC1)",
+    "presentation": "Tab.",
+    "price": "116"
+  },
+  {
+    "code": "NHIA-06-07-52",
+    "name": "Ciprofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "500 mg (Hcl)",
+    "presentation": "Tab.",
+    "price": "171"
+  },
+  {
+    "code": "NHIA-06-07-53",
+    "name": "Ciprofloxacin",
+    "dosage_form": "Infusion",
+    "strengths": "I.V. 2mg/ml (lactate) in 50 and 100ml vials",
+    "presentation": "Infusion",
+    "price": "866"
+  },
+  {
+    "code": "NHIA-06-07-54",
+    "name": "Clarithromycin",
+    "dosage_form": "Tablet",
+    "strengths": "250mg",
+    "presentation": "Tab.",
+    "price": "243"
+  },
+  {
+    "code": "NHIA-06-07-55",
+    "name": "Clarithromycin",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tab.",
+    "price": "410"
+  },
+  {
+    "code": "NHIA-06-07-56",
+    "name": "Clarithromycin",
+    "dosage_form": "Suspension",
+    "strengths": "125mg",
+    "presentation": "100ml",
+    "price": "1,526"
+  },
+  {
+    "code": "NHIA-06-07-57",
+    "name": "Clindamycin",
+    "dosage_form": "Capsule",
+    "strengths": "HCL 150mg",
+    "presentation": "Cap",
+    "price": "317"
+  },
+  {
+    "code": "NHIA-06-07-58",
+    "name": "Clindamycin",
+    "dosage_form": "Injection",
+    "strengths": "Phosphate 150mg/ml",
+    "presentation": "Amp",
+    "price": "2,300"
+  },
+  {
+    "code": "NHIA-06-07-59",
+    "name": "Clindamycin",
+    "dosage_form": "Tablet",
+    "strengths": "300mg",
+    "presentation": "Tablet",
+    "price": "439"
+  },
+  {
+    "code": "NHIA-06-07-60",
+    "name": "Cloxacillin",
+    "dosage_form": "Injection, powder",
+    "strengths": "250mg,",
+    "presentation": "Vial",
+    "price": "182"
+  },
+  {
+    "code": "NHIA-06-07-61",
+    "name": "Cloxacillin",
+    "dosage_form": "Injection, powder",
+    "strengths": "500 mg in vial",
+    "presentation": "Vial",
+    "price": "192"
+  },
+  {
+    "code": "NHIA-06-07-62",
+    "name": "Cloxacillin",
+    "dosage_form": "Capsule",
+    "strengths": "250mg",
+    "presentation": "Caps.",
+    "price": "63"
+  },
+  {
+    "code": "NHIA-06-07-63",
+    "name": "Cloxacillin",
+    "dosage_form": "Suspension, oral,",
+    "strengths": "125mg/5mls",
+    "presentation": "100mls",
+    "price": "563"
+  },
+  {
+    "code": "NHIA-06-07-64",
+    "name": "Co-trimoxazole",
+    "dosage_form": "Tablet",
+    "strengths": "400mg Sulphamethoxazole +80mg Trimethoprim",
+    "presentation": "Tab.",
+    "price": "37"
+  },
+  {
+    "code": "NHIA-06-07-65",
+    "name": "Co-trimoxazole",
+    "dosage_form": "Tablet",
+    "strengths": "800mg Sulphamethoxazole +160mg Trimethoprim",
+    "presentation": "Tab. (DS)",
+    "price": "55"
+  },
+  {
+    "code": "NHIA-06-07-66",
+    "name": "Co-trimoxazole",
+    "dosage_form": "Suspension",
+    "strengths": "Sulphamethoxazole 200 mg +40mg Trimethoprim /5ml.",
+    "presentation": "60mls",
+    "price": "1,171"
+  },
+  {
+    "code": "NHIA-06-07-67",
+    "name": "Doxycycline",
+    "dosage_form": "Capsule",
+    "strengths": "100mg",
+    "presentation": "Caps.",
+    "price": "195"
+  },
+  {
+    "code": "NHIA-06-07-68",
+    "name": "Erythromycin",
+    "dosage_form": "Tablets, capsules, enteric, film coated",
+    "strengths": "250mg stearate or ethylsuccinate)",
+    "presentation": "Tab.",
+    "price": "116"
+  },
+  {
+    "code": "NHIA-06-07-69",
+    "name": "Erythromycin",
+    "dosage_form": "Tablets, capsules, enteric, film coated",
+    "strengths": "500mg (stearate or ethylsuccinate)",
+    "presentation": "Tab.",
+    "price": "201"
+  },
+  {
+    "code": "NHIA-06-07-70",
+    "name": "Erythromycin",
+    "dosage_form": "Suspension oral",
+    "strengths": "125mg/5ml (stearate or Ethylsuccinate)",
+    "presentation": "60mls",
+    "price": "966"
+  },
+  {
+    "code": "NHIA-06-07-71",
+    "name": "Ethambutol 400mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tablet",
+    "price": "89"
+  },
+  {
+    "code": "NHIA-06-07-72",
+    "name": "Gentamycin",
+    "dosage_form": "Injection",
+    "strengths": "80mg/mls, 40 mg/2mls (Sulphate)",
+    "presentation": "Amp.",
+    "price": "146"
+  },
+  {
+    "code": "NHIA-06-07-73",
+    "name": "Imipenem + Cilastin 500mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "Injection",
+    "price": "10,919"
+  },
+  {
+    "code": "NHIA-06-07-74",
+    "name": "Isoniazid 300mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "300mg",
+    "presentation": "Tablet",
+    "price": "156"
+  },
+  {
+    "code": "NHIA-06-07-75",
+    "name": "Levofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "250mg",
+    "presentation": "Tab.",
+    "price": "136"
+  },
+  {
+    "code": "NHIA-06-07-76",
+    "name": "Levofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tab.",
+    "price": "207"
+  },
+  {
+    "code": "NHIA-06-07-77",
+    "name": "Levofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "750mg",
+    "presentation": "Tab.",
+    "price": "140"
+  },
+  {
+    "code": "NHIA-06-07-78",
+    "name": "Levofloxacin",
+    "dosage_form": "Injection",
+    "strengths": "500mg/100mls Infusion",
+    "presentation": "100mls",
+    "price": "1,793"
+  },
+  {
+    "code": "NHIA-06-07-79",
+    "name": "Lincomycin",
+    "dosage_form": "Capsules",
+    "strengths": "500 mg",
+    "presentation": "Caps.",
+    "price": "598"
+  },
+  {
+    "code": "NHIA-06-07-80",
+    "name": "Lincomycin",
+    "dosage_form": "Suspension",
+    "strengths": "250mg/5ml",
+    "presentation": "100mls",
+    "price": "2,898"
+  },
+  {
+    "code": "NHIA-06-07-81",
+    "name": "Lincomycin injection (Phosphate)",
+    "dosage_form": "injection (Phosphate)",
+    "strengths": "150 mg/ml in 2 ml",
+    "presentation": "Amp.",
+    "price": "409"
+  },
+  {
+    "code": "NHIA-06-07-82",
+    "name": "Metronidazole",
+    "dosage_form": "Tablets",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "79"
+  },
+  {
+    "code": "NHIA-06-07-83",
+    "name": "Metronidazole",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tab.",
+    "price": "95"
+  },
+  {
+    "code": "NHIA-06-07-84",
+    "name": "Metronidazole",
+    "dosage_form": "Suspension",
+    "strengths": "200mg/5ml",
+    "presentation": "60mls",
+    "price": "952"
+  },
+  {
+    "code": "NHIA-06-07-85",
+    "name": "Metronidazole",
+    "dosage_form": "IV Injection",
+    "strengths": "500mg in 100ml bottle",
+    "presentation": "100mls",
+    "price": "756"
+  },
+  {
+    "code": "NHIA-06-07-86",
+    "name": "Metronidazole",
+    "dosage_form": "Suppository",
+    "strengths": "500mg",
+    "presentation": "supp/ovule",
+    "price": "317"
+  },
+  {
+    "code": "NHIA-06-07-87",
+    "name": "Moxifloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tablet",
+    "price": "551"
+  },
+  {
+    "code": "NHIA-06-07-88",
+    "name": "Moxifloxacin",
+    "dosage_form": "Injection",
+    "strengths": "400mg/250ml",
+    "presentation": "Injection",
+    "price": "3,217"
+  },
+  {
+    "code": "NHIA-06-07-89",
+    "name": "Moxifloxacin",
+    "dosage_form": "eye drop",
+    "strengths": "10ml",
+    "presentation": "eye drop",
+    "price": "1,913"
+  },
+  {
+    "code": "NHIA-06-07-90",
+    "name": "Nitrofurantoin",
+    "dosage_form": "Tablet",
+    "strengths": "50mg",
+    "presentation": "Tab.",
+    "price": "22"
+  },
+  {
+    "code": "NHIA-06-07-91",
+    "name": "Nitrofurantoin",
+    "dosage_form": null,
+    "strengths": "100mg",
+    "presentation": "Tab.",
+    "price": "94"
+  },
+  {
+    "code": "NHIA-06-07-92",
+    "name": "Ofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "141"
+  },
+  {
+    "code": "NHIA-06-07-93",
+    "name": "Ofloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": null,
+    "price": "212"
+  },
+  {
+    "code": "NHIA-06-07-94",
+    "name": "Ofloxacin",
+    "dosage_form": "Infusion",
+    "strengths": "200mg/100ml Infusion",
+    "presentation": "100mls",
+    "price": "838"
+  },
+  {
+    "code": "NHIA-06-07-95",
+    "name": "Pefloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tab.",
+    "price": "306"
+  },
+  {
+    "code": "NHIA-06-07-96",
+    "name": "Phenoxymethyl- Penicillin",
+    "dosage_form": "Tablet",
+    "strengths": "250mg",
+    "presentation": "Tab.",
+    "price": "98"
+  },
+  {
+    "code": "NHIA-06-07-97",
+    "name": "Phenoxymethyl- Penicillin",
+    "dosage_form": "Suspension",
+    "strengths": "250mg/5ml",
+    "presentation": "100mls",
+    "price": "447"
+  },
+  {
+    "code": "NHIA-06-07-98",
+    "name": "Piperacillin + Tazobactam 2.25g",
+    "dosage_form": "Vial",
+    "strengths": "2.25g",
+    "presentation": "Vial",
+    "price": "6,545"
+  },
+  {
+    "code": "NHIA-06-07-99",
+    "name": "Pyrazinamide 500mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tablet",
+    "price": "134"
+  },
+  {
+    "code": "NHIA-06-07-100",
+    "name": "Rifampicin",
+    "dosage_form": "Capsules",
+    "strengths": "150mg, 300mg",
+    "presentation": "Caps.",
+    "price": "75"
+  },
+  {
+    "code": "NHIA-06-07-101",
+    "name": "Secnidazole",
+    "dosage_form": "4 Tablets (single dose)",
+    "strengths": "See section 6.1",
+    "presentation": null,
+    "price": "872"
+  },
+  {
+    "code": "NHIA-06-07-102",
+    "name": "Sparfloxacin",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "277"
+  },
+  {
+    "code": "NHIA-06-07-103",
+    "name": "Tetracycline",
+    "dosage_form": "Capsule",
+    "strengths": "250mg (Hydrochloride)",
+    "presentation": "Caps.",
+    "price": "104"
+  },
+  {
+    "code": "NHIA-06-07-104",
+    "name": "Tinidazole",
+    "dosage_form": "4 Tablets (Single dose)",
+    "strengths": "See section 6.1",
+    "presentation": null,
+    "price": "655"
+  },
+  {
+    "code": "NHIA-06-07-105",
+    "name": "Vancomycin",
+    "dosage_form": "Injection",
+    "strengths": null,
+    "presentation": "Injection",
+    "price": "7,881"
+  },
+  {
+    "code": "NHIA-06-08-01",
+    "name": "Clofazimine",
+    "dosage_form": "Capsules",
+    "strengths": "50 mg, 100 mg",
+    "presentation": "Caps.",
+    "price": "174"
+  },
+  {
+    "code": "NHIA-06-08-02",
+    "name": "Dapsone",
+    "dosage_form": "Tablets",
+    "strengths": "50mg, 100 mg",
+    "presentation": "Tab.",
+    "price": "73"
+  },
+  {
+    "code": "NHIA-06-08-03",
+    "name": "Rifampicin",
+    "dosage_form": "Capsules",
+    "strengths": "300 mg",
+    "presentation": "Caps.",
+    "price": "84"
+  },
+  {
+    "code": "NHIA-06-08-04",
+    "name": "Rifampicin",
+    "dosage_form": "Capsules",
+    "strengths": "150 mg",
+    "presentation": null,
+    "price": "60"
+  },
+  {
+    "code": "NHIA-06-09-01",
+    "name": "Amphotericin B",
+    "dosage_form": "Injection, powder",
+    "strengths": "50 mg/vial",
+    "presentation": "Vial",
+    "price": "8,229"
+  },
+  {
+    "code": "NHIA-06-09-02",
+    "name": "Fluconazole",
+    "dosage_form": "Capsule",
+    "strengths": "50 mg",
+    "presentation": "Caps.",
+    "price": "164"
+  },
+  {
+    "code": "NHIA-06-09-03",
+    "name": "Fluconazole",
+    "dosage_form": "Capsule",
+    "strengths": "150 mg",
+    "presentation": "Caps.",
+    "price": "188"
+  },
+  {
+    "code": "NHIA-06-09-04",
+    "name": "Fluconazole",
+    "dosage_form": "Capsule",
+    "strengths": "200mg",
+    "presentation": "Caps.",
+    "price": "459"
+  },
+  {
+    "code": "NHIA-06-09-05",
+    "name": "Fluconazole",
+    "dosage_form": "Suspension",
+    "strengths": "50mg/5ml",
+    "presentation": "35mls",
+    "price": "1,770"
+  },
+  {
+    "code": "NHIA-06-09-06",
+    "name": "Fluconazole",
+    "dosage_form": "Injection",
+    "strengths": "I.V. 2 mg/ml in 0.9 % sodium chloride",
+    "presentation": "Vial",
+    "price": "798"
+  },
+  {
+    "code": "NHIA-06-09-07",
+    "name": "Griseofulvin",
+    "dosage_form": "Tablet",
+    "strengths": "500mg",
+    "presentation": "Tab.",
+    "price": "135"
+  },
+  {
+    "code": "NHIA-06-09-08",
+    "name": "Griseofulvin",
+    "dosage_form": "Suspension",
+    "strengths": "125mg/ 5ml",
+    "presentation": "100mls",
+    "price": "1,091"
+  },
+  {
+    "code": "NHIA-06-09-09",
+    "name": "Itraconazole",
+    "dosage_form": "Capsules",
+    "strengths": "100mg",
+    "presentation": "Cap.",
+    "price": "412"
+  },
+  {
+    "code": "NHIA-06-09-10",
+    "name": "Miconazole",
+    "dosage_form": "Tablet",
+    "strengths": "250 mg",
+    "presentation": "Tab.",
+    "price": "878"
+  },
+  {
+    "code": "NHIA-06-09-11",
+    "name": "Nystatin",
+    "dosage_form": "Tablet",
+    "strengths": "500,000 units,",
+    "presentation": "Tab.",
+    "price": "87"
+  },
+  {
+    "code": "NHIA-06-09-12",
+    "name": "Nystatin",
+    "dosage_form": "Suspension",
+    "strengths": "100,000 units/ml",
+    "presentation": "30mls",
+    "price": "952"
+  },
+  {
+    "code": "NHIA-06-09-13",
+    "name": "Nystatin",
+    "dosage_form": "lozenges",
+    "strengths": "100,000 units/ml",
+    "presentation": "Tab.",
+    "price": "137"
+  },
+  {
+    "code": "NHIA-06-09-14",
+    "name": "Nystatin",
+    "dosage_form": "Pessary",
+    "strengths": "100,000 units",
+    "presentation": "Tab.",
+    "price": "192"
+  },
+  {
+    "code": "NHIA-06-09-15",
+    "name": "Terbinafine",
+    "dosage_form": "Tablet",
+    "strengths": "250mg",
+    "presentation": "Tab.",
+    "price": "269"
+  },
+  {
+    "code": "NHIA-06-10-01",
+    "name": "Aciclovir",
+    "dosage_form": "Tablets",
+    "strengths": "200mg",
+    "presentation": "Tab.",
+    "price": "234"
+  },
+  {
+    "code": "NHIA-06-10-02",
+    "name": "Aciclovir",
+    "dosage_form": "Tablets",
+    "strengths": "400 mg",
+    "presentation": "Tab.",
+    "price": "355"
+  },
+  {
+    "code": "NHIA-06-10-03",
+    "name": "Aciclovir",
+    "dosage_form": "Suspension",
+    "strengths": "200 mg/5 ml",
+    "presentation": "125mls",
+    "price": "1,383"
+  },
+  {
+    "code": "NHIA-06-10-04",
+    "name": "Aciclovir",
+    "dosage_form": "Cream",
+    "strengths": "5%",
+    "presentation": "Tube",
+    "price": "1,471"
+  },
+  {
+    "code": "NHIA-06-10-05",
+    "name": "Aciclovir",
+    "dosage_form": "Injection",
+    "strengths": "IV Sodium salt 250mg/vial",
+    "presentation": "Vial",
+    "price": "415"
+  },
+  {
+    "code": "NHIA-06-10-06",
+    "name": "Idoxuridine",
+    "dosage_form": "Solution",
+    "strengths": "5% in dimethyl sulphoxide (for external use)",
+    "presentation": "Solution",
+    "price": "588"
+  },
+  {
+    "code": "NHIA-06-10-07",
+    "name": "Lamivudine",
+    "dosage_form": "Tablet",
+    "strengths": "150 mg",
+    "presentation": "Tab",
+    "price": "136"
+  },
+  {
+    "code": "NHIA-06-10-08",
+    "name": "Lamivudine",
+    "dosage_form": "Solution",
+    "strengths": "50mg/5ml",
+    "presentation": "240 mls",
+    "price": "2,798"
+  },
+  {
+    "code": "NHIA-06-10-09",
+    "name": "Sofosbuvir",
+    "dosage_form": "Tablet",
+    "strengths": "400mg",
+    "presentation": "Tablet",
+    "price": "3,880"
+  },
+  {
+    "code": "NHIA-06-10-10",
+    "name": "Ledipasvir + Sofosbuvir",
+    "dosage_form": "Tablet",
+    "strengths": "90mg/400mg",
+    "presentation": "Tablet",
+    "price": "5,789"
+  },
+  {
+    "code": "NHIA-06-10-11",
+    "name": "Daclatasvir",
+    "dosage_form": "Tablet",
+    "strengths": "60mg",
+    "presentation": "Tablet",
+    "price": "2,837"
+  },
+  {
+    "code": "NHIA-06-10-12",
+    "name": "Tenofovir 300mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "300mg",
+    "presentation": "Tablet",
+    "price": "848"
+  },
+  {
+    "code": "NHIA-06-11-02",
+    "name": "Indinavir (IDV)",
+    "dosage_form": "Capsule (Sulphate)",
+    "strengths": "200 mg, 333mg, 400 mg",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-03",
+    "name": "Nelfinavir (NFV)",
+    "dosage_form": "Tablet",
+    "strengths": "250 mg",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-04",
+    "name": "Ritonavir (RTV)",
+    "dosage_form": "Oral liqiud",
+    "strengths": "400mg/5ml",
+    "presentation": "bottle",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-05",
+    "name": "Saquinavir (SQV)",
+    "dosage_form": "Capsule",
+    "strengths": "100mg",
+    "presentation": "Capsule",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-06",
+    "name": "Saquinavir (SQV)",
+    "dosage_form": "Capsule",
+    "strengths": "200mg",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-07",
+    "name": "Lopinavir + ritonavir LPV/r)",
+    "dosage_form": "Capsule",
+    "strengths": "133.3mg+33.3mg",
+    "presentation": "Capsule",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-08",
+    "name": "Lopinavir + ritonavir LPV/r)",
+    "dosage_form": "Tablet",
+    "strengths": "100mg/25mg",
+    "presentation": "Tab",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-09",
+    "name": "Lopinavir + ritonavir LPV/r)",
+    "dosage_form": "Tablet",
+    "strengths": "200mg/50mg",
+    "presentation": "\u201c",
+    "price": "488"
+  },
+  {
+    "code": "NHIA-06-11-10",
+    "name": "Lopinavir + ritonavir LPV/r)",
+    "dosage_form": "Oral liquid",
+    "strengths": "400mg/100mg/ 5ml",
+    "presentation": "Bottle",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-12",
+    "name": "Lamivudine (3TC)",
+    "dosage_form": "Tablet",
+    "strengths": "150 mg",
+    "presentation": null,
+    "price": "136"
+  },
+  {
+    "code": "NHIA-06-11-13",
+    "name": "Lamivudine (3TC)",
+    "dosage_form": "Solution",
+    "strengths": "5mg/ml",
+    "presentation": null,
+    "price": "2,798"
+  },
+  {
+    "code": "NHIA-06-11-14",
+    "name": "Zidovudine (ZDV)",
+    "dosage_form": "Capsules",
+    "strengths": "100 mg,",
+    "presentation": null,
+    "price": "501"
+  },
+  {
+    "code": "NHIA-06-11-15",
+    "name": "Zidovudine (ZDV)",
+    "dosage_form": "Capsules",
+    "strengths": "250 mg",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-16",
+    "name": "Zidovudine (ZDV)",
+    "dosage_form": "Syrup",
+    "strengths": "50 mg/5ml",
+    "presentation": null,
+    "price": "512"
+  },
+  {
+    "code": "NHIA-06-11-17",
+    "name": "Abacavir (ABC)",
+    "dosage_form": "Tablet (sulfate)",
+    "strengths": "300mg",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-18",
+    "name": "Abacavir (ABC)",
+    "dosage_form": "Liquid \u201c",
+    "strengths": "100mg/5ml",
+    "presentation": null,
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-19",
+    "name": "Zalcitabine (ddC)",
+    "dosage_form": "Tablet",
+    "strengths": "750ug",
+    "presentation": "Tab",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-20",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Capsule",
+    "strengths": "125mg",
+    "presentation": "Cap",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-21",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Capsule",
+    "strengths": "200mg, 250mg",
+    "presentation": "\u201c",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-22",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Capsule",
+    "strengths": "400mg",
+    "presentation": "\u201c",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-23",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Tablet",
+    "strengths": "25mg, 50mg",
+    "presentation": "Tab",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-24",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Tablet",
+    "strengths": "100mg, 150mg",
+    "presentation": "\u201c",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-25",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "\u201c",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-26",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Powder for oral dosage",
+    "strengths": "100mg,167mg",
+    "presentation": "Packets",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-27",
+    "name": "Didanosine (ddI)",
+    "dosage_form": "Powder for oral dosage",
+    "strengths": "200mg",
+    "presentation": "Packets",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-30",
+    "name": "Nevirapine (NVP)",
+    "dosage_form": "Tablet",
+    "strengths": "200 mg",
+    "presentation": null,
+    "price": "504"
+  },
+  {
+    "code": "NHIA-06-11-31",
+    "name": "Nevirapine (NVP)",
+    "dosage_form": "Syrup",
+    "strengths": "50 mg/5ml",
+    "presentation": null,
+    "price": "6,832"
+  },
+  {
+    "code": "NHIA-06-11-32",
+    "name": "Efavirenz (EFV or EFZ)",
+    "dosage_form": "Tablet",
+    "strengths": "600mg",
+    "presentation": "Tab",
+    "price": "302"
+  },
+  {
+    "code": "NHIA-06-11-33",
+    "name": "Efavirenz (EFV or EFZ)",
+    "dosage_form": "Capsules",
+    "strengths": "50mg",
+    "presentation": "Caps",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-34",
+    "name": "Efavirenz (EFV or EFZ)",
+    "dosage_form": "Capsules",
+    "strengths": "100mg, 200mg",
+    "presentation": "\u201c",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-35",
+    "name": "Efavirenz (EFV or EFZ)",
+    "dosage_form": "Oral liquid",
+    "strengths": "150mg/5ml",
+    "presentation": "Bottle",
+    "price": null
+  },
+  {
+    "code": "NHIA-06-11-36",
+    "name": "Ribavirin 200mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "200mg",
+    "presentation": "Tablet",
+    "price": "854"
+  },
+  {
+    "code": "NHIA-06-11-38",
+    "name": "Lamivudine + nevirapine + Zidovudine",
+    "dosage_form": "Tablet",
+    "strengths": "30mg+50mg+60mg/",
+    "presentation": "Tab x 60s",
+    "price": "4,880"
+  },
+  {
+    "code": "NHIA-06-11-39",
+    "name": "Lamivudine + nevirapine + Zidovudine",
+    "dosage_form": "Tablet",
+    "strengths": "150mg+200mg+300mg",
+    "presentation": null,
+    "price": "4,148"
+  },
+  {
+    "code": "NHIA-06-11-40",
+    "name": "Lamivudine + Zidovudine",
+    "dosage_form": "Tablet",
+    "strengths": "30mg + 60mg",
+    "presentation": "Tab x 60s",
+    "price": "4,880"
+  },
+  {
+    "code": "NHIA-06-11-41",
+    "name": "Lamivudine + Zidovudine",
+    "dosage_form": "Tablet",
+    "strengths": "150mg + 300mg",
+    "presentation": null,
+    "price": "2,196"
+  },
+  {
+    "code": "NHIA-07-01-01",
+    "name": "Ergotamine",
+    "dosage_form": "Tablet",
+    "strengths": "Tartrate, 2g",
+    "presentation": "Tab",
+    "price": "115"
+  },
+  {
+    "code": "NHIA-07-01-02",
+    "name": "Ergotamine Tartrate + Caffeine",
+    "dosage_form": "Tablet",
+    "strengths": "1mg / 100mg",
+    "presentation": "Tablet",
+    "price": "188"
+  },
+  {
+    "code": "NHIA-07-01-03",
+    "name": "Pizotifen",
+    "dosage_form": "Tablets",
+    "strengths": "0.5mg, 1.5 mg",
+    "presentation": "Tablet",
+    "price": "142"
+  },
+  {
+    "code": "NHIA-07-01-04",
+    "name": "Pizotifen",
+    "dosage_form": "Elixir",
+    "strengths": "0.25 mg/ml",
+    "presentation": "100mls",
+    "price": "4,677"
+  },
+  {
+    "code": "NHIA-07-01-05",
+    "name": "Propranolol",
+    "dosage_form": "Tablet",
+    "strengths": "40mg/",
+    "presentation": "Tab",
+    "price": "55"
+  },
+  {
+    "code": "NHIA-08-01-01",
+    "name": "Azathioprine (Restricted)",
+    "dosage_form": "Tablet",
+    "strengths": "50 mg",
+    "presentation": "Tablet",
+    "price": "189"
+  },
+  {
+    "code": "NHIA-08-01-02",
+    "name": "Azathioprine (Restricted)",
+    "dosage_form": "Injection, powder",
+    "strengths": "50 mg/vial",
+    "presentation": "Vial",
+    "price": "169"
+  },
+  {
+    "code": "NHIA-08-01-03",
+    "name": "Dexamethasone",
+    "dosage_form": "Tablet",
+    "strengths": "0.5 mg",
+    "presentation": "Tab.",
+    "price": "55"
+  },
+  {
+    "code": "NHIA-08-01-04",
+    "name": "Dexamethasone",
+    "dosage_form": "Injection",
+    "strengths": "Sodium PO4, 4 mg/ml",
+    "presentation": "Amp.",
+    "price": "116"
+  },
+  {
+    "code": "NHIA-08-01-05",
+    "name": "Methotrexate (restricted)",
+    "dosage_form": "Tablet",
+    "strengths": "2.5 mg",
+    "presentation": "Tab",
+    "price": "143"
+  },
+  {
+    "code": "NHIA-08-01-06",
+    "name": "Methotrexate (restricted)",
+    "dosage_form": "Injection",
+    "strengths": "50 mg/vial sodium salt",
+    "presentation": "Vial",
+    "price": "1,034"
+  },
+  {
+    "code": "NHIA-08-01-07",
+    "name": "Prednisolone",
+    "dosage_form": "Tablet",
+    "strengths": "5 mg",
+    "presentation": "Tab",
+    "price": "18"
+  },
+  {
+    "code": "NHIA-09-01-01",
+    "name": "Benzhexol",
+    "dosage_form": "Tablets",
+    "strengths": "2mg",
+    "presentation": "Tab.",
+    "price": "12"
+  },
+  {
+    "code": "NHIA-09-01-02",
+    "name": "Benzhexol",
+    "dosage_form": "Tablets",
+    "strengths": "5 mg (as HCl)",
+    "presentation": "Tab.",
+    "price": "16"
+  },
+  {
+    "code": "NHIA-09-01-03",
+    "name": "Biperiden",
+    "dosage_form": "Tablet",
+    "strengths": "2mg (as HCL)",
+    "presentation": "Tab.",
+    "price": "12"
+  },
+  {
+    "code": "NHIA-09-01-04",
+    "name": "Biperiden",
+    "dosage_form": "Injection",
+    "strengths": "5mg/ml (as lactate) in 1ml ampoule",
+    "presentation": "Amp.",
+    "price": "242"
+  },
+  {
+    "code": "NHIA-09-01-05",
+    "name": "Levodopa + Carbidopa",
+    "dosage_form": "Tablet",
+    "strengths": "Levodopa250mg + Carbidopa 25mg,",
+    "presentation": "Tab.",
+    "price": "275"
+  },
+  {
+    "code": "NHIA-09-01-06",
+    "name": "Levodopa + Carbidopa",
+    "dosage_form": "Tablet",
+    "strengths": "Levodopa100 mg + Carbidopa 10 mg",
+    "presentation": "Tab.",
+    "price": "176"
+  },
+  {
+    "code": "NHIA-09-02-01",
+    "name": "Edrophonium",
+    "dosage_form": "Injection",
+    "strengths": "(Chloride) 10mg/ml",
+    "presentation": "Inj",
+    "price": "622"
+  },
+  {
+    "code": "NHIA-09-02-02",
+    "name": "Neostigmine",
+    "dosage_form": "Tablet",
+    "strengths": "15mg (Bromide)",
+    "presentation": "Tab.",
+    "price": "393"
+  },
+  {
+    "code": "NHIA-09-02-03",
+    "name": "Pyridostigmine",
+    "dosage_form": "Tablet",
+    "strengths": "60 mg (Bromide)",
+    "presentation": "Tab.",
+    "price": "403"
+  },
+  {
+    "code": "NHIA-09-03-01",
+    "name": "Amino caproic acid (AA) plus lipid thromboplastin (LT)",
+    "dosage_form": "Injection",
+    "strengths": "100 mg AA + 2 mg/ml LT in 5 ml",
+    "presentation": null,
+    "price": "7,700"
+  },
+  {
+    "code": "NHIA-10-01-01",
+    "name": "Chlorhexidine",
+    "dosage_form": "Solution",
+    "strengths": "5% (Gluconate) for dilution",
+    "presentation": "500mls",
+    "price": "11,956"
+  },
+  {
+    "code": "NHIA-10-01-02",
+    "name": "Chlorhexidine",
+    "dosage_form": "gel",
+    "strengths": "7.10%",
+    "presentation": "25g",
+    "price": "671"
+  },
+  {
+    "code": "NHIA-10-01-03",
+    "name": "Chlorhexidine + Cetrimide",
+    "dosage_form": "Solution",
+    "strengths": "Cetrimide 15% + 1.5% chlorhexidine gluconate for dilution",
+    "presentation": "500mls",
+    "price": "11,956"
+  },
+  {
+    "code": "NHIA-10-01-04",
+    "name": "Chloroxylenol",
+    "dosage_form": "Solution",
+    "strengths": "5% for dilution",
+    "presentation": "250mls",
+    "price": "4,270"
+  },
+  {
+    "code": "NHIA-10-01-05",
+    "name": "Chloroxylenol",
+    "dosage_form": "Solution",
+    "strengths": "5% for dilution",
+    "presentation": "125mls",
+    "price": "2,166"
+  },
+  {
+    "code": "NHIA-10-01-06",
+    "name": "Coal tar",
+    "dosage_form": "Solution",
+    "strengths": "5%",
+    "presentation": "Solution",
+    "price": "727"
+  },
+  {
+    "code": "NHIA-10-01-07",
+    "name": "Compound Tincture of Benzoin (TBC)",
+    "dosage_form": "Liquid",
+    "strengths": "2%",
+    "presentation": "100mls",
+    "price": "721"
+  },
+  {
+    "code": "NHIA-10-01-08",
+    "name": "Dichloroxylenol + Chlorophenol",
+    "dosage_form": "Soap solution",
+    "strengths": null,
+    "presentation": "125mls",
+    "price": "721"
+  },
+  {
+    "code": "NHIA-10-01-09",
+    "name": "Iodine",
+    "dosage_form": "Solution",
+    "strengths": "Different Preparations 1%",
+    "presentation": "30mls",
+    "price": "466"
+  },
+  {
+    "code": "NHIA-10-01-10",
+    "name": "Methylated spirit",
+    "dosage_form": "Solution",
+    "strengths": "Alcohol vol/vol",
+    "presentation": "200mls",
+    "price": "1,684"
+  },
+  {
+    "code": "NHIA-10-01-11",
+    "name": "Potassium Permanganate",
+    "dosage_form": "Solution",
+    "strengths": "0.10%",
+    "presentation": "15mls",
+    "price": "246"
+  },
+  {
+    "code": "NHIA-10-01-12",
+    "name": "Povidone \u2013 iodine",
+    "dosage_form": "Solution",
+    "strengths": "10%",
+    "presentation": "Solution",
+    "price": "834"
+  },
+  {
+    "code": "NHIA-10-01-13",
+    "name": "Povidone \u2013 iodine",
+    "dosage_form": "Ointment",
+    "strengths": null,
+    "presentation": null,
+    "price": "390"
+  },
+  {
+    "code": "NHIA-10-01-14",
+    "name": "Sodium hypochlorite",
+    "dosage_form": "Solution",
+    "strengths": "1-10% (chlorine in different preparations)",
+    "presentation": "500mls",
+    "price": "600"
+  },
+  {
+    "code": "NHIA-10-01-15",
+    "name": "Trichlorophenol",
+    "dosage_form": "Cream, Liquid, ointment",
+    "strengths": "Mixture of halogenated phenols and Salicylic acid",
+    "presentation": "-",
+    "price": "1,074"
+  },
+  {
+    "code": "NHIA-10-01-16",
+    "name": "Hydrogen peroxide 6%w/v",
+    "dosage_form": "Bottle",
+    "strengths": "6%w/v",
+    "presentation": "Bottle",
+    "price": "622"
+  },
+  {
+    "code": "NHIA-10-02-01",
+    "name": "Fludrocortisone acetate + neomycin + polymyxin B Cream",
+    "dosage_form": "Cream",
+    "strengths": null,
+    "presentation": "Cream",
+    "price": "3,855"
+  },
+  {
+    "code": "NHIA-10-02-02",
+    "name": "Donepezil HCL",
+    "dosage_form": "Tablet",
+    "strengths": "5mg, 10mg",
+    "presentation": "tablet",
+    "price": "417"
+  },
+  {
+    "code": "NHIA-10-02-03",
+    "name": "Donepezil HCL",
+    "dosage_form": "Tablet, orodispersible",
+    "strengths": "5mg, 10mg",
+    "presentation": "tablet",
+    "price": "356"
+  },
+  {
+    "code": "NHIA-10-02-04",
+    "name": "Donepezil HCL",
+    "dosage_form": "Oral solution",
+    "strengths": "1mg/ml, 150ml",
+    "presentation": "syrup",
+    "price": "1,450.00"
+  },
+  {
+    "code": "NHIA-10-02-05",
+    "name": "Galantamine",
+    "dosage_form": "Tablet",
+    "strengths": "8mg, 12mg",
+    "presentation": "Tablet",
+    "price": "290.00"
+  },
+  {
+    "code": "NHIA-10-02-06",
+    "name": "Galantamine",
+    "dosage_form": "Tablet, orodispersible",
+    "strengths": "8mg, 16mg, 24mg",
+    "presentation": "Tablet",
+    "price": "292.00"
+  },
+  {
+    "code": "NHIA-10-02-07",
+    "name": "Galantamine",
+    "dosage_form": "Oral solution",
+    "strengths": "4mg/ml, 100mls",
+    "presentation": "Tablet",
+    "price": "291.00"
+  },
+  {
+    "code": "NHIA-10-02-08",
+    "name": "Rivastigmine",
+    "dosage_form": "Capsule",
+    "strengths": "1.5mg, 3mg",
+    "presentation": "Tablet",
+    "price": "200.00"
+  },
+  {
+    "code": "NHIA-10-02-09",
+    "name": "Rivastigmine",
+    "dosage_form": "Oral solution",
+    "strengths": "2mg/ml, 120mls",
+    "presentation": "syrup",
+    "price": "2,000.00"
+  },
+  {
+    "code": "NHIA-10-02-10",
+    "name": "Rivastigmine",
+    "dosage_form": "Transdermal patch",
+    "strengths": "4.6mg/24hr, 9.5mg/24hr, 13.3mg/24hr",
+    "presentation": "Patch",
+    "price": "300.00"
+  },
+  {
+    "code": "NHIA-10-02-11",
+    "name": "Memantine",
+    "dosage_form": "Tablet",
+    "strengths": "5mg, 10mg, 15mg, 20mg",
+    "presentation": "tablet",
+    "price": "15"
+  },
+  {
+    "code": "NHIA-10-02-12",
+    "name": "Memantine",
+    "dosage_form": "Tablet, orodispersible",
+    "strengths": "10mg, 20mg",
+    "presentation": "tablet",
+    "price": "15"
+  },
+  {
+    "code": "NHIA-10-02-13",
+    "name": "Memantine",
+    "dosage_form": "Oral solution",
+    "strengths": "10mg/ml, 50ml",
+    "presentation": "syrup",
+    "price": "342"
+  },
+  {
+    "code": "NHIA-10-02-14",
+    "name": "Vinpocetine",
+    "dosage_form": "Tablet",
+    "strengths": "5mg",
+    "presentation": "Tablet",
+    "price": "175"
+  },
+  {
+    "code": "NHIA-11-01-01",
+    "name": "Cyanocobalamin/ Hydroxocobalamin",
+    "dosage_form": "Tablet",
+    "strengths": "0.05mg",
+    "presentation": "Tab.",
+    "price": "89"
+  },
+  {
+    "code": "NHIA-11-01-02",
+    "name": "Cyanocobalamin/ Hydroxocobalamin",
+    "dosage_form": "Injection",
+    "strengths": "0.25 and 1mg/ml (injection, Hydroxocobalamin preferred)",
+    "presentation": "Amp.",
+    "price": "252"
+  },
+  {
+    "code": "NHIA-11-01-03",
+    "name": "Ferric Ammonium Citrate",
+    "dosage_form": "Mixture",
+    "strengths": "400mg/5ml of Ferric Ammonium citrate",
+    "presentation": "200mls",
+    "price": "712"
+  },
+  {
+    "code": "NHIA-11-01-04",
+    "name": "Ferrous Sulphate",
+    "dosage_form": "Tablets, Capsule",
+    "strengths": "200 mg equivalent to 60mg of Iron",
+    "presentation": "Tab",
+    "price": "8"
+  },
+  {
+    "code": "NHIA-11-01-05",
+    "name": "Folic Acid",
+    "dosage_form": "Tablet",
+    "strengths": "5mg",
+    "presentation": "Tab.",
+    "price": "8"
+  },
+  {
+    "code": "NHIA-11-01-06",
+    "name": "Iron dextran",
+    "dosage_form": "Injection",
+    "strengths": "Equiv to 50mg/iron/ml in 2ml amp",
+    "presentation": "Amp.",
+    "price": "275"
+  },
+  {
+    "code": "NHIA-11-01-07",
+    "name": "Iron sucrose",
+    "dosage_form": "Injection",
+    "strengths": "Equiv to 20mg/iron/ml in 5ml amp",
+    "presentation": "Amp.",
+    "price": "3,538"
+  },
+  {
+    "code": "NHIA-11-01-08",
+    "name": "Erythropoietin",
+    "dosage_form": null,
+    "strengths": "4,000IU/0.4ml",
+    "presentation": null,
+    "price": "18,605"
+  },
+  {
+    "code": "NHIA-11-02-01",
+    "name": "Enoxaparin",
+    "dosage_form": "Injection",
+    "strengths": "100 mg/ml in 0.4ml (40mg)",
+    "presentation": "prefilled Syringe",
+    "price": "7,015"
+  },
+  {
+    "code": "NHIA-11-02-02",
+    "name": "Enoxaparin",
+    "dosage_form": "Injection",
+    "strengths": "100 mg/ml in 0.2ml (20mg)",
+    "presentation": "prefilled Syringe",
+    "price": "4,249"
+  },
+  {
+    "code": "NHIA-11-02-03",
+    "name": "Heparin Sodium",
+    "dosage_form": "Injection",
+    "strengths": "5000 units/ml in Ampoule",
+    "presentation": "Amp.",
+    "price": "4,675"
+  },
+  {
+    "code": "NHIA-11-02-04",
+    "name": "Heparin Sodium",
+    "dosage_form": "Injection",
+    "strengths": "25,000 units/ml in Ampoule",
+    "presentation": "Amp.",
+    "price": "9,638"
+  },
+  {
+    "code": "NHIA-11-02-05",
+    "name": "Warfarin Sodium",
+    "dosage_form": "Tablets (as sodium)",
+    "strengths": "3mg,",
+    "presentation": "Tab.",
+    "price": "268"
+  },
+  {
+    "code": "NHIA-11-02-06",
+    "name": "Warfarin Sodium",
+    "dosage_form": "Tablets (as sodium)",
+    "strengths": "5mg",
+    "presentation": "Tab.",
+    "price": "336"
+  },
+  {
+    "code": "NHIA-11-02-07",
+    "name": "Dabigatran 110mg tab",
+    "dosage_form": "Tablet",
+    "strengths": "110mg",
+    "presentation": "Tablet",
+    "price": "1,440"
+  },
+  {
+    "code": "NHIA-11-03-01",
+    "name": "Acetylsalicylic acid",
+    "dosage_form": "Tablet",
+    "strengths": "75 mg",
+    "presentation": "Tab",
+    "price": "11"
+  },
+  {
+    "code": "NHIA-11-03-02",
+    "name": "Dipyridamole",
+    "dosage_form": "Tablet",
+    "strengths": "25mg",
+    "presentation": "Tab.",
+    "price": "161"
+  },
+  {
+    "code": "NHIA-11-03-03",
+    "name": "Dipyridamole",
+    "dosage_form": "Tablet",
+    "strengths": "100mg",
+    "presentation": "Tab.",
+    "price": "522"
+  },
+  {
+    "code": "NHIA-11-03-04",
+    "name": "Clopidogrel",
+    "dosage_form": "Tablet",
+    "strengths": "75mg",
+    "presentation": "Tab.",
+    "price": "190"
+  },
+  {
+    "code": "NHIA-11-04-01",
+    "name": "Aminocaproic acid",
+    "dosage_form": "Tablet",
+    "strengths": "500 mg",
+    "presentation": "Tab.",
+    "price": "56"
+  },
+  {
+    "code": "NHIA-11-04-02",
+    "name": "Aminocaproic acid (With/without \u2013 lipid thromboplastin",
+    "dosage_form": "Injection",
+    "strengths": "AA 100 mg/ml + TPT 2mg/ml in 5 ml, 10 ml",
+    "presentation": "Amp.",
+    "price": "5,880"
+  },
+  {
+    "code": "NHIA-11-04-03",
+    "name": "Tranexamic acid 500mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "Injection",
+    "price": "1,403"
+  },
+  {
+    "code": "NHIA-11-05-01",
+    "name": "Dextran 70",
+    "dosage_form": "Injection I.V.",
+    "strengths": "6% in 5% glucose or normal saline solution (in bottles of 500ml)",
+    "presentation": "500ml",
+    "price": "1,985"
+  },
+  {
+    "code": "NHIA-11-05-02",
+    "name": "Human Albumin (Plasma Protein fraction)",
+    "dosage_form": "Injection",
+    "strengths": "20% in 100ml vials",
+    "presentation": "Vial",
+    "price": "218,258"
+  },
+  {
+    "code": "NHIA-11-05-03",
+    "name": "Polygeline",
+    "dosage_form": "Injection IV",
+    "strengths": "3.5% solution in 500 mls",
+    "presentation": "500ml",
+    "price": "27,755"
+  },
+  {
+    "code": "NHIA-29-00-01",
+    "name": "Meropenem 1g Injection",
+    "dosage_form": "Injection",
+    "strengths": "1g",
+    "presentation": "Injection",
+    "price": "13,176"
+  },
+  {
+    "code": "NHIA-29-00-02",
+    "name": "Meropenem 500mg Injection",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "Injection",
+    "price": "7,564"
+  },
+  {
+    "code": "NHIA-30-00-01",
+    "name": "Chorionic gonadotropin",
+    "dosage_form": "Injection powder",
+    "strengths": "500 units in Ampoule",
+    "presentation": "Amp",
+    "price": "21,045"
+  },
+  {
+    "code": "NHIA-30-00-02",
+    "name": "Chorionic gonadotropin",
+    "dosage_form": "Injection powder",
+    "strengths": "1000 units in Ampoule",
+    "presentation": "Amp",
+    "price": "35,966"
+  },
+  {
+    "code": "NHIA-30-00-03",
+    "name": "Goserelin 10.8mg Prefilled syringe",
+    "dosage_form": "Syringe (prefilled)",
+    "strengths": "10.8mg",
+    "presentation": "Syringe (prefilled)",
+    "price": "339,514"
+  },
+  {
+    "code": "NHIA-30-00-04",
+    "name": "Human Menopausal Gonadotrophin injection",
+    "dosage_form": "Injection",
+    "strengths": "Hormonal Therapy",
+    "presentation": "Injection",
+    "price": "27,609"
+  },
+  {
+    "code": "NHIA-31-01-01",
+    "name": "Rosiglitazone",
+    "dosage_form": "Tablet",
+    "strengths": "4mg",
+    "presentation": "Tab.",
+    "price": "700"
+  },
+  {
+    "code": "NHIA-31-01-02",
+    "name": "Vildagliptin",
+    "dosage_form": "Tablet",
+    "strengths": "50mg",
+    "presentation": "Tab",
+    "price": "227"
+  },
+  {
+    "code": "NHIA-31-01-03",
+    "name": "Vildagliptin + Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "50mg/500mg",
+    "presentation": "Tab",
+    "price": "602"
+  },
+  {
+    "code": "NHIA-31-01-04",
+    "name": "Vildagliptin + Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "50mg/1000mg",
+    "presentation": "Tab",
+    "price": "426"
+  },
+  {
+    "code": "NHIA-31-01-05",
+    "name": "Saxagliptin + Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "5mg+500mg",
+    "presentation": "Tablet",
+    "price": "317"
+  },
+  {
+    "code": "NHIA-31-01-06",
+    "name": "Saxagliptin 5mg Tablet",
+    "dosage_form": "Tablet",
+    "strengths": "5mg",
+    "presentation": "Tablet",
+    "price": "217"
+  },
+  {
+    "code": "NHIA-31-01-07",
+    "name": "Saxagliptin/Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "2.5/1000mg",
+    "presentation": "Tablet",
+    "price": "268"
+  },
+  {
+    "code": "NHIA-31-01-08",
+    "name": "Saxagliptin/Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "5/1000mg",
+    "presentation": "Tablet",
+    "price": "249"
+  },
+  {
+    "code": "NHIA-31-01-09",
+    "name": "Sitagliptin",
+    "dosage_form": "Tablet",
+    "strengths": "50mg",
+    "presentation": "Tablet",
+    "price": "181"
+  },
+  {
+    "code": "NHIA-31-01-10",
+    "name": "Sitagliptin",
+    "dosage_form": "Tablet",
+    "strengths": "100mg",
+    "presentation": "Tablet",
+    "price": "627"
+  },
+  {
+    "code": "NHIA-31-01-11",
+    "name": "Sitagliptin/Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "50/1000mg",
+    "presentation": "Tablet",
+    "price": "440"
+  },
+  {
+    "code": "NHIA-31-01-12",
+    "name": "Sitagliptin/Metformin",
+    "dosage_form": "Tablet",
+    "strengths": "50/500mg",
+    "presentation": "Tablet",
+    "price": "558"
+  },
+  {
+    "code": "NHIA-32-01-01",
+    "name": "Anti-D (Rhesus) immunoglobulin (Humans)",
+    "dosage_form": "Injection",
+    "strengths": "300microgram (1,500 I.U)/ml",
+    "presentation": "Prefilled Syringe",
+    "price": "102,809"
+  },
+  {
+    "code": "NHIA-32-01-02",
+    "name": "Hepatitis B Anti-serum",
+    "dosage_form": "Injection",
+    "strengths": "200iu",
+    "presentation": "Amp.",
+    "price": "71,000"
+  },
+  {
+    "code": "NHIA-32-01-03",
+    "name": "Hepatitis B Anti-serum",
+    "dosage_form": "Injection",
+    "strengths": "400iu",
+    "presentation": "Amp.",
+    "price": "75,000"
+  },
+  {
+    "code": "NHIA-32-01-04",
+    "name": "Normal immunoglobulin",
+    "dosage_form": "IV Injection,",
+    "strengths": "30mg/ml, 165mg/ml",
+    "presentation": "Vial*",
+    "price": "295,645"
+  },
+  {
+    "code": "NHIA-32-01-05",
+    "name": "interferon (pegylated alpha-2a)",
+    "dosage_form": "Injection",
+    "strengths": "180mcg",
+    "presentation": "sc",
+    "price": "62,000"
+  },
+  {
+    "code": "NHIA-32-02-02",
+    "name": "Hepatitis B vaccines",
+    "dosage_form": "Liquid for injection",
+    "strengths": "10 doses/vial",
+    "presentation": "Vial",
+    "price": "13,054"
+  },
+  {
+    "code": "NHIA-32-02-03",
+    "name": "Rotavirus Vaccine",
+    "dosage_form": "Vaccine",
+    "strengths": null,
+    "presentation": "Vaccine",
+    "price": "17,904"
+  },
+  {
+    "code": "NHIA-33-01-01",
+    "name": "Gelofusine 500ml Infusion",
+    "dosage_form": "Infusion",
+    "strengths": "500ml",
+    "presentation": "Infusion",
+    "price": "10,000"
+  },
+  {
+    "code": "NHIA-33-01-02",
+    "name": "Lipid Emulsion 10%. 20% Infusion",
+    "dosage_form": "Infusion",
+    "strengths": "10%.20%",
+    "presentation": "Infusion",
+    "price": "19,217"
+  },
+  {
+    "code": "NHIA-33-01-03",
+    "name": "Total parenteral nutrition (TPN)",
+    "dosage_form": "Infusion",
+    "strengths": null,
+    "presentation": "Infusion",
+    "price": "91,415"
+  },
+  {
+    "code": "NHIA-34-00-01",
+    "name": "Lithium Carbonate",
+    "dosage_form": "Capsules/ Tablets",
+    "strengths": "300mg",
+    "presentation": "Cap./ Tab.",
+    "price": "2,000"
+  },
+  {
+    "code": "NHIA-34-00-02",
+    "name": "Pimozide",
+    "dosage_form": "Tablets",
+    "strengths": "4mg",
+    "presentation": "Tab.",
+    "price": "2,000"
+  },
+  {
+    "code": "NHIA-34-00-03",
+    "name": "Pimozide",
+    "dosage_form": "Tablets",
+    "strengths": "10mg",
+    "presentation": "Tab.",
+    "price": "2,000"
+  },
+  {
+    "code": "NHIA-34-00-04",
+    "name": "Risperidone Depot",
+    "dosage_form": "Injection",
+    "strengths": "25mg",
+    "presentation": "Injection",
+    "price": "100,000"
+  },
+  {
+    "code": "NHIA-34-00-05",
+    "name": "Paliperidone",
+    "dosage_form": "Injection depot",
+    "strengths": "150mg",
+    "presentation": "Injection",
+    "price": "315,586"
+  },
+  {
+    "code": "NHIA-34-00-06",
+    "name": "Paliperidone",
+    "dosage_form": "Injection depot",
+    "strengths": "100mg",
+    "presentation": "Injection",
+    "price": "240,396"
+  },
+  {
+    "code": "NHIA-35-01-01",
+    "name": "Budesonide/Formoterol inhaler",
+    "dosage_form": "Inhaler",
+    "strengths": "160/4.5ug",
+    "presentation": "Inhaler",
+    "price": "40,000"
+  },
+  {
+    "code": "NHIA-35-01-02",
+    "name": "Budesonide/Formoterol inhaler",
+    "dosage_form": "Inhaler",
+    "strengths": "80/4.5ug",
+    "presentation": "Inhaler",
+    "price": "12,000"
+  },
+  {
+    "code": "NHIA-36-00-01",
+    "name": "Bevacizumab Injection",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "Injection",
+    "price": "213,256"
+  },
+  {
+    "code": "NHIA-36-00-02",
+    "name": "Bevacizumab Injection",
+    "dosage_form": "Injection",
+    "strengths": "400mg",
+    "presentation": "Injection",
+    "price": "594,396"
+  },
+  {
+    "code": "NHIA-36-00-03",
+    "name": "Bevacizumab Injection (Avastin)",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "Injection",
+    "price": "601,445"
+  },
+  {
+    "code": "NHIA-36-00-04",
+    "name": "Bevacizumab Injection (Avastin)",
+    "dosage_form": "Injection",
+    "strengths": "400mg",
+    "presentation": "Injection",
+    "price": "1,151,516"
+  },
+  {
+    "code": "NHIA-36-00-05",
+    "name": "Docetaxel Injection",
+    "dosage_form": null,
+    "strengths": "80mg",
+    "presentation": "vial",
+    "price": "28,600"
+  },
+  {
+    "code": "NHIA-36-00-06",
+    "name": "Docetaxel Injection",
+    "dosage_form": "Injection",
+    "strengths": "20mg",
+    "presentation": "Injection",
+    "price": "14,200"
+  },
+  {
+    "code": "NHIA-36-00-07",
+    "name": "Docetaxel Injection",
+    "dosage_form": "Injection",
+    "strengths": "80mg/ 4mls",
+    "presentation": "Injection",
+    "price": "28,600"
+  },
+  {
+    "code": "NHIA-36-00-08",
+    "name": "Docetaxel Injection",
+    "dosage_form": "Injection",
+    "strengths": "20rng/ 4mls",
+    "presentation": "Injection",
+    "price": "14,200"
+  },
+  {
+    "code": "NHIA-36-00-09",
+    "name": "Oxaliplatin",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "vial",
+    "price": "26,310"
+  },
+  {
+    "code": "NHIA-36-00-10",
+    "name": "Oxaliplatin",
+    "dosage_form": "Injection",
+    "strengths": "50mg",
+    "presentation": "Injection",
+    "price": "17,500"
+  },
+  {
+    "code": "NHIA-36-00-11",
+    "name": "Carboplatin",
+    "dosage_form": "Injection, solution",
+    "strengths": "50mg/5ml, 150 mg/15ml, 450 mg/45ml or 600 mg/60ml multi-dose vials containing 10mg/ml",
+    "presentation": "Injection, solution",
+    "price": "62,700"
+  },
+  {
+    "code": "NHIA-36-00-12",
+    "name": "Paclitaxel",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "vial",
+    "price": "29,620"
+  },
+  {
+    "code": "NHIA-36-00-13",
+    "name": "Paclitaxel",
+    "dosage_form": "Injection",
+    "strengths": "300mg",
+    "presentation": "Injection",
+    "price": "58,200"
+  },
+  {
+    "code": "NHIA-36-00-14",
+    "name": "Palbociclib",
+    "dosage_form": "Tablet",
+    "strengths": "125mg, 100mg, 75mg",
+    "presentation": "Tablet",
+    "price": "63,050"
+  },
+  {
+    "code": "NHIA-36-00-15",
+    "name": "Bleomycin",
+    "dosage_form": "Injection",
+    "strengths": "15units/vial, 30units/vial; lyophilized pwd for IM, IV, SC, or intrapleural admin",
+    "presentation": null,
+    "price": "10,500"
+  },
+  {
+    "code": "NHIA-36-00-16",
+    "name": "Cisplatinin",
+    "dosage_form": null,
+    "strengths": "50mg",
+    "presentation": null,
+    "price": "10,800"
+  },
+  {
+    "code": "NHIA-36-00-17",
+    "name": "Rituximab",
+    "dosage_form": "Injection",
+    "strengths": "1400mg",
+    "presentation": "SC",
+    "price": "46,848"
+  },
+  {
+    "code": "NHIA-36-00-18",
+    "name": "Rituximab",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "IV",
+    "price": "604,778"
+  },
+  {
+    "code": "NHIA-36-00-19",
+    "name": "Rituximab",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "IV",
+    "price": "195,200"
+  },
+  {
+    "code": "NHIA-36-00-20",
+    "name": "Rituximab (Mabthera)",
+    "dosage_form": "Injection",
+    "strengths": "1400mg",
+    "presentation": "SC",
+    "price": "1,475,565"
+  },
+  {
+    "code": "NHIA-36-00-21",
+    "name": "Rituximab (Mabthera)",
+    "dosage_form": "Injection",
+    "strengths": "500mg",
+    "presentation": "IV",
+    "price": "1,138,293"
+  },
+  {
+    "code": "NHIA-36-00-22",
+    "name": "Rituximab (Mabthera)",
+    "dosage_form": "Injection",
+    "strengths": "100mg",
+    "presentation": "IV",
+    "price": "589,639"
+  },
+  {
+    "code": "NHIA-36-00-23",
+    "name": "Epirubicin",
+    "dosage_form": "Injection",
+    "strengths": "50mg",
+    "presentation": "vial",
+    "price": "21,720"
+  },
+  {
+    "code": "NHIA-36-00-24",
+    "name": "Pertuzumab",
+    "dosage_form": "Injection",
+    "strengths": "420mg",
+    "presentation": "Injection",
+    "price": "114,669"
+  },
+  {
+    "code": "NHIA-36-00-25",
+    "name": "Pertuzumab (Perjeta)",
+    "dosage_form": "Injection",
+    "strengths": "420mg",
+    "presentation": "Injection",
+    "price": "1,780,440"
+  },
+  {
+    "code": "NHIA-36-00-26",
+    "name": "Zoladex Inj",
+    "dosage_form": "Injection",
+    "strengths": "3.6mg",
+    "presentation": "Prefilled syringe",
+    "price": "165,000"
+  },
+  {
+    "code": "NHIA-36-00-27",
+    "name": "Zoledronic acid",
+    "dosage_form": "Solution",
+    "strengths": "5mg/100ml",
+    "presentation": "Solution",
+    "price": "17"
+  },
+  {
+    "code": "NHIA-36-00-28",
+    "name": "Trastuzumab",
+    "dosage_form": "Injection",
+    "strengths": "150mg",
+    "presentation": "Injection",
+    "price": "300,608"
+  },
+  {
+    "code": "NHIA-36-00-29",
+    "name": "Trastuzumab",
+    "dosage_form": "Injection",
+    "strengths": "440mg",
+    "presentation": "Injection",
+    "price": "440,000"
+  },
+  {
+    "code": "NHIA-36-00-30",
+    "name": "Trastuzumab",
+    "dosage_form": "Injection",
+    "strengths": "600mg",
+    "presentation": "SC",
+    "price": "613,810"
+  },
+  {
+    "code": "NHIA-36-00-31",
+    "name": "Trastuzumab (Herceptin)",
+    "dosage_form": "Injection",
+    "strengths": "150mg",
+    "presentation": "Injection",
+    "price": "246,400"
+  },
+  {
+    "code": "NHIA-36-00-32",
+    "name": "Trastuzumab (Herceptin)",
+    "dosage_form": "Injection",
+    "strengths": "440mg",
+    "presentation": "Injection",
+    "price": "491,800"
+  },
+  {
+    "code": "NHIA-36-00-33",
+    "name": "Trastuzumab (Herceptin)",
+    "dosage_form": "Injection",
+    "strengths": "600mg",
+    "presentation": "SC",
+    "price": "1,141,862"
+  },
+  {
+    "code": "NHIA-36-00-34",
+    "name": "Filgrastim",
+    "dosage_form": "Injection",
+    "strengths": "30IU",
+    "presentation": "Injection",
+    "price": "14,700"
+  },
+  {
+    "code": "NHIA-36-00-35",
+    "name": "Gemcitabine",
+    "dosage_form": "Injection",
+    "strengths": "1gm",
+    "presentation": "vial",
+    "price": "27,130"
+  }
+]
