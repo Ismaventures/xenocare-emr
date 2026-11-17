@@ -967,3 +967,56 @@ UI direction retains the existing clinical green/teal palette rather than mixing
 
 ### Outstanding
 - [ ] Manually smoke-test doctor ordering ? billing ? payment ? lab result and pharmacy dispensing in the running app.
+
+---
+
+## Task - Medical Director Operational & Financial Dashboard
+
+### Implemented
+- [x] Added a dedicated Medical Director dashboard for staff with the `medical_director` role.
+- [x] Added Today, Week, Month, Year and Custom period filters.
+- [x] Added live patient activity metrics: patients seen, total visits, new patients, returning patients, consultations, admissions and currently admitted patients.
+- [x] Added live financial metrics: collected in period, billed in period, outstanding in period, total outstanding, open bills, partial bills and patients owing.
+- [x] Added today, month, year and prior-year collection comparisons.
+- [x] Added department revenue table for Laboratory, Pharmacy, Consultation/OPD, Nursing, Dental, Ward/Admissions, Radiology, Procedures, Physiotherapy and Other.
+- [x] Added verified payment-method breakdown and six-month revenue/visit trend.
+- [x] Added MUHEDA-branded Excel, PDF and CSV exports.
+- [x] Counted collected revenue only from verified receipts; cancelled bills are excluded.
+- [x] Reused central billing orders/items and receipts as the financial source of truth.
+
+### Verification
+- [x] ESLint clean for the new dashboard, billing API and Dashboard integration files.
+- [x] No new TypeScript errors in the changed files.
+- [x] Production renderer webpack build completed successfully.
+- [x] Verified live Supabase column/relation availability for billing orders, billing items, receipts, visits, patients, consultations and admissions.
+
+### Outstanding
+- [ ] Manually smoke-test the dashboard against a live Medical Director login and confirm figures with a known billing period.
+
+---
+
+## Task - Patient Registration Duplicate False Positive
+
+### Implemented
+- [x] Changed duplicate-patient protection so a shared phone number alone cannot block registration.
+- [x] Phone matches now also require the same first name and surname.
+- [x] Exact NHIS number, exact service number, and same full name plus date of birth remain blocking checks.
+- [x] Corrected the duplicate-check query typing to accept Supabase query builders.
+
+### Verification
+- [x] ESLint clean for the patient API.
+- [x] No new TypeScript errors in the changed file.
+- [x] Production renderer webpack build completed successfully.
+
+---
+
+## Task - Drug Batch RLS Write Access
+
+### Implemented
+- [x] Added scoped INSERT and UPDATE policies for `drug_batches`.
+- [x] Allowed only `super_admin`, `admin`, `medical_director`, `pharmacist` and `inventory_manager`.
+- [x] Kept the existing authenticated SELECT and service-role policies unchanged.
+- [x] Added both `migrations/246_drug_batch_write_access.sql` and the deployment mirror `MUHEDA_CLINIC_MIGRATIONS/007_drug_batch_write_access.sql`.
+
+### Outstanding
+- [ ] Apply the migration to the live Supabase project, then retry receiving a drug batch.

@@ -333,7 +333,6 @@ export async function getPrescriptions(filters: PrescriptionFilters = {}) {
   let query = supabase
     .from('prescriptions')
     .select(PRESCRIPTION_SELECT, { count: 'exact' })
-    .eq('is_external', false)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -368,8 +367,11 @@ export async function getPrescriptions(filters: PrescriptionFilters = {}) {
   if (error) throw error;
 
   // Hydrate with patient, drug, and staff data
+  const internalPrescriptions = (
+    (data as PrescriptionDTO[]) || []
+  ).filter((rx) => !rx.is_external);
   let prescriptions = await hydratePrescriptionPatients(
-    (data as PrescriptionDTO[]) || [],
+    internalPrescriptions,
   );
   prescriptions = await hydratePrescriptionDrugs(prescriptions);
   prescriptions = await hydratePrescriptionStaff(prescriptions);
@@ -983,8 +985,7 @@ export async function getPharmacyStats(): Promise<PharmacyStats> {
   // This is more reliable than trying to filter by enum values via PostgREST
   const { data: allPrescriptions, error: prescError } = await supabase
     .from('prescriptions')
-    .select('prescription_id, status, updated_at, is_external')
-    .eq('is_external', false);
+    .select('prescription_id, status, updated_at');
 
   if (prescError) {
     log.error(
@@ -1001,8 +1002,10 @@ export async function getPharmacyStats(): Promise<PharmacyStats> {
 
   const todayDate = new Date(today);
 
-  allPrescriptions?.forEach((rx) => {
-    const { status } = rx;
+  allPrescriptions
+    ?.filter((rx) => !(rx as { is_external?: boolean }).is_external)
+    ?.forEach((rx) => {
+      const { status } = rx;
     const updatedAt = rx.updated_at ? new Date(rx.updated_at) : null;
     const isToday = updatedAt && updatedAt >= todayDate;
 
@@ -1082,7 +1085,6 @@ export async function getPendingPrescriptions(patientId?: string) {
   let query = supabase
     .from('prescriptions')
     .select(PRESCRIPTION_SELECT)
-    .eq('is_external', false)
     .or('status.eq.Pending,status.eq.Partial,status.eq.Verified,status.eq.Paid')
     .order('created_at', { ascending: true });
 
@@ -1096,7 +1098,7 @@ export async function getPendingPrescriptions(patientId?: string) {
 
   // Hydrate patient, drug, and staff data
   let hydratedData = await hydratePrescriptionPatients(
-    (data as PrescriptionDTO[]) || [],
+    ((data as PrescriptionDTO[]) || []).filter((rx) => !rx.is_external),
   );
   hydratedData = await hydratePrescriptionDrugs(hydratedData);
   hydratedData = await hydratePrescriptionStaff(hydratedData);

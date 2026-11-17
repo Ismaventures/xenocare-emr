@@ -930,21 +930,85 @@ export async function enterEnhancedResult(
     methodology: methodology || null, // varchar(255) for test method used
   };
 
+  const getMissingColumn = (error: unknown): string | null => {
+    if (!error || typeof error !== 'object') return null;
+    const candidate = error as {
+      code?: string;
+      message?: string;
+      details?: string;
+    };
+    if (
+      candidate.code !== 'PGRST204' &&
+      candidate.code !== '42703' &&
+      !String(candidate.message || '').toLowerCase().includes('column') &&
+      !String(candidate.details || '').toLowerCase().includes('column')
+    ) {
+      return null;
+    }
+    const text = `${candidate.message || ''} ${candidate.details || ''}`;
+    return (
+      text.match(/Could not find the '([^']+)' column/i)?.[1] ||
+      text.match(/column "([^"]+)"/i)?.[1] ||
+      text.match(/column '([^']+)'/i)?.[1] ||
+      null
+    );
+  };
+
+  const runWithOptionalColumnFallback = async <T>(
+    operation: (payload: Record<string, unknown>) => Promise<T>,
+  ): Promise<T> => {
+    const payload: Record<string, unknown> = { ...resultData };
+    const protectedColumns = new Set([
+      'request_id',
+      'patient_id',
+      'test_id',
+      'result_value',
+      'unit',
+      'reference_range',
+      'is_abnormal',
+      'is_critical',
+      'technician_id',
+      'comments',
+    ]);
+
+    for (let attempt = 0; attempt < 10; attempt += 1) {
+      try {
+        return await operation(payload);
+      } catch (error) {
+        const missingColumn = getMissingColumn(error);
+        if (
+          !missingColumn ||
+          protectedColumns.has(missingColumn) ||
+          !(missingColumn in payload)
+        ) {
+          throw error;
+        }
+        log.warn('[LabResults] Removing unsupported result column and retrying', {
+          column: missingColumn,
+        });
+        delete payload[missingColumn];
+      }
+    }
+
+    throw new Error('Unable to save laboratory result after schema fallback.');
+  };
+
   let resultId: string;
 
   if (existingResult?.id) {
     // Update existing result
-    const { data: updatedResult, error: updateError } = await supabase
-      .from('lab_results')
-      .update(resultData)
-      .eq('id', existingResult.id)
-      .select('id')
-      .single();
-
-    if (updateError) {
-      log.error('Error updating lab result:', updateError);
-      throw updateError;
-    }
+    const updatedResult = await runWithOptionalColumnFallback(
+      async (payload) => {
+        const { data, error } = await supabase
+          .from('lab_results')
+          .update(payload)
+          .eq('id', existingResult.id)
+          .select('id')
+          .single();
+        if (error) throw error;
+        return data;
+      },
+    );
     resultId = updatedResult.id;
 
     // Create history entry for amendment
@@ -969,16 +1033,15 @@ export async function enterEnhancedResult(
     }
   } else {
     // Insert new result
-    const { data: newResult, error: insertError } = await supabase
-      .from('lab_results')
-      .insert(resultData)
-      .select('id')
-      .single();
-
-    if (insertError) {
-      log.error('Error creating lab result:', insertError);
-      throw insertError;
-    }
+    const newResult = await runWithOptionalColumnFallback(async (payload) => {
+      const { data, error } = await supabase
+        .from('lab_results')
+        .insert(payload)
+        .select('id')
+        .single();
+      if (error) throw error;
+      return data;
+    });
     resultId = newResult.id;
 
     // Create initial history entry

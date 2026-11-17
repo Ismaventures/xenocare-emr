@@ -46,6 +46,7 @@ import NurseDashboardSection from '../components/dashboard/NurseDashboardSection
 import LabTechDashboardSection from '../components/dashboard/LabTechDashboardSection';
 import RadiologistDashboardSection from '../components/dashboard/RadiologistDashboardSection';
 import BillingClerkDashboardSection from '../components/dashboard/BillingClerkDashboardSection';
+import MedicalDirectorDashboard from '../components/dashboard/MedicalDirectorDashboard';
 import { PageHeader } from '../components/ui/PageHeader';
 
 // Type for online doctor
@@ -280,6 +281,10 @@ export default function Dashboard() {
   const isLabTech = staff?.role === 'lab_technician';
   const isRadiologist = staff?.role === 'radiologist';
   const isBillingClerk = staff?.role === 'billing_clerk';
+
+  if (staff?.role === 'medical_director') {
+    return <MedicalDirectorDashboard />;
+  }
 
   // Quick navigation modules
   const allModules = [

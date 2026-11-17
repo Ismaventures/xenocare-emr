@@ -30,7 +30,10 @@ async function findPotentialDuplicatePatients(
   const normalizedServiceNumber = patient.service_number?.trim();
 
   const checks: Array<
-    Promise<{ data: DuplicateCandidate[] | null; error: Error | null }>
+    PromiseLike<{
+      data: DuplicateCandidate[] | null;
+      error: { message: string } | null;
+    }>
   > = [];
 
   if (normalizedPhone) {
@@ -39,6 +42,8 @@ async function findPotentialDuplicatePatients(
         .from('patients')
         .select(DUPLICATE_PATIENT_SELECT)
         .eq('contact_phone', normalizedPhone)
+        .ilike('first_name', normalizedFirstName)
+        .ilike('surname', normalizedSurname)
         .limit(5),
     );
   }
