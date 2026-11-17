@@ -83,6 +83,7 @@ const configuration: webpack.Configuration = {
       SUPABASE_SERVICE_ROLE_KEY: '',
       // Supabase resilient-fetch tuning (src/renderer/api/supabaseClient.ts)
       SUPABASE_REQUEST_TIMEOUT_MS: '',
+      SUPABASE_UPLOAD_TIMEOUT_MS: '',
       SUPABASE_RETRY_ATTEMPTS: '',
       SUPABASE_SUCCESS_WARN_THRESHOLD_MS: '',
       SUPABASE_PERF_LOG: '',
